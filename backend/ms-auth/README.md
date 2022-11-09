@@ -5,6 +5,8 @@ bila running start membutuhkan
 npm install -g nodemon
 ```
 
+buat file .env dari .env.example
+
 
 # Running
 
