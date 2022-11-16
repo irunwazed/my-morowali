@@ -70,8 +70,11 @@ export default class PegawaiController {
 			},
 			{ "$match": { "login.username": nip, "nip": nip } },
 		]);
-		console.log(nip);
+		console.log(pegawai.length);
 		res.send(pegawai);
+		if(pegawai.length == 0){
+			
+		}
 
 	}
 
