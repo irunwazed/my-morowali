@@ -42,8 +42,11 @@ router.delete("/api/users", route('api/UsersController@deleteAll'))
 router.get("/api/pegawai", route('api/PegawaiController@getData'))
 router.post("/api/pegawai", [
   check('nip').exists(),
-  check('nama').exists(),
-  check('posisi').exists(),
+  check('name').exists(),
+  check('opd_nama').exists(),
+  check('opd_kode').exists(),
+  check('jabatan_nama').exists(),
+  check('jabatan_level').exists(),
 ], route('api/PegawaiController@store'))
 
 // . Api
