@@ -75,46 +75,52 @@ export default class PegawaiController {
 				{ "$match": { "login.username": nip, "nip": nip } },
 			]);
 		if(pegawai.length == 0){
-			await db.login.insertMany([
-				{name: name, username: nip, level: 4, password: bcrypt.hashSync('123456', 10), status: 1},
-			]);
-			let dataLogin = await db.login.find({username: nip});
-			await table.insertMany([
-				{nama: name, nip: nip, nik: nik, login_id: dataLogin[0]._id, posisi: [
-					{
-						opd_nama: opd_nama,
-						opd_kode: opd_kode,
-						jabatan_nama: jabatan_nama,
-						jabatan_level: jabatan_level,
-					}
-				]},
-			]);
+			try{
+				await db.login.insertMany([
+					{name: name, username: nip, level: 4, password: bcrypt.hashSync('123456', 10), status: 1},
+				]);
+				let dataLogin = await db.login.find({username: nip});
+				await table.insertMany([
+					{nama: name, nip: nip, nik: nik, login_id: dataLogin[0]._id, posisi: [
+						{
+							opd_nama: opd_nama,
+							opd_kode: opd_kode,
+							jabatan_nama: jabatan_nama,
+							jabatan_level: jabatan_level,
+						}
+					]},
+				]);
+				res.send({
+					message: 'Data berhasil ditambahkan'
+				});
+			}catch(e){
+				res.status(500).send({
+					message: e
+				});
+			}
 		}else{
-			let dataLogin = await db.login.find({username: nip});
-
-
-			await db.login.findOneAndUpdate({username: nip}, {name: name}, {
-					useFindAndModify: false,
-				}
-			)
-
-
-			await table.findOneAndUpdate({nip: nip}, {
-				nama: name, 
-				nik: nik, 
-				posisi: [
-					{
-						opd_nama: opd_nama,
-						opd_kode: opd_kode,
-						jabatan_nama: jabatan_nama,
-						jabatan_level: jabatan_level,
+			try{
+				await db.login.findOneAndUpdate({username: nip}, {name: name}, {useFindAndModify: false});
+				await table.findOneAndUpdate({nip: nip}, {nama: name, nik: nik, posisi: [
+						{
+							opd_nama: opd_nama,
+							opd_kode: opd_kode,
+							jabatan_nama: jabatan_nama,
+							jabatan_level: jabatan_level,
+						}
+					]}, {
+						useFindAndModify: false,
 					}
-				]}, {
-					useFindAndModify: false,
-				}
-			)
+				);
+				res.send({
+					message: 'Data berhasil diubah!'
+				});
+			}catch(e){
+				res.status(500).send({
+					message: e
+				});
+			}
 		}
-		res.send(pegawai);
 	}
 
 	static async delete(req, res){
