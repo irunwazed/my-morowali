@@ -7,15 +7,9 @@ const setProxy = require('./middlewares/proxy');
 const setAuth = require('./middlewares/auth');
 const ROUTES = require('./config/routes');
 
-
 setAuth(app, ROUTES);
 setProxy(app, ROUTES);
 
-
-// app.get('/login', (req, res) => {
-// 	res.send('login bro!');
-// });
-
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`API GATEWAY is running on port ${port}`);
 });

@@ -13,9 +13,13 @@ module.exports = mongoose => {
 				required: true,
 			},
 			jk: { 
-				type: Number,
+				type: String,
 				required: true,
-				comment: '1. Laki - Laki, 2 Perempuan' 
+				comment: 'L. Laki - Laki, P Perempuan' 
+			},
+			agama: { 
+				type: Number,
+				comment: '1. Islam, 2. Kristen, 3. Khatolik, 4. Hindu, 5 Buddha, 6. Konghucu'
 			},
 			lahir: { 
 				tempat: String,
@@ -32,19 +36,18 @@ module.exports = mongoose => {
 				longitude: Number,
 				latitude: Number,
 			},
-			pekerjaan: {
-				pekerjaan_id: {type: Schema.Types.ObjectId, ref: 'pekerjaans'},
-				gaji: Number,
-				keterangan: String,
-			},
-			agama: { 
-				type: Number,
-				comment: '1. Islam, 2. Kristen, 3. Khatolik, 4. Hindu, 5 Buddha, 6. Konghucu'
-			},
 			status_pernikahan: { 
 				type: Number,
 				comment: '1. Lajang, 2. Menikah, 3 Cerai, 4. Cerai Mati, 5. Duda, 6. Janda'
 			},
+			fisik: {
+				fisik_id: {type: Schema.Types.ObjectId, ref: 'fisiks'},
+				keterangan: String,
+			},
+			pendidikan_id: {type: Schema.Types.ObjectId, ref: 'pendidikans'},
+			penyakit: [
+				{penyakit_id: {type: Schema.Types.ObjectId, ref: 'penyakits'}, keterangan: String }
+			]
     },
     { timestamps: true }
   );

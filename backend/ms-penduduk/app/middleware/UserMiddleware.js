@@ -11,14 +11,14 @@ export default {
 			});
 			if(data.data.statusCode != 200){
 				return res.status(500).send({
-					message: 'Bearer invalid'
+					message: 'Bearer is invalid'
 				})
 			}
 			// res.locals.session = data.data.session;
 			req.session = data.data.session;
 		}catch(err){
 			return res.status(500).send({
-				message: 'Bearer invalid'
+				message: 'Bearer is invalid'
 			})
 		}
 

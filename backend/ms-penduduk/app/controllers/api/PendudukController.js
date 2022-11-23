@@ -3,14 +3,34 @@ import bcrypt from "bcrypt";
 import {
 	validationResult
 } from "express-validator";
+const { body } = require('express-validator/check')
 
 const table = db.penduduk;
 
+exports.validate = {
+  store: [ 
+		body('no_kk', 'no_kk tidak ada').exists(),
+		body('nik', 'nik tidak ada').exists(),
+		body('nama', 'nama tidak ada').exists(),
+		body('hubunganKeluarga').exists().optional().isInt(),
+		body('jk', 'jk tidak ada').optional().isIn(['L', 'P']),
+		body('lahirTempat', 'lahirTempat tidak ada').exists(),
+		body('lahirTgl', 'lahirTgl tidak ada').exists(),
+		body('agama', 'agama tidak ada').exists(),
+		body('alamat', 'alamat tidak ada').exists(),
+		body('fisik', 'fisik tidak ada').exists(),
+		body('fisikKet', 'fisikKet tidak ada').exists(),
+		body('statKawin', 'statKawin tidak ada').exists(),
+		body('statPendidikan', 'statPendidikan tidak ada').exists(),
+		// body('status').optional().isIn(['enabled', 'disabled'])
+	],
+}
+
 export default class PendudukController {
+
 	static async getData(req, res) {
 		var condition = {};
-		console.log(req.session);
-
+		// console.log(req.session);
 		try{
 			let data = await table.find(condition);
 			return res.send(data);
@@ -45,6 +65,7 @@ export default class PendudukController {
 			});
 		}
 
+		let no_kk = req.body.no_kk;
 		let nik = req.body.nik;
 		let nama = req.body.nama;
 		let hubunganKeluarga = req.body.hubunganKeluarga;
@@ -55,14 +76,40 @@ export default class PendudukController {
 		let alamat = req.body.alamat;
 		let fisik = req.body.fisik;
 		let fisikKet = req.body.fisikKet;
-		let penyakit = req.body.penyakit;
-		let keterampilan = req.body.keterampilan;
 		let statKawin = req.body.statKawin;
 		let statPendidikan = req.body.statPendidikan;
-		let statPekerjaanUtama = req.body.statPekerjaanUtama;
-		let statPekerjaanSamping = req.body.statPekerjaanSamping;
+		
+		let wilayah = req.body.wilayah;
+		wilayah = wilayah.split("-");
 
-		await db.penduduk.insertOne({});
+		await db.penduduk.insertOne({
+			nama: nama,
+			nik: nik,
+			jk: jk,
+			lahir:{
+				tempat: lahirTempat,
+				tanggal: lahirTgl,
+			},
+			agama: agama,
+			alamat: {
+				provinsi_kode: wilayah[0],
+				kabupaten_kode: wilayah[1],
+				kecamatan_kode: wilayah[2],
+				kelurahan_kode: wilayah[3],
+				kabupaten_nama: 'Morowali',
+				kecamatan_nama: '',
+				kelurahan_nama: '',
+				alamat_nama: alamat,
+			},
+			fisik: {
+				fisik_id: fisik,
+				keterangan: fisikKet,
+			},
+			status_pernikahan: statKawin,
+			pendidikan_id: statPendidikan,
+		});
+
+		res.send({});
 
 		// const users = new table({
 		// 	nik: nik,
