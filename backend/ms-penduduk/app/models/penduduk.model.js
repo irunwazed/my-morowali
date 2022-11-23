@@ -9,7 +9,8 @@ module.exports = mongoose => {
 				required: true,
 			},
       nik: {
-				type: String
+				type: String,
+				required: true,
 			},
 			jk: { 
 				type: Number,

@@ -88,6 +88,7 @@ export default class LoginController {
 		}
 
 		return res.send({
+			statusCode: 200,
 			message: "credentials is valid!",
 			session: {
 				username: decoded.username,

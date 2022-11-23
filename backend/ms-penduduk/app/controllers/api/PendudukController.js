@@ -9,36 +9,32 @@ const table = db.penduduk;
 export default class PendudukController {
 	static async getData(req, res) {
 		var condition = {};
+		console.log(req.session);
 
-		table
-			.find(condition)
-			.then((data) => {
-				res.send(data);
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while retrieving tutorials.",
-				});
+		try{
+			let data = await table.find(condition);
+			return res.send(data);
+		}catch(err){
+			return res.status(500).send({
+				message: err.message || "Some error occurred while retrieving tutorials.",
 			});
+		}
 	}
 
 	static async getOneData(req, res) {
-		let id = req.params.id;
 
-		table
-			.findById(id)
-			.then((data) => {
-				if (!data)
-					res.status(400).send({
+		try{
+			let id = req.params.id;
+			let data = table.findById(id);
+			if (!data) return res.status(400).send({
 						message: "Not found Tutorial with id " + id,
 					});
-				else res.send(data);
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while retrieving tutorials.",
-				});
+			else return res.send(data);
+		}catch(err){
+			return res.status(500).send({
+				message: err.message || "Some error occurred while retrieving tutorials.",
 			});
+		}
 	}
 
 	static async store(req, res) {
@@ -49,18 +45,25 @@ export default class PendudukController {
 			});
 		}
 
-		let username = req.body.username;
-		let password = req.body.password;
-		let name = req.body.name ? req.body.name : "";
-		let nik = req.body.nik ? req.body.nik : "";
+		let nik = req.body.nik;
+		let nama = req.body.nama;
+		let hubunganKeluarga = req.body.hubunganKeluarga;
+		let jk = req.body.jk;
+		let lahirTempat = req.body.lahirTempat;
+		let lahirTgl = req.body.lahirTgl;
+		let agama = req.body.agama;
+		let alamat = req.body.alamat;
+		let fisik = req.body.fisik;
+		let fisikKet = req.body.fisikKet;
+		let penyakit = req.body.penyakit;
+		let keterampilan = req.body.keterampilan;
+		let statKawin = req.body.statKawin;
+		let statPendidikan = req.body.statPendidikan;
+		let statPekerjaanUtama = req.body.statPekerjaanUtama;
+		let statPekerjaanSamping = req.body.statPekerjaanSamping;
 
 		const users = new table({
-			username: username,
-			password: bcrypt.hashSync(password, 10),
-			profil: {
-				name: name,
-				nik: nik,
-			},
+			nik: nik,
 		});
 
 		users
@@ -129,65 +132,4 @@ export default class PendudukController {
 			});
 	}
 
-	static async deleteAll(req, res) {
-		table
-			.deleteMany({})
-			.then((data) => {
-				res.send({
-					message: `${data.deletedCount} Users were deleted successfully!`,
-				});
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while removing all Users.",
-				});
-			});
-	}
-
-	static async changePassword(req, res){
-		let session = req.setSession;
-		let password = req.body.password;
-		let passwordReset = req.body.passwordReset;
-		let passwordResetValid = req.body.passwordResetValid;
-
-		if(password == passwordResetValid) return res.status(412).send({
-			message: "Password same with new password!",
-		}); 
-
-		if(passwordReset != passwordResetValid) return res.status(412).send({
-			message: "Password reset not same!",
-		}); 
-
-		let user = await table.findById(session.id);
-		let userAll = await table.find({});
-
-		if(!user.id) return res.status(401).send({
-			message: "User not found. please login again!",
-		});
-
-		if (!bcrypt.compareSync(password, user.password)) return res.status(401).send({
-			message: "wrong password!",
-		});
-
-		try{
-			let status = await table.findByIdAndUpdate(session.id, {
-				password: bcrypt.hashSync(passwordReset, 10),
-			}, {
-				useFindAndModify: false,
-			});
-
-			if(!status) return res.status(401).send({
-				message: "Change user fail!",
-			});
-			return res.status(200).send({
-				message: "Change user success!",
-			});
-		}catch(err){
-			return res.status(500).send({
-				message: "User cancel change password!",
-			});
-		}
-		
-		
-	}
 }

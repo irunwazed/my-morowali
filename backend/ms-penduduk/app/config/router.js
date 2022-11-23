@@ -1,5 +1,6 @@
 import express from 'express';
 import { check } from 'express-validator';
+import userMiddleware from '../middleware/UserMiddleware';
 
 // setting export all Controller
 const route = (_route) => {
@@ -16,6 +17,8 @@ const route = (_route) => {
 const router = express.Router()
 
 // Api
+
+router.use('/', userMiddleware.getSession);
 router.get("/", route('api/HomeController@index'))
 router.get("/api", route('api/HomeController@index'))
 
@@ -29,7 +32,9 @@ router.put("/api/penduduk/:id", [
   check('username').isLength({ min: 2 }),
 ], route('api/PendudukController@update'))
 router.delete("/api/penduduk/:id", route('api/PendudukController@delete'))
-router.delete("/api/penduduk", route('api/PendudukController@deleteAll'))
+
+// data
+router.get("/api/penduduk/nik/:nik", route('api/DataController@getPendudukByNIK'))
 
 // . Api
 
