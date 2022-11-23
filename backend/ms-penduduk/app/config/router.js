@@ -38,6 +38,12 @@ router.post("/api/penduduk", validate('api/PendudukController@store'), route('ap
 router.put("/api/penduduk/:id", validate('api/PendudukController@store'), route('api/PendudukController@update'));
 router.delete("/api/penduduk/:id", route('api/PendudukController@delete'));
 
+router.get("/api/data/fisik", route('api/data/FisikController@getData'));
+router.get("/api/data/fisik/:id", route('api/data/FisikController@getOneData'));
+router.post("/api/data/fisik", validate('api/data/FisikController@store'), route('api/data/FisikController@store'));
+router.put("/api/data/fisik/:id", validate('api/data/FisikController@store'), route('api/data/FisikController@update'));
+router.delete("/api/data/fisik/:id", route('api/data/FisikController@delete'));
+
 // data
 router.get("/api/penduduk/nik/:nik", route('api/DataController@getPendudukByNIK'))
 

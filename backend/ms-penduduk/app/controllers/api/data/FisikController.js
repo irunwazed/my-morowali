@@ -5,28 +5,15 @@ import {
 } from "express-validator";
 const { body } = require('express-validator/check')
 
-const table = db.penduduk;
+const table = db.fisik;
 
 exports.validate = {
   store: [ 
-		body('no_kk', 'no_kk tidak ada').exists(),
-		body('nik', 'nik tidak ada').exists(),
 		body('nama', 'nama tidak ada').exists(),
-		body('hubunganKeluarga').exists().optional().isInt(),
-		body('jk', 'jk tidak ada').optional().isIn(['L', 'P']),
-		body('lahirTempat', 'lahirTempat tidak ada').exists(),
-		body('lahirTgl', 'lahirTgl tidak ada').exists(),
-		body('agama', 'agama tidak ada').exists(),
-		body('wilayah', 'wilayah tidak ada').exists(),
-		body('alamat', 'alamat tidak ada').exists(),
-		body('fisik', 'fisik tidak ada').exists(),
-		body('fisikKet', 'fisikKet tidak ada').exists(),
-		body('statKawin', 'statKawin tidak ada').exists(),
-		body('statPendidikan', 'statPendidikan tidak ada').exists(),
 	],
 }
 
-export default class PendudukController {
+export default class FisikController {
 
 	static async getData(req, res) {
 		var condition = {};
@@ -36,23 +23,22 @@ export default class PendudukController {
 			return res.send(data);
 		}catch(err){
 			return res.status(500).send({
-				message: err.message || "Some error occurred while retrieving tutorials.",
+				message: err.message || "Some error occurred while retrieving data.",
 			});
 		}
 	}
 
 	static async getOneData(req, res) {
-
 		try{
 			let id = req.params.id;
 			let data = table.findById(id);
 			if (!data) return res.status(400).send({
-						message: "Not found Tutorial with id " + id,
+						message: "Not found data with id " + id,
 					});
 			else return res.send(data);
 		}catch(err){
 			return res.status(500).send({
-				message: err.message || "Some error occurred while retrieving tutorials.",
+				message: err.message || "Some error occurred while retrieving data.",
 			});
 		}
 	}

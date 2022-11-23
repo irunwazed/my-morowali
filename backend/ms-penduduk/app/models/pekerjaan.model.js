@@ -4,13 +4,12 @@ var Schema = mongoose.Schema;
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
-      pekerjaan_kode: {
-				type: Number,
-				required: true,
-			},
-      pekerjaan_nama: {
+      nama: {
 				type: String,
 				required: true,
+			},
+      keterangan: {
+				type: String
 			},
     },
     { timestamps: true }

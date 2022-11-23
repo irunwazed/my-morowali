@@ -12,7 +12,7 @@ module.exports = mongoose => {
       level: {
 				type: Number,
 				required: true,
-				comment: '1. Suami, 2 Istri, 3 Wali, 4 Anak'
+				comment: '1. Istri / Suami, 2 Anak, 3 Wali, 4 Lainnya'
 			},
 			kepala: {
 				type: Boolean,

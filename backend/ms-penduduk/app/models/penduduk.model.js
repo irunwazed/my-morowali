@@ -45,9 +45,10 @@ module.exports = mongoose => {
 				keterangan: String,
 			},
 			pendidikan_id: {type: Schema.Types.ObjectId, ref: 'pendidikans'},
-			penyakit: [
-				{penyakit_id: {type: Schema.Types.ObjectId, ref: 'penyakits'}, keterangan: String }
-			]
+			penyakit: {
+				penyakit_id: {type: Schema.Types.ObjectId, ref: 'penyakits'}, 
+				keterangan: String
+			}
     },
     { timestamps: true }
   );
