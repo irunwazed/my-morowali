@@ -8,10 +8,6 @@ module.exports = mongoose => {
 				type: String,
 				required: true,
 			},
-      asal: {
-				opd_kode: String,
-				opd_nama: String,
-			},
       keterangan: {
 				type: String,
 			},
