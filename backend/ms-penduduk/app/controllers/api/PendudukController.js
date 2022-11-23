@@ -62,22 +62,24 @@ export default class PendudukController {
 		let statPekerjaanUtama = req.body.statPekerjaanUtama;
 		let statPekerjaanSamping = req.body.statPekerjaanSamping;
 
-		const users = new table({
-			nik: nik,
-		});
+		await db.penduduk.insertOne({});
 
-		users
-			.save(users)
-			.then((data) => {
-				// console.log(data);
-				res.send(data);
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message,
-					req: username,
-				});
-			});
+		// const users = new table({
+		// 	nik: nik,
+		// });
+
+		// users
+		// 	.save(users)
+		// 	.then((data) => {
+		// 		// console.log(data);
+		// 		res.send(data);
+		// 	})
+		// 	.catch((err) => {
+		// 		res.status(500).send({
+		// 			message: err.message,
+		// 			req: username,
+		// 		});
+		// 	});
 	}
 
 	static async update(req, res) {
