@@ -14,7 +14,6 @@ module.exports = mongoose => {
 			},
 			jk: { 
 				type: String,
-				required: true,
 				comment: 'L. Laki - Laki, P Perempuan' 
 			},
 			agama: { 
@@ -38,13 +37,13 @@ module.exports = mongoose => {
 			},
 			status_pernikahan: { 
 				type: Number,
-				comment: '1. Lajang, 2. Menikah, 3 Cerai, 4. Cerai Mati, 5. Duda, 6. Janda'
+				comment: '1. Belum Menikah, 2. Menikah, 3 Cerai, 4. Duda, 5. Janda'
 			},
 			fisik: {
-				fisik_id: {type: Schema.Types.ObjectId, ref: 'fisiks'},
+				fisik_id: {type: Number, comment: '1. Lainnya, 2. Sehat, 3. Cacat'},
 				keterangan: String,
 			},
-			pendidikan_id: {type: Schema.Types.ObjectId, ref: 'pendidikans'},
+			pendidikan_id: {type: Number, comment: '1. Tidak punya ijazah, 2. SD, 3. SMP, 4. SMA, 5. S1, 6. S2, 7. S3'},
 			penyakit: {
 				penyakit_id: {type: Schema.Types.ObjectId, ref: 'penyakits'}, 
 				keterangan: String

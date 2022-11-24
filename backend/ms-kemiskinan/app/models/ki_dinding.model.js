@@ -8,13 +8,17 @@ module.exports = mongoose => {
 				type: String,
 				required: true,
 			},
+      bobot: {
+				type: Number,
+				required: true,
+			},
       keterangan: {
 				type: String,
 			},
     },
     { timestamps: true }
   );
-
-  const Table = mongoose.model('pendidikan', schema);
+  
+  const Table = mongoose.model('ki_dinding', schema);
   return Table
 }

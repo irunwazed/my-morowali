@@ -8,13 +8,6 @@ const running = async () => {
     useUnifiedTopology: true
   })
 
-  await db.fisik.deleteMany({})
-  await db.fisik.insertMany([
-    {nama: 'Lainnya'},
-    {nama: 'Sehat'},
-    {nama: 'Cacat'},
-  ]);
-
   await db.penyakit.deleteMany({})
   await db.penyakit.insertMany([
     {nama: 'Lainnya'},
@@ -28,6 +21,7 @@ const running = async () => {
     {nama: 'Stroke'},
     {nama: 'Kanker /tumor'},
   ]);
+  console.log('insert data penyakit');
 
   await db.pekerjaan.deleteMany({})
   await db.pekerjaan.insertMany([
@@ -44,17 +38,7 @@ const running = async () => {
     {nama: 'Pengurus Rumah Tangga'},
     {nama: 'Karyawan'},
   ]);
-
-  await db.pendidikan.deleteMany({})
-  await db.pendidikan.insertMany([
-    {nama: 'Tidak punya ijazah'},
-    {nama: 'SD/sederajat'},
-    {nama: 'SMP/sederajat'},
-    {nama: 'SMA/sederajat'},
-    {nama: 'S1/sederajat'},
-    {nama: 'S2/sederajat'},
-    {nama: 'S3/sederajat'},
-  ]);
+  console.log('insert data pekerjaan');
 	
 }
 
