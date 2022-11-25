@@ -6,39 +6,58 @@ import {
 import { check } from 'express-validator';
 import services from "../../libraries/api-services"
 
-const table = db.penduduk;
+const table = db.keluarga;
 
 exports.validate = {
   store: [ 
 		check('no_kk', 'no_kk tidak ada').exists(),
-		check('kepala_keluarga', 'kepala_keluarga tidak ada').exists().isIn([true, false]),
-		check('hubungan_keluarga').exists().isInt(),//1. Istri / Suami, 2 Anak, 3 Wali, 4 Lainnya
-		check('nik', 'nik tidak ada').exists(),
-		check('nama', 'nama tidak ada').exists(),
-		check('jk', 'jk tidak ada').exists().isIn(['L', 'P']),
-		check('lahirTempat', 'lahirTempat tidak ada').exists(),
-		check('lahirTgl', 'lahirTgl tidak ada').exists(),
-		check('agama', 'agama tidak ada').exists(),
-		check('wilayah', 'wilayah tidak ada').exists(),
-		check('alamat', 'alamat tidak ada').exists(),
-		check('fisik', 'fisik tidak ada').exists(),
-		check('fisikKet', 'fisikKet tidak ada').exists(),
-		check('statKawin', 'statKawin tidak ada').exists(),
-		check('statPendidikan', 'statPendidikan tidak ada').exists(),
-		check('hidup', 'hidup tidak ada').exists().isIn([true, false]),
-		check('penyakit_id', 'penyakit_id tidak ada').exists(),
-		check('penyakit_ket', 'penyakit_ket tidak ada').exists(),
-		
+		check('kb', 'kb tidak ada').exists().isIn([1, 2]),
+		check('nik_kepala', 'nik_kepala tidak ada').exists(),
 	],
 }
 
-export default class PendudukController {
+export default class KeluargaController {
 
 	static async getData(req, res) {
 		var condition = {};
-		// console.log(req.session);
 		try{
-			let data = await table.find(condition);
+			let data = await table.aggregate([
+				{
+					$lookup:{
+						from: 'keluarga_penduduks',
+						localField: '_id',
+						foreignField: 'keluarga_id',
+						as: 'keluarga_penduduk',
+					},
+				},
+				{
+					$lookup:{
+						from: 'penduduks',
+						localField: 'keluarga_penduduk.penduduk_id',
+						foreignField: '_id',
+						pipeline: [
+							{
+								$project: { 
+									nik: '$nik',
+									nama: '$nama',
+									lahir: '$lahir',
+									alamat: '$alamat',
+									fisik: '$fisik',
+									jk: '$jk',
+								}
+							}
+						],
+						as: 'anggota_keluarga'
+					},
+				}, 
+				// { $unwind: "$anggota_keluarga" },
+				{
+					$project: {
+						no_kk: 1,
+						anggota_keluarga: 1,
+					}
+				}
+			]);
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -49,12 +68,11 @@ export default class PendudukController {
 	}
 
 	static async getOneData(req, res) {
-
 		try{
 			let id = req.params.id;
 			let data = await table.findById(id);
 			if (!data) return res.status(400).send({
-						message: "Not found Tutorial with id " + id,
+						message: "Not found data with id " + id,
 					});
 			else return res.send({statusCode: 200, data: data});
 		}catch(err){
@@ -75,7 +93,6 @@ export default class PendudukController {
 		}
 
 		try{
-			
 			let no_kk = req.body.no_kk;
 			let nik = req.body.nik;
 			let nama = req.body.nama;
@@ -95,9 +112,6 @@ export default class PendudukController {
 			let kb = req.body.kb;
 			let kepala_keluarga = req.body.kepala_keluarga;
 			let hubungan_keluarga = req.body.hubungan_keluarga;
-			let penyakit_id = req.body.penyakit_id;
-			let penyakit_ket = req.body.penyakit_ket;
-			
 			
 			let provinsi = await db.wil_provinsi.find({kode: wilayah.slice(0, 2)});
 			let kabupaten = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)});
@@ -148,10 +162,6 @@ export default class PendudukController {
 				status_pernikahan: statKawin,
 				pendidikan_id: statPendidikan,
 				hidup: hidup,
-				penyakit: {
-					penyakit_id: penyakit_id,
-					keterangan: penyakit_ket,
-				}
 			};
 			let penduduk_id = '';
 			let cekNIK = await db.penduduk.find({ nik: nik });
@@ -166,7 +176,6 @@ export default class PendudukController {
 
 		
 			// insert data hubkel
-			console.log(hubungan_keluarga);
 			let cekHub = await db.keluarga_penduduk.find({ keluarga_id: kk_id, penduduk_id: penduduk_id });
 			if(cekHub.length > 0){
 				await db.keluarga_penduduk.findByIdAndUpdate(cekHub[0]._id, {kepala: kepala_keluarga, level: hubungan_keluarga}, {useFindAndModify: false,});

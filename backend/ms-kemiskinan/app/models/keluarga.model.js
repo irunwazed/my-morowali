@@ -10,7 +10,7 @@ module.exports = mongoose => {
         unique: true,
 			},
       kb: {
-				type: String,
+				type: Number,
 				comment: '1. Ya, 2. Tidak',
 			},
       nik_kepala: {

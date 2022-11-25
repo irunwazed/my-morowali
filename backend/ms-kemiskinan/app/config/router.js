@@ -28,8 +28,13 @@ router.get("/api", route('api/HomeController@index'));
 router.get("/api/penduduk", route('api/PendudukController@getData'));
 router.get("/api/penduduk/:id", route('api/PendudukController@getOneData'));
 router.post("/api/penduduk", route('api/PendudukController@store', true), route('api/PendudukController@store'));
-// router.put("/api/penduduk/:id", route('api/PendudukController@store', true), route('api/PendudukController@update'));
 router.delete("/api/penduduk/:id", route('api/PendudukController@delete'));
+
+
+router.get("/api/keluarga", route('api/KeluargaController@getData'));
+router.get("/api/keluarga/:id", route('api/KeluargaController@getOneData'));
+router.post("/api/keluarga", route('api/KeluargaController@store', true), route('api/KeluargaController@store'));
+router.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 
 router.get("/api/data/penyakit", route('api/data/PenyakitController@getData'));
 router.get("/api/data/penyakit/:id", route('api/data/PenyakitController@getOneData'));
@@ -52,6 +57,7 @@ router.delete("/api/data/bantuan/:id", route('api/data/BantuanController@delete'
 // data
 router.get("/api/get/penduduk", route('api/DataController@getPendudukByNIK'))
 router.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
+router.get("/api/get/keluarga/:no_kk", route('api/DataController@getKeluargaByNoKK'))
 router.get("/api/get/provinsi", route('api/DataController@getProvinsi'))
 router.get("/api/get/provinsi/:kode", route('api/DataController@getProvinsiKode'))
 router.get("/api/get/kabupaten", route('api/DataController@getKabupaten'))
@@ -62,7 +68,6 @@ router.get("/api/get/kelurahan/:kode", route('api/DataController@getKelurahanByK
 router.get("/api/get/kelurahan-by-kecamatan/:kode", route('api/DataController@getKelurahanByKodeKecamatan'))
 
 // . Api
-
 router.get("*", route('api/HomeController@notFound'));
 router.post("*", route('api/HomeController@notFound'));
 router.put("*", route('api/HomeController@notFound'));
