@@ -22,13 +22,13 @@ const route = (_route, validate = false) => {
 const router = express.Router();
 
 // Api
-router.use('/', userMiddleware.getSession);
 router.get("/", route('api/HomeController@index'));
+router.use('/api', userMiddleware.getSession);
 router.get("/api", route('api/HomeController@index'));
 router.get("/api/penduduk", route('api/PendudukController@getData'));
 router.get("/api/penduduk/:id", route('api/PendudukController@getOneData'));
 router.post("/api/penduduk", route('api/PendudukController@store', true), route('api/PendudukController@store'));
-router.put("/api/penduduk/:id", route('api/PendudukController@store', true), route('api/PendudukController@update'));
+// router.put("/api/penduduk/:id", route('api/PendudukController@store', true), route('api/PendudukController@update'));
 router.delete("/api/penduduk/:id", route('api/PendudukController@delete'));
 
 router.get("/api/data/penyakit", route('api/data/PenyakitController@getData'));
@@ -50,7 +50,16 @@ router.put("/api/data/bantuan/:id", route('api/data/BantuanController@store', tr
 router.delete("/api/data/bantuan/:id", route('api/data/BantuanController@delete'));
 
 // data
-router.get("/api/penduduk/nik/:nik", route('api/DataController@getPendudukByNIK'))
+router.get("/api/get/penduduk", route('api/DataController@getPendudukByNIK'))
+router.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
+router.get("/api/get/provinsi", route('api/DataController@getProvinsi'))
+router.get("/api/get/provinsi/:kode", route('api/DataController@getProvinsiKode'))
+router.get("/api/get/kabupaten", route('api/DataController@getKabupaten'))
+router.get("/api/get/kabupaten/:kode", route('api/DataController@getKabupatenKode'))
+router.get("/api/get/kecamatan", route('api/DataController@getKecamatan'))
+router.get("/api/get/kecamatan/:kode", route('api/DataController@getKecamatanByKode'))
+router.get("/api/get/kelurahan/:kode", route('api/DataController@getKelurahanByKode'))
+router.get("/api/get/kelurahan-by-kecamatan/:kode", route('api/DataController@getKelurahanByKodeKecamatan'))
 
 // . Api
 

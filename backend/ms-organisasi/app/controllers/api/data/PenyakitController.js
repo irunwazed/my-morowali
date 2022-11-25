@@ -4,7 +4,7 @@ import {
 } from "express-validator";
 import { check } from 'express-validator';
 
-const table = db.pekerjaan;
+const table = db.penyakit;
 
 exports.validate = {
   store: [ 
@@ -13,7 +13,7 @@ exports.validate = {
 	],
 }
 
-export default class PekerjaanController {
+export default class PenyakitController {
 
 	static async getData(req, res) {
 		let nama = new RegExp(req.query.nama);
@@ -79,14 +79,6 @@ export default class PekerjaanController {
 	}
 
 	static async update(req, res) {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(422).json({
-				statusCode: 422,
-				errors: errors.array(),
-			});
-		}
-		
 		let nama = req.body.nama;
 		let keterangan = req.body.keterangan;
 		let id = req.params.id;

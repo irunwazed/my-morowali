@@ -1,4 +1,4 @@
-import axios from 'axios';
+var axios = require('axios');
 
 export default {
   getSession: async (req, res, next) => {
@@ -14,7 +14,6 @@ export default {
 					message: 'Bearer is invalid'
 				})
 			}
-			// res.locals.session = data.data.session;
 			req.session = data.data.session;
 		}catch(err){
 			return res.status(500).send({

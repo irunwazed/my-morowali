@@ -7,10 +7,11 @@ module.exports = mongoose => {
       nama: {
 				type: String,
 				required: true,
+        unique: true,
 			},
-      asal: {
-				opd_kode: String,
-				opd_nama: String,
+      opd: {
+				kode: {type: String},
+				nama: {type: String},
 			},
       keterangan: {
 				type: String,

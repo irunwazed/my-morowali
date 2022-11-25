@@ -4,23 +4,24 @@ var Schema = mongoose.Schema;
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
-      no_kk: {
+      nip: {
 				type: String,
 				required: true,
         unique: true,
 			},
-      kb: {
+      nama: {
 				type: String,
-				comment: '1. Ya, 2. Tidak',
+				required: true,
 			},
-      nik_kepala: {
+      golongan: { type: String },
+      esolon: { type: String },
+      keterangan: {
 				type: String,
-				comment: 'NIK kepala keluarga',
 			},
     },
     { timestamps: true }
   );
 
-  const Table = mongoose.model('keluarga', schema);
+  const Table = mongoose.model('pegawai', schema);
   return Table
 }

@@ -4,18 +4,23 @@ var Schema = mongoose.Schema;
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
+      kode: {
+				type: Number,
+				required: true,
+			},
       nama: {
 				type: String,
 				required: true,
-        unique: true,
 			},
-      keterangan: {
-				type: String,
+      level: {
+				type: Number,
+				required: true,
+        comment: '1. Kota, 2. Kabupaten'
 			},
     },
     { timestamps: true }
   );
-
-  const Table = mongoose.model('penyakit', schema);
+	// ki => kesejahteraan indikator
+  const Table = mongoose.model('wil_kabupaten', schema);
   return Table
 }

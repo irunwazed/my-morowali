@@ -2,15 +2,16 @@ import db from "../../../models";
 import {
 	validationResult
 } from "express-validator";
-const { body } = require('express-validator/check')
+import { check } from 'express-validator';
+import services from "../../../libraries/api-services"
 
-const table = db.pekerjaan;
+const table = db.bantuan;
 
 exports.validate = {
   store: [ 
-		body('nama', 'please insert nama').exists(),
-		body('opd_kode', 'please insert OPD').exists(),
-		body('keterangan', 'please insert keterangan').exists(),
+		check('nama', 'please insert nama').exists(),
+		check('opd_kode', 'please insert OPD').exists(),
+		check('keterangan', 'please insert keterangan').exists(),
 	],
 }
 
@@ -55,15 +56,20 @@ export default class BantuanController {
 			});
 		}
 
-		var data;
+		var result;
 		try{
 			let nama = req.body.nama;
 			let keterangan = req.body.keterangan;
-
-			data = await table.create({
+			let opd_kode = req.body.opd_kode;
+			
+			let opd = await services.getOPDByKode(req, opd_kode);
+			let data = {
 				nama: nama,
 				keterangan: keterangan,
-			});
+			};
+			if(opd.kode)data['opd'] = opd;
+
+			result = await table.create(data);
 
 		}catch(err){
 			console.log(err);
@@ -75,21 +81,35 @@ export default class BantuanController {
 		return res.send({
 			statusCode: 200,
 			message: 'Data was inserted successfully.',
-			data: data
+			data: result
 		});
 	}
 
 	static async update(req, res) {
-		let nama = req.body.nama;
-		let keterangan = req.body.keterangan;
-		let id = req.params.id;
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({
+				statusCode: 422,
+				errors: errors.array(),
+			});
+		}
 
 		try{
-			let data = await table.findByIdAndUpdate(id, {
-					nama,
-					keterangan,
-				}, { useFindAndModify: false });
-			if (!data) {
+			let nama = req.body.nama;
+			let keterangan = req.body.keterangan;
+			let opd_kode = req.body.opd_kode;
+			let id = req.params.id;
+
+			let opd = await services.getOPDByKode(req, opd_kode);
+			let data = {
+				nama: nama,
+				keterangan: keterangan,
+			};
+			if(opd.kode)data['opd'] = opd;
+			
+			let result = await table.findByIdAndUpdate(id, data, { useFindAndModify: false });
+
+			if (!result) {
 				return res.status(404).send({
 					statusCode: 404,
 					message: `Cannot update data with id=${id}. Maybe data was not found!`,

@@ -11,6 +11,7 @@ module.exports = mongoose => {
       nik: {
 				type: String,
 				required: true,
+        unique: true,
 			},
 			jk: { 
 				type: String,
@@ -25,9 +26,11 @@ module.exports = mongoose => {
 				tanggal: Date,
 			},
 			alamat : {
+				provinsi_kode: String,
 				kabupaten_kode: String,
 				kecamatan_kode: String,
 				kelurahan_kode: String,
+				provinsi_nama: String,
 				kabupaten_nama: String,
 				kecamatan_nama: String,
 				kelurahan_nama: String,
@@ -47,7 +50,11 @@ module.exports = mongoose => {
 			penyakit: {
 				penyakit_id: {type: Schema.Types.ObjectId, ref: 'penyakits'}, 
 				keterangan: String
-			}
+			},
+			hidup:{ 
+				type: Boolean,
+				comment: 'true = Hidup, false = Mati' 
+			},
     },
     { timestamps: true }
   );

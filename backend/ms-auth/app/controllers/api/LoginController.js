@@ -37,6 +37,7 @@ export default class LoginController {
 			process.env.JWT_SECRET_KEY
 		);
 		res.send({
+			statusCode: 200,
 			message: "login success!",
 			status: true,
 			token: token,

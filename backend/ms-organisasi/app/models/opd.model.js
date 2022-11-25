@@ -4,23 +4,27 @@ var Schema = mongoose.Schema;
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
-      no_kk: {
+      kode: {
 				type: String,
 				required: true,
         unique: true,
 			},
-      kb: {
+      nama: {
 				type: String,
-				comment: '1. Ya, 2. Tidak',
+				required: true,
+        unique: true,
 			},
-      nik_kepala: {
+      pimpinan: {
+				nama: String,
+				nip: String,
+			},
+      keterangan: {
 				type: String,
-				comment: 'NIK kepala keluarga',
 			},
     },
     { timestamps: true }
   );
 
-  const Table = mongoose.model('keluarga', schema);
+  const Table = mongoose.model('opd', schema);
   return Table
 }

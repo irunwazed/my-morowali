@@ -7,6 +7,7 @@ module.exports = mongoose => {
       nama: {
 				type: String,
 				required: true,
+        unique: true,
 			},
       keterangan: {
 				type: String

@@ -4,11 +4,8 @@ var Schema = mongoose.Schema;
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
-      no_kk: {
-				type: String,
-				required: true,
-			},
       keluarga_id: {type: Schema.Types.ObjectId, ref: 'keluargas', required: true},
+      penduduk_id: {type: Schema.Types.ObjectId, ref: 'penduduks', required: true},
       level: {
 				type: Number,
 				required: true,
@@ -23,6 +20,6 @@ module.exports = mongoose => {
     { timestamps: true }
   );
 
-  const Table = mongoose.model('penduduk_keluarga', schema);
+  const Table = mongoose.model('keluarga_penduduk', schema);
   return Table
 }

@@ -26,5 +26,9 @@ db.ki_lantai = require('./ki_lantai.model.js')(mongoose);
 db.ki_penerangan = require('./ki_penerangan.model.js')(mongoose);
 db.ki_rumah = require('./ki_rumah.model.js')(mongoose);
 db.ki_sumber_air = require('./ki_sumber_air.model.js')(mongoose);
+db.wil_provinsi = require('./wil_provinsi.model.js')(mongoose);
+db.wil_kabupaten = require('./wil_kabupaten.model.js')(mongoose);
+db.wil_kecamatan = require('./wil_kecamatan.model.js')(mongoose);
+db.wil_desa = require('./wil_desa.model.js')(mongoose);
 
 module.exports = db;

@@ -3,26 +3,30 @@ import bcrypt from "bcrypt";
 import {
 	validationResult
 } from "express-validator";
-const { body } = require('express-validator/check')
+import { check } from 'express-validator';
+import services from "../../libraries/api-services"
 
 const table = db.penduduk;
 
 exports.validate = {
   store: [ 
-		body('no_kk', 'no_kk tidak ada').exists(),
-		body('nik', 'nik tidak ada').exists(),
-		body('nama', 'nama tidak ada').exists(),
-		body('hubunganKeluarga').exists().optional().isInt(),
-		body('jk', 'jk tidak ada').optional().isIn(['L', 'P']),
-		body('lahirTempat', 'lahirTempat tidak ada').exists(),
-		body('lahirTgl', 'lahirTgl tidak ada').exists(),
-		body('agama', 'agama tidak ada').exists(),
-		body('wilayah', 'wilayah tidak ada').exists(),
-		body('alamat', 'alamat tidak ada').exists(),
-		body('fisik', 'fisik tidak ada').exists(),
-		body('fisikKet', 'fisikKet tidak ada').exists(),
-		body('statKawin', 'statKawin tidak ada').exists(),
-		body('statPendidikan', 'statPendidikan tidak ada').exists(),
+		check('no_kk', 'no_kk tidak ada').exists(),
+		check('kepala_keluarga', 'kepala_keluarga tidak ada').exists().isIn([true, false]),
+		check('hubungan_keluarga').exists().optional().isInt(),//1. Istri / Suami, 2 Anak, 3 Wali, 4 Lainnya
+		check('nik', 'nik tidak ada').exists(),
+		check('nama', 'nama tidak ada').exists(),
+		check('jk', 'jk tidak ada').exists().isIn(['L', 'P']),
+		check('lahirTempat', 'lahirTempat tidak ada').exists(),
+		check('lahirTgl', 'lahirTgl tidak ada').exists(),
+		check('agama', 'agama tidak ada').exists(),
+		check('wilayah', 'wilayah tidak ada').exists(),
+		check('alamat', 'alamat tidak ada').exists(),
+		check('fisik', 'fisik tidak ada').exists(),
+		check('fisikKet', 'fisikKet tidak ada').exists(),
+		check('statKawin', 'statKawin tidak ada').exists(),
+		check('statPendidikan', 'statPendidikan tidak ada').exists(),
+		check('hidup', 'hidup tidak ada').exists().isIn([true, false]),
+		
 	],
 }
 
@@ -33,7 +37,7 @@ export default class PendudukController {
 		// console.log(req.session);
 		try{
 			let data = await table.find(condition);
-			return res.send(data);
+			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
@@ -46,11 +50,11 @@ export default class PendudukController {
 
 		try{
 			let id = req.params.id;
-			let data = table.findById(id);
+			let data = await table.findById(id);
 			if (!data) return res.status(400).send({
 						message: "Not found Tutorial with id " + id,
 					});
-			else return res.send(data);
+			else return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
@@ -69,10 +73,10 @@ export default class PendudukController {
 		}
 
 		try{
+			
 			let no_kk = req.body.no_kk;
 			let nik = req.body.nik;
 			let nama = req.body.nama;
-			let hubunganKeluarga = req.body.hubunganKeluarga;
 			let jk = req.body.jk;
 			let lahirTempat = req.body.lahirTempat;
 			let lahirTgl = req.body.lahirTgl;
@@ -82,13 +86,38 @@ export default class PendudukController {
 			let fisikKet = req.body.fisikKet;
 			let statKawin = req.body.statKawin;
 			let statPendidikan = req.body.statPendidikan;
-			
+			let longitude = req.body.longitude;
+			let latitude = req.body.latitude;
 			let wilayah = req.body.wilayah;
-			wilayah = wilayah.split("-");
+			let hidup = req.body.hidup;
+			let kb = req.body.kb;
+			let kepala_keluarga = req.body.kepala_keluarga;
+			let hubungan_keluarga = req.body.hubungan_keluarga;
+			
+			
+			let provinsi = await db.wil_provinsi.find({kode: wilayah.slice(0, 2)});
+			let kabupaten = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)});
+			let kecamatan = await db.wil_kecamatan.find({kode: wilayah.slice(0, 7)});
+			let desa = await db.wil_desa.find({kode: wilayah.slice(0, 10)});
 
-			await db.penduduk.create({
+			// insert data keluarga
+			let cekNoKK = await db.keluarga.find({ no_kk: no_kk });
+			let kk_id = '';
+			if(cekNoKK.length > 0){
+				kk_id = cekNoKK[0]._id;
+			}else{
+				kepala_keluarga = true;
+				let dataKK = await db.keluarga.create({
+					no_kk: no_kk,
+					kb: kb,
+					nik_kepala: nik
+				});
+				kk_id = dataKK._id;
+			}
+
+			// insert penduduk
+			let dataPenduduk = {
 				nama: nama,
-				nik: nik,
 				jk: jk,
 				lahir:{
 					tempat: lahirTempat,
@@ -96,14 +125,17 @@ export default class PendudukController {
 				},
 				agama: agama,
 				alamat: {
-					provinsi_kode: wilayah[0],
-					kabupaten_kode: wilayah[1],
-					kecamatan_kode: wilayah[2],
-					kelurahan_kode: wilayah[3],
-					kabupaten_nama: 'Morowali',
-					kecamatan_nama: '',
-					kelurahan_nama: '',
+					provinsi_kode: wilayah.slice(0, 2),
+					kabupaten_kode: wilayah.slice(0, 4),
+					kecamatan_kode: wilayah.slice(0, 7),
+					kelurahan_kode: wilayah.slice(0, 10),
+					provinsi_nama: provinsi[0].nama,
+					kabupaten_nama: kabupaten[0].nama,
+					kecamatan_nama: kecamatan[0].nama,
+					kelurahan_nama: desa[0].nama,
 					alamat_nama: alamat,
+					longitude: longitude,
+					latitude: latitude,
 				},
 				fisik: {
 					fisik_id: fisik,
@@ -111,88 +143,83 @@ export default class PendudukController {
 				},
 				status_pernikahan: statKawin,
 				pendidikan_id: statPendidikan,
-			});
+				hidup: hidup,
+			};
+			let penduduk_id = '';
+			let cekNIK = await db.penduduk.find({ nik: nik });
+			if(cekNIK.length > 0){
+				penduduk_id = cekNIK[0]._id;
+				await db.penduduk.findByIdAndUpdate(penduduk_id, dataPenduduk, {useFindAndModify: false,});
+			}else{
+				dataPenduduk['nik'] = nik;
+				let tempPenduduk = await db.penduduk.create(dataPenduduk);
+				penduduk_id = tempPenduduk._id;
+			}
 
-
+		
+			// insert data hubkel
+			let cekHub = await db.keluarga_penduduk.find({ keluarga_id: kk_id, penduduk_id: penduduk_id });
+			if(cekHub.length > 0){
+				await db.keluarga_penduduk.findByIdAndUpdate(cekHub[0]._id, {kepala: kepala_keluarga, level: hubungan_keluarga}, {useFindAndModify: false,});
+			}else{
+				await db.keluarga_penduduk.create({
+					keluarga_id: kk_id,
+					penduduk_id: penduduk_id,
+					kepala: kepala_keluarga,
+					level: hubungan_keluarga,
+				});
+			}
 
 		}catch(err){
-			console.log(err);
 			return res.status(500).send({
 				statusCode: 500,
 				message: err.message || "Some error occurred while retrieving tutorials.",
 			});
 		}
-		res.send({});
-
-		
-		// const users = new table({
-		// 	nik: nik,
-		// });
-
-		// users
-		// 	.save(users)
-		// 	.then((data) => {
-		// 		// console.log(data);
-		// 		res.send(data);
-		// 	})
-		// 	.catch((err) => {
-		// 		res.status(500).send({
-		// 			message: err.message,
-		// 			req: username,
-		// 		});
-		// 	});
-	}
-
-	static async update(req, res) {
-		let username = req.body.username;
-		let id = req.params.id;
-
-		table
-			.findByIdAndUpdate(
-				id, {
-					username,
-				}, {
-					useFindAndModify: false,
-				}
-			)
-			.then((data) => {
-				if (!data) {
-					res.status(404).send({
-						message: `Cannot update Users with id=${id}. Maybe Users was not found!`,
-					});
-				} else
-					res.send({
-						message: "Users was updated successfully.",
-					});
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: "Error updating Users with id=" + id,
-				});
-			});
+		return res.send({
+			statusCode: 200,
+			message: 'Data was inserted successfully.',
+		});
 	}
 
 	static async delete(req, res) {
-		let id = req.params.id;
-
-		table
-			.findByIdAndRemove(id)
-			.then((data) => {
-				if (!data) {
-					res.status(400).send({
-						message: `Cannot delete Users with id=${id}. Maybe Users was not found!`,
-					});
-				} else {
-					res.send({
-						message: "Users was deleted successfully!",
-					});
-				}
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: "Could not delete Users with id=" + id,
+		var id = (req.params.id);
+		try{
+			let data = await db.penduduk.aggregate([
+				{ $match: { _id: db.mongoose.Types.ObjectId(id) } },
+				{
+					$lookup:{
+						from: 'keluarga_penduduks',
+						localField: '_id',
+						foreignField: 'penduduk_id',
+						as: 'keluarga_penduduk'
+					},
+				},
+			]);
+			
+			if (!data) {
+				return res.status(400).send({
+					statusCode: 400,
+					message: `Cannot delete data with id=${id}. Maybe data was not found!`,
 				});
+			} else {
+				
+				await db.penduduk.findByIdAndRemove(id);
+				await data[0].keluarga_penduduk.forEach( async element =>  {
+					await db.keluarga_penduduk.findByIdAndRemove(element._id);
+				});
+
+				return res.send({
+					statusCode: 200,
+					message: "data was deleted successfully!"
+				});
+			}
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: "Could not delete data with id=" + id,
 			});
+		}
 	}
 
 }
