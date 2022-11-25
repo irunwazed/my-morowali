@@ -27,36 +27,40 @@ export default class KeluargaController {
 						from: 'keluarga_penduduks',
 						localField: '_id',
 						foreignField: 'keluarga_id',
+						pipeline: [
+							{
+								$lookup:{
+									from: 'penduduks',
+									localField: 'penduduk_id',
+									foreignField: '_id',
+									pipeline: [
+										{
+											$project: { 
+												nik: '$nik',
+												nama: '$nama',
+												lahir: '$lahir',
+												alamat: '$alamat',
+												fisik: '$fisik',
+												jk: '$jk',
+											}
+										}
+									],
+									as: 'data_penduduk'
+								},
+							}, 
+							{ $unwind: "$data_penduduk" },
+						],
 						as: 'keluarga_penduduk',
 					},
 				},
-				{
-					$lookup:{
-						from: 'penduduks',
-						localField: 'keluarga_penduduk.penduduk_id',
-						foreignField: '_id',
-						pipeline: [
-							{
-								$project: { 
-									nik: '$nik',
-									nama: '$nama',
-									lahir: '$lahir',
-									alamat: '$alamat',
-									fisik: '$fisik',
-									jk: '$jk',
-								}
-							}
-						],
-						as: 'anggota_keluarga'
-					},
-				}, 
+				
 				// { $unwind: "$anggota_keluarga" },
-				{
-					$project: {
-						no_kk: 1,
-						anggota_keluarga: 1,
-					}
-				}
+				// {
+				// 	$project: {
+				// 		no_kk: 1,
+				// 		anggota_keluarga: 1,
+				// 	}
+				// }
 			]);
 			return res.send({statusCode: 200, data: data});
 		}catch(err){

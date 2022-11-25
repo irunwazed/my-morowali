@@ -164,11 +164,13 @@ export default class PendudukController {
 				penduduk_id = tempPenduduk._id;
 			}
 
-		
 			// insert data hubkel
 			console.log(hubungan_keluarga);
 			let cekHub = await db.keluarga_penduduk.find({ keluarga_id: kk_id, penduduk_id: penduduk_id });
 			if(cekHub.length > 0){
+				if(kepala_keluarga){
+					await db.keluarga_penduduk.updateMany({ keluarga_id: kk_id }, {kepala: false}, {useFindAndModify: false,});
+				}
 				await db.keluarga_penduduk.findByIdAndUpdate(cekHub[0]._id, {kepala: kepala_keluarga, level: hubungan_keluarga}, {useFindAndModify: false,});
 			}else{
 				await db.keluarga_penduduk.create({
