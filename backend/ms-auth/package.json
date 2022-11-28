@@ -7,7 +7,8 @@
     "build": "nodemon --exec babel-node ./app/server.js",
     "start": "nodemon --exec babel-node ./app/server.js",
     "seed": "nodemon --exec babel-node ./databases/seeds.js",
-    "test": "jest --watchAll --runInBand --detectOpenHandles"
+    "test": "jest --watchAll --runInBand --detectOpenHandles",
+    "serve": "nodemon server.js"
   },
   "author": "aka",
   "license": "ISC",
