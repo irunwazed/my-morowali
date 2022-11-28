@@ -137,6 +137,7 @@ export default class DataController {
 	static async getProvinsi(req, res) {
 		try{
 			let data = await db.wil_provinsi.find({  });
+			data = data.map(e => { return {kode: e.kode, nama: e.nama} })
 			return res.send({ statusCode: 200, data: data });
 		}catch(err){
 			return res.status(500).send({
@@ -162,7 +163,8 @@ export default class DataController {
 
 	static async getKabupaten(req, res) {
 		try{
-			let data = await db.wil_kabupaten.find({  });
+			let data = await db.wil_kabupaten.find({});
+			data = data.map(e => { return {kode: e.kode, level: e.level==1?'Kota':'Kabupaten', nama: e.nama} })
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -176,7 +178,7 @@ export default class DataController {
 		var kode = req.params.kode?req.params.kode:0;
 		try{
 			let data = await db.wil_kabupaten.find({ kode: kode });
-			if(data[0])return res.send({ statusCode: 200, data: { kode: data[0].kode, nama: data[0].nama } });
+			if(data[0])return res.send({ statusCode: 200, data: { kode: data[0].kode, level: data[0].level==1?'Kota':'Kabupaten', nama: data[0].nama } });
 			else return res.status(404).send({ statusCode: 404, message: 'data not found' });
 		}catch(err){
 			return res.status(500).send({
@@ -188,7 +190,8 @@ export default class DataController {
 
 	static async getKecamatan(req, res) {
 		try{
-			let data = await db.wil_kecamatan.find({  });
+			let data = await db.wil_kecamatan.find({});
+			data = data.map(e => { return {kode: e.kode, nama: e.nama} })
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -216,7 +219,7 @@ export default class DataController {
 		var kode = req.params.kode?req.params.kode:0;
 		try{
 			let data = await db.wil_desa.find({ kode: kode });
-			if(data[0])return res.send({ statusCode: 200, data: { kode: data[0].kode, nama: data[0].nama, level: data[0].level } });
+			if(data[0])return res.send({ statusCode: 200, data: { kode: data[0].kode, level: data[0].level==1?'Kelurahan':'Desa', nama: data[0].nama } });
 			else return res.status(404).send({ statusCode: 404, message: 'data not found' });
 		}catch(err){
 			return res.status(500).send({
@@ -230,6 +233,7 @@ export default class DataController {
 		var kode = req.params.kode?req.params.kode:0;
 		try{
 			let data = await db.wil_desa.find({ kode: {$gt: (kode*1000), $lt: (kode*1000 + 999)} });
+			data = data.map(e => { return {kode: e.kode, level: e.level==1?'Kelurahan':'Desa', nama: e.nama} })
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
