@@ -109,6 +109,9 @@ export default class PendudukController {
 			let kk_id = '';
 			if(cekNoKK.length > 0){
 				kk_id = cekNoKK[0]._id;
+				if(kepala_keluarga){
+					await db.keluarga.findByIdAndUpdate(kk_id, {nik_kepala: nik}, {useFindAndModify: false,});
+				}
 			}else{
 				kepala_keluarga = true;
 				let dataKK = await db.keluarga.create({

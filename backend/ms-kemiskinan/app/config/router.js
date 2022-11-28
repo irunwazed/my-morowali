@@ -30,11 +30,8 @@ router.get("/api/penduduk/:id", route('api/PendudukController@getOneData'));
 router.post("/api/penduduk", route('api/PendudukController@store', true), route('api/PendudukController@store'));
 router.delete("/api/penduduk/:id", route('api/PendudukController@delete'));
 
-
 router.get("/api/keluarga", route('api/KeluargaController@getData'));
-router.get("/api/keluarga/:id", route('api/KeluargaController@getOneData'));
-router.post("/api/keluarga", route('api/KeluargaController@store', true), route('api/KeluargaController@store'));
-router.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
+router.get("/api/keluarga/:id", route('api/KeluargaController@getData'));
 
 router.get("/api/data/penyakit", route('api/data/PenyakitController@getData'));
 router.get("/api/data/penyakit/:id", route('api/data/PenyakitController@getOneData'));
