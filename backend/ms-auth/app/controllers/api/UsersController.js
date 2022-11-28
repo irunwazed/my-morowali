@@ -16,7 +16,7 @@ export default class UsersController {
 			} :
 			{};
 
-		db.users
+		db.login
 			.find(condition)
 			.then((data) => {
 				// console.log(data);
@@ -32,7 +32,7 @@ export default class UsersController {
 	static async getOneData(req, res) {
 		let id = req.params.id;
 
-		db.users
+		db.login
 			.findById(id)
 			.then((data) => {
 				if (!data)
@@ -61,7 +61,7 @@ export default class UsersController {
 		let name = req.body.name ? req.body.name : "";
 		let nik = req.body.nik ? req.body.nik : "";
 
-		const users = new db.users({
+		const users = new db.login({
 			username: username,
 			password: bcrypt.hashSync(password, 10),
 			profil: {
@@ -88,7 +88,7 @@ export default class UsersController {
 		let username = req.body.username;
 		let id = req.params.id;
 
-		db.users
+		db.login
 			.findByIdAndUpdate(
 				id, {
 					username,
@@ -116,7 +116,7 @@ export default class UsersController {
 	static async delete(req, res) {
 		let id = req.params.id;
 
-		db.users
+		db.login
 			.findByIdAndRemove(id)
 			.then((data) => {
 				if (!data) {
@@ -137,7 +137,7 @@ export default class UsersController {
 	}
 
 	static async deleteAll(req, res) {
-		db.users
+		db.login
 			.deleteMany({})
 			.then((data) => {
 				res.send({
@@ -165,8 +165,8 @@ export default class UsersController {
 			message: "Password reset not same!",
 		}); 
 
-		let user = await db.users.findById(session.id);
-		let userAll = await db.users.find({});
+		let user = await db.login.findById(session.id);
+		let userAll = await db.login.find({});
 
 		if(!user.id) return res.status(401).send({
 			message: "User not found. please login again!",
@@ -177,7 +177,7 @@ export default class UsersController {
 		});
 
 		try{
-			let status = await db.users.findByIdAndUpdate(session.id, {
+			let status = await db.login.findByIdAndUpdate(session.id, {
 				password: bcrypt.hashSync(passwordReset, 10),
 			}, {
 				useFindAndModify: false,

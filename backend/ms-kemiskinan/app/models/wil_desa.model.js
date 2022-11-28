@@ -1,30 +1,26 @@
 import mongoose from "mongoose";
+var Schema = mongoose.Schema;
 
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
-      username: {
+      kode: {
+				type: Number,
+				required: true,
+			},
+      nama: {
 				type: String,
 				required: true,
-        unique: true,
 			},
       level: {
 				type: Number,
 				required: true,
+        comment: '1. Kelurahan, 2. Desa'
 			},
-      password: {
-				type: String,
-				required: true,
-			},
-      profil: {
-        name: String,
-        nik: String,
-      }
     },
     { timestamps: true }
   );
-	
-  const Login = mongoose.model('login', schema);
-
-  return Login
+	// ki => kesejahteraan indikator
+  const Table = mongoose.model('wil_desa', schema);
+  return Table
 }

@@ -8,28 +8,25 @@ module.exports = mongoose => {
 				type: String,
 				required: true,
 			},
-      nip: {
-				type: String,
-				required: true,
-        unique: true,
-			},
       nik: {
 				type: String,
+				required: true,
 			},
       login_id: {type: Schema.Types.ObjectId, ref: 'logins', unique: true},
-      posisi: [
-				{
-					opd_nama: String,
-					opd_kode: String,
-					jabatan_nama: String,
-					jabatan_level: Number, // 1 kepala, 2 sekretaris, 3 kabid, 4 kasubag, 5 kasubid, 6 fungsional, 7 staff
-				},
-			],
+			alamat : {
+				kabupaten_kode: String,
+				kecamatan_kode: String,
+				kelurahan_kode: String,
+				kabupaten_nama: String,
+				kecamatan_nama: String,
+				kelurahan_nama: String,
+				alamat_nama: String,
+			}
     },
     { timestamps: true }
   );
 
-  const Table = mongoose.model('pegawai', schema);
+  const Table = mongoose.model('penduduk', schema);
 
   return Table
 }

@@ -14,7 +14,7 @@ export default class LoginController {
 			});
 		}
 
-		let user = await db.users.find({
+		let user = await db.login.find({
 			username: req.body.username,
 		});
 		if (user.length != 1)
@@ -32,17 +32,19 @@ export default class LoginController {
 		var token = jwt.sign({
 				username: user[0].username,
 				id: user[0].id,
+				level: user[0].level,
 			},
 			process.env.JWT_SECRET_KEY
 		);
 		res.send({
+			statusCode: 200,
 			message: "login success!",
 			status: true,
 			token: token,
 		});
 	}
 
-	static cekLogin(req, res) {
+	static async cekLogin(req, res) {
 		let bearerHeader = req.header("authorization");
 		if (typeof bearerHeader === "undefined")
 			return res.status(404).send({
@@ -65,11 +67,35 @@ export default class LoginController {
 			});
 		}
 
+		var akun = {};
+		if(decoded.level == 4){
+			let tmp = await db.pegawai.find({login_id: decoded.id});
+			if(tmp.length == 1){
+				akun = {
+					nama: tmp[0].nama,
+					nip: tmp[0].nip,
+					posisi: tmp[0].posisi,
+				}
+			}
+		}else if(decoded.level == 5){
+			let tmp = await db.penduduk.find({nik: decoded.username});
+			if(tmp.length == 1){
+				akun = {
+					nama: tmp[0].nama,
+					nik: tmp[0].nik,
+					alamat: tmp[0].alamat,
+				}
+			}
+		}
+
 		return res.send({
+			statusCode: 200,
 			message: "credentials is valid!",
 			session: {
 				username: decoded.username,
 				id: decoded.id,
+				level: decoded.level,
+				akun: akun,
 			},
 		});
 	}

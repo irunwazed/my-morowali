@@ -1,13 +1,16 @@
 import db from "../../models";
-import bcrypt from "bcrypt";
 import {
 	validationResult
 } from "express-validator";
+import bcrypt from 'bcrypt';
 
 const table = db.pegawai;
+const tableLogin = db.pegawai;
 
 export default class PegawaiController {
+
 	static async getData(req, res) {
+
 		const nama = req.query.nama;
 		var condition = nama ?
 			{
@@ -28,9 +31,10 @@ export default class PegawaiController {
 							foreignField: '_id',
 							as: 'login'
 						}
-				}
+				},
+				{ "$match": { "login.username": "123456", "nip": "123456" } },
 			])
-			// .find(condition)
+			// .find({})
 			.then((data) => {
 				res.send(data);
 			})
@@ -41,26 +45,7 @@ export default class PegawaiController {
 			});
 	}
 
-	static async getOneData(req, res) {
-		let id = req.params.id;
-
-		table
-			.findById(id)
-			.then((data) => {
-				if (!data)
-					res.status(400).send({
-						message: "Not found Tutorial with id " + id,
-					});
-				else res.send(data);
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while retrieving tutorials.",
-				});
-			});
-	}
-
-	static async store(req, res) {
+	static async store(req, res){
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(422).json({
@@ -68,91 +53,81 @@ export default class PegawaiController {
 			});
 		}
 
-		let nama = req.body.nama;
-		let login_id = req.body.login_id;
+		let nip = req.body.nip;
+		let name = req.body.name;
+		let opd_nama = req.body.opd_nama;
+		let opd_kode = req.body.opd_kode;
+		let jabatan_nama = req.body.jabatan_nama;
+		let jabatan_level = req.body.jabatan_level;
+		let nik = req.body.nik ? req.body.nik : "";
 
-		// let user = await db.users.findById(login_id);
-
-		const pegawai = new db.pegawai();
-		pegawai.nama = nama;
-		pegawai.login_id = login_id;
-
-		try{
-			let result = await pegawai.save(pegawai);
-			res.send(result);
-		}catch(err){
-			console.log(err.message);
-			res.status(500).send({
-				message: err.message,
-			});
+		let pegawai = await table
+			.aggregate([
+				{
+					$lookup:
+						{
+							from: 'logins',
+							localField: 'login_id',
+							foreignField: '_id',
+							as: 'login'
+						}
+				},
+				{ "$match": { "login.username": nip, "nip": nip } },
+			]);
+		if(pegawai.length == 0){
+			try{
+				await db.login.insertMany([
+					{name: name, username: nip, level: 4, password: bcrypt.hashSync('123456', 10), status: 1},
+				]);
+				let dataLogin = await db.login.find({username: nip});
+				await table.insertMany([
+					{nama: name, nip: nip, nik: nik, login_id: dataLogin[0]._id, posisi: [
+						{
+							opd_nama: opd_nama,
+							opd_kode: opd_kode,
+							jabatan_nama: jabatan_nama,
+							jabatan_level: jabatan_level,
+						}
+					]},
+				]);
+				res.send({
+					message: 'Data berhasil ditambahkan'
+				});
+			}catch(e){
+				res.status(500).send({
+					message: e
+				});
+			}
+		}else{
+			try{
+				await db.login.findOneAndUpdate({username: nip}, {name: name}, {useFindAndModify: false});
+				await table.findOneAndUpdate({nip: nip}, {nama: name, nik: nik, posisi: [
+						{
+							opd_nama: opd_nama,
+							opd_kode: opd_kode,
+							jabatan_nama: jabatan_nama,
+							jabatan_level: jabatan_level,
+						}
+					]}, {
+						useFindAndModify: false,
+					}
+				);
+				res.send({
+					message: 'Data berhasil diubah!'
+				});
+			}catch(e){
+				res.status(500).send({
+					message: e
+				});
+			}
 		}
 	}
 
-	static async update(req, res) {
-		let nama = req.body.nama;
-		let id = req.params.id;
+	static async delete(req, res){
+		let nip = req.body.nip;
 
-		table
-			.findByIdAndUpdate(
-				id, {
-					nama,
-				}, {
-					useFindAndModify: false,
-				}
-			)
-			.then((data) => {
-				if (!data) {
-					res.status(404).send({
-						message: `Cannot update Users with id=${id}. Maybe Users was not found!`,
-					});
-				} else
-					res.send({
-						message: "Users was updated successfully.",
-					});
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: "Error updating Users with id=" + id,
-				});
-			});
-	}
-
-	static async delete(req, res) {
-		let id = req.params.id;
-
-		table
-			.findByIdAndRemove(id)
-			.then((data) => {
-				if (!data) {
-					res.status(400).send({
-						message: `Cannot delete Users with id=${id}. Maybe Users was not found!`,
-					});
-				} else {
-					res.send({
-						message: "Users was deleted successfully!",
-					});
-				}
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: "Could not delete Users with id=" + id,
-				});
-			});
-	}
-
-	static async deleteAll(req, res) {
-		table
-			.deleteMany({})
-			.then((data) => {
-				res.send({
-					message: `${data.deletedCount} Users were deleted successfully!`,
-				});
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while removing all Users.",
-				});
-			});
+		await db.pegawai.deleteMany({nip: nip})
+		await db.login.deleteMany({username: nip})
 	}
 
 }

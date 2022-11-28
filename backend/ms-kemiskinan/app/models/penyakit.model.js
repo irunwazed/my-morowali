@@ -1,22 +1,21 @@
 import mongoose from "mongoose";
+var Schema = mongoose.Schema;
 
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
-      kode: String,
-      opd_nama: {
+      nama: {
 				type: String,
 				required: true,
+        unique: true,
 			},
-      pimpinan: {
-        nama: String,
-        nip: String,
-      }
+      keterangan: {
+				type: String,
+			},
     },
     { timestamps: true }
   );
 
-  const Opd = mongoose.model('opd', schema);
-
-  return Opd
+  const Table = mongoose.model('penyakit', schema);
+  return Table
 }
