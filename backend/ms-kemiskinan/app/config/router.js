@@ -65,6 +65,48 @@ router.post("/api/kesejahteraan/indikator/rumah", route('api/indikator/RumahCont
 router.put("/api/kesejahteraan/indikator/rumah/:id", route('api/indikator/RumahController@store', true), route('api/indikator/RumahController@update'));
 router.delete("/api/kesejahteraan/indikator/rumah/:id", route('api/indikator/RumahController@delete'));
 
+router.get("/api/kesejahteraan/indikator/atap", route('api/indikator/AtapController@getData'));
+router.get("/api/kesejahteraan/indikator/atap/:id", route('api/indikator/AtapController@getOneData'));
+router.post("/api/kesejahteraan/indikator/atap", route('api/indikator/AtapController@store', true), route('api/indikator/AtapController@store'));
+router.put("/api/kesejahteraan/indikator/atap/:id", route('api/indikator/AtapController@store', true), route('api/indikator/AtapController@update'));
+router.delete("/api/kesejahteraan/indikator/atap/:id", route('api/indikator/AtapController@delete'));
+
+router.get("/api/kesejahteraan/indikator/bahan-bakar", route('api/indikator/BahanBakarController@getData'));
+router.get("/api/kesejahteraan/indikator/bahan-bakar/:id", route('api/indikator/BahanBakarController@getOneData'));
+router.post("/api/kesejahteraan/indikator/bahan-bakar", route('api/indikator/BahanBakarController@store', true), route('api/indikator/BahanBakarController@store'));
+router.put("/api/kesejahteraan/indikator/bahan-bakar/:id", route('api/indikator/BahanBakarController@store', true), route('api/indikator/BahanBakarController@update'));
+router.delete("/api/kesejahteraan/indikator/bahan-bakar/:id", route('api/indikator/BahanBakarController@delete'));
+
+router.get("/api/kesejahteraan/indikator/dinding", route('api/indikator/DindingController@getData'));
+router.get("/api/kesejahteraan/indikator/dinding/:id", route('api/indikator/DindingController@getOneData'));
+router.post("/api/kesejahteraan/indikator/dinding", route('api/indikator/DindingController@store', true), route('api/indikator/DindingController@store'));
+router.put("/api/kesejahteraan/indikator/dinding/:id", route('api/indikator/DindingController@store', true), route('api/indikator/DindingController@update'));
+router.delete("/api/kesejahteraan/indikator/dinding/:id", route('api/indikator/DindingController@delete'));
+
+router.get("/api/kesejahteraan/indikator/jamban", route('api/indikator/JambanController@getData'));
+router.get("/api/kesejahteraan/indikator/jamban/:id", route('api/indikator/JambanController@getOneData'));
+router.post("/api/kesejahteraan/indikator/jamban", route('api/indikator/JambanController@store', true), route('api/indikator/JambanController@store'));
+router.put("/api/kesejahteraan/indikator/jamban/:id", route('api/indikator/JambanController@store', true), route('api/indikator/JambanController@update'));
+router.delete("/api/kesejahteraan/indikator/jamban/:id", route('api/indikator/JambanController@delete'));
+
+router.get("/api/kesejahteraan/indikator/lantai", route('api/indikator/LantaiController@getData'));
+router.get("/api/kesejahteraan/indikator/lantai/:id", route('api/indikator/LantaiController@getOneData'));
+router.post("/api/kesejahteraan/indikator/lantai", route('api/indikator/LantaiController@store', true), route('api/indikator/LantaiController@store'));
+router.put("/api/kesejahteraan/indikator/lantai/:id", route('api/indikator/LantaiController@store', true), route('api/indikator/LantaiController@update'));
+router.delete("/api/kesejahteraan/indikator/lantai/:id", route('api/indikator/LantaiController@delete'));
+
+router.get("/api/kesejahteraan/indikator/penerangan", route('api/indikator/PeneranganController@getData'));
+router.get("/api/kesejahteraan/indikator/penerangan/:id", route('api/indikator/PeneranganController@getOneData'));
+router.post("/api/kesejahteraan/indikator/penerangan", route('api/indikator/PeneranganController@store', true), route('api/indikator/PeneranganController@store'));
+router.put("/api/kesejahteraan/indikator/penerangan/:id", route('api/indikator/PeneranganController@store', true), route('api/indikator/PeneranganController@update'));
+router.delete("/api/kesejahteraan/indikator/penerangan/:id", route('api/indikator/PeneranganController@delete'));
+
+router.get("/api/kesejahteraan/indikator/sumber-air", route('api/indikator/SumberAirController@getData'));
+router.get("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@getOneData'));
+router.post("/api/kesejahteraan/indikator/sumber-air", route('api/indikator/SumberAirController@store', true), route('api/indikator/SumberAirController@store'));
+router.put("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@store', true), route('api/indikator/SumberAirController@update'));
+router.delete("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@delete'));
+
 // get data to foreign
 router.get("/api/get/penduduk", route('api/DataController@getPendudukByNIK'))
 router.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
