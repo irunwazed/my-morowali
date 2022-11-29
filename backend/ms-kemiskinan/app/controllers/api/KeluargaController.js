@@ -43,8 +43,8 @@ export default class KeluargaController {
 			if(req.params.id){
 				query.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id) } });
 			}
-			let data = await table.aggregate(query);
-			
+			let data = await db.keluarga.aggregate(query);
+		
 			if (!data) {
 				return res.status(400).send({
 					statusCode: 400,

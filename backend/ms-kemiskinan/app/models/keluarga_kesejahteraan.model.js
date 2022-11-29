@@ -6,7 +6,6 @@ module.exports = mongoose => {
     {
       no_kk: {
 				type: String,
-				required: true,
 			},
       keluarga_id: {type: Schema.Types.ObjectId, ref: 'keluargas', required: true},
       status_kesejahteraan: {
@@ -23,42 +22,50 @@ module.exports = mongoose => {
 			indikator: {
 				rumah: {
 					rumah_id: {type: Schema.Types.ObjectId, ref: 'ki_rumahs', required: true},
+					nama: String,
 					ukuran: Number,
 					image: String,
 					keterangan: String,
 				},
 				atap: {
 					atap_id: {type: Schema.Types.ObjectId, ref: 'ki_ataps', required: true},
+					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				bahan_bakar: {
 					bahan_bakar_id: {type: Schema.Types.ObjectId, ref: 'ki_bahan_bakars', required: true},
+					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				dinding: {
 					dinding_id: {type: Schema.Types.ObjectId, ref: 'ki_dindings', required: true},
+					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				jamban: {
 					jamban_id: {type: Schema.Types.ObjectId, ref: 'ki_jambans', required: true},
+					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				lantai: {
 					lantai_id: {type: Schema.Types.ObjectId, ref: 'ki_lantais', required: true},
+					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				penerangan: {
 					penerangan_id: {type: Schema.Types.ObjectId, ref: 'ki_penerangans', required: true},
+					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				sumber_air: {
 					sumber_air_id: {type: Schema.Types.ObjectId, ref: 'ki_sumber_airs', required: true},
+					nama: String,
 					image: String,
 					keterangan: String,
 				},

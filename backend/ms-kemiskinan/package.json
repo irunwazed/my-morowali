@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nodemon --exec babel-node ./app/server.js",
     "start": "nodemon --exec babel-node ./app/server.js",
-    "seed": "nodemon --exec babel-node ./databases/seeds.js",
+    "seed": "npx babel-node ./databases/seeds.js",
     "test": "jest --watchAll --runInBand --detectOpenHandles"
   },
   "author": "aka",

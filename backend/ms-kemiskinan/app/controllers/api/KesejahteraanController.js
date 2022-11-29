@@ -1,11 +1,33 @@
 import db from "../../models";
 import { validationResult, check } from "express-validator";
 
-const table = db.penduduk;
+const table = db.keluarga_kesejahteraan;
 
 exports.validate = {
   store: [ 
-		check('no_kk', 'no_kk tidak ada').exists(),
+		check('keluarga_id', 'keluarga_id tidak ada').exists(),
+		check('status_kesejahteraan', 'status_kesejahteraan tidak ada').exists().isInt({ min: 1, max: 5 }), // 1. Sejahtera, 2 Hampir Miskin, 3. Miskin, 4. Sangat Miskin, 5. Belum Ada
+		check('tahun', 'tahun tidak ada').exists().isInt(),
+		check('pendapatan_utama', 'pendapatan_utama tidak ada').exists().isFloat(),
+		check('pendapatan_sampingan', 'pendapatan_sampingan tidak ada').exists().isFloat(),
+		check('pengeluaran_total', 'pengeluaran_total tidak ada').exists().isFloat(),
+		check('indikator_rumah_id', 'indikator_rumah_id tidak ada').exists(),
+		check('indikator_rumah_ukuran', 'indikator_rumah_ukuran tidak ada').exists().isFloat(),
+		check('indikator_rumah_ket', 'indikator_rumah_ket tidak ada').exists(),
+		check('indikator_atap_id', 'indikator_atap_id tidak ada').exists(),
+		check('indikator_atap_ket', 'indikator_atap_ket tidak ada').exists(),
+		check('indikator_bahan_bakar_id', 'indikator_bahan_bakar_id tidak ada').exists(),
+		check('indikator_bahan_bakar_ket', 'indikator_bahan_bakar_ket tidak ada').exists(),
+		check('indikator_dinding_id', 'indikator_dinding_id tidak ada').exists(),
+		check('indikator_dinding_ket', 'indikator_dinding_ket tidak ada').exists(),
+		check('indikator_jamban_id', 'indikator_jamban_id tidak ada').exists(),
+		check('indikator_jamban_ket', 'indikator_jamban_ket tidak ada').exists(),
+		check('indikator_lantai_id', 'indikator_lantai_id tidak ada').exists(),
+		check('indikator_lantai_ket', 'indikator_lantai_ket tidak ada').exists(),
+		check('indikator_penerangan_id', 'indikator_penerangan_id tidak ada').exists(),
+		check('indikator_penerangan_ket', 'indikator_penerangan_ket tidak ada').exists(),
+		check('indikator_sumber_air_id', 'indikator_sumber_air_id tidak ada').exists(),
+		check('indikator_sumber_air_ket', 'indikator_sumber_air_ket tidak ada').exists(),
 	],
 }
 
@@ -13,7 +35,6 @@ export default class KesejahteraanController {
 
 	static async getData(req, res) {
 		var condition = {};
-		// console.log(req.session);
 		try{
 			let data = await table.find(condition);
 			return res.send({statusCode: 200, data: data});
@@ -53,111 +74,103 @@ export default class KesejahteraanController {
 
 		try{
 			
-			let no_kk = req.body.no_kk;
-			let nik = req.body.nik;
-			let nama = req.body.nama;
-			let jk = req.body.jk;
-			let lahirTempat = req.body.lahirTempat;
-			let lahirTgl = req.body.lahirTgl;
-			let agama = req.body.agama;
-			let alamat = req.body.alamat;
-			let fisik = req.body.fisik;
-			let fisikKet = req.body.fisikKet;
-			let statKawin = req.body.statKawin;
-			let statPendidikan = req.body.statPendidikan;
-			let longitude = req.body.longitude;
-			let latitude = req.body.latitude;
-			let wilayah = req.body.wilayah;
-			let hidup = req.body.hidup;
-			let kb = req.body.kb;
-			let kepala_keluarga = req.body.kepala_keluarga;
-			let hubungan_keluarga = req.body.hubungan_keluarga;
-			let penyakit_id = req.body.penyakit_id;
-			let penyakit_ket = req.body.penyakit_ket;
+			let keluarga_id = req.body.keluarga_id;
+			let status_kesejahteraan = req.body.status_kesejahteraan;
+			let tahun = req.body.tahun;
+			let pendapatan_utama = req.body.pendapatan_utama;
+			let pendapatan_sampingan = req.body.pendapatan_sampingan;
+			let pengeluaran_total = req.body.pengeluaran_total;
+			let indikator_rumah_id = req.body.indikator_rumah_id;
+			let indikator_rumah_ukuran = req.body.indikator_rumah_ukuran;
+			let indikator_rumah_ket = req.body.indikator_rumah_ket;
+			let indikator_atap_id = req.body.indikator_atap_id;
+			let indikator_atap_ket = req.body.indikator_atap_ket;
+			let indikator_bahan_bakar_id = req.body.indikator_bahan_bakar_id;
+			let indikator_bahan_bakar_ket = req.body.indikator_bahan_bakar_ket;
+			let indikator_dinding_id = req.body.indikator_dinding_id;
+			let indikator_dinding_ket = req.body.indikator_dinding_ket;
+			let indikator_jamban_id = req.body.indikator_jamban_id;
+			let indikator_jamban_ket = req.body.indikator_jamban_ket;
+			let indikator_lantai_id = req.body.indikator_lantai_id;
+			let indikator_lantai_ket = req.body.indikator_lantai_ket;
+			let indikator_penerangan_id = req.body.indikator_penerangan_id;
+			let indikator_penerangan_ket = req.body.indikator_penerangan_ket;
+			let indikator_sumber_air_id = req.body.indikator_sumber_air_id;
+			let indikator_sumber_air_ket = req.body.indikator_sumber_air_ket;
 			
-			
-			let provinsi = await db.wil_provinsi.find({kode: wilayah.slice(0, 2)});
-			let kabupaten = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)});
-			let kecamatan = await db.wil_kecamatan.find({kode: wilayah.slice(0, 7)});
-			let desa = await db.wil_desa.find({kode: wilayah.slice(0, 10)});
-
-			// insert data keluarga
-			let cekNoKK = await db.keluarga.find({ no_kk: no_kk });
-			let kk_id = '';
-			if(cekNoKK.length > 0){
-				kk_id = cekNoKK[0]._id;
-				if(kepala_keluarga){
-					await db.keluarga.findByIdAndUpdate(kk_id, {nik_kepala: nik}, {useFindAndModify: false,});
-				}
-			}else{
-				kepala_keluarga = true;
-				let dataKK = await db.keluarga.create({
-					no_kk: no_kk,
-					kb: kb,
-					nik_kepala: nik
-				});
-				kk_id = dataKK._id;
-			}
-
-			// insert penduduk
-			let dataPenduduk = {
-				nama: nama,
-				jk: jk,
-				lahir:{
-					tempat: lahirTempat,
-					tanggal: lahirTgl,
+			let dataInput = {
+				keluarga_id: keluarga_id,
+				status_kesejahteraan: status_kesejahteraan,
+				tahun: tahun,
+				keuangan: {
+					pendapatan_utama: pendapatan_utama,
+					pendapatan_sampingan: pendapatan_sampingan,
+					pengeluaran_total: pengeluaran_total,
 				},
-				agama: agama,
-				alamat: {
-					provinsi_kode: wilayah.slice(0, 2),
-					kabupaten_kode: wilayah.slice(0, 4),
-					kecamatan_kode: wilayah.slice(0, 7),
-					kelurahan_kode: wilayah.slice(0, 10),
-					provinsi_nama: provinsi[0].nama,
-					kabupaten_nama: kabupaten[0].nama,
-					kecamatan_nama: kecamatan[0].nama,
-					kelurahan_nama: desa[0].nama,
-					alamat_nama: alamat,
-					longitude: longitude,
-					latitude: latitude,
+				indikator: {
+					rumah: {
+						rumah_id: indikator_rumah_id,
+						ukuran: indikator_rumah_ukuran,
+						keterangan: indikator_rumah_ket,
+					},
+					atap: {
+						atap_id: indikator_atap_id,
+						keterangan: indikator_atap_ket,
+					},
+					bahan_bakar: {
+						bahan_bakar_id: indikator_bahan_bakar_id,
+						keterangan: indikator_bahan_bakar_ket,
+					},
+					dinding: {
+						dinding_id: indikator_dinding_id,
+						keterangan: indikator_dinding_ket,
+					},
+					jamban: {
+						jamban_id: indikator_jamban_id,
+						keterangan: indikator_jamban_ket,
+					},
+					lantai: {
+						lantai_id: indikator_lantai_id,
+						keterangan: indikator_lantai_ket,
+					},
+					penerangan: {
+						penerangan_id: indikator_penerangan_id,
+						keterangan: indikator_penerangan_ket,
+					},
+					sumber_air: {
+						sumber_air_id: indikator_sumber_air_id,
+						keterangan: indikator_sumber_air_ket,
+					},
 				},
-				fisik: {
-					fisik_id: fisik,
-					keterangan: fisikKet,
-				},
-				status_pernikahan: statKawin,
-				pendidikan_id: statPendidikan,
-				hidup: hidup,
-				penyakit: {
-					penyakit_id: penyakit_id,
-					keterangan: penyakit_ket,
-				}
 			};
-			let penduduk_id = '';
-			let cekNIK = await db.penduduk.find({ nik: nik });
-			if(cekNIK.length > 0){
-				penduduk_id = cekNIK[0]._id;
-				await db.penduduk.findByIdAndUpdate(penduduk_id, dataPenduduk, {useFindAndModify: false,});
-			}else{
-				dataPenduduk['nik'] = nik;
-				let tempPenduduk = await db.penduduk.create(dataPenduduk);
-				penduduk_id = tempPenduduk._id;
-			}
 
-			// insert data hubkel
-			console.log(hubungan_keluarga);
-			let cekHub = await db.keluarga_penduduk.find({ keluarga_id: kk_id, penduduk_id: penduduk_id });
-			if(cekHub.length > 0){
-				if(kepala_keluarga){
-					await db.keluarga_penduduk.updateMany({ keluarga_id: kk_id }, {kepala: false}, {useFindAndModify: false,});
+			
+			if(req.params.id){
+				let id = req.params.id;
+				let data = table.findByIdAndUpdate(id, dataInput, {useFindAndModify: false,});
+				if (!data) {
+					return res.status(404).send({
+						statusCode: 404,
+						message: `Cannot update data with id=${id}. Maybe data was not found!`,
+					});
 				}
-				await db.keluarga_penduduk.findByIdAndUpdate(cekHub[0]._id, {kepala: kepala_keluarga, level: hubungan_keluarga}, {useFindAndModify: false,});
+				return res.send({
+					statusCode: 200,
+					message: "Data was updated successfully."
+				});
 			}else{
-				await db.keluarga_penduduk.create({
-					keluarga_id: kk_id,
-					penduduk_id: penduduk_id,
-					kepala: kepala_keluarga,
-					level: hubungan_keluarga,
+				let cekData = await table.find({ keluarga_id: keluarga_id, tahun: tahun });
+				if(cekData.length > 0){
+					return res.status(400).send({
+						statusCode: 400,
+						message: 'Data already exists.',
+					});
+				}
+
+				let data = table.create(dataInput);
+				return res.send({
+					statusCode: 200,
+					message: 'Data was inserted successfully.',
 				});
 			}
 
@@ -167,10 +180,6 @@ export default class KesejahteraanController {
 				message: err.message || "Some error occurred while retrieving tutorials.",
 			});
 		}
-		return res.send({
-			statusCode: 200,
-			message: 'Data was inserted successfully.',
-		});
 	}
 
 	static async delete(req, res) {

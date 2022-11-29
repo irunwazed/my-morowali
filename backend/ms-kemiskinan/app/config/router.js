@@ -34,6 +34,12 @@ router.get("/api/keluarga", route('api/KeluargaController@getData'));
 router.get("/api/keluarga/:id", route('api/KeluargaController@getData'));
 router.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 
+router.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
+router.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getOneData'));
+router.post("/api/kesejahteraan", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
+router.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
+router.delete("/api/kesejahteraan/:id", route('api/KesejahteraanController@delete'));
+
 router.get("/api/data/penyakit", route('api/data/PenyakitController@getData'));
 router.get("/api/data/penyakit/:id", route('api/data/PenyakitController@getOneData'));
 router.post("/api/data/penyakit", route('api/data/PenyakitController@store', true), route('api/data/PenyakitController@store'));
@@ -52,7 +58,14 @@ router.post("/api/data/bantuan", route('api/data/BantuanController@store', true)
 router.put("/api/data/bantuan/:id", route('api/data/BantuanController@store', true), route('api/data/BantuanController@update'));
 router.delete("/api/data/bantuan/:id", route('api/data/BantuanController@delete'));
 
-// get data foreign
+// indikator
+router.get("/api/kesejahteraan/indikator/rumah", route('api/indikator/RumahController@getData'));
+router.get("/api/kesejahteraan/indikator/rumah/:id", route('api/indikator/RumahController@getOneData'));
+router.post("/api/kesejahteraan/indikator/rumah", route('api/indikator/RumahController@store', true), route('api/indikator/RumahController@store'));
+router.put("/api/kesejahteraan/indikator/rumah/:id", route('api/indikator/RumahController@store', true), route('api/indikator/RumahController@update'));
+router.delete("/api/kesejahteraan/indikator/rumah/:id", route('api/indikator/RumahController@delete'));
+
+// get data to foreign
 router.get("/api/get/penduduk", route('api/DataController@getPendudukByNIK'))
 router.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
 router.get("/api/get/keluarga/:no_kk", route('api/DataController@getKeluargaByNoKK'))
