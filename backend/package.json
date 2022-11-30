@@ -1,0 +1,15 @@
+{
+  "name": "run",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently --kill-others \"cd api-gateway & npm start\" \"cd ms-auth & npm start\" \"cd ms-organisasi & npm start\" \"cd ms-kemiskinan & npm start\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
