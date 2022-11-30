@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon ./server.js",
     "build": "pm2 start server.js --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon server.js"
   },
   "author": "aka",
   "license": "ISC",
