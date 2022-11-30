@@ -16,5 +16,5 @@ db.mongoose
 
 const PORT = process.env.APP_PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`Server ${process.env.APP_NAME||''} is running on port ${PORT}.`);
 });

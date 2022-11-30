@@ -77,7 +77,7 @@ const running = async () => {
   console.log('insert data penduduk');
 
 
-  process.exit(1);
+  // process.exit(1);
 }
 
 running()

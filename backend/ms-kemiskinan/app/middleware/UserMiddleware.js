@@ -11,6 +11,7 @@ export default {
 			});
 			if(data.data.statusCode != 200){
 				return res.status(500).send({
+					statusCode: 500,
 					message: 'Bearer is invalid'
 				})
 			}
@@ -18,6 +19,7 @@ export default {
 			req.session = data.data.session;
 		}catch(err){
 			return res.status(500).send({
+				statusCode: 500,
 				message: 'Bearer is invalid'
 			})
 		}

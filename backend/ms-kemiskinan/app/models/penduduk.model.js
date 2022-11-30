@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 var Schema = mongoose.Schema;
 
 module.exports = mongoose => {
-  const schema = mongoose.Schema(
+  const schema = new mongoose.Schema(
     {
       nama: {
 				type: String,

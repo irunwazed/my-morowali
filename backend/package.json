@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "concurrently --kill-others \"cd ms-auth & npm run-script seed\" \"cd ms-organisasi & npm run-script seed\" \"cd ms-kemiskinan & npm run-script seed\"",
     "dev": "concurrently --kill-others \"cd api-gateway & npm start\" \"cd ms-auth & npm start\" \"cd ms-organisasi & npm start\" \"cd ms-kemiskinan & npm start\""
   },
   "author": "",

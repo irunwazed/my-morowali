@@ -7,9 +7,11 @@ exports.validate = {
   store: [ 
 		check('tahun', 'tahun tidak ada').exists().isInt(), // cant update 
 		check('bantuan_id', 'bantuan_id tidak ada').exists(),
-		check('penduduk', 'penduduk tidak ada').exists().isArray({ min: 1 }),
+		check('penduduk').exists().isArray({ min: 1 }),
 		check('pagu', 'pagu tidak ada').isFloat(),
 		check('keterangan', 'keterangan tidak ada').exists(),
+		check('wilayah', 'wilayah tidak ada').exists(),
+		check('alamat', 'alamat tidak ada').exists(),
 	],
 }
 
@@ -20,20 +22,6 @@ export default class BantuanController {
 		try{
 			
 			let data = await table.find(condition);
-			// let tgl = data[0].createdAt;
-			// console.log(tgl.getDate());
-			// console.log(tgl.getMonth());
-			// console.log(tgl.getFullYear());
-
-			
-			// let data = await table.aggregate([
-			// 	{ $project: { data: {
-			// 		year: { $substr: [ "$createdAt", 0, 4 ] },
-			// 		month: { $substr: [ "$createdAt", 5, 2 ] },
-			// 		day: { $substr: [ "$createdAt", 8, 2 ] },
-			// 	} } }
-			// ]);
-			
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -70,19 +58,66 @@ export default class BantuanController {
 		}
 
 		try{
-			let penduduk_id = req.body.penduduk_id;
+			let penduduk = req.body.penduduk;
 			let tahun = req.body.tahun;
 			let bantuan_id = req.body.bantuan_id;
 			let pagu = req.body.pagu;
 			let keterangan = req.body.keterangan;
+			let wilayah = req.body.wilayah;
+			let alamat = req.body.alamat;
+			let longitude = req.body.longitude;
+			let latitude = req.body.latitude;
 			
+
+			let dataPenduduk = await Promise.all(penduduk.map( async e => {
+				let data = await db.penduduk.findById(e);
+				return { penduduk_id: data._id, nik: data.nik, nama: data.nama };
+			}));
+
+			
+			let lokasi = {
+				alamat: alamat,
+				longitude: longitude,
+				latitude: latitude,
+			}
+
+			let level = 4;
+			if(wilayah.length >= 2){
+				lokasi['provinsi_kode'] = wilayah.slice(0, 2);
+				let tmp = await db.wil_provinsi.find({kode: wilayah.slice(0, 2)})
+				lokasi['provinsi_nama'] = tmp[0].nama;
+				level = 1;
+			}
+			if(wilayah.length >= 4){
+				lokasi['kabupaten_kode'] = wilayah.slice(0, 2);
+				let tmp = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)})
+				lokasi['kabupaten_nama'] = tmp[0].nama;
+				level = 2;
+			}
+			if(wilayah.length >= 7){
+				lokasi['kecamatan_kode'] = wilayah.slice(0, 2);
+				let tmp = await db.wil_kecamatan.find({kode: wilayah.slice(0, 7)})
+				lokasi['kecamatan_nama'] = tmp[0].nama;
+				level = 3;
+			}
+			if(wilayah.length == 10){
+				lokasi['kelurahan_kode'] = wilayah.slice(0, 2);
+				let tmp = await db.wil_desa.find({kode: wilayah.slice(0, 10)})
+				lokasi['kelurahan_nama'] = tmp[0].nama;
+				level = 4;
+			}
+			lokasi['level'] = level;
+			
+
 			let dataInput = {
+				penduduk: dataPenduduk,
 				bantuan: {
 					bantuan_id: bantuan_id,
 					nama: await BantuanController.getIndikatorName('bantuan', bantuan_id),
 					pagu: pagu,
 					keterangan: keterangan,
 				},
+				lokasi: lokasi,
 			};
 
 			if(req.params.id){
@@ -99,10 +134,7 @@ export default class BantuanController {
 					message: "Data was updated successfully.",
 				});
 			}else{
-				
-				dataInput['penduduk_id'] = penduduk_id;
 				dataInput['tahun'] = tahun;
-
 				let data = await table.create(dataInput);
 				return res.send({
 					statusCode: 200,

@@ -12,7 +12,10 @@ const running = async () => {
   await db.penduduk.deleteMany({})
   await db.keluarga.deleteMany({})
   await db.keluarga_penduduk.deleteMany({})
-
+  
+  await db.bantuan.deleteMany({})
+  await db.penduduk_bantuan.deleteMany({})
+  
   await db.penyakit.deleteMany({})
   await db.penyakit.insertMany([
     {nama: 'Lainnya'},
@@ -334,7 +337,7 @@ const running = async () => {
   ]);
   console.log('insert data desa');
 	
-  process.exit(1);
+  // process.exit(1);
 }
 
 running();

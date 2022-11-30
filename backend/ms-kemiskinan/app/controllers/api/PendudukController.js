@@ -28,6 +28,10 @@ exports.validate = {
 
 export default class PendudukController {
 
+	static async paginate(){
+
+	}
+
 	static async getData(req, res) {
 		var condition = {};
 		try{
@@ -162,7 +166,6 @@ export default class PendudukController {
 			}
 
 			// insert data hubkel
-			console.log(hubungan_keluarga);
 			let cekHub = await db.keluarga_penduduk.find({ keluarga_id: kk_id, penduduk_id: penduduk_id });
 			if(cekHub.length > 0){
 				if(kepala_keluarga){
@@ -181,7 +184,7 @@ export default class PendudukController {
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
-				message: err.message || "Some error occurred while retrieving tutorials.",
+				message: err.message || "Some error occurred while retrieving data.",
 			});
 		}
 		return res.send({

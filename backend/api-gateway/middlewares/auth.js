@@ -9,12 +9,14 @@ const setAuth = (app, routes) => {
 					let bearerHeader = req.header("authorization");
 					if (typeof bearerHeader === "undefined")
 						return res.status(404).send({
+							statusCode: 404,
 							message: "No credentials sent!",
 						});
 
 					let bearer = bearerHeader.split(" ");
 					if (bearer.length != 2)
 						return res.status(404).send({
+							statusCode: 404,
 							message: "Bearer is invalid",
 						});
 					// let data = await axios.get('http://127.0.0.1:3000/auth/cek-login', {
@@ -30,6 +32,7 @@ const setAuth = (app, routes) => {
 					// }
 				}catch(err){
 					return res.status(500).send({
+						statusCode: 500,
 						message: 'Bearer is invalid'
 					})
 				}
