@@ -45,6 +45,84 @@ const running = async () => {
   ]);
   console.log('insert data pekerjaan');
 
+  await db.ki_rumah.deleteMany({})
+  await db.ki_rumah.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Milik Sendiri', bobot: 0.8, keterangan: ''},
+    {nama: 'Kontrak/Sewa', bobot: 0.6, keterangan: ''},
+    {nama: 'Tidak Ada', bobot: 0.5, keterangan: ''},
+  ]);
+  console.log('insert data indikator rumah');
+
+  await db.ki_atap.deleteMany({})
+  await db.ki_atap.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Beton', bobot: 1, keterangan: ''},
+    {nama: 'Genteng', bobot: 0.9, keterangan: ''},
+    {nama: 'Sirap', bobot: 0.9, keterangan: ''},
+    {nama: 'Seng', bobot: 0.8, keterangan: ''},
+    {nama: 'Asbes', bobot: 0.8, keterangan: ''},
+    {nama: 'Ijuk/rumbia', bobot: 0.7, keterangan: ''},
+  ]);
+  console.log('insert data indikator atap');
+
+  await db.ki_bahan_bakar.deleteMany({})
+  await db.ki_bahan_bakar.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Listrik/Gas/Elpiji', bobot: 1, keterangan: ''},
+  ]);
+  console.log('insert data indikator bahan bakar');
+
+  await db.ki_dinding.deleteMany({})
+  await db.ki_dinding.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Tembok', bobot: 0.9, keterangan: ''},
+    {nama: 'Kayu', bobot: 0.7, keterangan: ''},
+    {nama: 'Bambu', bobot: 0.6, keterangan: ''},
+    {nama: 'Papan', bobot: 0.7, keterangan: ''},
+    {nama: 'Kalsiboard', bobot: 0.6, keterangan: ''},
+  ]);
+  console.log('insert data indikator dinding');
+
+  await db.ki_jamban.deleteMany({})
+  await db.ki_jamban.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Sendiri', bobot: 0.8, keterangan: ''},
+    {nama: 'Bersama/Umum', bobot: 0.5, keterangan: ''},
+    {nama: 'Tidak Ada', bobot: 0.2, keterangan: ''},
+  ]);
+  console.log('insert data indikator jamban');
+
+  await db.ki_lantai.deleteMany({})
+  await db.ki_lantai.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Tehel', bobot: 1, keterangan: ''},
+    {nama: 'Semen', bobot: 0.8, keterangan: ''},
+    {nama: 'Papan', bobot: 0.5, keterangan: ''},
+    {nama: 'Bambu', bobot: 0.4, keterangan: ''},
+    {nama: 'Tanah', bobot: 0.3, keterangan: ''},
+  ]);
+  console.log('insert data indikator lantai');
+
+  await db.ki_penerangan.deleteMany({})
+  await db.ki_penerangan.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Listrik PLN', bobot: 1, keterangan: ''},
+    {nama: 'Listrik Non PLN', bobot: 0.6, keterangan: ''},
+    {nama: 'Tidak Ada Listrik', bobot: 0.2, keterangan: ''},
+  ]);
+  console.log('insert data indikator penerangan');
+
+  await db.ki_sumber_air.deleteMany({})
+  await db.ki_sumber_air.insertMany([
+    {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Air Kemasan', bobot: 1, keterangan: ''},
+    {nama: 'Air Ledeng', bobot: 0.8, keterangan: ''},
+    {nama: 'Air Terlindung', bobot: 0.6, keterangan: ''},
+    {nama: 'Sumber Tidak Terlindungi', bobot: 0.3, keterangan: ''},
+  ]);
+  console.log('insert data indikator sumber air');
+
   
   await db.wil_provinsi.deleteMany({})
   await db.wil_provinsi.insertMany([
@@ -256,6 +334,7 @@ const running = async () => {
   ]);
   console.log('insert data desa');
 	
+  process.exit(1);
 }
 
 running();

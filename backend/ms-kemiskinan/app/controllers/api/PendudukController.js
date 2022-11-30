@@ -1,34 +1,28 @@
 import db from "../../models";
-import bcrypt from "bcrypt";
-import {
-	validationResult
-} from "express-validator";
-import { check } from 'express-validator';
-import services from "../../libraries/api-services"
+import { validationResult, check } from "express-validator";
 
 const table = db.penduduk;
 
 exports.validate = {
   store: [ 
-		check('no_kk', 'no_kk tidak ada').exists(),
-		check('kepala_keluarga', 'kepala_keluarga tidak ada').exists().isIn([true, false]),
-		check('hubungan_keluarga').exists().isInt(),//1. Istri / Suami, 2 Anak, 3 Wali, 4 Lainnya
-		check('nik', 'nik tidak ada').exists(),
+		check('no_kk').exists().isInt().isLength({ min: 16, max:16 }),
+		check('kepala_keluarga').exists().isIn([true, false]),
+		check('hubungan_keluarga').exists().isInt({ min: 1, max: 4 }), //1. Istri / Suami, 2 Anak, 3 Wali, 4 Lainnya
+		check('nik').exists().isInt().isLength({ min: 16, max:16 }),
 		check('nama', 'nama tidak ada').exists(),
 		check('jk', 'jk tidak ada').exists().isIn(['L', 'P']),
 		check('lahirTempat', 'lahirTempat tidak ada').exists(),
-		check('lahirTgl', 'lahirTgl tidak ada').exists(),
-		check('agama', 'agama tidak ada').exists(),
-		check('wilayah', 'wilayah tidak ada').exists(),
+		check('lahirTgl', 'lahirTgl tidak ada').exists().toDate(),
+		check('agama', 'agama tidak ada').exists().isInt({ min: 1, max: 6 }), // 1. Islam, 2. Kristen, 3. Khatolik, 4. Hindu, 5 Buddha, 6. Konghucu
+		check('wilayah', 'wilayah tidak ada').exists(), // kode desa
 		check('alamat', 'alamat tidak ada').exists(),
-		check('fisik', 'fisik tidak ada').exists(),
+		check('fisik', 'fisik tidak ada').exists().isInt({ min: 1, max: 3 }), // 1. Lainnya, 2. Sehat, 3. Cacat
 		check('fisikKet', 'fisikKet tidak ada').exists(),
-		check('statKawin', 'statKawin tidak ada').exists(),
-		check('statPendidikan', 'statPendidikan tidak ada').exists(),
+		check('statKawin', 'statKawin tidak ada').exists().isInt({ min: 1, max: 5 }), // 1. Belum Menikah, 2. Menikah, 3 Cerai, 4. Duda, 5. Janda
+		check('statPendidikan', 'statPendidikan tidak ada').exists().isInt({ min: 1, max: 7 }), // 1. Tidak punya ijazah, 2. SD, 3. SMP, 4. SMA, 5. S1, 6. S2, 7. S3
 		check('hidup', 'hidup tidak ada').exists().isIn([true, false]),
-		check('penyakit_id', 'penyakit_id tidak ada').exists(),
+		check('penyakit_id', 'penyakit_id tidak ada').exists(), // id table penyakit
 		check('penyakit_ket', 'penyakit_ket tidak ada').exists(),
-		
 	],
 }
 
@@ -36,7 +30,6 @@ export default class PendudukController {
 
 	static async getData(req, res) {
 		var condition = {};
-		// console.log(req.session);
 		try{
 			let data = await table.find(condition);
 			return res.send({statusCode: 200, data: data});
@@ -54,8 +47,9 @@ export default class PendudukController {
 			let id = req.params.id;
 			let data = await table.findById(id);
 			if (!data) return res.status(400).send({
-						message: "Not found Tutorial with id " + id,
-					});
+				statusCode: 400,
+				message: "Not found Tutorial with id " + id,
+			});
 			else return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({

@@ -79,6 +79,7 @@ const running = async () => {
   ]);
   console.log('insert data OPD');
 
+  process.exit(1);
 }
 
 running();
