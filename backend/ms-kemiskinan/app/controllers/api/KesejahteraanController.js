@@ -5,9 +5,9 @@ const table = db.keluarga_kesejahteraan;
 
 exports.validate = {
   store: [ 
-		check('keluarga_id', 'keluarga_id tidak ada').exists(),
+		check('keluarga_id', 'keluarga_id tidak ada').exists(), // cant update 
+		check('tahun', 'tahun tidak ada').exists().isInt(), // cant update 
 		check('status_kesejahteraan', 'status_kesejahteraan tidak ada').exists().isInt({ min: 1, max: 5 }), // 1. Sejahtera, 2 Hampir Miskin, 3. Miskin, 4. Sangat Miskin, 5. Belum Ada
-		check('tahun', 'tahun tidak ada').exists().isInt(),
 		check('pendapatan_utama', 'pendapatan_utama tidak ada').exists().isFloat(),
 		check('pendapatan_sampingan', 'pendapatan_sampingan tidak ada').exists().isFloat(),
 		check('pengeluaran_total', 'pengeluaran_total tidak ada').exists().isFloat(),
@@ -41,7 +41,7 @@ export default class KesejahteraanController {
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
-				message: err.message || "Some error occurred while retrieving tutorials.",
+				message: err.message || "Some error occurred while retrieving data.",
 			});
 		}
 	}
@@ -52,13 +52,14 @@ export default class KesejahteraanController {
 			let id = req.params.id;
 			let data = await table.findById(id);
 			if (!data) return res.status(400).send({
-						message: "Not found Tutorial with id " + id,
+						statusCode: 400,
+						message: "Not found data with id " + id,
 					});
 			else return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
-				message: err.message || "Some error occurred while retrieving tutorials.",
+				message: err.message || "Some error occurred while retrieving data.",
 			});
 		}
 	}
@@ -99,9 +100,7 @@ export default class KesejahteraanController {
 			let indikator_sumber_air_ket = req.body.indikator_sumber_air_ket;
 			
 			let dataInput = {
-				keluarga_id: keluarga_id,
 				status_kesejahteraan: status_kesejahteraan,
-				tahun: tahun,
 				keuangan: {
 					pendapatan_utama: pendapatan_utama,
 					pendapatan_sampingan: pendapatan_sampingan,
@@ -110,53 +109,61 @@ export default class KesejahteraanController {
 				indikator: {
 					rumah: {
 						rumah_id: indikator_rumah_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_rumah', indikator_rumah_id),
 						ukuran: indikator_rumah_ukuran,
 						keterangan: indikator_rumah_ket,
 					},
 					atap: {
 						atap_id: indikator_atap_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_atap', indikator_atap_id),
 						keterangan: indikator_atap_ket,
 					},
 					bahan_bakar: {
 						bahan_bakar_id: indikator_bahan_bakar_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_bahan_bakar', indikator_bahan_bakar_id),
 						keterangan: indikator_bahan_bakar_ket,
 					},
 					dinding: {
 						dinding_id: indikator_dinding_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_dinding', indikator_dinding_id),
 						keterangan: indikator_dinding_ket,
 					},
 					jamban: {
 						jamban_id: indikator_jamban_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_jamban', indikator_jamban_id),
 						keterangan: indikator_jamban_ket,
 					},
 					lantai: {
 						lantai_id: indikator_lantai_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_lantai', indikator_lantai_id),
 						keterangan: indikator_lantai_ket,
 					},
 					penerangan: {
 						penerangan_id: indikator_penerangan_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_penerangan', indikator_penerangan_id),
 						keterangan: indikator_penerangan_ket,
 					},
 					sumber_air: {
 						sumber_air_id: indikator_sumber_air_id,
+						nama: await KesejahteraanController.getIndikatorName('ki_sumber_air', indikator_sumber_air_id),
 						keterangan: indikator_sumber_air_ket,
 					},
 				},
 			};
 
-			
 			if(req.params.id){
 				let id = req.params.id;
-				let data = table.findByIdAndUpdate(id, dataInput, {useFindAndModify: false,});
+				let data = await table.findByIdAndUpdate(id, dataInput, {useFindAndModify: false});
 				if (!data) {
 					return res.status(404).send({
 						statusCode: 404,
 						message: `Cannot update data with id=${id}. Maybe data was not found!`,
 					});
 				}
+				console.log(id);
 				return res.send({
 					statusCode: 200,
-					message: "Data was updated successfully."
+					message: "Data was updated successfully.",
 				});
 			}else{
 				let cekData = await table.find({ keluarga_id: keluarga_id, tahun: tahun });
@@ -166,8 +173,11 @@ export default class KesejahteraanController {
 						message: 'Data already exists.',
 					});
 				}
+				
+				dataInput['keluarga_id'] = keluarga_id;
+				dataInput['tahun'] = tahun;
 
-				let data = table.create(dataInput);
+				let data = await table.create(dataInput);
 				return res.send({
 					statusCode: 200,
 					message: 'Data was inserted successfully.',
@@ -177,25 +187,15 @@ export default class KesejahteraanController {
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
-				message: err.message || "Some error occurred while retrieving tutorials.",
+				message: err.message || "Some error occurred while retrieving data.",
 			});
 		}
 	}
 
 	static async delete(req, res) {
-		var id = (req.params.id);
+		let id = req.params.id;
 		try{
-			let data = await db.penduduk.aggregate([
-				{ $match: { _id: db.mongoose.Types.ObjectId(id) } },
-				{
-					$lookup:{
-						from: 'keluarga_penduduks',
-						localField: '_id',
-						foreignField: 'penduduk_id',
-						as: 'keluarga_penduduk'
-					},
-				},
-			]);
+			let data = await table.findByIdAndRemove(id);
 			
 			if (!data) {
 				return res.status(400).send({
@@ -203,17 +203,12 @@ export default class KesejahteraanController {
 					message: `Cannot delete data with id=${id}. Maybe data was not found!`,
 				});
 			} else {
-				
-				await db.penduduk.findByIdAndRemove(id);
-				await data[0].keluarga_penduduk.forEach( async element =>  {
-					await db.keluarga_penduduk.findByIdAndRemove(element._id);
-				});
-
 				return res.send({
 					statusCode: 200,
-					message: "data was deleted successfully!"
+					message: "data was deleted successfully!",
 				});
 			}
+
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
@@ -221,5 +216,10 @@ export default class KesejahteraanController {
 			});
 		}
 	}
-
+	
+	static async getIndikatorName(table, id){
+		let data = await db[table].findById(id);
+		if(!data) return '';
+		return data.nama;
+	}
 }

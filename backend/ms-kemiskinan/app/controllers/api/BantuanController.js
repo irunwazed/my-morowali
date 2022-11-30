@@ -1,193 +1,150 @@
 import db from "../../models";
-import bcrypt from "bcrypt";
-import {
-	validationResult
-} from "express-validator";
+import { validationResult, check } from "express-validator";
 
-const table = db.bantuan;
+const table = db.penduduk_bantuan;
+
+exports.validate = {
+  store: [ 
+		check('tahun', 'tahun tidak ada').exists().isInt(), // cant update 
+		check('bantuan_id', 'bantuan_id tidak ada').exists(),
+		check('penduduk', 'penduduk tidak ada').exists().isArray({ min: 1 }),
+		check('pagu', 'pagu tidak ada').isFloat(),
+		check('keterangan', 'keterangan tidak ada').exists(),
+	],
+}
 
 export default class BantuanController {
+
 	static async getData(req, res) {
 		var condition = {};
+		try{
+			
+			let data = await table.find(condition);
+			// let tgl = data[0].createdAt;
+			// console.log(tgl.getDate());
+			// console.log(tgl.getMonth());
+			// console.log(tgl.getFullYear());
 
-		table
-			.find(condition)
-			.then((data) => {
-				res.send(data);
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while retrieving tutorials.",
-				});
+			
+			// let data = await table.aggregate([
+			// 	{ $project: { data: {
+			// 		year: { $substr: [ "$createdAt", 0, 4 ] },
+			// 		month: { $substr: [ "$createdAt", 5, 2 ] },
+			// 		day: { $substr: [ "$createdAt", 8, 2 ] },
+			// 	} } }
+			// ]);
+			
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Some error occurred while retrieving data.",
 			});
+		}
 	}
 
 	static async getOneData(req, res) {
-		let id = req.params.id;
-
-		table
-			.findById(id)
-			.then((data) => {
-				if (!data)
-					res.status(400).send({
-						message: "Not found Tutorial with id " + id,
+		try{
+			let id = req.params.id;
+			let data = await table.findById(id);
+			if (!data) return res.status(400).send({
+						statusCode: 400,
+						message: "Not found data with id " + id,
 					});
-				else res.send(data);
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while retrieving tutorials.",
-				});
+			else return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Some error occurred while retrieving data.",
 			});
+		}
 	}
 
 	static async store(req, res) {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(422).json({
+				statusCode: 422,
 				errors: errors.array(),
 			});
 		}
 
-		let username = req.body.username;
-		let password = req.body.password;
-		let name = req.body.name ? req.body.name : "";
-		let nik = req.body.nik ? req.body.nik : "";
+		try{
+			let penduduk_id = req.body.penduduk_id;
+			let tahun = req.body.tahun;
+			let bantuan_id = req.body.bantuan_id;
+			let pagu = req.body.pagu;
+			let keterangan = req.body.keterangan;
+			
+			let dataInput = {
+				bantuan: {
+					bantuan_id: bantuan_id,
+					nama: await BantuanController.getIndikatorName('bantuan', bantuan_id),
+					pagu: pagu,
+					keterangan: keterangan,
+				},
+			};
 
-		const users = new table({
-			username: username,
-			password: bcrypt.hashSync(password, 10),
-			profil: {
-				name: name,
-				nik: nik,
-			},
-		});
-
-		users
-			.save(users)
-			.then((data) => {
-				// console.log(data);
-				res.send(data);
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message,
-					req: username,
-				});
-			});
-	}
-
-	static async update(req, res) {
-		let username = req.body.username;
-		let id = req.params.id;
-
-		table
-			.findByIdAndUpdate(
-				id, {
-					username,
-				}, {
-					useFindAndModify: false,
-				}
-			)
-			.then((data) => {
+			if(req.params.id){
+				let id = req.params.id;
+				let data = await table.findByIdAndUpdate(id, dataInput, {useFindAndModify: false});
 				if (!data) {
-					res.status(404).send({
-						message: `Cannot update Users with id=${id}. Maybe Users was not found!`,
+					return res.status(404).send({
+						statusCode: 404,
+						message: `Cannot update data with id=${id}. Maybe data was not found!`,
 					});
-				} else
-					res.send({
-						message: "Users was updated successfully.",
-					});
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: "Error updating Users with id=" + id,
+				}
+				return res.send({
+					statusCode: 200,
+					message: "Data was updated successfully.",
 				});
+			}else{
+				
+				dataInput['penduduk_id'] = penduduk_id;
+				dataInput['tahun'] = tahun;
+
+				let data = await table.create(dataInput);
+				return res.send({
+					statusCode: 200,
+					message: 'Data was inserted successfully.',
+				});
+			}
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Some error occurred while retrieving data.",
 			});
+		}
 	}
 
 	static async delete(req, res) {
 		let id = req.params.id;
-
-		table
-			.findByIdAndRemove(id)
-			.then((data) => {
-				if (!data) {
-					res.status(400).send({
-						message: `Cannot delete Users with id=${id}. Maybe Users was not found!`,
-					});
-				} else {
-					res.send({
-						message: "Users was deleted successfully!",
-					});
-				}
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: "Could not delete Users with id=" + id,
-				});
-			});
-	}
-
-	static async deleteAll(req, res) {
-		table
-			.deleteMany({})
-			.then((data) => {
-				res.send({
-					message: `${data.deletedCount} Users were deleted successfully!`,
-				});
-			})
-			.catch((err) => {
-				res.status(500).send({
-					message: err.message || "Some error occurred while removing all Users.",
-				});
-			});
-	}
-
-	static async changePassword(req, res){
-		let session = req.setSession;
-		let password = req.body.password;
-		let passwordReset = req.body.passwordReset;
-		let passwordResetValid = req.body.passwordResetValid;
-
-		if(password == passwordResetValid) return res.status(412).send({
-			message: "Password same with new password!",
-		}); 
-
-		if(passwordReset != passwordResetValid) return res.status(412).send({
-			message: "Password reset not same!",
-		}); 
-
-		let user = await table.findById(session.id);
-		let userAll = await table.find({});
-
-		if(!user.id) return res.status(401).send({
-			message: "User not found. please login again!",
-		});
-
-		if (!bcrypt.compareSync(password, user.password)) return res.status(401).send({
-			message: "wrong password!",
-		});
-
 		try{
-			let status = await table.findByIdAndUpdate(session.id, {
-				password: bcrypt.hashSync(passwordReset, 10),
-			}, {
-				useFindAndModify: false,
-			});
+			let data = await table.findByIdAndRemove(id);
+			
+			if (!data) {
+				return res.status(400).send({
+					statusCode: 400,
+					message: `Cannot delete data with id=${id}. Maybe data was not found!`,
+				});
+			} else {
+				return res.send({
+					statusCode: 200,
+					message: "data was deleted successfully!",
+				});
+			}
 
-			if(!status) return res.status(401).send({
-				message: "Change user fail!",
-			});
-			return res.status(200).send({
-				message: "Change user success!",
-			});
 		}catch(err){
 			return res.status(500).send({
-				message: "User cancel change password!",
+				statusCode: 500,
+				message: "Could not delete data with id=" + id,
 			});
 		}
-		
-		
+	}
+	
+	static async getIndikatorName(table, id){
+		let data = await db[table].findById(id);
+		if(!data) return '';
+		return data.nama;
 	}
 }

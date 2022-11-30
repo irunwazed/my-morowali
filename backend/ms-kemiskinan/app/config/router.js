@@ -40,6 +40,12 @@ router.post("/api/kesejahteraan", route('api/KesejahteraanController@store', tru
 router.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
 router.delete("/api/kesejahteraan/:id", route('api/KesejahteraanController@delete'));
 
+router.get("/api/bantuan", route('api/BantuanController@getData'));
+router.get("/api/bantuan/:id", route('api/BantuanController@getOneData'));
+router.post("/api/bantuan", route('api/BantuanController@store', true), route('api/BantuanController@store'));
+router.put("/api/bantuan/:id", route('api/BantuanController@store', true), route('api/BantuanController@store'));
+router.delete("/api/bantuan/:id", route('api/BantuanController@delete'));
+
 router.get("/api/data/penyakit", route('api/data/PenyakitController@getData'));
 router.get("/api/data/penyakit/:id", route('api/data/PenyakitController@getOneData'));
 router.post("/api/data/penyakit", route('api/data/PenyakitController@store', true), route('api/data/PenyakitController@store'));
@@ -57,6 +63,7 @@ router.get("/api/data/bantuan/:id", route('api/data/BantuanController@getOneData
 router.post("/api/data/bantuan", route('api/data/BantuanController@store', true), route('api/data/BantuanController@store'));
 router.put("/api/data/bantuan/:id", route('api/data/BantuanController@store', true), route('api/data/BantuanController@update'));
 router.delete("/api/data/bantuan/:id", route('api/data/BantuanController@delete'));
+
 
 // indikator
 router.get("/api/kesejahteraan/indikator/rumah", route('api/indikator/RumahController@getData'));

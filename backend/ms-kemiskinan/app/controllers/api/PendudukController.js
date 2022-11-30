@@ -186,7 +186,7 @@ export default class PendudukController {
 		}
 		return res.send({
 			statusCode: 200,
-			message: 'Data was inserted successfully.',
+			message: 'Data was saved.',
 		});
 	}
 
