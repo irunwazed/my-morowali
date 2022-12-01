@@ -48,12 +48,14 @@ export default class LoginController {
 		let bearerHeader = req.header("authorization");
 		if (typeof bearerHeader === "undefined")
 			return res.status(404).send({
+				statusCode: 404,
 				message: "No credentials sent!",
 			});
 
 		let bearer = bearerHeader.split(" ");
 		if (bearer.length != 2)
 			return res.status(404).send({
+				statusCode: 404,
 				message: "Bearer is invalid",
 			});
 
@@ -63,13 +65,14 @@ export default class LoginController {
 			decoded = jwt.verify(bearer, process.env.JWT_SECRET_KEY);
 		} catch (err) {
 			return res.status(500).send({
+				statusCode: 500,
 				message: err.message,
 			});
 		}
 
 		var akun = {};
 		if(decoded.level == 4){
-			let tmp = await db.pegawai.find({login_id: decoded.id});
+			let tmp = await db.pegawai.find({nip: decoded.username});
 			if(tmp.length == 1){
 				akun = {
 					nama: tmp[0].nama,
