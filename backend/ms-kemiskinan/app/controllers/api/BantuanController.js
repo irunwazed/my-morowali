@@ -17,11 +17,28 @@ exports.validate = {
 
 export default class BantuanController {
 
+	static async paginate(func, condition){
+		let data = await table[func](condition)
+		return {
+			data: data,
+			
+		};
+	}
+
 	static async getData(req, res) {
 		var condition = {};
 		try{
 			
-			let data = await table.find(condition);
+			let limit = 2;
+			let page = 1;
+
+			let data = await table.find(condition)
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+			// let data  = await BantuanController.paginate('aggregate', [
+			// 	{ $project:{ data: '$$ROOT' } }
+			// ]);
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -68,19 +85,12 @@ export default class BantuanController {
 			let longitude = req.body.longitude;
 			let latitude = req.body.latitude;
 			
-
 			let dataPenduduk = await Promise.all(penduduk.map( async e => {
 				let data = await db.penduduk.findById(e);
 				return { penduduk_id: data._id, nik: data.nik, nama: data.nama };
 			}));
 
-			
-			let lokasi = {
-				alamat: alamat,
-				longitude: longitude,
-				latitude: latitude,
-			}
-
+			let lokasi = {}
 			let level = 4;
 			if(wilayah.length >= 2){
 				lokasi['provinsi_kode'] = wilayah.slice(0, 2);
@@ -89,26 +99,28 @@ export default class BantuanController {
 				level = 1;
 			}
 			if(wilayah.length >= 4){
-				lokasi['kabupaten_kode'] = wilayah.slice(0, 2);
+				lokasi['kabupaten_kode'] = wilayah.slice(0, 4);
 				let tmp = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)})
 				lokasi['kabupaten_nama'] = tmp[0].nama;
 				level = 2;
 			}
 			if(wilayah.length >= 7){
-				lokasi['kecamatan_kode'] = wilayah.slice(0, 2);
+				lokasi['kecamatan_kode'] = wilayah.slice(0, 7);
 				let tmp = await db.wil_kecamatan.find({kode: wilayah.slice(0, 7)})
 				lokasi['kecamatan_nama'] = tmp[0].nama;
 				level = 3;
 			}
 			if(wilayah.length == 10){
-				lokasi['kelurahan_kode'] = wilayah.slice(0, 2);
+				lokasi['kelurahan_kode'] = wilayah.slice(0, 10);
 				let tmp = await db.wil_desa.find({kode: wilayah.slice(0, 10)})
 				lokasi['kelurahan_nama'] = tmp[0].nama;
 				level = 4;
 			}
 			lokasi['level'] = level;
+			lokasi['alamat_nama'] = alamat;
+			longitude?lokasi['longitude'] = longitude:'';
+			latitude?lokasi['latitude'] = latitude:'';
 			
-
 			let dataInput = {
 				penduduk: dataPenduduk,
 				bantuan: {
