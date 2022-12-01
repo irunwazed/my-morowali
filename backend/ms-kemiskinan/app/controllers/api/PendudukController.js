@@ -28,14 +28,47 @@ exports.validate = {
 
 export default class PendudukController {
 
-	static async paginate(){
+	static async paginate(req, table, condition = {}){
+		let start = req.query.start?req.query.start:0;
+		let length = req.query.length?req.query.length:2;
+		let search = req.query.search?req.query.search:'';
+		let data = [];
+		let jumData = 0;
+		let draw = req.query.draw;
 
+		data = await db[table].find({ 
+			$or: [
+				{ 'nama': search.value },
+				{ 'nik': search.value },
+				{ 'lahir.tempat': search.value }
+			]
+		 })
+			.skip(start)
+			.limit(length)
+			.sort({ updatedAt: 'desc' });
+		let tmp = data = await db[table].find({});
+		jumData = tmp.length;
+
+		let result = {
+			statusCode: 200,
+			draw: draw,
+			recordsTotal: jumData,
+			recordsFiltered: jumData,
+			data: data,
+			start: start,
+			length: length,
+			search: search,
+		};
+		return result;
 	}
 
 	static async getData(req, res) {
 		var condition = {};
 		try{
 			let data = await table.find(condition);
+			let result = await PendudukController.paginate(req, 'penduduk');
+			console.log(result);
+			return res.send(result);
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
