@@ -1,5 +1,6 @@
 import db from "../../../models";
 import { validationResult, check } from "express-validator";
+import paginate from '../../../libraries/paginate';
 
 const table = db.ki_dinding;
 
@@ -16,8 +17,8 @@ export default class DindingController {
 		let nama = new RegExp(req.query.nama);
 		var condition = {nama: {$regex: nama, $options: 'i'}};
 		try{
-			let data = await table.find(condition);
-			return res.send({ statusCode: 200, data: data });
+			let result = await paginate.find(req, 'ki_dinding', condition);
+			return res.send(result);
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,

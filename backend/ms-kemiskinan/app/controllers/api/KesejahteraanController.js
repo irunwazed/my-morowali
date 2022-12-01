@@ -1,5 +1,6 @@
 import db from "../../models";
 import { validationResult, check } from "express-validator";
+import paginate from '../../libraries/paginate';
 
 const table = db.keluarga_kesejahteraan;
 
@@ -36,8 +37,8 @@ export default class KesejahteraanController {
 	static async getData(req, res) {
 		var condition = {};
 		try{
-			let data = await table.find(condition);
-			return res.send({statusCode: 200, data: data});
+			let data = await paginate.find(req, 'keluarga_kesejahteraan', condition);
+			return res.send(data);
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,

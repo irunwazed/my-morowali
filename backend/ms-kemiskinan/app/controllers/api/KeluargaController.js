@@ -1,4 +1,5 @@
 import db from "../../models";
+import paginate from '../../libraries/paginate';
 
 export default class KeluargaController {
 	static async getData(req, res) {
@@ -42,21 +43,12 @@ export default class KeluargaController {
 
 			if(req.params.id){
 				query.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id) } });
+				let data = await db.keluarga.aggregate(query);
+				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
+				return res.send({statusCode: 200, data: data[0]});
 			}
-			let data = await db.keluarga.aggregate(query);
-		
-			if (!data) {
-				return res.status(400).send({
-					statusCode: 400,
-					message: `data not found!`,
-				});
-			}else{
-				if(req.params.id){
-					if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
-					return res.send({statusCode: 200, data: data[0]});
-				}
-				return res.send({statusCode: 200, data: data});
-			}
+			let result = await paginate.aggregate(req, 'keluarga', query);
+			return res.send(result);
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,

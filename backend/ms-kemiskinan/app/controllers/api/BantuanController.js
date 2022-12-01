@@ -1,5 +1,6 @@
 import db from "../../models";
 import { validationResult, check } from "express-validator";
+import paginate from '../../libraries/paginate';
 
 const table = db.penduduk_bantuan;
 
@@ -28,18 +29,8 @@ export default class BantuanController {
 	static async getData(req, res) {
 		var condition = {};
 		try{
-			
-			let limit = 2;
-			let page = 1;
-
-			let data = await table.find(condition)
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec();
-			// let data  = await BantuanController.paginate('aggregate', [
-			// 	{ $project:{ data: '$$ROOT' } }
-			// ]);
-			return res.send({statusCode: 200, data: data});
+			let data = await paginate.find(req, 'penduduk_bantuan', condition);
+			return res.send(data);
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
