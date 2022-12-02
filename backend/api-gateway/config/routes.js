@@ -28,6 +28,18 @@ const ROUTES = [
 		}
 	},
 	{
+		path: '/kemiskinan-public/storages',
+		auth: false,
+		author: false,
+		proxy: {
+			target: MS_KEMISKINAN+'storages/',
+			changeOrigin: true,
+			pathRewrite: {
+				[`^/kemiskinan-public/storages`]: '',
+			},
+		}
+	},
+	{
 		path: '/kemiskinan',
 		auth: true,
 		author: false,
