@@ -11,7 +11,6 @@ const setAuth = (app, routes) => {
 						return res.status(404).send({
 							statusCode: 404,
 							message: "No credentials sent!",
-							route: route
 						});
 
 					let bearer = bearerHeader.split(" ");

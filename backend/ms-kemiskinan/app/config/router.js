@@ -114,6 +114,10 @@ router.post("/api/kesejahteraan/indikator/sumber-air", route('api/indikator/Sumb
 router.put("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@store', true), route('api/indikator/SumberAirController@update'));
 router.delete("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@delete'));
 
+// laporan
+router.get("/api/laporan/penduduk", route('api/LaporanController@penduduk'));
+
+
 // get data to foreign
 router.get("/api/get/penduduk", route('api/DataController@getPendudukByNIK'))
 router.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
