@@ -31,6 +31,7 @@ router.post("/api/penduduk", route('api/PendudukController@store', true), route(
 router.delete("/api/penduduk/:id", route('api/PendudukController@delete'));
 
 router.get("/api/keluarga", route('api/KeluargaController@getData'));
+router.get("/api/keluarga/no_kk/:no_kk", route('api/KeluargaController@getDataByKK'));
 router.get("/api/keluarga/:id", route('api/KeluargaController@getData'));
 router.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 

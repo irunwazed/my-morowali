@@ -16,7 +16,7 @@ export default class DataController {
 						as: 'penyakit_diderita',
 					},
 				},
-				{ $unwind: "$penyakit_diderita" },
+				// { $unwind: "$penyakit_diderita" },
 				{ $match: { nik: nik } }
 			]);
 			if(data[0]){

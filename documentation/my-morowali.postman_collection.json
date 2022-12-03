@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4cd697fe-c500-4890-b90f-f705718fc5b8",
+		"_postman_id": "fcd16267-d9a3-4aab-ac35-0b553b4652f1",
 		"name": "my-morowali",
 		"description": "# Introduction\n\nwelcome",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -25,7 +25,7 @@
 								},
 								{
 									"key": "password",
-									"value": "1234561",
+									"value": "123456",
 									"type": "text"
 								}
 							]
@@ -191,7 +191,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 									"type": "string"
 								}
 							]
@@ -289,7 +289,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -376,7 +376,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -557,7 +557,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -719,7 +719,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -867,7 +867,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -954,7 +954,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -1120,7 +1120,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -1293,7 +1293,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -1441,7 +1441,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -1528,7 +1528,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -1708,7 +1708,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -1991,7 +1991,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -2142,7 +2142,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -2231,7 +2231,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -2440,7 +2440,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -2630,7 +2630,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -2781,7 +2781,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -2870,7 +2870,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -3079,7 +3079,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -3269,7 +3269,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -3420,7 +3420,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -3509,7 +3509,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -3715,7 +3715,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -3999,7 +3999,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -4150,7 +4150,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -4239,7 +4239,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -4445,7 +4445,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -4654,7 +4654,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -4805,7 +4805,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -4894,7 +4894,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -5100,7 +5100,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -5384,7 +5384,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -5535,7 +5535,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -5624,7 +5624,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -5830,7 +5830,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -6114,7 +6114,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -6265,7 +6265,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -6354,7 +6354,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -6560,7 +6560,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -6844,7 +6844,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -6995,7 +6995,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -7084,7 +7084,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -7290,7 +7290,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -7574,7 +7574,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 															"type": "string"
 														}
 													]
@@ -7732,7 +7732,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -7819,7 +7819,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -7908,7 +7908,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -7995,7 +7995,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -8084,7 +8084,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -8171,7 +8171,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -8260,7 +8260,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -8349,7 +8349,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 													"type": "string"
 												}
 											]
@@ -8440,7 +8440,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -8583,7 +8583,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -8725,19 +8725,26 @@
 					"item": [
 						{
 							"name": "data",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"auth": {
 									"type": "bearer",
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
 								},
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
 								"url": {
 									"raw": "127.0.0.1:3000/kemiskinan/penduduk",
 									"host": [
@@ -8809,6 +8816,39 @@
 							]
 						},
 						{
+							"name": "data by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/penduduk/6388bd7179866000086c9d9f",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"penduduk",
+										"6388bd7179866000086c9d9f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "create and update",
 							"request": {
 								"auth": {
@@ -8816,7 +8856,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -8828,7 +8868,7 @@
 									"urlencoded": [
 										{
 											"key": "no_kk",
-											"value": "1234567890123456",
+											"value": "1134567890123451",
 											"type": "text"
 										},
 										{
@@ -8843,12 +8883,12 @@
 										},
 										{
 											"key": "nik",
-											"value": "1234567890123455",
+											"value": "2124567890123451",
 											"type": "text"
 										},
 										{
 											"key": "nama",
-											"value": "aka",
+											"value": "qwe",
 											"type": "text"
 										},
 										{
@@ -8908,7 +8948,7 @@
 										},
 										{
 											"key": "penyakit_id",
-											"value": "6385388a63408b8e2716d022",
+											"value": "638789bf5ba29dc28d390498",
 											"type": "text"
 										},
 										{
@@ -9195,7 +9235,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -9203,7 +9243,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/penduduk/63858d7c7753ba6c3fe69586",
+									"raw": "127.0.0.1:3000/kemiskinan/penduduk/63858fb17753ba6c3fe695a7",
 									"host": [
 										"127",
 										"0",
@@ -9214,7 +9254,7 @@
 									"path": [
 										"kemiskinan",
 										"penduduk",
-										"63858d7c7753ba6c3fe69586"
+										"63858fb17753ba6c3fe695a7"
 									]
 								}
 							},
@@ -9340,7 +9380,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -9425,7 +9465,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -9433,7 +9473,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/keluarga",
+									"raw": "127.0.0.1:3000/kemiskinan/keluarga/6388bd4b79866000086c9d77",
 									"host": [
 										"127",
 										"0",
@@ -9443,7 +9483,96 @@
 									"port": "3000",
 									"path": [
 										"kemiskinan",
-										"keluarga"
+										"keluarga",
+										"6388bd4b79866000086c9d77"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/keluarga/63858d7c7753ba6c3fe69583",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"keluarga",
+												"63858d7c7753ba6c3fe69583"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "228"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"e4-8w7TnFcgjcxLBqkC0zKnvmPM7J8\""
+										},
+										{
+											"key": "date",
+											"value": "Tue, 29 Nov 2022 04:47:42 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"data\": {\n        \"_id\": \"63858d7c7753ba6c3fe69583\",\n        \"no_kk\": \"1234567890123456\",\n        \"nik_kepala\": \"1234567890123455\",\n        \"createdAt\": \"2022-11-29T04:41:32.467Z\",\n        \"updatedAt\": \"2022-11-29T04:41:32.467Z\",\n        \"__v\": 0,\n        \"keluarga_penduduk\": []\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "data by no_kk",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/keluarga/no_kk/2234567890123451",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"keluarga",
+										"no_kk",
+										"2234567890123451"
 									]
 								}
 							},
@@ -9511,7 +9640,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -9644,6 +9773,2563 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "kesejahteraan",
+					"item": [
+						{
+							"name": "data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"kesejahteraan"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "5106"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"13f2-5ygafY+0alN98JQAxgv7uW9v1c4\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:23:15 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"data\": [\n        {\n            \"keuangan\": {\n                \"pendapatan_utama\": 1500000,\n                \"pendapatan_sampingan\": 0,\n                \"pengeluaran_total\": 500000\n            },\n            \"indikator\": {\n                \"rumah\": {\n                    \"rumah_id\": \"6385388a63408b8e2716d036\",\n                    \"nama\": \"Lainnya\",\n                    \"ukuran\": 22,\n                    \"keterangan\": \"-\"\n                },\n                \"atap\": {\n                    \"atap_id\": \"6385388a63408b8e2716d03d\",\n                    \"nama\": \"Beton\",\n                    \"keterangan\": \"-\"\n                },\n                \"bahan_bakar\": {\n                    \"bahan_bakar_id\": \"6385388a63408b8e2716d045\",\n                    \"nama\": \"Lainnya\",\n                    \"keterangan\": \"-\"\n                },\n                \"dinding\": {\n                    \"dinding_id\": \"6385388a63408b8e2716d04a\",\n                    \"nama\": \"Tembok\",\n                    \"keterangan\": \"-\"\n                },\n                \"jamban\": {\n                    \"jamban_id\": \"6385388a63408b8e2716d052\",\n                    \"nama\": \"Sendiri\",\n                    \"keterangan\": \"-\"\n                },\n                \"lantai\": {\n                    \"lantai_id\": \"6385388a63408b8e2716d058\",\n                    \"nama\": \"Tehel\",\n                    \"keterangan\": \"-\"\n                },\n                \"penerangan\": {\n                    \"penerangan_id\": \"6385388a63408b8e2716d060\",\n                    \"nama\": \"Listrik PLN\",\n                    \"keterangan\": \"-\"\n                },\n                \"sumber_air\": {\n                    \"sumber_air_id\": \"6385388a63408b8e2716d066\",\n                    \"nama\": \"Air Kemasan\",\n                    \"keterangan\": \"-\"\n                }\n            },\n            \"_id\": \"6386a8f82d10be098d292b72\",\n            \"keluarga_id\": \"63858fb17753ba6c3fe695a4\",\n            \"status_kesejahteraan\": 2,\n            \"tahun\": 2022,\n            \"createdAt\": \"2022-11-30T00:51:04.370Z\",\n            \"updatedAt\": \"2022-11-30T02:16:35.545Z\",\n            \"__v\": 0\n        },\n        {\n            \"keuangan\": {\n                \"pendapatan_utama\": 2000000,\n                \"pendapatan_sampingan\": 0,\n                \"pengeluaran_total\": 2000000\n            },\n            \"indikator\": {\n                \"rumah\": {\n                    \"rumah_id\": \"6385388a63408b8e2716d036\",\n                    \"nama\": \"Lainnya\",\n                    \"ukuran\": 22,\n                    \"keterangan\": \"-\"\n                },\n                \"atap\": {\n                    \"atap_id\": \"6385388a63408b8e2716d03d\",\n                    \"nama\": \"Beton\",\n                    \"keterangan\": \"-\"\n                },\n                \"bahan_bakar\": {\n                    \"bahan_bakar_id\": \"6385388a63408b8e2716d045\",\n                    \"nama\": \"Lainnya\",\n                    \"keterangan\": \"-\"\n                },\n                \"dinding\": {\n                    \"dinding_id\": \"6385388a63408b8e2716d04a\",\n                    \"nama\": \"Tembok\",\n                    \"keterangan\": \"-\"\n                },\n                \"jamban\": {\n                    \"jamban_id\": \"6385388a63408b8e2716d052\",\n                    \"nama\": \"Sendiri\",\n                    \"keterangan\": \"-\"\n                },\n                \"lantai\": {\n                    \"lantai_id\": \"6385388a63408b8e2716d058\",\n                    \"nama\": \"Tehel\",\n                    \"keterangan\": \"-\"\n                },\n                \"penerangan\": {\n                    \"penerangan_id\": \"6385388a63408b8e2716d060\",\n                    \"nama\": \"Listrik PLN\",\n                    \"keterangan\": \"-\"\n                },\n                \"sumber_air\": {\n                    \"sumber_air_id\": \"6385388a63408b8e2716d066\",\n                    \"nama\": \"Air Kemasan\",\n                    \"keterangan\": \"-\"\n                }\n            },\n            \"_id\": \"6386ac3ee57b455ede61ea34\",\n            \"keluarga_id\": \"63858fb17753ba6c3fe695a4\",\n            \"status_kesejahteraan\": 1,\n            \"tahun\": 2020,\n            \"createdAt\": \"2022-11-30T01:05:02.532Z\",\n            \"updatedAt\": \"2022-11-30T01:05:02.532Z\",\n            \"__v\": 0\n        },\n        {\n            \"keuangan\": {\n                \"pendapatan_utama\": 2000000,\n                \"pendapatan_sampingan\": 0,\n                \"pengeluaran_total\": 2000000\n            },\n            \"indikator\": {\n                \"rumah\": {\n                    \"rumah_id\": \"6385388a63408b8e2716d036\",\n                    \"nama\": \"Lainnya\",\n                    \"ukuran\": 22,\n                    \"keterangan\": \"-\"\n                },\n                \"atap\": {\n                    \"atap_id\": \"6385388a63408b8e2716d03d\",\n                    \"nama\": \"Beton\",\n                    \"keterangan\": \"-\"\n                },\n                \"bahan_bakar\": {\n                    \"bahan_bakar_id\": \"6385388a63408b8e2716d045\",\n                    \"nama\": \"Lainnya\",\n                    \"keterangan\": \"-\"\n                },\n                \"dinding\": {\n                    \"dinding_id\": \"6385388a63408b8e2716d04a\",\n                    \"nama\": \"Tembok\",\n                    \"keterangan\": \"-\"\n                },\n                \"jamban\": {\n                    \"jamban_id\": \"6385388a63408b8e2716d052\",\n                    \"nama\": \"Sendiri\",\n                    \"keterangan\": \"-\"\n                },\n                \"lantai\": {\n                    \"lantai_id\": \"6385388a63408b8e2716d058\",\n                    \"nama\": \"Tehel\",\n                    \"keterangan\": \"-\"\n                },\n                \"penerangan\": {\n                    \"penerangan_id\": \"6385388a63408b8e2716d060\",\n                    \"nama\": \"Listrik PLN\",\n                    \"keterangan\": \"-\"\n                },\n                \"sumber_air\": {\n                    \"sumber_air_id\": \"6385388a63408b8e2716d066\",\n                    \"nama\": \"Air Kemasan\",\n                    \"keterangan\": \"-\"\n                }\n            },\n            \"_id\": \"6386ad13bd78607ad209d93e\",\n            \"keluarga_id\": \"63858fb17753ba6c3fe695a4\",\n            \"status_kesejahteraan\": 1,\n            \"tahun\": 2021,\n            \"createdAt\": \"2022-11-30T01:08:35.017Z\",\n            \"updatedAt\": \"2022-11-30T01:08:35.017Z\",\n            \"__v\": 0\n        },\n        {\n            \"keuangan\": {\n                \"pendapatan_utama\": 2000000,\n                \"pendapatan_sampingan\": 0,\n                \"pengeluaran_total\": 2000000\n            },\n            \"indikator\": {\n                \"rumah\": {\n                    \"rumah_id\": \"6385388a63408b8e2716d036\",\n                    \"nama\": \"Lainnya\",\n                    \"ukuran\": 22,\n                    \"keterangan\": \"-\"\n                },\n                \"atap\": {\n                    \"atap_id\": \"6385388a63408b8e2716d03d\",\n                    \"nama\": \"Beton\",\n                    \"keterangan\": \"-\"\n                },\n                \"bahan_bakar\": {\n                    \"bahan_bakar_id\": \"6385388a63408b8e2716d045\",\n                    \"nama\": \"Lainnya\",\n                    \"keterangan\": \"-\"\n                },\n                \"dinding\": {\n                    \"dinding_id\": \"6385388a63408b8e2716d04a\",\n                    \"nama\": \"Tembok\",\n                    \"keterangan\": \"-\"\n                },\n                \"jamban\": {\n                    \"jamban_id\": \"6385388a63408b8e2716d052\",\n                    \"nama\": \"Sendiri\",\n                    \"keterangan\": \"-\"\n                },\n                \"lantai\": {\n                    \"lantai_id\": \"6385388a63408b8e2716d058\",\n                    \"nama\": \"Tehel\",\n                    \"keterangan\": \"-\"\n                },\n                \"penerangan\": {\n                    \"penerangan_id\": \"6385388a63408b8e2716d060\",\n                    \"nama\": \"Listrik PLN\",\n                    \"keterangan\": \"-\"\n                },\n                \"sumber_air\": {\n                    \"sumber_air_id\": \"6385388a63408b8e2716d066\",\n                    \"nama\": \"Air Kemasan\",\n                    \"keterangan\": \"-\"\n                }\n            },\n            \"_id\": \"6386b122a8c8c32093c0ae65\",\n            \"keluarga_id\": \"63858fb17753ba6c3fe695a4\",\n            \"status_kesejahteraan\": 1,\n            \"tahun\": 2019,\n            \"createdAt\": \"2022-11-30T01:25:54.362Z\",\n            \"updatedAt\": \"2022-11-30T01:25:54.362Z\",\n            \"__v\": 0\n        },\n        {\n            \"keuangan\": {\n                \"pendapatan_utama\": 1000000,\n                \"pendapatan_sampingan\": 0,\n                \"pengeluaran_total\": 500000\n            },\n            \"indikator\": {\n                \"rumah\": {\n                    \"rumah_id\": \"6385388a63408b8e2716d036\",\n                    \"nama\": \"Lainnya\",\n                    \"ukuran\": 22,\n                    \"keterangan\": \"-\"\n                },\n                \"atap\": {\n                    \"atap_id\": \"6385388a63408b8e2716d03d\",\n                    \"nama\": \"Beton\",\n                    \"keterangan\": \"-\"\n                },\n                \"bahan_bakar\": {\n                    \"bahan_bakar_id\": \"6385388a63408b8e2716d045\",\n                    \"nama\": \"Lainnya\",\n                    \"keterangan\": \"-\"\n                },\n                \"dinding\": {\n                    \"dinding_id\": \"6385388a63408b8e2716d04a\",\n                    \"nama\": \"Tembok\",\n                    \"keterangan\": \"-\"\n                },\n                \"jamban\": {\n                    \"jamban_id\": \"6385388a63408b8e2716d052\",\n                    \"nama\": \"Sendiri\",\n                    \"keterangan\": \"-\"\n                },\n                \"lantai\": {\n                    \"lantai_id\": \"6385388a63408b8e2716d058\",\n                    \"nama\": \"Tehel\",\n                    \"keterangan\": \"-\"\n                },\n                \"penerangan\": {\n                    \"penerangan_id\": \"6385388a63408b8e2716d060\",\n                    \"nama\": \"Listrik PLN\",\n                    \"keterangan\": \"-\"\n                },\n                \"sumber_air\": {\n                    \"sumber_air_id\": \"6385388a63408b8e2716d066\",\n                    \"nama\": \"Air Kemasan\",\n                    \"keterangan\": \"-\"\n                }\n            },\n            \"_id\": \"6386ba4b5b9902554712000d\",\n            \"keluarga_id\": \"63858fb17753ba6c3fe695a4\",\n            \"status_kesejahteraan\": 5,\n            \"tahun\": 20221,\n            \"createdAt\": \"2022-11-30T02:04:59.119Z\",\n            \"updatedAt\": \"2022-11-30T02:04:59.119Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "data by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638960f03aeaba24fe380a3e",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"kesejahteraan",
+										"638960f03aeaba24fe380a3e"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/6386a8f82d10be098d292b72",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan",
+												"6386a8f82d10be098d292b72"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "1040"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"410-Z0WJleKSltx14bGRyumghhPLs/k\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:23:41 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"data\": {\n        \"keuangan\": {\n            \"pendapatan_utama\": 1500000,\n            \"pendapatan_sampingan\": 0,\n            \"pengeluaran_total\": 500000\n        },\n        \"indikator\": {\n            \"rumah\": {\n                \"rumah_id\": \"6385388a63408b8e2716d036\",\n                \"nama\": \"Lainnya\",\n                \"ukuran\": 22,\n                \"keterangan\": \"-\"\n            },\n            \"atap\": {\n                \"atap_id\": \"6385388a63408b8e2716d03d\",\n                \"nama\": \"Beton\",\n                \"keterangan\": \"-\"\n            },\n            \"bahan_bakar\": {\n                \"bahan_bakar_id\": \"6385388a63408b8e2716d045\",\n                \"nama\": \"Lainnya\",\n                \"keterangan\": \"-\"\n            },\n            \"dinding\": {\n                \"dinding_id\": \"6385388a63408b8e2716d04a\",\n                \"nama\": \"Tembok\",\n                \"keterangan\": \"-\"\n            },\n            \"jamban\": {\n                \"jamban_id\": \"6385388a63408b8e2716d052\",\n                \"nama\": \"Sendiri\",\n                \"keterangan\": \"-\"\n            },\n            \"lantai\": {\n                \"lantai_id\": \"6385388a63408b8e2716d058\",\n                \"nama\": \"Tehel\",\n                \"keterangan\": \"-\"\n            },\n            \"penerangan\": {\n                \"penerangan_id\": \"6385388a63408b8e2716d060\",\n                \"nama\": \"Listrik PLN\",\n                \"keterangan\": \"-\"\n            },\n            \"sumber_air\": {\n                \"sumber_air_id\": \"6385388a63408b8e2716d066\",\n                \"nama\": \"Air Kemasan\",\n                \"keterangan\": \"-\"\n            }\n        },\n        \"_id\": \"6386a8f82d10be098d292b72\",\n        \"keluarga_id\": \"63858fb17753ba6c3fe695a4\",\n        \"status_kesejahteraan\": 2,\n        \"tahun\": 2022,\n        \"createdAt\": \"2022-11-30T00:51:04.370Z\",\n        \"updatedAt\": \"2022-11-30T02:16:35.545Z\",\n        \"__v\": 0\n    }\n}"
+								},
+								{
+									"name": "id not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/6386a8f82d10be098d292b71",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan",
+												"6386a8f82d10be098d292b71"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "78"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"4e-HoZ/gQp3aQT03wSWYRKV1Idl21w\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:23:53 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Not found data with id 6386a8f82d10be098d292b71\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "keluarga_id",
+											"value": "6388bd4b79866000086c9d77",
+											"type": "text"
+										},
+										{
+											"key": "tahun",
+											"value": "2019",
+											"type": "text"
+										},
+										{
+											"key": "status_kesejahteraan",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pendapatan_utama",
+											"value": "2000000",
+											"type": "text"
+										},
+										{
+											"key": "pendapatan_sampingan",
+											"value": "1000000",
+											"type": "text"
+										},
+										{
+											"key": "pengeluaran_total",
+											"value": "3000000",
+											"type": "text"
+										},
+										{
+											"key": "indikator_rumah_id",
+											"value": "6388ba5e0501afdf6c05cccb",
+											"type": "text"
+										},
+										{
+											"key": "indikator_rumah_ukuran",
+											"value": "20",
+											"type": "text"
+										},
+										{
+											"key": "indikator_rumah_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/2.PNG"
+										},
+										{
+											"key": "indikator_rumah_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_atap_id",
+											"value": "6388ba5e0501afdf6c05ccd2",
+											"type": "text"
+										},
+										{
+											"key": "indikator_atap_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_atap_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_bahan_bakar_id",
+											"value": "6388ba5e0501afdf6c05ccd9",
+											"type": "text"
+										},
+										{
+											"key": "indikator_bahan_bakar_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_bahan_bakar_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_dinding_id",
+											"value": "6388ba5e0501afdf6c05ccdd",
+											"type": "text"
+										},
+										{
+											"key": "indikator_dinding_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_dinding_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_jamban_id",
+											"value": "6388ba5e0501afdf6c05cce5",
+											"type": "text"
+										},
+										{
+											"key": "indikator_jamban_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_jamban_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_lantai_id",
+											"value": "6388ba5e0501afdf6c05ccef",
+											"type": "text"
+										},
+										{
+											"key": "indikator_lantai_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_lantai_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_penerangan_id",
+											"value": "6388ba5e0501afdf6c05ccf3",
+											"type": "text"
+										},
+										{
+											"key": "indikator_penerangan_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_penerangan_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_sumber_air_id",
+											"value": "6388ba5e0501afdf6c05ccf9",
+											"type": "text"
+										},
+										{
+											"key": "indikator_sumber_air_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_sumber_air_ket",
+											"value": "-",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"kesejahteraan"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "keluarga_id",
+													"value": "63858fb17753ba6c3fe695a4",
+													"type": "text"
+												},
+												{
+													"key": "status_kesejahteraan",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2023",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_utama",
+													"value": "3000000",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_sampingan",
+													"value": "0",
+													"type": "text"
+												},
+												{
+													"key": "pengeluaran_total",
+													"value": "2000000",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_id",
+													"value": "6385388a63408b8e2716d036",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ukuran",
+													"value": "22",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_id",
+													"value": "6385388a63408b8e2716d03d",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_id",
+													"value": "6385388a63408b8e2716d045",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_id",
+													"value": "6385388a63408b8e2716d04a",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_id",
+													"value": "6385388a63408b8e2716d052",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_id",
+													"value": "6385388a63408b8e2716d058",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_id",
+													"value": "6385388a63408b8e2716d060",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_id",
+													"value": "6385388a63408b8e2716d066",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_ket",
+													"value": "-",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "62"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"3e-SbzD3oSQwO0s7wZwkYW7B7DhCtQ\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:24:06 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Data was inserted successfully.\"\n}"
+								},
+								{
+									"name": "data already exists",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "keluarga_id",
+													"value": "63858fb17753ba6c3fe695a4",
+													"type": "text"
+												},
+												{
+													"key": "status_kesejahteraan",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2023",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_utama",
+													"value": "3000000",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_sampingan",
+													"value": "0",
+													"type": "text"
+												},
+												{
+													"key": "pengeluaran_total",
+													"value": "2000000",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_id",
+													"value": "6385388a63408b8e2716d036",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ukuran",
+													"value": "22",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_id",
+													"value": "6385388a63408b8e2716d03d",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_id",
+													"value": "6385388a63408b8e2716d045",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_id",
+													"value": "6385388a63408b8e2716d04a",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_id",
+													"value": "6385388a63408b8e2716d052",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_id",
+													"value": "6385388a63408b8e2716d058",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_id",
+													"value": "6385388a63408b8e2716d060",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_id",
+													"value": "6385388a63408b8e2716d066",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_ket",
+													"value": "-",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "51"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"33-n77NIj47Mg81UbdJQNYrV5QSIr0\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:24:25 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Data already exists.\"\n}"
+								},
+								{
+									"name": "invalid input",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "keluarga_id",
+													"value": "63858fb17753ba6c3fe695a4",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "status_kesejahteraan",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2023",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_utama",
+													"value": "3000000",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_sampingan",
+													"value": "0",
+													"type": "text"
+												},
+												{
+													"key": "pengeluaran_total",
+													"value": "2000000",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_id",
+													"value": "6385388a63408b8e2716d036",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ukuran",
+													"value": "22",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_id",
+													"value": "6385388a63408b8e2716d03d",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_id",
+													"value": "6385388a63408b8e2716d045",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_id",
+													"value": "6385388a63408b8e2716d04a",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_id",
+													"value": "6385388a63408b8e2716d052",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_id",
+													"value": "6385388a63408b8e2716d058",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_id",
+													"value": "6385388a63408b8e2716d060",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_id",
+													"value": "6385388a63408b8e2716d066",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_ket",
+													"value": "-",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan"
+											]
+										}
+									},
+									"status": "Unprocessable Entity",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "101"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"65-iXs808CGtJBDMelZgWhl4izY0wI\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:24:50 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 422,\n    \"errors\": [\n        {\n            \"msg\": \"keluarga_id tidak ada\",\n            \"param\": \"keluarga_id\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "keluarga_id",
+											"value": "6388bd4b79866000086c9d77",
+											"type": "text"
+										},
+										{
+											"key": "tahun",
+											"value": "2019",
+											"type": "text"
+										},
+										{
+											"key": "status_kesejahteraan",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pendapatan_utama",
+											"value": "2000000",
+											"type": "text"
+										},
+										{
+											"key": "pendapatan_sampingan",
+											"value": "1000000",
+											"type": "text"
+										},
+										{
+											"key": "pengeluaran_total",
+											"value": "3000000",
+											"type": "text"
+										},
+										{
+											"key": "indikator_rumah_id",
+											"value": "6388ba5e0501afdf6c05cccb",
+											"type": "text"
+										},
+										{
+											"key": "indikator_rumah_ukuran",
+											"value": "20",
+											"type": "text"
+										},
+										{
+											"key": "indikator_rumah_image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "indikator_rumah_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_atap_id",
+											"value": "6388ba5e0501afdf6c05ccd2",
+											"type": "text"
+										},
+										{
+											"key": "indikator_atap_image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "indikator_atap_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_bahan_bakar_id",
+											"value": "6388ba5e0501afdf6c05ccd9",
+											"type": "text"
+										},
+										{
+											"key": "indikator_bahan_bakar_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/0.PNG"
+										},
+										{
+											"key": "indikator_bahan_bakar_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_dinding_id",
+											"value": "6388ba5e0501afdf6c05ccdd",
+											"type": "text"
+										},
+										{
+											"key": "indikator_dinding_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_dinding_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_jamban_id",
+											"value": "6388ba5e0501afdf6c05cce5",
+											"type": "text"
+										},
+										{
+											"key": "indikator_jamban_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_jamban_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_lantai_id",
+											"value": "6388ba5e0501afdf6c05ccef",
+											"type": "text"
+										},
+										{
+											"key": "indikator_lantai_image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "indikator_lantai_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_penerangan_id",
+											"value": "6388ba5e0501afdf6c05ccf3",
+											"type": "text"
+										},
+										{
+											"key": "indikator_penerangan_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_penerangan_ket",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "indikator_sumber_air_id",
+											"value": "6388ba5e0501afdf6c05ccf9",
+											"type": "text"
+										},
+										{
+											"key": "indikator_sumber_air_image",
+											"type": "file",
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
+										},
+										{
+											"key": "indikator_sumber_air_ket",
+											"value": "-",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638973057f9b3b5c84a7e56a",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"kesejahteraan",
+										"638973057f9b3b5c84a7e56a"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "keluarga_id",
+													"value": "63858fb17753ba6c3fe695a4",
+													"type": "text"
+												},
+												{
+													"key": "status_kesejahteraan",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2023",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_utama",
+													"value": "3000000",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_sampingan",
+													"value": "0",
+													"type": "text"
+												},
+												{
+													"key": "pengeluaran_total",
+													"value": "2000000",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_id",
+													"value": "6385388a63408b8e2716d036",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ukuran",
+													"value": "22",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_id",
+													"value": "6385388a63408b8e2716d03d",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_id",
+													"value": "6385388a63408b8e2716d045",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_id",
+													"value": "6385388a63408b8e2716d04a",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_id",
+													"value": "6385388a63408b8e2716d052",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_id",
+													"value": "6385388a63408b8e2716d058",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_id",
+													"value": "6385388a63408b8e2716d060",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_id",
+													"value": "6385388a63408b8e2716d066",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_ket",
+													"value": "-",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "62"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"3e-SbzD3oSQwO0s7wZwkYW7B7DhCtQ\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:24:06 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Data was inserted successfully.\"\n}"
+								},
+								{
+									"name": "data already exists",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "keluarga_id",
+													"value": "63858fb17753ba6c3fe695a4",
+													"type": "text"
+												},
+												{
+													"key": "status_kesejahteraan",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2023",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_utama",
+													"value": "3000000",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_sampingan",
+													"value": "0",
+													"type": "text"
+												},
+												{
+													"key": "pengeluaran_total",
+													"value": "2000000",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_id",
+													"value": "6385388a63408b8e2716d036",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ukuran",
+													"value": "22",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_id",
+													"value": "6385388a63408b8e2716d03d",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_id",
+													"value": "6385388a63408b8e2716d045",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_id",
+													"value": "6385388a63408b8e2716d04a",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_id",
+													"value": "6385388a63408b8e2716d052",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_id",
+													"value": "6385388a63408b8e2716d058",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_id",
+													"value": "6385388a63408b8e2716d060",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_id",
+													"value": "6385388a63408b8e2716d066",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_ket",
+													"value": "-",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "51"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"33-n77NIj47Mg81UbdJQNYrV5QSIr0\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:24:25 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Data already exists.\"\n}"
+								},
+								{
+									"name": "invalid input",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "keluarga_id",
+													"value": "63858fb17753ba6c3fe695a4",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "status_kesejahteraan",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2023",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_utama",
+													"value": "3000000",
+													"type": "text"
+												},
+												{
+													"key": "pendapatan_sampingan",
+													"value": "0",
+													"type": "text"
+												},
+												{
+													"key": "pengeluaran_total",
+													"value": "2000000",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_id",
+													"value": "6385388a63408b8e2716d036",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ukuran",
+													"value": "22",
+													"type": "text"
+												},
+												{
+													"key": "indikator_rumah_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_id",
+													"value": "6385388a63408b8e2716d03d",
+													"type": "text"
+												},
+												{
+													"key": "indikator_atap_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_id",
+													"value": "6385388a63408b8e2716d045",
+													"type": "text"
+												},
+												{
+													"key": "indikator_bahan_bakar_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_id",
+													"value": "6385388a63408b8e2716d04a",
+													"type": "text"
+												},
+												{
+													"key": "indikator_dinding_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_id",
+													"value": "6385388a63408b8e2716d052",
+													"type": "text"
+												},
+												{
+													"key": "indikator_jamban_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_id",
+													"value": "6385388a63408b8e2716d058",
+													"type": "text"
+												},
+												{
+													"key": "indikator_lantai_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_id",
+													"value": "6385388a63408b8e2716d060",
+													"type": "text"
+												},
+												{
+													"key": "indikator_penerangan_ket",
+													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_id",
+													"value": "6385388a63408b8e2716d066",
+													"type": "text"
+												},
+												{
+													"key": "indikator_sumber_air_ket",
+													"value": "-",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan"
+											]
+										}
+									},
+									"status": "Unprocessable Entity",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "101"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"65-iXs808CGtJBDMelZgWhl4izY0wI\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:24:50 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 422,\n    \"errors\": [\n        {\n            \"msg\": \"keluarga_id tidak ada\",\n            \"param\": \"keluarga_id\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638971f672a0716c7b8b3fc7",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"kesejahteraan",
+										"638971f672a0716c7b8b3fc7"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/6386a8f82d10be098d292b72",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan",
+												"6386a8f82d10be098d292b72"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "61"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"3d-1mcKVsCpB3EKgPrUoSqb1XvU588\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:26:03 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"message\": \"data was deleted successfully!\"\n}"
+								},
+								{
+									"name": "id not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/6386a8f82d10be098d292b72",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"kesejahteraan",
+												"6386a8f82d10be098d292b72"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "109"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"6d-6zB9mrlc0uxOFbikb9Z8eZ2Rc4k\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 02:26:18 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Cannot delete data with id=6386a8f82d10be098d292b72. Maybe data was not found!\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "bantuan",
+					"item": [
+						{
+							"name": "data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/bantuan",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"bantuan"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/bantuan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"bantuan"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "847"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"34f-WYGa8HsZSWd71l6koVDm39vLeDM\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 03:08:36 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"data\": [\n        {\n            \"bantuan\": {\n                \"bantuan_id\": \"6386c704e51c1553b67e95ae\",\n                \"nama\": \"beasiswa\",\n                \"pagu\": 100000000,\n                \"keterangan\": \"-2\"\n            },\n            \"_id\": \"6386c7ba97211b4a27486bb9\",\n            \"penduduk_id\": \"6386bb1a5b9902554712010e\",\n            \"tahun\": 2022,\n            \"createdAt\": \"2022-11-30T03:02:18.165Z\",\n            \"updatedAt\": \"2022-11-30T03:07:40.437Z\",\n            \"__v\": 0\n        },\n        {\n            \"bantuan\": {\n                \"bantuan_id\": \"6386c704e51c1553b67e95ae\",\n                \"pagu\": 100000000,\n                \"keterangan\": \"-\"\n            },\n            \"_id\": \"6386c7f62483a393148cf526\",\n            \"penduduk_id\": \"6386bb1a5b9902554712010e\",\n            \"tahun\": 2022,\n            \"createdAt\": \"2022-11-30T03:03:18.230Z\",\n            \"updatedAt\": \"2022-11-30T03:03:18.230Z\",\n            \"__v\": 0\n        },\n        {\n            \"bantuan\": {\n                \"bantuan_id\": \"6386c704e51c1553b67e95ae\",\n                \"nama\": \"beasiswa\",\n                \"pagu\": 100000000,\n                \"keterangan\": \"-\"\n            },\n            \"_id\": \"6386c918fb68f58b03f92464\",\n            \"penduduk_id\": \"6386bb1a5b9902554712010e\",\n            \"tahun\": 2022,\n            \"createdAt\": \"2022-11-30T03:08:08.216Z\",\n            \"updatedAt\": \"2022-11-30T03:08:08.216Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "penduduk",
+											"value": "63879583093779697ded929b",
+											"type": "text"
+										},
+										{
+											"key": "tahun",
+											"value": "2022",
+											"type": "text"
+										},
+										{
+											"key": "bantuan_id",
+											"value": "6386c704e51c1553b67e95ae",
+											"type": "text"
+										},
+										{
+											"key": "pagu",
+											"value": "200000000",
+											"type": "text"
+										},
+										{
+											"key": "keterangan",
+											"value": "-",
+											"type": "text"
+										},
+										{
+											"key": "penduduk",
+											"value": "6387e0a50e69b9363dfa3b48",
+											"type": "text"
+										},
+										{
+											"key": "alamat",
+											"value": "btn",
+											"type": "text"
+										},
+										{
+											"key": "wilayah",
+											"value": "7203030011",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/bantuan",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"bantuan"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "penduduk_id",
+													"value": "6386bb1a5b9902554712010e",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2022",
+													"type": "text"
+												},
+												{
+													"key": "bantuan_id",
+													"value": "6386c704e51c1553b67e95ae",
+													"type": "text"
+												},
+												{
+													"key": "pagu",
+													"value": "100000000",
+													"type": "text"
+												},
+												{
+													"key": "keterangan",
+													"value": "-",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/bantuan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"bantuan"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "62"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"3e-SbzD3oSQwO0s7wZwkYW7B7DhCtQ\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 03:08:08 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Data was inserted successfully.\"\n}"
+								},
+								{
+									"name": "invalid input",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "penduduk_id",
+													"value": "6386bb1a5b9902554712010e",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "tahun",
+													"value": "2022",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "bantuan_id",
+													"value": "6386c704e51c1553b67e95ae",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "pagu",
+													"value": "100000000",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "keterangan",
+													"value": "-",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/bantuan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"bantuan"
+											]
+										}
+									},
+									"status": "Unprocessable Entity",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "419"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"1a3-7RFO5/82ETLpxZzcN0M6BXUIixI\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 03:08:20 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 422,\n    \"errors\": [\n        {\n            \"msg\": \"penduduk_id tidak ada\",\n            \"param\": \"penduduk_id\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"tahun tidak ada\",\n            \"param\": \"tahun\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"tahun tidak ada\",\n            \"param\": \"tahun\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"bantuan_id tidak ada\",\n            \"param\": \"bantuan_id\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"pagu tidak ada\",\n            \"param\": \"pagu\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"keterangan tidak ada\",\n            \"param\": \"keterangan\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "tahun",
+											"value": "2022",
+											"type": "text"
+										},
+										{
+											"key": "bantuan_id",
+											"value": "6386c704e51c1553b67e95ae",
+											"type": "text"
+										},
+										{
+											"key": "pagu",
+											"value": "100000000",
+											"type": "text"
+										},
+										{
+											"key": "keterangan",
+											"value": "-2",
+											"type": "text"
+										},
+										{
+											"key": "alamat",
+											"value": "bttn",
+											"type": "text"
+										},
+										{
+											"key": "wilayah",
+											"value": "7203030011",
+											"type": "text"
+										},
+										{
+											"key": "penduduk",
+											"value": "6387e407306fd417a3f2950b",
+											"type": "text"
+										},
+										{
+											"key": "penduduk",
+											"value": "6387e3ff306fd417a3f294fe",
+											"type": "text"
+										},
+										{
+											"key": "penduduk",
+											"value": "6387e0a50e69b9363dfa3b48",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/bantuan/6387e0e20e69b9363dfa3b56",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"bantuan",
+										"6387e0e20e69b9363dfa3b56"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "penduduk_id",
+													"value": "6386bb1a5b9902554712010e",
+													"type": "text"
+												},
+												{
+													"key": "tahun",
+													"value": "2022",
+													"type": "text"
+												},
+												{
+													"key": "bantuan_id",
+													"value": "6386c704e51c1553b67e95ae",
+													"type": "text"
+												},
+												{
+													"key": "pagu",
+													"value": "100000000",
+													"type": "text"
+												},
+												{
+													"key": "keterangan",
+													"value": "-2",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/bantuan/6386c7ba97211b4a27486bb9",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"bantuan",
+												"6386c7ba97211b4a27486bb9"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "61"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"3d-H/XqxBbcXagG4BZgP6NM03uNHX4\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 03:07:40 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Data was updated successfully.\"\n}"
+								},
+								{
+									"name": "invalid input",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "penduduk_id",
+													"value": "6386bb1a5b9902554712010e",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "tahun",
+													"value": "2022",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "bantuan_id",
+													"value": "6386c704e51c1553b67e95ae",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "pagu",
+													"value": "100000000",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "keterangan",
+													"value": "-2",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/bantuan/6386c7ba97211b4a27486bb9",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"bantuan",
+												"6386c7ba97211b4a27486bb9"
+											]
+										}
+									},
+									"status": "Unprocessable Entity",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "419"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"1a3-7RFO5/82ETLpxZzcN0M6BXUIixI\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 03:07:54 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 422,\n    \"errors\": [\n        {\n            \"msg\": \"penduduk_id tidak ada\",\n            \"param\": \"penduduk_id\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"tahun tidak ada\",\n            \"param\": \"tahun\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"tahun tidak ada\",\n            \"param\": \"tahun\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"bantuan_id tidak ada\",\n            \"param\": \"bantuan_id\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"pagu tidak ada\",\n            \"param\": \"pagu\",\n            \"location\": \"body\"\n        },\n        {\n            \"msg\": \"keterangan tidak ada\",\n            \"param\": \"keterangan\",\n            \"location\": \"body\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/bantuan/6387e1701a45bc6796dc9f35",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"bantuan",
+										"6387e1701a45bc6796dc9f35"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/bantuan/6386c84ffbc1695401e6999f",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"bantuan",
+												"6386c84ffbc1695401e6999f"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "61"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"3d-1mcKVsCpB3EKgPrUoSqb1XvU588\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 03:07:12 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"message\": \"data was deleted successfully!\"\n}"
+								},
+								{
+									"name": "id not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/bantuan/6386c84ffbc1695401e6999f",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"bantuan",
+												"6386c84ffbc1695401e6999f"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "109"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"6d-oLSKrQv91L8bFZ9qdgQrlD1Hjtw\""
+										},
+										{
+											"key": "date",
+											"value": "Wed, 30 Nov 2022 03:07:23 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 400,\n    \"message\": \"Cannot delete data with id=6386c84ffbc1695401e6999f. Maybe data was not found!\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "laporan",
+					"item": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -9661,7 +12347,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]
@@ -9748,7 +12434,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM3ZGU3MDYyZGFjOWI4ZDVlMTMyNzhjIiwibGV2ZWwiOjQsImlhdCI6MTY2OTY3NTk4N30.hTg9PDp8MQ8tU7FkoWfIuHMIEwz5Lyl5eoS3r-tu6k8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImlkIjoiNjM4Nzg5YmY3MTg1ZDYwYmE2Y2FhNjk3IiwibGV2ZWwiOjQsImlhdCI6MTY2OTkwNDI4OX0.wx18WDi_IYyDwBu-FdMc9G21IeUQJWrbihbe3xJ62sk",
 											"type": "string"
 										}
 									]

@@ -31,6 +31,7 @@ export default class PendudukController {
 
 	static async getData(req, res) {
 		let search = req.query.search?req.query.search:{ value: '', regex: false };
+		
 		var condition = { 
 			$or: [
 				{ 'nama': { $regex: new RegExp(search.value), $options: "i" } },
@@ -52,12 +53,44 @@ export default class PendudukController {
 	static async getOneData(req, res) {
 		try{
 			let id = req.params.id;
-			let data = await table.findById(id);
-			if (!data) return res.status(400).send({
+			let data = await table.aggregate([
+				{
+					$lookup:{
+						from: 'keluarga_penduduks',
+						localField: '_id',
+						foreignField: 'penduduk_id',
+						pipeline: [
+							{
+								$lookup:{
+									from: 'keluargas',
+									localField: 'keluarga_id',
+									foreignField: '_id',
+									pipeline: [
+										{
+											$project: { 
+												no_kk: '$no_kk',
+												kb: '$kb',
+												nik_kepala: '$nik_kepala',
+											}
+										}
+									],
+									as: 'keluarga'
+								},
+							}, 
+							{ $unwind: "$keluarga" },
+						],
+						as: 'keluarga_penduduk',
+					},
+				},
+				{ $match: { _id: db.mongoose.Types.ObjectId(id) } }
+			])
+
+			// let data = await table.findById(id);
+			if (!data[0]) return res.status(400).send({
 				statusCode: 400,
 				message: "Not found Tutorial with id " + id,
 			});
-			else return res.send({statusCode: 200, data: data});
+			else return res.send({statusCode: 200, data: data[0]});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
