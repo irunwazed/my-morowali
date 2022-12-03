@@ -16,18 +16,6 @@ export default class KeluargaController {
 								from: 'penduduks',
 								localField: 'penduduk_id',
 								foreignField: '_id',
-								pipeline: [
-									{
-										$project: { 
-											nik: '$nik',
-											nama: '$nama',
-											lahir: '$lahir',
-											alamat: '$alamat',
-											fisik: '$fisik',
-											jk: '$jk',
-										}
-									}
-								],
 								as: 'data_penduduk'
 							},
 						}, 

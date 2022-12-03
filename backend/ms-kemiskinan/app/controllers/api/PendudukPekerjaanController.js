@@ -2,26 +2,24 @@ import db from "../../models";
 import { validationResult, check } from "express-validator";
 import paginate from '../../libraries/paginate';
 
-const table = db.penduduk_bantuan;
+const table = db.penduduk_pekerjaan;
 
 exports.validate = {
   store: [ 
-		check('tahun', 'tahun tidak ada').exists().isInt(), // cant update 
-		check('bantuan_id', 'bantuan_id tidak ada').exists(),
-		check('penduduk').exists().isArray({ min: 1 }),
-		check('pagu', 'pagu tidak ada').isFloat(),
+		check('penduduk_id', 'penduduk_id tidak ada').exists(),
+		check('pekerjaan_id', 'pekerjaan_id tidak ada').exists(),
+		check('gaji', 'gaji tidak ada').exists().isFloat(),
 		check('keterangan', 'keterangan tidak ada').exists(),
-		check('wilayah', 'wilayah tidak ada').exists(),
-		check('alamat', 'alamat tidak ada').exists(),
 	],
 }
 
-export default class BantuanController {
+export default class PendudukPekerjaanController {
+
 
 	static async getData(req, res) {
 		var condition = {};
 		try{
-			let data = await paginate.find(req, 'penduduk_bantuan', condition);
+			let data = await paginate.find(req, 'penduduk_pekerjaan', condition);
 			return res.send(data);
 		}catch(err){
 			return res.status(500).send({

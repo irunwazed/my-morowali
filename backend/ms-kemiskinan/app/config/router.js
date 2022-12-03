@@ -25,7 +25,18 @@ const router = express.Router();
 router.get("/", route('api/HomeController@index'));
 router.use('/api', userMiddleware.getSession);
 router.get("/api", route('api/HomeController@index'));
+
+
+
+
+router.get("/api/penduduk/pekerjaan", route('api/PendudukPekerjaanController@getData'));
+router.get("/api/penduduk/pekerjaan/:id", route('api/PendudukPekerjaanController@getOneData'));
+router.post("/api/penduduk/pekerjaan", route('api/PendudukPekerjaanController@store', true), route('api/PendudukPekerjaanController@store'));
+router.put("/api/penduduk/pekerjaan/:id", route('api/PendudukPekerjaanController@store', true), route('api/PendudukPekerjaanController@store'));
+router.delete("/api/penduduk/pekerjaan/:id", route('api/PendudukPekerjaanController@delete'));
+
 router.get("/api/penduduk", route('api/PendudukController@getData'));
+router.get("/api/penduduk/no_kk/:no_kk", route('api/PendudukController@getOneData'));
 router.get("/api/penduduk/:id", route('api/PendudukController@getOneData'));
 router.post("/api/penduduk", route('api/PendudukController@store', true), route('api/PendudukController@store'));
 router.delete("/api/penduduk/:id", route('api/PendudukController@delete'));

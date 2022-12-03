@@ -52,8 +52,10 @@ export default class PendudukController {
 
 	static async getOneData(req, res) {
 		try{
-			let id = req.params.id;
-			let data = await table.aggregate([
+			let id = req.params.id?req.params.id:0;
+			let no_kk = req.params.no_kk?req.params.no_kk:0;
+
+			let query = [
 				{
 					$lookup:{
 						from: 'keluarga_penduduks',
@@ -82,13 +84,18 @@ export default class PendudukController {
 						as: 'keluarga_penduduk',
 					},
 				},
-				{ $match: { _id: db.mongoose.Types.ObjectId(id) } }
-			])
+			];
 
+			if(id != 0){
+				query.push({ $match: { _id: db.mongoose.Types.ObjectId(id) } });
+			}else if(no_kk){
+				query.push({ $match: { 'keluarga_penduduk.keluarga.no_kk': no_kk } });
+			}
+			let data = await table.aggregate(query)
 			// let data = await table.findById(id);
 			if (!data[0]) return res.status(400).send({
 				statusCode: 400,
-				message: "Not found Tutorial with id " + id,
+				message: "Data not found",
 			});
 			else return res.send({statusCode: 200, data: data[0]});
 		}catch(err){

@@ -5,8 +5,8 @@ export default class LaporanController {
 
     try{
 
-      let kecamatan = req.body.kecamatan;
-      let kelurahan = req.body.kelurahan;
+      let kecamatan = req.body.kecamatan?req.body.kecamatan:'';
+      let kelurahan = req.body.kelurahan?req.body.kelurahan:'';
 
       let data = await db.penduduk.aggregate([
         {
@@ -18,7 +18,10 @@ export default class LaporanController {
           },
         },
         // { $unwind: "$penyakit_diderita" },
-        // { $match: { nik: nik } }
+        { $match: { 
+          'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+          'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+        } }
       ]);
       
       return res.send({statusCode: 200, data: data});
