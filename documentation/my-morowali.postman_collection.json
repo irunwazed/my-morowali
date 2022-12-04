@@ -11145,7 +11145,7 @@
 										},
 										{
 											"key": "bantuan_id",
-											"value": "638b600240767b82510eeee2",
+											"value": "638cbc138bc991c6bdee28a5",
 											"type": "text"
 										},
 										{
@@ -11827,6 +11827,54 @@
 										"kemiskinan",
 										"laporan",
 										"keluarga"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "kesejahteraan",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "kecamatan",
+											"value": "7203030",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "kelurahan",
+											"value": "7203030011",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "kabupaten",
+											"value": "7203",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/kesejahteraan",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"laporan",
+										"kesejahteraan"
 									]
 								}
 							},
