@@ -132,20 +132,7 @@ routerAdmin.get("/api/laporan/penduduk", route('api/LaporanController@penduduk')
 routerAdmin.get("/api/laporan/keluarga", route('api/LaporanController@keluarga'));
 
 // get data to foreign
-routerAdmin.get("/api/get/penduduk", route('api/DataController@getPendudukByNIK'))
-routerAdmin.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
-routerAdmin.get("/api/get/keluarga/:no_kk", route('api/DataController@getKeluargaByNoKK'))
-routerAdmin.get("/api/get/provinsi", route('api/DataController@getProvinsi'))
-routerAdmin.get("/api/get/provinsi/:kode", route('api/DataController@getProvinsiKode'))
-routerAdmin.get("/api/get/kabupaten", route('api/DataController@getKabupaten'))
-routerAdmin.get("/api/get/kabupaten/:kode", route('api/DataController@getKabupatenKode'))
-routerAdmin.get("/api/get/kecamatan", route('api/DataController@getKecamatan'))
-routerAdmin.get("/api/get/kecamatan/:kode", route('api/DataController@getKecamatanByKode'))
-routerAdmin.get("/api/get/kelurahan/:kode", route('api/DataController@getKelurahanByKode'))
-routerAdmin.get("/api/get/kelurahan-by-kecamatan/:kode", route('api/DataController@getKelurahanByKodeKecamatan'))
-
-// get data to foreign
-routerAdmin.get("/api/get/penduduk", route('api/DataController@getPendudukByNIK'))
+routerAdmin.get("/api/get/penduduk", route('api/DataController@getPendudukBySearch'))
 routerAdmin.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
 routerAdmin.get("/api/get/keluarga/:no_kk", route('api/DataController@getKeluargaByNoKK'))
 routerAdmin.get("/api/get/provinsi", route('api/DataController@getProvinsi'))

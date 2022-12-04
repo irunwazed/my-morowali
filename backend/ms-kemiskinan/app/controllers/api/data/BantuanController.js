@@ -61,8 +61,13 @@ export default class BantuanController {
 			let opd_kode = req.body.opd_kode;
 			
 			let opd = await services.getOPDByKode(req, opd_kode);
+			
 			let data = {
 				nama: nama,
+				opd: {
+					kode: opd.kode,
+					nama: opd.nama,
+				},
 				keterangan: keterangan,
 			};
 			if(opd.kode)data['opd'] = opd;

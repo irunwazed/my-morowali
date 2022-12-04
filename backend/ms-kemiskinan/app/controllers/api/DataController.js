@@ -3,47 +3,56 @@ import db from "../../models";
 const table = db.penduduk;
 
 export default class DataController {
+	
+	static queryPenduduk(){
+		return [
+			{
+				$lookup: {
+					from: 'penyakits',
+					localField: 'penyakit.penyakit_id',
+					foreignField: '_id',
+					as: 'penyakit_diderita',
+				},
+			},
+			{
+				$lookup: {
+					from: 'penduduk_pekerjaans',
+					localField: '_id',
+					foreignField: 'penduduk_id',
+					pipeline: [
+						{
+							$lookup: {
+								from: 'pekerjaans',
+								localField: 'pekerjaan_id',
+								foreignField: '_id',
+								as: 'pekerjaan',
+							},
+						},
+						{ $unwind: "$pekerjaan" },
+						{ $project: {
+							pekerjaan_id: '$pekerjaan_id',
+							pekerjaan_nama: '$pekerjaan.nama',
+							gaji: '$gaji',
+							keterangan: '$keterangan',
+						} }
+					],
+					as: 'pekerjaan',
+				},
+			},
+		];
+	}
 
 	static async getPendudukByNIK(req, res) {
 		let nik = req.params.nik;
 		try{
-			let data = await db.penduduk.aggregate([
-				{
-					$lookup: {
-						from: 'penyakits',
-						localField: 'penyakit.penyakit_id',
-						foreignField: '_id',
-						as: 'penyakit_diderita',
-					},
-				},
-				{
-					$lookup: {
-						from: 'penduduk_pekerjaans',
-						localField: '_id',
-						foreignField: 'penduduk_id',
-						pipeline: [
-							{
-								$lookup: {
-									from: 'pekerjaans',
-									localField: 'pekerjaan_id',
-									foreignField: '_id',
-									as: 'pekerjaan',
-								},
-							},
-							{ $unwind: "$pekerjaan" },
-							{ $project: {
-								pekerjaan_id: '$pekerjaan_id',
-								pekerjaan_nama: '$pekerjaan.nama',
-								gaji: '$gaji',
-								keterangan: '$keterangan',
-							} }
-						],
-						as: 'pekerjaan',
-					},
-				},
+
+			let query = DataController.queryPenduduk();
+
+			let data = await db.penduduk.aggregate([... query,
 				{ $match: { nik: nik } },
         {
           $project: {
+            _id: '$_id',
             nama: '$nama',
             nik: '$nik',
             jk: '$jk',
@@ -70,6 +79,7 @@ export default class DataController {
 				let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu']; 
 				
 				return res.send({statusCode: 200, data: {
+					_id: data[0]._id,
 					nama: data[0].nama,
 					nik: data[0].nik,
 					jenis_kelamin: data[0].jk=='P'?'Perempuan':'Laki - Laki',
@@ -90,6 +100,51 @@ export default class DataController {
 					hidup: data[0].hidup?'Ya':'Tidak',
 				}});
 			}else return res.status(404).send({statusCode: 404, message: 'data not found'});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getPendudukBySearch(req, res) {
+		try{
+
+			let search = req.query.search?req.query.search:'';
+			let query = DataController.queryPenduduk();
+			console.log(search);
+
+			let data = await db.penduduk.aggregate([... query,
+        {
+          $project: {
+            _id: '$_id',
+            nama: '$nama',
+            nik: '$nik',
+            jk: '$jk',
+            agama: '$agama',
+            lahir: '$lahir',
+            alamat: '$alamat',
+            status_pernikahan: '$status_pernikahan',
+            fisik: '$fisik',
+            pendidikan_id: '$pendidikan_id',
+            penyakit: {
+              penyakit_id: '$penyakit.penyakit_id',
+              nama: { $arrayElemAt: ['$penyakit_diderita.nama', 0] },
+              keterangan: '$penyakit.keterangan',
+            },
+            pekerjaan: '$pekerjaan',
+            hidup: '$hidup',
+          }
+        },
+				{ $match: {
+					$or: [
+						{ nik: { $regex: new RegExp(search), $options: "i" }, },
+						{ nama: { $regex: new RegExp(search), $options: "i" }, },
+					]
+				} },
+			]);
+			return res.status(200).send({statusCode: 404, data: data});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
