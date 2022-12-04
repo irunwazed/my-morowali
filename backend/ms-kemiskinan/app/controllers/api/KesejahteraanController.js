@@ -36,9 +36,46 @@ exports.validate = {
 export default class KesejahteraanController {
 
 	static async getData(req, res) {
-		var condition = {};
+		var condition = [
+			{
+				$lookup:{
+					from: 'keluargas',
+					localField: 'keluarga_id',
+					foreignField: '_id',
+					pipeline: [
+						{
+							$lookup:{
+								from: 'penduduks',
+								localField: 'nik_kepala',
+								foreignField: 'nik',
+								as: 'penduduk'
+							},
+						}, 
+						{
+							$project: {
+								keluarga_id: '$_id',
+								no_kk: '$no_kk',
+								penduduk_id: { $arrayElemAt: ['$penduduk._id', 0] },
+								nama: { $arrayElemAt: ['$penduduk.nama', 0] },
+								nik: { $arrayElemAt: ['$penduduk.nik', 0] },
+							}
+						}
+					],
+					as: 'kepala_keluarga'
+				},
+			}, 
+			{ $unwind: "$kepala_keluarga" },
+		];
 		try{
-			let data = await paginate.find(req, 'keluarga_kesejahteraan', condition);
+
+			if(req.params.id){
+				condition.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id) } });
+				let data = await table.aggregate(condition);
+				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
+				return res.send({statusCode: 200, data: data[0]});
+			}
+
+			let data = await paginate.aggregate(req, 'keluarga_kesejahteraan', condition);
 			return res.send(data);
 		}catch(err){
 			return res.status(500).send({
@@ -48,23 +85,6 @@ export default class KesejahteraanController {
 		}
 	}
 
-	static async getOneData(req, res) {
-
-		try{
-			let id = req.params.id;
-			let data = await table.findById(id);
-			if (!data) return res.status(400).send({
-						statusCode: 400,
-						message: "Not found data with id " + id,
-					});
-			else return res.send({statusCode: 200, data: data});
-		}catch(err){
-			return res.status(500).send({
-				statusCode: 500,
-				message: err.message || "Some error occurred while retrieving data.",
-			});
-		}
-	}
 
 	static async store(req, res) {
 		const errors = validationResult(req);
@@ -76,6 +96,8 @@ export default class KesejahteraanController {
 		}
 
 		try{
+			
+			req.files = req.files?req.files:{};
 			
 			let keluarga_id = req.body.keluarga_id;
 			let status_kesejahteraan = req.body.status_kesejahteraan;
@@ -108,6 +130,7 @@ export default class KesejahteraanController {
 			let indikator_sumber_air_id = req.body.indikator_sumber_air_id;
 			let indikator_sumber_air_image = req.files.indikator_sumber_air_image;
 			let indikator_sumber_air_ket = req.body.indikator_sumber_air_ket;
+
 
 			indikator_rumah_image = await upload.upload(indikator_rumah_image, keluarga_id+'_'+tahun+'_rumah.gif', '/kesejahteraan/rumah/')
 			indikator_atap_image = await upload.upload(indikator_atap_image, keluarga_id+'_'+tahun+'_atap.gif', '/kesejahteraan/atap/')
@@ -183,7 +206,6 @@ export default class KesejahteraanController {
 
 				let id = req.params.id;
 				let tmp = await table.findById(id);
-				console.log(tmp)
 
 				if(!indikator_rumah_image.status){
 					dataInput.indikator.rumah.image = tmp.indikator.rumah.image;
@@ -217,7 +239,6 @@ export default class KesejahteraanController {
 						message: `Cannot update data with id=${id}. Maybe data was not found!`,
 					});
 				}
-				console.log(id);
 				return res.send({
 					statusCode: 200,
 					message: "Data was updated successfully.",

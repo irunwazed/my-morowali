@@ -49,7 +49,7 @@ routerAdmin.get("/api/keluarga/:id", route('api/KeluargaController@getData'));
 routerAdmin.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 
 routerAdmin.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
-routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getOneData'));
+routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getData'));
 routerAdmin.post("/api/kesejahteraan", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
 routerAdmin.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
 routerAdmin.delete("/api/kesejahteraan/:id", route('api/KesejahteraanController@delete'));

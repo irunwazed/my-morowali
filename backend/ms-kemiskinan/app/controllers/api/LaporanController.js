@@ -16,11 +16,57 @@ export default class LaporanController {
             as: 'penyakit_diderita',
           },
         },
+        {
+          $lookup: {
+            from: 'penduduk_pekerjaans',
+            localField: '_id',
+            foreignField: 'penduduk_id',
+            pipeline: [
+              {
+                $lookup: {
+                  from: 'pekerjaans',
+                  localField: 'pekerjaan_id',
+                  foreignField: '_id',
+                  as: 'pekerjaan',
+                },
+              },
+              { $unwind: "$pekerjaan" },
+              { $project: {
+                pekerjaan_id: '$pekerjaan_id',
+                pekerjaan_nama: '$pekerjaan.nama',
+                gaji: '$gaji',
+                keterangan: '$keterangan',
+              } }
+            ],
+            as: 'pekerjaan',
+          },
+        },
+        
         // { $unwind: "$penyakit_diderita" },
         { $match: { 
           'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
           'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-        } }
+        } },
+        {
+          $project: {
+            nama: '$nama',
+            nik: '$nik',
+            jk: '$jk',
+            agama: '$agama',
+            lahir: '$lahir',
+            alamat: '$alamat',
+            status_pernikahan: '$status_pernikahan',
+            fisik: '$fisik',
+            pendidikan_id: '$pendidikan_id',
+            penyakit: {
+              penyakit_id: '$penyakit.penyakit_id',
+              nama: { $arrayElemAt: ['$penyakit_diderita.nama', 0] },
+              keterangan: '$penyakit.keterangan',
+            },
+            pekerjaan: '$pekerjaan',
+            hidup: '$hidup',
+          }
+        }
       ]);
       
       return res.send({statusCode: 200, data: data});
@@ -57,7 +103,6 @@ export default class LaporanController {
 												as: 'penyakit_diderita',
 											},
 										},
-                    // { $unwind: "$penyakit_diderita" },
 										{
 											$lookup: {
 												from: 'penduduk_pekerjaans',
@@ -115,11 +160,11 @@ export default class LaporanController {
 						as: 'anggota_keluarga', 
 					},
 				},
-        // { $match: { 
-        //   'anggota_keluarga.penduduk.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-        //   'anggota_keluarga.penduduk.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-        //   'anggota_keluarga.penduduk.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-        // } }
+        { $match: { 
+          'anggota_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+          'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+          'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+        } }
 			]);
       
       return res.send({statusCode: 200, data: data});

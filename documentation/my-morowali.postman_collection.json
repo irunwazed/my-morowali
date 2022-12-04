@@ -7908,7 +7908,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/123",
+									"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/2124567890123451",
 									"host": [
 										"127",
 										"0",
@@ -7920,7 +7920,7 @@
 										"kemiskinan",
 										"get",
 										"penduduk",
-										"123"
+										"2124567890123451"
 									]
 								}
 							},
@@ -8041,7 +8041,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/get/keluarga/2234567890123451",
+									"raw": "127.0.0.1:3000/kemiskinan/get/keluarga/3334567890123456",
 									"host": [
 										"127",
 										"0",
@@ -8053,7 +8053,7 @@
 										"kemiskinan",
 										"get",
 										"keluarga",
-										"2234567890123451"
+										"3334567890123456"
 									]
 								}
 							},
@@ -8312,7 +8312,7 @@
 									"urlencoded": [
 										{
 											"key": "no_kk",
-											"value": "1134567890123451",
+											"value": "3334567890123456",
 											"type": "text"
 										},
 										{
@@ -8392,7 +8392,7 @@
 										},
 										{
 											"key": "penyakit_id",
-											"value": "638c210e42be3f86c5930be6",
+											"value": "138c210e42be3f86c5930be6",
 											"type": "text"
 										},
 										{
@@ -8964,7 +8964,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/keluarga/no_kk/2234567890123451",
+									"raw": "127.0.0.1:3000/kemiskinan/keluarga/no_kk/3334567890123456",
 									"host": [
 										"127",
 										"0",
@@ -8976,7 +8976,7 @@
 										"kemiskinan",
 										"keluarga",
 										"no_kk",
-										"2234567890123451"
+										"3334567890123456"
 									]
 								}
 							},
@@ -9252,7 +9252,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638973057f9b3b5c84a7e56a",
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638c8046f97a744a35a2572c",
 									"host": [
 										"127",
 										"0",
@@ -9263,7 +9263,7 @@
 									"path": [
 										"kemiskinan",
 										"kesejahteraan",
-										"638973057f9b3b5c84a7e56a"
+										"638c8046f97a744a35a2572c"
 									]
 								}
 							},
@@ -9386,12 +9386,12 @@
 									"formdata": [
 										{
 											"key": "keluarga_id",
-											"value": "6388bd4b79866000086c9d77",
+											"value": "638c6cf887c0ada0ddd5d622",
 											"type": "text"
 										},
 										{
 											"key": "tahun",
-											"value": "2019",
+											"value": "2018",
 											"type": "text"
 										},
 										{
@@ -9427,7 +9427,7 @@
 										{
 											"key": "indikator_rumah_image",
 											"type": "file",
-											"src": "/C:/Users/User/OneDrive/Screenshot/2.PNG"
+											"src": "/C:/Users/User/OneDrive/Screenshot/3.PNG"
 										},
 										{
 											"key": "indikator_rumah_ket",
@@ -10242,7 +10242,7 @@
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638973057f9b3b5c84a7e56a",
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638c8046f97a744a35a2572c",
 									"host": [
 										"127",
 										"0",
@@ -10253,7 +10253,7 @@
 									"path": [
 										"kemiskinan",
 										"kesejahteraan",
-										"638973057f9b3b5c84a7e56a"
+										"638c8046f97a744a35a2572c"
 									]
 								}
 							},
@@ -11667,8 +11667,7 @@
 										{
 											"key": "kabupaten",
 											"value": "7203",
-											"type": "text",
-											"disabled": true
+											"type": "text"
 										}
 									]
 								},

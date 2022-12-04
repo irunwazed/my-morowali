@@ -12,9 +12,9 @@ module.exports = {
 			let draw = req.query.draw;
 	
 			data = await db[table].find(condition)
+				.sort({ updatedAt: 'desc' })
 				.skip(start)
-				.limit(length)
-				.sort({ updatedAt: 'desc' });
+				.limit(length);
 			let tmp = await db[table].find({});
 			jumData = tmp.length;
 	
@@ -41,16 +41,20 @@ module.exports = {
 		var result = {}
 		try{
 			let start = req.query.start?req.query.start:0;
-			let length = req.query.length?req.query.length:2;
+			let length = req.query.length?req.query.length:10;
 			let search = req.query.search?req.query.search:{ value: '', regex: false };
 			let data = [];
 			let jumData = 0;
 			let draw = req.query.draw;
 	
-			condition.push({ "$skip": start, });
-			condition.push({ "$limit": length, });
+			// condition.push({ "$sort": { updatedAt: 'desc' }, });
+			// condition.push({ "$skip": start, });
+			// condition.push({ "$limit": length, });
 	
-			data = await db[table].aggregate(condition);
+			data = await db[table].aggregate(condition)
+				.sort({ updatedAt: 'desc' })
+				.skip(start)
+				.limit(length);
 			let tmp = await db[table].find({});
 			jumData = tmp.length;
 	

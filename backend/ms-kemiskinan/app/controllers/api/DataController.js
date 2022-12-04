@@ -16,30 +16,77 @@ export default class DataController {
 						as: 'penyakit_diderita',
 					},
 				},
-				// { $unwind: "$penyakit_diderita" },
-				{ $match: { nik: nik } }
+				{
+					$lookup: {
+						from: 'penduduk_pekerjaans',
+						localField: '_id',
+						foreignField: 'penduduk_id',
+						pipeline: [
+							{
+								$lookup: {
+									from: 'pekerjaans',
+									localField: 'pekerjaan_id',
+									foreignField: '_id',
+									as: 'pekerjaan',
+								},
+							},
+							{ $unwind: "$pekerjaan" },
+							{ $project: {
+								pekerjaan_id: '$pekerjaan_id',
+								pekerjaan_nama: '$pekerjaan.nama',
+								gaji: '$gaji',
+								keterangan: '$keterangan',
+							} }
+						],
+						as: 'pekerjaan',
+					},
+				},
+				{ $match: { nik: nik } },
+        {
+          $project: {
+            nama: '$nama',
+            nik: '$nik',
+            jk: '$jk',
+            agama: '$agama',
+            lahir: '$lahir',
+            alamat: '$alamat',
+            status_pernikahan: '$status_pernikahan',
+            fisik: '$fisik',
+            pendidikan_id: '$pendidikan_id',
+            penyakit: {
+              penyakit_id: '$penyakit.penyakit_id',
+              nama: { $arrayElemAt: ['$penyakit_diderita.nama', 0] },
+              keterangan: '$penyakit.keterangan',
+            },
+            pekerjaan: '$pekerjaan',
+            hidup: '$hidup',
+          }
+        }
 			]);
 			if(data[0]){
 				let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
 				let status_pernikahan = ['', 'Belum Menikah', 'Menikah', 'Duda', 'Janda'];
 				let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
-				// return res.send(data);
+				let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu']; 
+				
 				return res.send({statusCode: 200, data: {
-					nik: data[0].nik,
 					nama: data[0].nama,
+					nik: data[0].nik,
+					jenis_kelamin: data[0].jk=='P'?'Perempuan':'Laki - Laki',
 					lahir: data[0].lahir,
+					agama: agama[data[0].agama],
 					alamat: data[0].alamat,
 					fisik: {
 						kondisi: fisik[data[0].fisik.fisik_id],
 						keterangan: data[0].fisik.keterangan,
 					},
 					status_pernikahan: status_pernikahan[data[0].status_pernikahan],
-					jenis_kelamin: data[0].jk=='P'?'Perempuan':'Laki - Laki',
 					pendidikan_terakhir: pendidikan[data[0].pendidikan_id],
 					penyakit: {
-						nama: data[0].penyakit_diderita.nama,
+						nama: data[0].penyakit.nama,
 						keterangan: data[0].penyakit.keterangan,
 					},
+					pekerjaan: data[0].pekerjaan.map(e => { return { nama: e.pekerjaan_nama, gaji: e.gaji, keterangan: e.keterangan, } }),
 					hidup: data[0].hidup?'Ya':'Tidak',
 				}});
 			}else return res.status(404).send({statusCode: 404, message: 'data not found'});
@@ -75,7 +122,31 @@ export default class DataController {
 												as: 'penyakit_diderita',
 											},
 										},
-										{ $unwind: "$penyakit_diderita" },
+										{
+											$lookup: {
+												from: 'penduduk_pekerjaans',
+												localField: '_id',
+												foreignField: 'penduduk_id',
+												pipeline: [
+													{
+														$lookup: {
+															from: 'pekerjaans',
+															localField: 'pekerjaan_id',
+															foreignField: '_id',
+															as: 'pekerjaan',
+														},
+													},
+													{ $unwind: "$pekerjaan" },
+													{ $project: {
+														pekerjaan_id: '$pekerjaan_id',
+														pekerjaan_nama: '$pekerjaan.nama',
+														gaji: '$gaji',
+														keterangan: '$keterangan',
+													} }
+												],
+												as: 'pekerjaan',
+											},
+										},
 									],
 									as: 'penduduk'
 								},
