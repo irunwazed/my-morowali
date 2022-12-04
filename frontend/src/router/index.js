@@ -23,7 +23,16 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import("../views/ViewEntriData.vue"),
+      import("../views/ViewPenduduk.vue"),
+  },
+  {
+    path: "/data-penyakit",
+    name: "data-penyakit",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import("../views/ViewPenyakit.vue"),
   },
 ];
 

@@ -51,21 +51,19 @@
 </template>
 
 <script>
-import vSelect from 'vue-select'
-
-import 'vue-select/dist/vue-select.css';
+// import vSelect from 'vue-select'npm i
 
 export default {
   // declare Select2Component
-  components: { vSelect },
-  data() {
-    return {
-      options: [
-        { 'code': 'op1', 'label': 'value2' },
-        { 'code': 'op1', 'label': 'value1' }
-      ],
-    }
-  },
+  // components: { vSelect },
+  // data() {
+  //   return {
+  //     options: [
+  //       { 'code': 'op1', 'label': 'value2' },
+  //       { 'code': 'op1', 'label': 'value1' }
+  //     ],
+  //   }
+  // },
   // methods: {
   //   onchange(val) {
   //     console.log(val);
