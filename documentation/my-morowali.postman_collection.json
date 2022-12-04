@@ -1430,7 +1430,7 @@
 											"urlencoded": [
 												{
 													"key": "nama",
-													"value": "beasiswa",
+													"value": "beasiswa22",
 													"type": "text"
 												},
 												{
@@ -7903,12 +7903,150 @@
 							]
 						},
 						{
+							"name": "penduduk by nik or name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/get/penduduk?search=123",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"get",
+										"penduduk"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "123"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/123",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"penduduk",
+												"123"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "45"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"2d-n7Cj2d4+uhIt4KyNnGVUh5Gv8ng\""
+										},
+										{
+											"key": "date",
+											"value": "Tue, 29 Nov 2022 04:51:17 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 404,\n    \"message\": \"data not found\"\n}"
+								},
+								{
+									"name": "penduduk by nik",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/1234567890123455",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"penduduk",
+												"1234567890123455"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "x-powered-by",
+											"value": "Express"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "content-length",
+											"value": "606"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"25e-r/Yg3c67sixtZvPZPFzQEmd2Ius\""
+										},
+										{
+											"key": "date",
+											"value": "Tue, 29 Nov 2022 04:51:40 GMT"
+										},
+										{
+											"key": "connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"data\": {\n        \"nik\": \"1234567890123455\",\n        \"nama\": \"aka\",\n        \"lahir\": {\n            \"tempat\": \"Kendari\",\n            \"tanggal\": \"2022-01-02T00:00:00.000Z\"\n        },\n        \"alamat\": {\n            \"provinsi_kode\": \"72\",\n            \"kabupaten_kode\": \"7203\",\n            \"kecamatan_kode\": \"7203030\",\n            \"kelurahan_kode\": \"7203030011\",\n            \"provinsi_nama\": \"Sulawesi Tengah\",\n            \"kabupaten_nama\": \"Morowali\",\n            \"kecamatan_nama\": \"Bungku Tengah\",\n            \"kelurahan_nama\": \"Puungkoilu\",\n            \"alamat_nama\": \"btn\"\n        },\n        \"fisik\": {\n            \"kondisi\": \"Lainnya\",\n            \"keterangan\": \"-\"\n        },\n        \"status_pernikahan\": \"Belum Menikah\",\n        \"jenis_kelamin\": \"Laki - Laki\",\n        \"pendidikan_terakhir\": \"Tidak punya ijazah\",\n        \"penyakit\": {\n            \"nama\": \"Diabetes\",\n            \"keterangan\": \"-\"\n        },\n        \"hidup\": \"Ya\"\n    }\n}"
+								}
+							]
+						},
+						{
 							"name": "penduduk by nik",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/123",
+									"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/2124567890123451",
 									"host": [
 										"127",
 										"0",
@@ -7920,7 +8058,7 @@
 										"kemiskinan",
 										"get",
 										"penduduk",
-										"123"
+										"2124567890123451"
 									]
 								}
 							},
@@ -8041,7 +8179,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/get/keluarga/2234567890123451",
+									"raw": "127.0.0.1:3000/kemiskinan/get/keluarga/3334567890123456",
 									"host": [
 										"127",
 										"0",
@@ -8053,7 +8191,7 @@
 										"kemiskinan",
 										"get",
 										"keluarga",
-										"2234567890123451"
+										"3334567890123456"
 									]
 								}
 							},
@@ -8312,7 +8450,7 @@
 									"urlencoded": [
 										{
 											"key": "no_kk",
-											"value": "1134567890123451",
+											"value": "3334567890123456",
 											"type": "text"
 										},
 										{
@@ -8392,7 +8530,7 @@
 										},
 										{
 											"key": "penyakit_id",
-											"value": "638c210e42be3f86c5930be6",
+											"value": "138c210e42be3f86c5930be6",
 											"type": "text"
 										},
 										{
@@ -8964,7 +9102,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/keluarga/no_kk/2234567890123451",
+									"raw": "127.0.0.1:3000/kemiskinan/keluarga/no_kk/3334567890123456",
 									"host": [
 										"127",
 										"0",
@@ -8976,7 +9114,7 @@
 										"kemiskinan",
 										"keluarga",
 										"no_kk",
-										"2234567890123451"
+										"3334567890123456"
 									]
 								}
 							},
@@ -9252,7 +9390,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638973057f9b3b5c84a7e56a",
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638c8046f97a744a35a2572c",
 									"host": [
 										"127",
 										"0",
@@ -9263,7 +9401,7 @@
 									"path": [
 										"kemiskinan",
 										"kesejahteraan",
-										"638973057f9b3b5c84a7e56a"
+										"638c8046f97a744a35a2572c"
 									]
 								}
 							},
@@ -9386,12 +9524,12 @@
 									"formdata": [
 										{
 											"key": "keluarga_id",
-											"value": "6388bd4b79866000086c9d77",
+											"value": "638c6cf887c0ada0ddd5d622",
 											"type": "text"
 										},
 										{
 											"key": "tahun",
-											"value": "2019",
+											"value": "2018",
 											"type": "text"
 										},
 										{
@@ -9427,7 +9565,7 @@
 										{
 											"key": "indikator_rumah_image",
 											"type": "file",
-											"src": "/C:/Users/User/OneDrive/Screenshot/2.PNG"
+											"src": "/C:/Users/User/OneDrive/Screenshot/3.PNG"
 										},
 										{
 											"key": "indikator_rumah_ket",
@@ -10242,7 +10380,7 @@
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638973057f9b3b5c84a7e56a",
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/638c8046f97a744a35a2572c",
 									"host": [
 										"127",
 										"0",
@@ -10253,7 +10391,7 @@
 									"path": [
 										"kemiskinan",
 										"kesejahteraan",
-										"638973057f9b3b5c84a7e56a"
+										"638c8046f97a744a35a2572c"
 									]
 								}
 							},
@@ -10996,8 +11134,8 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "penduduk",
-											"value": "6388bd4b79866000086c9d7a",
+											"key": "penduduk[]",
+											"value": "638c6eb8e32155829a4bce6d",
 											"type": "text"
 										},
 										{
@@ -11021,18 +11159,23 @@
 											"type": "text"
 										},
 										{
-											"key": "penduduk",
-											"value": "6388bd5779866000086c9d86",
+											"key": "penduduk[]",
+											"value": "638c6e7fe32155829a4bce5d",
 											"type": "text"
 										},
 										{
 											"key": "alamat",
-											"value": "btn",
+											"value": "j",
 											"type": "text"
 										},
 										{
 											"key": "wilayah",
 											"value": "7203030011",
+											"type": "text"
+										},
+										{
+											"key": "penduduk[]",
+											"value": "638c6d0387c0ada0ddd5d631",
 											"type": "text"
 										}
 									]
@@ -11667,8 +11810,7 @@
 										{
 											"key": "kabupaten",
 											"value": "7203",
-											"type": "text",
-											"disabled": true
+											"type": "text"
 										}
 									]
 								},
