@@ -130,6 +130,7 @@ routerAdmin.delete("/api/kesejahteraan/indikator/sumber-air/:id", route('api/ind
 // laporan
 routerAdmin.get("/api/laporan/penduduk", route('api/LaporanController@penduduk'));
 routerAdmin.get("/api/laporan/keluarga", route('api/LaporanController@keluarga'));
+routerAdmin.get("/api/laporan/kesejahteraan", route('api/LaporanController@kesejahteraan'));
 
 // get data to foreign
 routerAdmin.get("/api/get/penduduk", route('api/DataController@getPendudukBySearch'))
