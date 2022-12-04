@@ -2,7 +2,7 @@ export default class HomeController {
 	static async index(req, res) {
 
 		let api = {
-			status: true,
+			statusCode: 200,
 			data: [],
 		};
 		return res.send(api);
@@ -10,7 +10,7 @@ export default class HomeController {
 
 	static async notFound(req, res) {
 		let api = {
-			status: false,
+			statusCode: 404,
 			message: "pages not found!",
 		};
 		return res.status(404).send(api);

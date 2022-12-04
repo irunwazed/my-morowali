@@ -8,7 +8,7 @@ exports.validate = {
   store: [ 
 		check('penduduk_id', 'penduduk_id tidak ada').exists(),
 		check('pekerjaan_id', 'pekerjaan_id tidak ada').exists(),
-		check('gaji', 'gaji tidak ada').exists().isFloat(),
+		check('gaji', 'gaji tidak ada').exists().isFloat(), 
 		check('keterangan', 'keterangan tidak ada').exists(),
 	],
 }
@@ -56,61 +56,19 @@ export default class PendudukPekerjaanController {
 		}
 
 		try{
-			let penduduk = req.body.penduduk;
-			let tahun = req.body.tahun;
-			let bantuan_id = req.body.bantuan_id;
-			let pagu = req.body.pagu;
+			let penduduk_id = req.body.penduduk_id;
+			let pekerjaan_id = req.body.pekerjaan_id;
+			let gaji = req.body.gaji;
 			let keterangan = req.body.keterangan;
-			let wilayah = req.body.wilayah;
-			let alamat = req.body.alamat;
-			let longitude = req.body.longitude;
-			let latitude = req.body.latitude;
+			let nik = '';
 			
-			let dataPenduduk = await Promise.all(penduduk.map( async e => {
-				let data = await db.penduduk.findById(e);
-				return { penduduk_id: data._id, nik: data.nik, nama: data.nama };
-			}));
-
-			let lokasi = {}
-			let level = 4;
-			if(wilayah.length >= 2){
-				lokasi['provinsi_kode'] = wilayah.slice(0, 2);
-				let tmp = await db.wil_provinsi.find({kode: wilayah.slice(0, 2)})
-				lokasi['provinsi_nama'] = tmp[0].nama;
-				level = 1;
-			}
-			if(wilayah.length >= 4){
-				lokasi['kabupaten_kode'] = wilayah.slice(0, 4);
-				let tmp = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)})
-				lokasi['kabupaten_nama'] = tmp[0].nama;
-				level = 2;
-			}
-			if(wilayah.length >= 7){
-				lokasi['kecamatan_kode'] = wilayah.slice(0, 7);
-				let tmp = await db.wil_kecamatan.find({kode: wilayah.slice(0, 7)})
-				lokasi['kecamatan_nama'] = tmp[0].nama;
-				level = 3;
-			}
-			if(wilayah.length == 10){
-				lokasi['kelurahan_kode'] = wilayah.slice(0, 10);
-				let tmp = await db.wil_desa.find({kode: wilayah.slice(0, 10)})
-				lokasi['kelurahan_nama'] = tmp[0].nama;
-				level = 4;
-			}
-			lokasi['level'] = level;
-			lokasi['alamat_nama'] = alamat;
-			longitude?lokasi['longitude'] = longitude:'';
-			latitude?lokasi['latitude'] = latitude:'';
+			let dataPenduduk = await db.penduduk.findById(penduduk_id);
+			if(!dataPenduduk) return res.status(404).send({ statusCode: 400, message: 'penduduk not found' });
 			
 			let dataInput = {
-				penduduk: dataPenduduk,
-				bantuan: {
-					bantuan_id: bantuan_id,
-					nama: await BantuanController.getIndikatorName('bantuan', bantuan_id),
-					pagu: pagu,
-					keterangan: keterangan,
-				},
-				lokasi: lokasi,
+				pekerjaan_id: pekerjaan_id,
+				gaji: gaji,
+				keterangan: keterangan,
 			};
 
 			if(req.params.id){
@@ -127,8 +85,9 @@ export default class PendudukPekerjaanController {
 					message: "Data was updated successfully.",
 				});
 			}else{
-				dataInput['tahun'] = tahun;
-				let data = await table.create(dataInput);
+				dataInput['penduduk_id'] = penduduk_id;
+				dataInput['nik'] = dataPenduduk.nik;
+				await table.create(dataInput);
 				return res.send({
 					statusCode: 200,
 					message: 'Data was inserted successfully.',
@@ -165,11 +124,5 @@ export default class PendudukPekerjaanController {
 				message: "Could not delete data with id=" + id,
 			});
 		}
-	}
-	
-	static async getIndikatorName(table, id){
-		let data = await db[table].findById(id);
-		if(!data) return '';
-		return data.nama;
 	}
 }

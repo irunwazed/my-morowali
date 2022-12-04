@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 var Schema = mongoose.Schema;
 
 module.exports = mongoose => {
-  const schema = mongoose.Schema(
+  const schema = Schema(
     {
       nama: {
 				type: String, // admin desa, admin dll
@@ -11,8 +11,15 @@ module.exports = mongoose => {
 			level: {
 				type: Number,
 				required: true,
+        unique: true,
 			},
-      login_id: {type: Schema.Types.ObjectId, ref: 'logins', unique: true},
+      data: {
+        type: Object,
+        default: []
+      },
+      keterangan: {
+				type: String, 
+			},
     },
     { timestamps: true }
   );

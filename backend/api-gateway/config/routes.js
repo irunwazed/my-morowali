@@ -40,11 +40,23 @@ const ROUTES = [
 		}
 	},
 	{
-		path: '/kemiskinan',
+		path: '/kemiskinan-user',
 		auth: true,
 		author: false,
 		proxy: {
 			target: MS_KEMISKINAN+'api/',
+			changeOrigin: true,
+			pathRewrite: {
+				[`^/kemiskinan-user`]: '',
+			},
+		}
+	},
+	{
+		path: '/kemiskinan',
+		auth: true,
+		author: false,
+		proxy: {
+			target: MS_KEMISKINAN+'admin/api/',
 			changeOrigin: true,
 			pathRewrite: {
 				[`^/kemiskinan`]: '',

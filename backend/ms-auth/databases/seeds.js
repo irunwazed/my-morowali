@@ -8,20 +8,30 @@ const running = async () => {
     useUnifiedTopology: true
   })
 
+	
+  await db.admin.deleteMany({})
+  await db.admin.insertMany([
+    { nama: 'Admin Kemiskinan', level: 1, keterangan: 'Kemiskinan Admin utama' },
+    { nama: 'Admin Desa Kemiskinan', level: 2, keterangan: 'Kemiskinan Admin desa' },
+  ]);
+  console.log('insert data other admin');
+
   await db.login.deleteMany({})
   await db.login.insertMany([
     { name: 'Super Administrator', username: 'super-admin', level: 1, password: bcrypt.hashSync('123456', 10), status: 1 },
     { name: 'Administrator', username: 'admin', level: 2, password: bcrypt.hashSync('123456', 10), status: 1 },
-    // { name: 'Hafid Dwi Hibatullah', username: '123456', level: 4, password: bcrypt.hashSync('123456', 10) },
-    // { name: 'Muhammad Fahri Rahman', username: '654321', level: 5, password: bcrypt.hashSync('123456', 10) },
+    { name: 'Admin Kemiskinan', username: 'admin-kemiskinan', level: 3, level_akun: 1, password: bcrypt.hashSync('123456', 10), status: 1 },
   ]);
   console.log('insert data user');
 
+
 	let dataPenduduk = [
-		{nama: 'Muhammad Fahri Rahman', nik: '654321', alamat: { kabupaten_kode: '1', kecamatan_kode: '1', kelurahan_kode: '1', kabupaten_nama: 'Morowali', kecamatan_nama: 'Bungku Tengah', kelurahan_nama: 'Bente', alamat_nama: 'Jalur 2', }}
+		{nama: 'Muhammad Fahri Rahman', nik: '654321', alamat: { kabupaten_kode: '1', kecamatan_kode: '1', kelurahan_kode: '1', kabupaten_nama: 'Morowali', kecamatan_nama: 'Bungku Tengah', kelurahan_nama: 'Bente', alamat_nama: 'Jalur 2', }},
+		{nama: 'Muhammad Fahri Rahman2', nik: '1654321', alamat: { kabupaten_kode: '1', kecamatan_kode: '1', kelurahan_kode: '1', kabupaten_nama: 'Morowali', kecamatan_nama: 'Bungku Tengah', kelurahan_nama: 'Bente', alamat_nama: 'Jalur 2', }},
 	];
 	let dataPegawai = [
-		{nama: 'Hafid Dwi Hibatullah', nip: '123456', posisi: [{ opd_nama: 'Kominfo', opd_kode: '01', jabatan_nama: 'Kepala', opd_id: 1, jabatan_level: 1 }]}
+		{nama: 'Hafid Dwi Hibatullah', nip: '123456', posisi: [{ opd_nama: 'Kominfo', opd_kode: '01', jabatan_nama: 'Kepala', opd_id: 1, jabatan_level: 1 }]},
+		{nama: 'Hafid Dwi Hibatullah2', nip: '1234562', posisi: [{ opd_nama: 'Kominfo', opd_kode: '01', jabatan_nama: 'Kepala', opd_id: 1, jabatan_level: 1 }]},
 	];
 
 	var tmpData = [];

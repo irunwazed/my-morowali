@@ -89,6 +89,7 @@ export default class PendudukController {
 			if(id != 0){
 				query.push({ $match: { _id: db.mongoose.Types.ObjectId(id) } });
 			}else if(no_kk){
+				query.push({ $unwind: "$keluarga_penduduk" },);
 				query.push({ $match: { 'keluarga_penduduk.keluarga.no_kk': no_kk } });
 			}
 			let data = await table.aggregate(query)

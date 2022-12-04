@@ -33,6 +33,7 @@ export default class LoginController {
 				username: user[0].username,
 				id: user[0].id,
 				level: user[0].level,
+				level_akun: user[0].level_akun,
 			},
 			process.env.JWT_SECRET_KEY
 		);
@@ -71,7 +72,16 @@ export default class LoginController {
 		}
 
 		var akun = {};
-		if(decoded.level == 4){
+		if(decoded.level == 3){
+			let tmp = await db.admin.find({level: decoded.level_akun});
+			if(tmp.length == 1){
+				akun = {
+					nama: tmp[0].nama,
+					level: tmp[0].level,
+					data: tmp[0].data,
+				}
+			}
+		}else if(decoded.level == 4){
 			let tmp = await db.pegawai.find({nip: decoded.username});
 			if(tmp.length == 1){
 				akun = {
@@ -98,6 +108,7 @@ export default class LoginController {
 				username: decoded.username,
 				id: decoded.id,
 				level: decoded.level,
+				level_akun: decoded.level_akun,
 				akun: akun,
 			},
 		});
