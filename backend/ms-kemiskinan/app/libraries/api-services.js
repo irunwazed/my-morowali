@@ -12,11 +12,11 @@ const sendRequest = async (url, headers) => {
 
 const services = {
   getDataOPD: async (req) =>{
-    let data = await sendRequest(process.env.API_GATEWAY+'/organisasi/get/opd', { headers: { 'Authorization': req.header("authorization") } });
+    let data = await sendRequest(process.env.API_GATEWAY+'organisasi/get/opd', { headers: { 'Authorization': req.header("authorization") } });
     return data;
   },
   getOPDByKode: async (req, kode) =>{
-    let data = await sendRequest(process.env.API_GATEWAY+'/organisasi/get/opd/'+kode, { headers: { 'Authorization': req.header("authorization") } });
+    let data = await sendRequest(process.env.API_GATEWAY+'organisasi/get/opd/'+kode, { headers: { 'Authorization': req.header("authorization") } });
     return data;
   },
 }
