@@ -131,15 +131,15 @@ export default class KesejahteraanController {
 			let indikator_sumber_air_image = req.files.indikator_sumber_air_image;
 			let indikator_sumber_air_ket = req.body.indikator_sumber_air_ket;
 
-
-			indikator_rumah_image = await upload.upload(indikator_rumah_image, keluarga_id+'_'+tahun+'_rumah.gif', '/kesejahteraan/rumah/')
-			indikator_atap_image = await upload.upload(indikator_atap_image, keluarga_id+'_'+tahun+'_atap.gif', '/kesejahteraan/atap/')
-			indikator_bahan_bakar_image = await upload.upload(indikator_bahan_bakar_image, keluarga_id+'_'+tahun+'_bahan_bakar.gif', '/kesejahteraan/bahan_bakar/')
-			indikator_dinding_image = await upload.upload(indikator_dinding_image, keluarga_id+'_'+tahun+'_dinding.gif', '/kesejahteraan/dinding/')
-			indikator_jamban_image = await upload.upload(indikator_jamban_image, keluarga_id+'_'+tahun+'_jamban.gif', '/kesejahteraan/jamban/')
-			indikator_lantai_image = await upload.upload(indikator_lantai_image, keluarga_id+'_'+tahun+'_lantai.gif', '/kesejahteraan/lantai/')
-			indikator_penerangan_image = await upload.upload(indikator_penerangan_image, keluarga_id+'_'+tahun+'_penerangan.gif', '/kesejahteraan/penerangan/')
-			indikator_sumber_air_image = await upload.upload(indikator_sumber_air_image, keluarga_id+'_'+tahun+'_sumber_air.gif', '/kesejahteraan/sumber_air/')
+			let datetime = new Date().getTime();
+			indikator_rumah_image = await upload.upload(indikator_rumah_image, keluarga_id+'_'+tahun+'_rumah_'+datetime+'.gif', '/kesejahteraan/rumah/')
+			indikator_atap_image = await upload.upload(indikator_atap_image, keluarga_id+'_'+tahun+'_atap_'+datetime+'.gif', '/kesejahteraan/atap/')
+			indikator_bahan_bakar_image = await upload.upload(indikator_bahan_bakar_image, keluarga_id+'_'+tahun+'_bahan_bakar_'+datetime+'.gif', '/kesejahteraan/bahan_bakar/')
+			indikator_dinding_image = await upload.upload(indikator_dinding_image, keluarga_id+'_'+tahun+'_dinding_'+datetime+'.gif', '/kesejahteraan/dinding/')
+			indikator_jamban_image = await upload.upload(indikator_jamban_image, keluarga_id+'_'+tahun+'_jamban_'+datetime+'.gif', '/kesejahteraan/jamban/')
+			indikator_lantai_image = await upload.upload(indikator_lantai_image, keluarga_id+'_'+tahun+'_lantai_'+datetime+'.gif', '/kesejahteraan/lantai/')
+			indikator_penerangan_image = await upload.upload(indikator_penerangan_image, keluarga_id+'_'+tahun+'_penerangan_'+datetime+'.gif', '/kesejahteraan/penerangan/')
+			indikator_sumber_air_image = await upload.upload(indikator_sumber_air_image, keluarga_id+'_'+tahun+'_sumber_air_'+datetime+'.gif', '/kesejahteraan/sumber_air/')
 			
 			
 			let dataInput = {
