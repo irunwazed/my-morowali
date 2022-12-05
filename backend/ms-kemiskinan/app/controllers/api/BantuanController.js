@@ -8,7 +8,7 @@ exports.validate = {
   store: [ 
 		check('tahun', 'tahun tidak ada').exists().isInt(), // cant update 
 		check('bantuan_id', 'bantuan_id tidak ada').exists(),
-		check('penduduk').exists().isArray({ min: 1 }),
+		check('penduduk').exists(),
 		check('pagu', 'pagu tidak ada').isFloat(),
 		check('keterangan', 'keterangan tidak ada').exists(),
 		check('wilayah', 'wilayah tidak ada').exists(),
@@ -67,11 +67,19 @@ export default class BantuanController {
 			let alamat = req.body.alamat;
 			let longitude = req.body.longitude;
 			let latitude = req.body.latitude;
-			
-			let dataPenduduk = await Promise.all(penduduk.map( async e => {
-				let data = await db.penduduk.findById(e);
-				return { penduduk_id: data._id, nik: data.nik, nama: data.nama };
-			}));
+
+			console.log();
+			let dataPenduduk = [];
+			if(Array.isArray(penduduk)){
+
+				dataPenduduk = await Promise.all(penduduk.map( async e => {
+					let data = await db.penduduk.findById(e);
+					return { penduduk_id: data._id, nik: data.nik, nama: data.nama };
+				}));
+			}else{
+				let data = await db.penduduk.findById(penduduk);
+				dataPenduduk.push({ penduduk_id: data._id, nik: data.nik, nama: data.nama });
+			}
 
 			let lokasi = {}
 			let level = 4;
