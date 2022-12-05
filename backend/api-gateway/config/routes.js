@@ -1,6 +1,6 @@
-const MS_AUTH = 'http://127.0.0.1:3001/';
-const MS_ORGANISASI = 'http://127.0.0.1:3002/';
-const MS_KEMISKINAN = 'http://127.0.0.1:3003/';
+const MS_AUTH = `http://${process.env.APP_HOST}:3001/`;
+const MS_ORGANISASI = `http://${process.env.APP_HOST}:3002/`;
+const MS_KEMISKINAN = `http://${process.env.APP_HOST}:3003/`;
 
 const ROUTES = [
 	{
