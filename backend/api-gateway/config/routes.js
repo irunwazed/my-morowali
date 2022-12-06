@@ -1,6 +1,7 @@
 const MS_AUTH = `http://${process.env.APP_HOST}:3001/`;
 const MS_ORGANISASI = `http://${process.env.APP_HOST}:3002/`;
 const MS_KEMISKINAN = `http://${process.env.APP_HOST}:3003/`;
+const MS_PORTAL = `http://${process.env.APP_HOST}:3030/`;
 
 const ROUTES = [
 	{
@@ -8,7 +9,7 @@ const ROUTES = [
 		auth: false,
 		author: false,
 		proxy: {
-			target: MS_AUTH,
+			target: MS_PORTAL,
 			changeOrigin: true,
 			pathRewrite: {
 				[`^/`]: '',
