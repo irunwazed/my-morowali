@@ -4,9 +4,9 @@ exports.controller = class LaporanController {
 	static async penduduk(req, res) {
     try{
 
-      let kabupaten = req.body.kabupaten?req.body.kabupaten:'';
-      let kecamatan = req.body.kecamatan?req.body.kecamatan:'';
-      let kelurahan = req.body.kelurahan?req.body.kelurahan:'';
+      let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
+      let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
+      let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
 
       let data = await db.penduduk.aggregate([
         {
@@ -130,9 +130,9 @@ exports.controller = class LaporanController {
 	static async keluarga(req, res) {
     try{
 
-      let kabupaten = req.body.kabupaten?req.body.kabupaten:'';
-      let kecamatan = req.body.kecamatan?req.body.kecamatan:'';
-      let kelurahan = req.body.kelurahan?req.body.kelurahan:'';
+      let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
+      let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
+      let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
 
       let data = await db.keluarga.aggregate([
 				{
@@ -264,9 +264,9 @@ exports.controller = class LaporanController {
 
   static async kesejahteraan(req, res){
     try{
-      let kabupaten = req.body.kabupaten?req.body.kabupaten:'';
-      let kecamatan = req.body.kecamatan?req.body.kecamatan:'';
-      let kelurahan = req.body.kelurahan?req.body.kelurahan:'';
+      let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
+      let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
+      let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
 
       let query = [
         {
