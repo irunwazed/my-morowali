@@ -1,21 +1,14 @@
 module.exports = {
   apps: [{
-    name: "MS-KEMISKINAN",
-    script: "./app/server.js",
+    name: "API-GATEWAY",
+    script: "./server.js",
     watch: true,
     log_date_format: "YYYY/MM/DD HH:mm Z",
-    error_file: "./storages/logs/stderr.log",
-    out_file: "./storages/logs/stdout.log",
+    // error_file: "./storages/logs/stderr.log",
+    // out_file: "./storages/logs/stdout.log",
     instances: 1,
-    exec_mode: "fork",
     max_memory_restart: "512M",
     autorestart: true,
-    merge_logs: true,
-    env: {
-      NODE_ENV: "development"
-    },
-    env_production: {
-      NODE_ENV: 'production'
-    },
+    // merge_logs: true,
   }]
 }
