@@ -14,17 +14,17 @@ const setAuth = require('./middlewares/auth');
 const ROUTES = require('./config/routes');
 
 
-// router.get("/", (req, res) => {
-//   let api = {
-//     statusCode: 200,
-//     message: 'Selamat datang di My Morowali',
-//   };
-//   return res.send(api);
-// })
+router.get("/", (req, res) => {
+  let api = {
+    statusCode: 200,
+    message: 'Selamat datang di My Morowali',
+  };
+  return res.send(api);
+})
 
 setAuth(app, ROUTES);
 setProxy(app, ROUTES);
-// app.use("/", router);
+app.use("/", router);
 
 
 
