@@ -4,6 +4,18 @@ const MS_KEMISKINAN = `http://${process.env.APP_HOST}:3003/`;
 
 const ROUTES = [
 	{
+		path: '/',
+		auth: false,
+		author: false,
+		proxy: {
+			target: MS_AUTH,
+			changeOrigin: true,
+			pathRewrite: {
+				[`^/`]: '',
+			}
+		}
+	},
+	{
 		path: '/auth',
 		auth: false,
 		author: false,

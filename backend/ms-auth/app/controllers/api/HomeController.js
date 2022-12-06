@@ -2,8 +2,8 @@ module.exports = class HomeController {
 	static async index(req, res) {
 
 		let api = {
-			status: false,
-			data: [],
+			statusCode: 200,
+			data: 'Selamat Datang di My Morowali',
 		};
 		return res.send(api);
 	}
