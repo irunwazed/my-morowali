@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+const jwt =  require('jsonwebtoken');
 
-export default {
+module.exports = {
   checkApi: (req, res, next) => {
 
     let except = [

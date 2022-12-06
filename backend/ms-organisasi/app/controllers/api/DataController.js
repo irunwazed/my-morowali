@@ -1,6 +1,6 @@
 import db from "../../models";
 
-export default class DataController {
+exports.controller = class DataController {
 
 	static async getOPD(req, res) {
 		try{

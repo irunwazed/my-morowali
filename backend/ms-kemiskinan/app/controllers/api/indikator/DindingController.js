@@ -1,6 +1,6 @@
-import db from "../../../models";
-import { validationResult, check } from "express-validator";
-import paginate from '../../../libraries/paginate';
+const db = require("../../../models");
+const { validationResult, check } = require("express-validator");
+const paginate = require("../../../libraries/paginate");
 
 const table = db.ki_dinding;
 
@@ -12,7 +12,7 @@ exports.validate = {
 	],
 }
 
-export default class DindingController {
+exports.controller = class DindingController {
 	static async getData(req, res) {
 		let nama = new RegExp(req.query.nama);
 		var condition = {nama: {$regex: nama, $options: 'i'}};

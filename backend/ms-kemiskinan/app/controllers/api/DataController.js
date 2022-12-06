@@ -1,8 +1,8 @@
-import db from "../../models";
+const db = require("../../models");
 
 const table = db.penduduk;
 
-export default class DataController {
+exports.controller = class DataController {
 	
 	static queryPenduduk(){
 		return [

@@ -1,6 +1,6 @@
-import db from "../../models";
-import { validationResult, check } from "express-validator";
-import paginate from '../../libraries/paginate';
+const db = require("../../models");
+const { validationResult, check } = require("express-validator");
+const paginate = require("../../libraries/paginate");
 
 const table = db.penduduk_pekerjaan;
 
@@ -13,7 +13,7 @@ exports.validate = {
 	],
 }
 
-export default class PendudukPekerjaanController {
+exports.controller = class PendudukPekerjaanController {
 
 
 	static async getData(req, res) {

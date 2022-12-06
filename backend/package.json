@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "concurrently --kill-others \"cd ms-auth & npm run-script seed\" \"cd ms-organisasi & npm run-script seed\" \"cd ms-kemiskinan & npm run-script seed\"",
-    "dev": "concurrently --kill-others \"cd api-gateway & npm start\" \"cd ms-auth & npm start\" \"cd ms-organisasi & npm start\" \"cd ms-kemiskinan & npm start\""
+    "start": "concurrently -k --success first \"cd ms-auth & npm start\" \"cd ms-organisasi & npm start\" \"cd ms-kemiskinan & npm start\"",
+    "seed": "concurrently -k --success first \"cd ms-auth & npm run seed\" \"cd ms-organisasi & npm run seed\" \"cd ms-kemiskinan & npm run seed\"",
+    "dev": "concurrently -k --success first \"cd api-gateway & npm run dev\" \"cd ms-auth & npm run dev\" \"cd ms-organisasi & npm run dev\" \"cd ms-kemiskinan & npm run dev\"",
+    "build": "concurrently --kill-others \"cd api-gateway & npm run build\" \"cd ms-auth & npm run build\" \"cd ms-organisasi & npm run build\" \"cd ms-kemiskinan & npm run build\""
   },
   "author": "",
   "license": "ISC",

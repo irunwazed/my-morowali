@@ -1,10 +1,8 @@
-import db from "../../models";
-import bcrypt from "bcrypt";
-import {
-	validationResult
-} from "express-validator";
+const db = require("../../models");
+const bcrypt = require("bcrypt");
+const { validationResult } = require("express-validator");
 
-export default class UsersController {
+module.exports = class UsersController {
 	static async getData(req, res) {
 		const username = req.query.username;
 		var condition = username ?
