@@ -9,7 +9,7 @@ exports.validate = {
   store: [ 
 		check('keluarga_id', 'keluarga_id tidak ada').exists(), // cant update 
 		check('tahun', 'tahun tidak ada').exists().isInt(), // cant update 
-		check('status_kesejahteraan', 'status_kesejahteraan tidak ada').exists().isInt({ min: 1, max: 5 }), // 1. Sejahtera, 2 Hampir Miskin, 3. Miskin, 4. Sangat Miskin, 5. Belum Ada
+		check('status_kesejahteraan', 'status_kesejahteraan tidak ada').exists().isInt({ min: 1, max: 5 }), // '1. Sangat Miskin, 2. Miskin, 3. Rentan Miskin, 4. Menuju Miskin, 5. Middle Class' 
 		check('pendapatan_utama', 'pendapatan_utama tidak ada').exists().isFloat(),
 		check('pendapatan_sampingan', 'pendapatan_sampingan tidak ada').exists().isFloat(),
 		check('pengeluaran_total', 'pengeluaran_total tidak ada').exists().isFloat(),
