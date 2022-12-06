@@ -32,7 +32,7 @@ const ROUTES = [
 		auth: false,
 		author: false,
 		proxy: {
-			target: MS_KEMISKINAN+'storages/',
+			target: MS_KEMISKINAN+'storages/public/',
 			changeOrigin: true,
 			pathRewrite: {
 				[`^/kemiskinan-public/storages`]: '',

@@ -1,4 +1,4 @@
-export default class HomeController {
+module.exports = class HomeController {
 	static async index(req, res) {
 
 		let api = {

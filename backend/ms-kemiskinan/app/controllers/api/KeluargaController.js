@@ -1,7 +1,7 @@
-import db from "../../models";
-import paginate from '../../libraries/paginate';
+const db = require("../../models");
+const paginate = require("../../libraries/paginate");
 
-export default class KeluargaController {
+exports.controller = class KeluargaController {
 
 	static query(){
 		return [

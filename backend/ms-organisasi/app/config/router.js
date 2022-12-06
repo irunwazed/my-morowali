@@ -1,5 +1,5 @@
-import express from 'express';
-import userMiddleware from '../middleware/UserMiddleware';
+const express = require('express');
+const userMiddleware = require('../middleware/UserMiddleware');
 
 // setting export all Controller
 var exports = {};
@@ -13,11 +13,10 @@ const route = (_route, validate = false) => {
   if(validate){
     return exports[name].validate[_route[1]];
   }
-  return exports[name].default[(_route.length==1?'index':_route[1])]
+  return exports[name].controller[(_route.length==1?'index':_route[1])];
 }
 
 // . setting
-;
 
 const router = express.Router();
 

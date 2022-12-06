@@ -1,5 +1,4 @@
-import db from '../app/models';
-import bcrypt from 'bcrypt';
+const db = require('../app/models');
 
 const running = async () => {
 
@@ -79,7 +78,11 @@ const running = async () => {
   ]);
   console.log('insert data OPD');
 
-  // process.exit(1);
+  // 
+  setInterval(() => {
+    console.log("stop");
+    process.exit();
+  }, 5000);
 }
 
 running();

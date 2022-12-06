@@ -1,6 +1,6 @@
-var axios = require('axios');
+const axios = require('axios');
 
-export default {
+module.exports =  {
   getSession: async (req, res, next) => {
 
     try{

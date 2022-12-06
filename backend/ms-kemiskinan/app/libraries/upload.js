@@ -3,7 +3,7 @@ module.exports = {
 
     let filePath = '/storages/images'+path+name;
     let image = '/storages/images/no-images.png';
-    path = __dirname+'/../../public'+filePath;
+    path = __dirname+'/../../storages/public/images'+path+name;
 
     let maxSize = options.maxSize?options.maxSize:200;
 

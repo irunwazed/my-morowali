@@ -1,6 +1,6 @@
-import db from "../../../models";
-import { validationResult, check } from "express-validator";
-import paginate from '../../../libraries/paginate';
+const db = require("../../../models");
+const { validationResult, check } = require("express-validator");
+const paginate = require("../../../libraries/paginate");
 
 const table = db.penyakit;
 
@@ -11,7 +11,7 @@ exports.validate = {
 	],
 }
 
-export default class PenyakitController {
+exports.controller = class PenyakitController {
 
 	static async getData(req, res) {
 		let nama = new RegExp(req.query.nama);

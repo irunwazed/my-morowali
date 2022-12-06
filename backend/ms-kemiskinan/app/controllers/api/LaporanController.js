@@ -1,6 +1,6 @@
-import db from "../../models";
+const db = require("../../models");
 
-export default class LaporanController {
+exports.controller = class LaporanController {
 	static async penduduk(req, res) {
     try{
 

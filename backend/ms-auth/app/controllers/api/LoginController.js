@@ -1,11 +1,9 @@
-import jwt from "jsonwebtoken";
-import {
-	validationResult
-} from "express-validator";
-import db from "../../models";
-import bcrypt from "bcrypt";
+const jwt =  require("jsonwebtoken");
+const { validationResult } =  require("express-validator");
+const db =  require("../../models");
+const bcrypt =  require("bcrypt");
 
-export default class LoginController {
+module.exports = class LoginController {
 	static async login(req, res) {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {

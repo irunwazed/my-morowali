@@ -1,0 +1,33 @@
+2022/12/06 10:13 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3001/api
+2022/12/06 10:13 +08:00: [HPM] Proxy rewrite rule created: "^/auth" ~> ""
+2022/12/06 10:13 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3002/api/
+2022/12/06 10:13 +08:00: [HPM] Proxy rewrite rule created: "^/organisasi" ~> ""
+2022/12/06 10:13 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/storages/public/
+2022/12/06 10:13 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan-public/storages" ~> ""
+2022/12/06 10:13 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/api/
+2022/12/06 10:13 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan-user" ~> ""
+2022/12/06 10:13 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/admin/api/
+2022/12/06 10:13 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan" ~> ""
+2022/12/06 10:13 +08:00: API GATEWAY is running on port 3000
+2022/12/06 10:15 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3001/api
+2022/12/06 10:15 +08:00: [HPM] Proxy rewrite rule created: "^/auth" ~> ""
+2022/12/06 10:15 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3002/api/
+2022/12/06 10:15 +08:00: [HPM] Proxy rewrite rule created: "^/organisasi" ~> ""
+2022/12/06 10:15 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/storages/public/
+2022/12/06 10:15 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan-public/storages" ~> ""
+2022/12/06 10:15 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/api/
+2022/12/06 10:15 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan-user" ~> ""
+2022/12/06 10:15 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/admin/api/
+2022/12/06 10:15 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan" ~> ""
+2022/12/06 10:15 +08:00: API GATEWAY is running on port 3000
+2022/12/06 10:19 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3001/api
+2022/12/06 10:19 +08:00: [HPM] Proxy rewrite rule created: "^/auth" ~> ""
+2022/12/06 10:19 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3002/api/
+2022/12/06 10:19 +08:00: [HPM] Proxy rewrite rule created: "^/organisasi" ~> ""
+2022/12/06 10:19 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/storages/public/
+2022/12/06 10:19 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan-public/storages" ~> ""
+2022/12/06 10:19 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/api/
+2022/12/06 10:19 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan-user" ~> ""
+2022/12/06 10:19 +08:00: [HPM] Proxy created: /  -> http://127.0.0.1:3003/admin/api/
+2022/12/06 10:19 +08:00: [HPM] Proxy rewrite rule created: "^/kemiskinan" ~> ""
+2022/12/06 10:19 +08:00: API GATEWAY is running on port 3000
