@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: "API-GATEWAY",
+    name: "MS-KEMISKINAN",
     script: "./server.js",
     watch: true,
     log_date_format: "YYYY/MM/DD HH:mm Z",
