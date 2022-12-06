@@ -17,5 +17,5 @@ setProxy(app, ROUTES);
 
 
 app.listen(port, () => {
-  console.log(`API GATEWAY is running on port ${port}`);
+  console.log(`${process.env.APP_NAME||''} is running on port ${port}`);
 });
