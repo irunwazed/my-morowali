@@ -155,8 +155,6 @@ routerAdmin.get("/api/get/ki/rumah", route('api/DataController@getKIRumah'))
 routerAdmin.get("/api/get/ki/sumber-air", route('api/DataController@getKISumberAir'))
 
 
-
-
 router.get("*", route('api/HomeController@notFound'));
 router.post("*", route('api/HomeController@notFound'));
 router.put("*", route('api/HomeController@notFound'));
