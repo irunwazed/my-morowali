@@ -78,11 +78,7 @@ const running = async () => {
   ]);
   console.log('insert data OPD');
 
-  // 
-  setInterval(() => {
-    console.log("stop");
-    process.exit();
-  }, 5000);
+  process.exit();
 }
 
 running();

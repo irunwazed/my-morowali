@@ -336,7 +336,7 @@ const running = async () => {
   ]);
   console.log('insert data desa');
 	
-  // process.exit();
+  process.exit();
 }
 
 running();
