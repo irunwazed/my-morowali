@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 module.exports = mongoose => {
@@ -11,7 +11,7 @@ module.exports = mongoose => {
       status_kesejahteraan: {
 				type: Number,
 				required: true,
-				comment: '1. Sejahtera, 2 Hampir Miskin, 3. Miskin, 4. Sangat Miskin, 5. Belum Ada'
+				comment: '1. Sangat Miskin, 2. Miskin, 3. Rentan Miskin, 4. Menuju Miskin, 5. Middle Class'
 			},
 			tahun: {type: Number, required: true},
 			keuangan: {

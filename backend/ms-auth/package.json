@@ -4,16 +4,16 @@
   "description": "auth microservice",
   "main": "index.js",
   "scripts": {
-    "build": "nodemon --exec babel-node ./app/server.js",
-    "start": "nodemon --exec babel-node ./app/server.js",
-    "seed": "npx babel-node ./databases/seeds.js",
-    "test": "jest --watchAll --runInBand --detectOpenHandles"
+    "build": "pm2 start",
+    "start": "node ./app/server.js",
+    "seed": "node ./databases/seeds.js",
+    "test": "jest --watchAll --runInBand --detectOpenHandles",
+    "dev": "nodemon --exec babel-node ./app/server.js"
   },
   "author": "aka",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-validator": "^6.14.2",
@@ -21,9 +21,9 @@
     "mongoose": "^6.6.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.1",
+    "@babel/core": "^7.20.5",
     "@babel/node": "^7.19.1",
-    "@babel/preset-env": "^7.19.1",
+    "@babel/preset-env": "^7.20.2",
     "jest": "^28.1.3",
     "supertest": "^6.2.4"
   }

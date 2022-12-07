@@ -1,8 +1,21 @@
 const MS_AUTH = `http://${process.env.APP_HOST}:3001/`;
 const MS_ORGANISASI = `http://${process.env.APP_HOST}:3002/`;
 const MS_KEMISKINAN = `http://${process.env.APP_HOST}:3003/`;
+const MS_PORTAL = `http://${process.env.APP_HOST}:3030/`;
 
 const ROUTES = [
+	// {
+	// 	path: '/',
+	// 	auth: false,
+	// 	author: false,
+	// 	proxy: {
+	// 		target: MS_PORTAL,
+	// 		changeOrigin: true,
+	// 		pathRewrite: {
+	// 			[`^/`]: '',
+	// 		}
+	// 	}
+	// },
 	{
 		path: '/auth',
 		auth: false,
@@ -32,7 +45,7 @@ const ROUTES = [
 		auth: false,
 		author: false,
 		proxy: {
-			target: MS_KEMISKINAN+'storages/',
+			target: MS_KEMISKINAN+'storages/public/',
 			changeOrigin: true,
 			pathRewrite: {
 				[`^/kemiskinan-public/storages`]: '',

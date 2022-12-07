@@ -1,6 +1,6 @@
-import db from "../../models";
-import { validationResult, check } from "express-validator";
-import paginate from '../../libraries/paginate';
+const db = require("../../models");
+const { validationResult, check } = require("express-validator");
+const paginate = require("../../libraries/paginate");
 
 const table = db.penduduk_pekerjaan;
 
@@ -13,13 +13,32 @@ exports.validate = {
 	],
 }
 
-export default class PendudukPekerjaanController {
+exports.controller = class PendudukPekerjaanController {
 
 
 	static async getData(req, res) {
-		var condition = {};
+		var condition = [
+			{
+				$lookup: {
+					from: 'penduduks',
+					localField: 'penduduk_id',
+					foreignField: '_id',
+					as: 'penduduk',
+				},
+			},
+			{ $unwind: "$penduduk" },
+			{
+				$lookup: {
+					from: 'pekerjaans',
+					localField: 'pekerjaan_id',
+					foreignField: '_id',
+					as: 'pekerjaan',
+				},
+			},
+			{ $unwind: "$pekerjaan" },
+		];
 		try{
-			let data = await paginate.find(req, 'penduduk_pekerjaan', condition);
+			let data = await paginate.aggregate(req, 'penduduk_pekerjaan', condition);
 			return res.send(data);
 		}catch(err){
 			return res.status(500).send({
@@ -32,12 +51,33 @@ export default class PendudukPekerjaanController {
 	static async getOneData(req, res) {
 		try{
 			let id = req.params.id;
-			let data = await table.findById(id);
-			if (!data) return res.status(400).send({
+			var condition = [
+				{
+					$lookup: {
+						from: 'penduduks',
+						localField: 'penduduk_id',
+						foreignField: '_id',
+						as: 'penduduk',
+					},
+				},
+				{ $unwind: "$penduduk" },
+				{
+					$lookup: {
+						from: 'pekerjaans',
+						localField: 'pekerjaan_id',
+						foreignField: '_id',
+						as: 'pekerjaan',
+					},
+				},
+				{ $unwind: "$pekerjaan" },
+				{ $match: { _id: db.mongoose.Types.ObjectId(id) } }
+			];
+			let data = await table.aggregate(condition);
+			if (!data[0]) return res.status(400).send({
 						statusCode: 400,
 						message: "Not found data with id " + id,
 					});
-			else return res.send({statusCode: 200, data: data});
+			else return res.send({statusCode: 200, data: data[0]});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,

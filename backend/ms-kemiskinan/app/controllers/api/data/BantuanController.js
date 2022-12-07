@@ -1,7 +1,7 @@
-import db from "../../../models";
-import { validationResult, check } from "express-validator";
-import services from "../../../libraries/api-services"
-import paginate from '../../../libraries/paginate';
+const db = require("../../../models");
+const { validationResult, check } = require("express-validator");
+const paginate = require("../../../libraries/paginate");
+const services = require("../../../libraries/api-services");
 
 const table = db.bantuan;
 
@@ -13,7 +13,7 @@ exports.validate = {
 	],
 }
 
-export default class BantuanController {
+exports.controller = class BantuanController {
 
 	static async getData(req, res) {
 		let nama = new RegExp(req.query.nama);

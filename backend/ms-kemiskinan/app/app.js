@@ -1,10 +1,9 @@
-import express from "express";
-import {router, routerAdmin} from "./config/router";
-import fileUpload from "express-fileupload";
-// import cors from 'cors';
+const express = require("express");
+const {router, routerAdmin} = require("./config/router");
+const fileUpload = require("express-fileupload");
+
 
 const app = express();
-// app.use(cors());
 app.use(express.json());
 app.use(fileUpload({
   limits: { fileSize: 1 * 1024 * 1024 },
@@ -15,4 +14,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/admin", routerAdmin);
 app.use("/", router);
 
-export default app;
+module.exports = app;

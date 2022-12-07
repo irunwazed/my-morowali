@@ -1,6 +1,6 @@
-import express from 'express';
-import userMiddleware from '../middleware/UserMiddleware';
-import { check } from 'express-validator';
+const express = require('express');
+const userMiddleware = require('../middleware/UserMiddleware');
+const { check } = require('express-validator');
 
 // setting export all Controller
 const route = (_route) => {
@@ -10,7 +10,7 @@ const route = (_route) => {
   if(exports[name] == null){
     exports[name] = require(path+_route[0])
   }
-  return exports[name].default[(_route.length==1?'index':_route[1])]
+  return exports[name][(_route.length==1?'index':_route[1])]
 }
 // . setting
 

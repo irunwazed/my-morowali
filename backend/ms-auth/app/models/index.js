@@ -1,5 +1,5 @@
-import dbConfig from "../config/db.config";
-import mongoose from 'mongoose';
+const dbConfig = require("../config/db.config");
+const mongoose = require('mongoose');
 
 
 mongoose.Promise = global.Promise;

@@ -1,13 +1,12 @@
-import db from "../../models";
-import {
-	validationResult
-} from "express-validator";
-import bcrypt from 'bcrypt';
+const db = require("../../models");
+const bcrypt = require("bcrypt");
+const { validationResult } = require("express-validator");
+
 
 const table = db.pegawai;
 const tableLogin = db.pegawai;
 
-export default class PegawaiController {
+module.exports = class PegawaiController {
 
 	static async getData(req, res) {
 

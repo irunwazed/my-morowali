@@ -1,5 +1,5 @@
-import app from './app'
-import db from './models';
+const app = require('./app');
+const db = require('./models');
 
 db.mongoose
   .connect(db.url, {

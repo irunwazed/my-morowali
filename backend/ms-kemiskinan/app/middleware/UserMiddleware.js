@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const getSession = async (token) => {
 	try{
@@ -10,7 +10,7 @@ const getSession = async (token) => {
 	}
 }
 
-export default {
+module.exports = {
   checkUser: async (req, res, next) => {
 
     try{
