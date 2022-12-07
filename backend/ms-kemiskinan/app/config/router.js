@@ -131,6 +131,7 @@ routerAdmin.delete("/api/kesejahteraan/indikator/sumber-air/:id", route('api/ind
 routerAdmin.get("/api/laporan/penduduk", route('api/LaporanController@penduduk'));
 routerAdmin.get("/api/laporan/keluarga", route('api/LaporanController@keluarga'));
 routerAdmin.get("/api/laporan/kesejahteraan", route('api/LaporanController@kesejahteraan'));
+routerAdmin.get("/api/laporan/bantuan", route('api/LaporanController@bantuan'));
 
 // get data to foreign
 routerAdmin.get("/api/get/penduduk", route('api/DataController@getPendudukBySearch'))
@@ -144,8 +145,14 @@ routerAdmin.get("/api/get/kecamatan", route('api/DataController@getKecamatan'))
 routerAdmin.get("/api/get/kecamatan/:kode", route('api/DataController@getKecamatanByKode'))
 routerAdmin.get("/api/get/kelurahan/:kode", route('api/DataController@getKelurahanByKode'))
 routerAdmin.get("/api/get/kelurahan-by-kecamatan/:kode", route('api/DataController@getKelurahanByKodeKecamatan'))
-
-
+routerAdmin.get("/api/get/ki/atap", route('api/DataController@getKIAtap'))
+routerAdmin.get("/api/get/ki/bahan-bakar", route('api/DataController@getKIBahanBakar'))
+routerAdmin.get("/api/get/ki/dinding", route('api/DataController@getKIDinding'))
+routerAdmin.get("/api/get/ki/jamban", route('api/DataController@getKIJamban'))
+routerAdmin.get("/api/get/ki/lantai", route('api/DataController@getKILantai'))
+routerAdmin.get("/api/get/ki/penerangan", route('api/DataController@getKIPenerangan'))
+routerAdmin.get("/api/get/ki/rumah", route('api/DataController@getKIRumah'))
+routerAdmin.get("/api/get/ki/sumber-air", route('api/DataController@getKISumberAir'))
 
 
 router.get("*", route('api/HomeController@notFound'));

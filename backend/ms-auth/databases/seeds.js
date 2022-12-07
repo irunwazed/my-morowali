@@ -8,6 +8,7 @@ const running = async () => {
     useUnifiedTopology: true
   })
 
+	await db.dropCollection('admins')
 	
   await db.admin.deleteMany({})
   await db.admin.insertMany([

@@ -368,4 +368,102 @@ exports.controller = class DataController {
 			});
 		}
 	}
+
+	static async getKIAtap(req, res){
+		try{
+			let data = await db.ki_atap.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKIBahanBakar(req, res){
+		try{
+			let data = await db.ki_bahan_bakar.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKIDinding(req, res){
+		try{
+			let data = await db.ki_dinding.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKIJamban(req, res){
+		try{
+			let data = await db.ki_jamban.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKILantai(req, res){
+		try{
+			let data = await db.ki_lantai.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKIPenerangan(req, res){
+		try{
+			let data = await db.ki_penerangan.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKIRumah(req, res){
+		try{
+			let data = await db.ki_rumah.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKISumberAir(req, res){
+		try{
+			let data = await db.ki_sumber_air.find({});
+			return res.send({statusCode: 200, data: data});
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+	
+
 }

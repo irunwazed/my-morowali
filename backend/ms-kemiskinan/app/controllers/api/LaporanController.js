@@ -1,14 +1,16 @@
+const paginate = require("../../libraries/paginate");
 const db = require("../../models");
 
 exports.controller = class LaporanController {
 	static async penduduk(req, res) {
     try{
 
+      let datatable = req.query.datatable=='true'?true:false;
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
 
-      let data = await db.penduduk.aggregate([
+      let query = [
         {
           $lookup: {
             from: 'penyakits',
@@ -89,7 +91,17 @@ exports.controller = class LaporanController {
           'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
           'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
         } },
-      ]);
+      ];
+
+      let data = [];
+      let tmp = [];
+      if(datatable){
+        tmp = await paginate.aggregate(req, 'penduduk', query);
+        data = tmp.data;
+      }else{
+        data = await db.penduduk.aggregate(query);
+      }
+      
 
       
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
@@ -120,6 +132,12 @@ exports.controller = class LaporanController {
           hidup: e.hidup?'Ya':'Tidak',
         }
       });
+
+      if(datatable){
+        tmp.data = dataAll;
+        data = tmp;
+        return res.send(data);
+      }
       
       return res.send({statusCode: 200, data: dataAll});
     }catch(err){
@@ -130,11 +148,12 @@ exports.controller = class LaporanController {
 	static async keluarga(req, res) {
     try{
 
+      let datatable = req.query.datatable=='true'?true:false;
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
 
-      let data = await db.keluarga.aggregate([
+      let query = [
 				{
 					$lookup:{
 						from: 'keluarga_penduduks',
@@ -217,7 +236,16 @@ exports.controller = class LaporanController {
           'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
           'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
         } }
-			]);
+			];
+
+      let data = [];
+      let tmp = {};
+      if(datatable){
+        tmp = await paginate.aggregate(req, 'keluarga', query);
+        data = tmp.data;
+      }else{
+        data = await db.keluarga.aggregate(query);
+      }
 
       let hubKel = ['', 'Istri / Suami', 'Anak', 'Wali', 'Lainnya'];  
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
@@ -255,6 +283,12 @@ exports.controller = class LaporanController {
           }),
         }
       });
+
+      if(datatable){
+        tmp.data = dataAll;
+        data = tmp;
+        return res.send(data);
+      }
       
       return res.send({statusCode: 200, data: dataAll});
     }catch(err){
@@ -264,6 +298,7 @@ exports.controller = class LaporanController {
 
   static async kesejahteraan(req, res){
     try{
+      let datatable = req.query.datatable=='true'?true:false;
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
@@ -342,9 +377,16 @@ exports.controller = class LaporanController {
         // } }
       ];
 
-      let data = await db.keluarga_kesejahteraan.aggregate(query);
+      let data = [];
+      let tmp = {};
+      if(datatable){
+        tmp = await paginate.aggregate(req, 'keluarga_kesejahteraan', query);
+        data = tmp.data;
+      }else{
+        data = await db.keluarga_kesejahteraan.aggregate(query);;
+      }
 
-      let kesejahteraan = ['', 'Sejahtera', 'Hampir Miskin', 'Miskin', 'Sangat Miskin', 'Belum Ada'];
+      let kesejahteraan = ['', 'Sangat Miskin', 'Miskin', 'Rentan Miskin', 'Menuju Miskin', 'Middle Class'];
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
       let status_pernikahan = ['', 'Belum Menikah', 'Menikah', 'Duda', 'Janda'];
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
@@ -375,6 +417,53 @@ exports.controller = class LaporanController {
           },
         }
       });
+
+      if(datatable){
+        tmp.data = dataAll;
+        data = tmp;
+        return res.send(data);
+      }
+
+      return res.send({statusCode: 200, data: dataAll});
+
+    }catch(err){
+      return res.send({statusCode: 500, message: err});
+    }
+  }
+
+  static async bantuan(req, res){
+    try{
+      let datatable = req.query.datatable=='true'?true:false;
+      let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
+      let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
+      let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
+
+      let query = {};
+
+      let data = [];
+      let tmp = {};
+      if(datatable){
+        tmp = await paginate.find(req, 'penduduk_bantuan', query);
+        data = tmp.data;
+      }else{
+        data = await db.penduduk_bantuan.find(query);;
+      }
+
+      let dataAll = data.map(e => {
+        return {
+          tahun: e.tahun,
+          bantuan: e.bantuan,
+          lokasi: e.lokasi,
+          penduduk: e.penduduk,
+          penduduk2: e.penduduk2,
+        }
+      });
+
+      if(datatable){
+        tmp.data = dataAll;
+        data = tmp;
+        return res.send(data);
+      }
 
       return res.send({statusCode: 200, data: dataAll});
 
