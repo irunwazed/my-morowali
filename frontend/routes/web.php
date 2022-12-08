@@ -51,6 +51,24 @@ Route::group(['middleware' => 'cek_login'], function () {
                 Route::get("/indikator", [Controller::class, 'kes_indi'])->name('kes.indikator');
                 Route::get("/bantuan", [Controller::class, 'kes_ban'])->name('kes.bantuan');
             });
+
+            Route::prefix("/laporan")->group(function () {
+                Route::get("/kesejahteraan", [Controller::class, 'laporan_kesejahteraan'])->name('laporan.kesejahteraan');
+                Route::get("/penduduk", [Controller::class, 'laporan_penduduk'])->name('laporan.penduduk');
+                Route::get("/keluarga", [Controller::class, 'laporan_keluarga'])->name('laporan.keluarga');
+                Route::get("/bantuan", [Controller::class, 'laporan_bantuan'])->name('laporan.bantuan');
+            });
+
+            Route::prefix("/print")->group(function () {
+                Route::get("/kesejahteraan/stream", [Controller::class, 'print_kesejahteraan_stream'])->name('print.kesejahteraan.stream');
+                Route::get("/kesejahteraan/pdf", [Controller::class, 'print_kesejahteraan_pdf'])->name('print.kesejahteraan.pdf');
+                Route::get("/penduduk/stream", [Controller::class, 'print_penduduk_stream'])->name('print.penduduk.stream');
+                Route::get("/penduduk/pdf", [Controller::class, 'print_penduduk_pdf'])->name('print.penduduk.pdf');
+                Route::get("/bantuan/stream", [Controller::class, 'print_bantuan_stream'])->name('print.bantuan.stream');
+                Route::get("/bantuan/pdf", [Controller::class, 'print_bantuan_pdf'])->name('print.bantuan.pdf');
+                Route::get("/keluarga/stream", [Controller::class, 'print_keluarga_stream'])->name('print.keluarga.stream');
+                Route::get("/keluarga/pdf", [Controller::class, 'print_keluarga_pdf'])->name('print.keluarga.pdf');
+            });
         });
     });
 

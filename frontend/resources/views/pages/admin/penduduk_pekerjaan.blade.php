@@ -3,8 +3,7 @@
 @section('judul', 'Pekerjaan - SEPAKAD')
 
 @section('tambah_css')
-    <link rel="stylesheet" href="{{ asset('') }}/assets/dist-assets/css/plugins/datatables.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @endsection
 
 @section('isi')
@@ -62,7 +61,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Form Jenis Atap</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Form Pekerjaan</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
@@ -71,18 +70,23 @@
                         <div class="modal-body">
                             <input id="e_id" hidden>
                             <div class="form-group">
-                                <label>Jenis Atap</label>
-                                <input id="nama" name="nama" type="text" class="form-control" required="">
+                                <label>Nama Penduduk</label>
+                                <select id="nama" name="penduduk_id" class="form-control" style="width:100%;">
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label>Bobot</label>
-                                <input id="bobot" name="bobot" type="number" class="form-control angka"
-                                    required="" step="0.1" min="0" max="1" />
+                                <label>Pekerjaan</label>
+                                <select id="pekerjaan" name="pekerjaan_id" class="form-control" style="width:100%;">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Gaji</label>
+                                <input id="gaji" name="gaji" type="number" class="form-control" required />
 
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea name="keterangan" id="keterangan" class="form-control" rows="3" required=""></textarea>
+                                <textarea name="keterangan" id="keterangan" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                     </form>
@@ -90,12 +94,14 @@
                 <div class="modal-footer">
                     <div id="m_tambah">
                         <button class="btn btn-outline-warning btn-sm" type="button" data-dismiss="modal">Batal</button>
-                        <button class="btn btn-outline-primary btn-sm" id="btn_tambah" type="button"><i class="i-Add"></i>
+                        <button class="btn btn-outline-primary btn-sm" form="form_data" type="submit"><i
+                                class="i-Add"></i>
                             Tambah Data</button>
                     </div>
                     <div id="m_edit">
                         <button class="btn btn-outline-warning btn-sm" type="button" data-dismiss="modal">Batal</button>
-                        <button class="btn btn-outline-primary btn-sm" id="btn_update" type="button"><i class="i-Edit"></i>
+                        <button class="btn btn-outline-primary btn-sm" form="form_data" type="submit"><i
+                                class="i-Edit"></i>
                             Ubah Data</button>
                     </div>
                 </div>
@@ -106,23 +112,23 @@
 
 @section('tambah_js')
 
-    <script src="{{ asset('') }}assets/dist-assets/js/plugins/datatables.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/scripts/datatables.script.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/select2.min.js"></script>
     <script>
+        var formStatus = '';
+
         $(document).ready(function() {
             loadData();
             $('#m_tambah').hide();
             $('#m_edit').hide();
-            // $(".angka").inputFilter(function(value) {
-            //     return /^-?\d*$/.test(value);
-            // }, "");
+            getPekerjaan();
+            getPenduduk();
         });
 
         $("#btn_modal").click(function() {
+            $('#nama').append(null).change();
             $("#form_data")[0].reset();
             $('#m_tambah').show();
             $('#m_edit').hide();
+            formStatus = 'create';
             $('#modal_data').modal('show');
         });
 
@@ -137,7 +143,7 @@
                 info: true,
                 destroy: true,
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 ajax: {
                     url: "{{ env('API_URL') }}/kemiskinan/penduduk/pekerjaan",
                     type: 'GET',
@@ -181,13 +187,19 @@
                         }
                     },
                     {
-                        data: 'nik',
+                        data: null,
+                        render: function(data, row) {
+                            return data.penduduk.nama + "<br><small>" + data.nik + "</small>";
+                        }
                     },
                     {
-                        data: 'pekerjaan_id',
+                        data: 'pekerjaan.nama',
                     },
                     {
-                        data: 'data.gaji',
+                        data: 'gaji',
+                        render: function(data, row) {
+                            return rupiah(data);
+                        }
                     },
                     {
                         data: 'keterangan',
@@ -197,20 +209,25 @@
         }
 
         function edit_data(id) {
+            $('#nama').append(null).change();
             $("#form_data")[0].reset();
-            // console.log(id);
+            formStatus = 'edit';
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap/" + id,
+                url: "{{ env('API_URL') }}/kemiskinan/penduduk/pekerjaan/" + id,
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    // console.log(data.data);
+                    console.log(data.data);
                     $('#e_id').val(id);
-                    $('#nama').val(data.data.nama);
-                    $('#bobot').val(data.data.bobot);
+                    // $('#nama').val(data.data.penduduk_id).change();
+                    $('#pekerjaan').val(data.data.pekerjaan_id).change();
+                    $('#gaji').val(data.data.gaji);
                     $('#keterangan').val(data.data.keterangan);
+                    newOption = new Option(data.data.penduduk.nama + " - " + data.data.nik, data.data.penduduk_id,
+                        true, true);
+                    $('#nama').append(newOption).trigger('change');
                 },
                 error: function(error) {
                     console.log(error);
@@ -223,7 +240,6 @@
         }
 
         function hapus_data(id) {
-            // console.log(id);
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -231,7 +247,6 @@
                 },
                 buttonsStyling: false,
             });
-
             swalWithBootstrapButtons
                 .fire({
                     title: "Data akan dihapus?",
@@ -245,7 +260,7 @@
                 .then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap/" + id,
+                            url: "{{ env('API_URL') }}/kemiskinan/penduduk/pekerjaan/" + id,
                             type: "DELETE",
                             headers: {
                                 "Authorization": "Bearer {{ Session::get('token') }}"
@@ -253,7 +268,7 @@
                         });
                         loadData();
                         swalWithBootstrapButtons.fire(
-                            "Terhapus!",
+                            "",
                             "Data Berhasil diHapus!.",
                             "success"
                         );
@@ -266,13 +281,28 @@
                 });
         }
 
-        $('#btn_tambah').click(function() {
-            event.preventDefault();
+        $('#form_data').on('submit', function(e) {
+            e.preventDefault();
             idata = new FormData($('#form_data')[0]);
-            // console.log(idata);
+            console.log(idata)
+            // die()
+
+            let url = ""
+            let method = ""
+            if (formStatus == 'edit') {
+                id = $('#e_id').val();
+                url = '{{ env('API_URL') }}/kemiskinan/penduduk/pekerjaan/' + id;
+                method = 'PUT'
+                msg = "Data berhasil diubah!"
+            } else {
+                url = '{{ env('API_URL') }}/kemiskinan/penduduk/pekerjaan'
+                method = 'POST'
+                msg = "Data berhasil ditambahkan!"
+            }
+
             $.ajax({
-                type: "POST",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap",
+                type: method,
+                url: url,
                 data: idata,
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
@@ -284,73 +314,110 @@
                     // console.log(data);
                     Swal.fire({
                         icon: 'success',
-                        title: "Data berhasil ditambahkan!",
-                        text: '',
+                        title: "",
+                        text: msg,
                         customClass: {
                             confirmButton: 'btn btn-success'
                         }
                     });
-                    loadData();
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
+                    loadData();
                 },
                 error: function(error) {
+                    if (error.responseJSON.message) {
+                        title2 = error.responseJSON.message;
+                    } else {
+                        title2 = error.responseJSON.errors['0'].msg + " (" + error.responseJSON.errors[
+                            '0'].param + ")"
+                    }
+
                     Swal.fire({
                         icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
+                        title: title2,
                         text: '',
                         customClass: {
                             confirmButton: 'btn btn-success'
                         }
                     });
-                    console.log(error);
                 }
             });
         });
 
-
-        $('#btn_update').click(function() {
-            event.preventDefault();
-            idata = new FormData($('#form_data')[0]);
-            id = $('#e_id').val();
+        function getPekerjaan(id) {
+            var select = $('#pekerjaan');
             $.ajax({
-                type: "PUT",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap/" + id,
-                data: idata,
+                type: "GET",
+                url: "{{ env('API_URL') }}/kemiskinan/data/pekerjaan",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
-                processData: false,
-                contentType: false,
-                cache: false,
                 success: function(data) {
                     // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil diubah!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
+                    var htmlOptions = [];
+                    if (data.data.length) {
+                        html = '<option value="" selected disabled>- Pilih Pekerjaan -</option>';
+                        htmlOptions[htmlOptions.length] = html;
+                        for (item in data.data) {
+                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
+                                .nama +
+                                '</option>';
+                            htmlOptions[htmlOptions.length] = html;
                         }
-                    });
-                    loadData();
-                    $("#form_data")[0].reset();
-                    $('#modal_data').modal('hide');
+
+                        select.empty().append(htmlOptions.join(''));
+                    }
                 },
                 error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
                     console.log(error);
                 }
             });
-        });
+        }
+
+        function getPenduduk() {
+            $('#nama').select2({
+                minimumInputLength: 3,
+                language: {
+                    inputTooShort: function() {
+                        return 'Cari berdasarkan Nama atau NIK';
+                    }
+                },
+                // allowClear: true,
+                ajax: {
+                    headers: {
+                        "Authorization": "Bearer {{ Session::get('token') }}"
+                    },
+                    url: "{{ env('API_URL') }}/kemiskinan/get/penduduk",
+                    data: function(params) {
+                        var query = {
+                            search: params.term,
+                            type: 'public'
+                        }
+
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    },
+                    processResults: function(data) {
+                        // console.log(data.data)
+                        return {
+                            results: data.data.map(e => {
+                                return {
+                                    id: e._id,
+                                    text: e.nama + " - " + e.nik
+                                }
+                            })
+                        };
+                    }
+                }
+            });
+        }
+
+        function rupiah(number) {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0,
+            }).format(number);
+        }
     </script>
 @endsection

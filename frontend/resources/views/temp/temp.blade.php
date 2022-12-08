@@ -14,6 +14,8 @@
     <link href="{{ asset('') }}assets/dist-assets/css/plugins/perfect-scrollbar.css" rel="stylesheet" />
     {{-- <link rel="stylesheet" href="{{ asset('') }}assets/dist-assets/css/plugins/fontawesome-5.css" /> --}}
     <link href="{{ asset('') }}assets/dist-assets/css/plugins/metisMenu.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('') }}assets/dist-assets/css/plugins/datatables.min.css" />
+    <link rel="stylesheet" href="{{ asset('') }}assets/dist-assets/js/select2.min.css" />
 
     <style>
         #modal_loading {
@@ -25,6 +27,31 @@
             height: 100%;
             width: 100%;
             background: rgba(255, 255, 255, .8) url('{{ asset('') }}assets/dist-assets/images/load1.gif') 50% 50% no-repeat;
+        }
+
+        .modal-header {
+            background-image: url('{{ asset('') }}assets/dist-assets/images/head.png');
+            background-position: top 0px right 0px;
+            background-repeat: no-repeat;
+        }
+
+        .modal-footer {
+            background-image: url('{{ asset('') }}assets/dist-assets/images/bottom.png');
+            background-position: bottom 0px left 0px;
+            background-repeat: no-repeat;
+        }
+
+        .scroll-nav {
+            background-image: url('{{ asset('') }}assets/dist-assets/images/bl.png');
+            background-position: bottom 0px left 0px;
+            background-repeat: no-repeat;
+        }
+
+        .main-content-wrap {
+            background-image: url('{{ asset('') }}assets/dist-assets/images/br.png');
+            background-position: bottom 0px right 0px;
+            background-repeat: no-repeat;
+
         }
 
         th.dt-center,
@@ -50,8 +77,6 @@
     <div id="modal_loading"></div>
     <script src="{{ asset('') }}assets/dist-assets/js/plugins/jquery-3.3.1.min.js"></script>
     <script src="{{ asset('') }}assets/dist-assets/js/jquery-ui.min.js"></script>
-    {{-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
-        integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script> --}}
     <script src="{{ asset('') }}assets/dist-assets/js/plugins/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('') }}assets/dist-assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="{{ asset('') }}assets/dist-assets/js/scripts/tooltip.script.min.js"></script>
@@ -61,11 +86,12 @@
     <script src="{{ asset('') }}assets/dist-assets/js/plugins/feather.min.js"></script>
     <script src="{{ asset('') }}assets/dist-assets/js/plugins/metisMenu.min.js"></script>
     <script src="{{ asset('') }}assets/dist-assets/js/scripts/layout-sidebar-vertical.min.js"></script>
-    {{-- <script src="{{ asset('') }}assets/dist-assets/js/plugins/echarts.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/scripts/echart.options.min.js"></script> --}}
-    {{-- <script src="{{ asset('') }}assets/dist-assets/js/plugins/datatables.min.js"></script> --}}
     <script src="{{ asset('') }}assets/dist-assets/js/scripts/dashboard.v4.script.min.js"></script>
-    <script src="{{ asset('') }}/assets/dist-assets/js/sweetalert2.all.min.js"></script>
+
+    <script src="{{ asset('') }}assets/dist-assets/js/plugins/datatables.min.js"></script>
+    <script src="{{ asset('') }}assets/dist-assets/js/scripts/datatables.script.min.js"></script>
+    <script src="{{ asset('') }}assets/dist-assets/js/select2.min.js"></script>
+    <script src="{{ asset('') }}assets/dist-assets/js/sweetalert2.all.min.js"></script>
     @yield('tambah_js')
     <script>
         $(document).on({

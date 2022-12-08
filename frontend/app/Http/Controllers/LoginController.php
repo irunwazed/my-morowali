@@ -44,7 +44,16 @@ class LoginController extends Controller
             Session::put('token', $token);
             Session::put('session_data', $session);
             Session::save();
-            dd($request->session()->all());
+            $data = $request->session()->all();
+            // dd($data['session_data']->akun);
+
+            if ($data['session_data']->level == 2) {
+                return \redirect(route('admin.index'))->with('success', 'Login Success, <br> Selamat datang ' . $data['session_data']->username . '!');
+            } else {
+                $request->session()->forget('token');
+                $request->session()->forget('session_data');
+                return \redirect(route('login'))->with('error', 'Err Login!');
+            }
         } catch (RequestException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = json_decode($response->getBody()->getContents());
@@ -55,9 +64,10 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $request->session()->forget('token');
+        $request->session()->forget('session_data');
         $request->session()->flush();
 
         return \redirect(route('login'))->with('success', 'Anda berhasil logout!');
     }
-
 }

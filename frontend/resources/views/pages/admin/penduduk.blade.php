@@ -3,8 +3,7 @@
 @section('judul', 'Dashboard - SEPAKAD')
 
 @section('tambah_css')
-    <link rel="stylesheet" href="{{ asset('') }}/assets/dist-assets/css/plugins/datatables.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
         * {
             box-sizing: border-box;
@@ -112,7 +111,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Form Penduduk</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    <button class="close m_close" type="button" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -121,7 +120,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Nomor Kartu Keluarga</label>
-                                <input id="no_kk" name="no_kk" type="text" class="form-control" readonly="false">
+                                <input id="no_kk" name="no_kk" type="text" class="form-control" readonly>
                             </div>
                             <div class="form-group">
                                 <label>Kepala Keluarga</label>
@@ -150,8 +149,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama</label>
-                                <input id="e_nama" name="nama" type="text" class="form-control"
-                                    required="">
+                                <input id="e_nama" name="nama" type="text" class="form-control" required="">
                             </div>
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
@@ -278,13 +276,15 @@
                 </div>
                 <div class="modal-footer">
                     <div id="m_tambah">
-                        <button class="btn btn-outline-warning btn-sm" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-outline-warning btn-sm m_close" type="button"
+                            data-dismiss="modal">Batal</button>
                         <button class="btn btn-outline-primary btn-sm" id="btn_tambah" type="button"><i
                                 class="i-Add"></i>
                             Tambah Data</button>
                     </div>
                     <div id="m_edit">
-                        <button class="btn btn-outline-warning btn-sm" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-outline-warning btn-sm m_close" type="button"
+                            data-dismiss="modal">Batal</button>
                         <button class="btn btn-outline-primary btn-sm" id="btn_update" type="button"><i
                                 class="i-Edit"></i>
                             Ubah Data</button>
@@ -297,9 +297,6 @@
 
 @section('tambah_js')
 
-    <script src="{{ asset('') }}assets/dist-assets/js/plugins/datatables.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/scripts/datatables.script.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             // loadData();
@@ -331,23 +328,52 @@
                 },
                 success: function(data) {
                     if (data.data) {
-                        $('#kk_dummy').val(id);
+                        // console.log(data.data.no_kk);
                         $("#btn_tam_hid").show(300);
-                        $("#no_kk").val(data.data.no_kk);
+                        $('#no_kk').val(data.data.no_kk);
+                        $('#kk_dummy').val(data.data.no_kk);
+                        // $("input[name='no_kk']").val(data.data.no_kk);
 
                         loadData(id);
                     } else {
                         $("#tabel_show").hide()
                         $("#btn_tam_hid").hide(300);
-                        Swal.fire({
-                            icon: 'error',
-                            title: data.message,
-                            // title: 'Nomor Kartu Keluarga Tidak Terdaftar',
-                            text: '',
+
+                        const swalWithBootstrapButtons = Swal.mixin({
                             customClass: {
-                                confirmButton: 'btn btn-danger'
-                            }
+                                confirmButton: "btn btn-success",
+                                cancelButton: "btn btn-danger mr-2",
+                            },
+                            buttonsStyling: false,
                         });
+
+                        swalWithBootstrapButtons
+                            .fire({
+                                title: "Data tidak ditemukan",
+                                text: "Apakah ingin membiuat data keluarga baru?",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonText: "Ya",
+                                cancelButtonText: "Tidak",
+                                reverseButtons: true,
+                            })
+                            .then((result) => {
+                                if (result.isConfirmed) {
+                                    $('#no_kk').val(id);
+                                    $('#kk_dummy').val(id);
+                                    getPenyakit();
+                                    getCamat();
+                                    $('#m_tambah').show();
+                                    $('#m_edit').hide();
+                                    $('.mode_edit').prop('readonly', false);
+                                    $('#modal_data').modal('show');
+
+                                } else if (
+                                    result.dismiss === Swal.DismissReason.cancel
+                                ) {
+                                    swalWithBootstrapButtons.fire("", "Dibatalkan", "error");
+                                }
+                            });
                     }
                 },
                 error: function(error) {
@@ -356,11 +382,21 @@
             });
         });
 
+        $(".m_close").click(function() {
+            id = $('#id_cari').val();
+            $('#no_kk').val("");
+            $('#kk_dummy').val("");
+            $("#form_data")[0].reset();
+            $('#modal_data').modal('hide');
+        })
+
         $("#btn_modal").click(function() {
 
+            id = $('#id_cari').val();
+            $('#no_kk').val(id);
+            $('#kk_dummy').val(id);
             getPenyakit();
             getCamat();
-            $("#form_data")[0].reset();
             $('#m_tambah').show();
             $('#m_edit').hide();
             $('.mode_edit').prop('readonly', false);
@@ -608,7 +644,7 @@
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    console.log(data.data);
+                    // console.log(data.data);
                     $('#kecamatan').val(data.data.alamat.kecamatan_kode).change();
                     $('#e_nik').val(data.data.nik);
                     $('#e_nama').val(data.data.nama);
@@ -729,11 +765,11 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                     Swal.fire({
-                        icon: data.status,
-                        title: "Data berhasil ditambahkan!",
-                        text: '',
+                        icon: 'success',
+                        title: "",
+                        text: 'Data berhasil ditambahkan!',
                         customClass: {
                             confirmButton: 'btn btn-success'
                         }

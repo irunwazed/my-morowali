@@ -3,8 +3,7 @@
 @section('judul', 'Data Bantuan - SEPAKAD')
 
 @section('tambah_css')
-    <link rel="stylesheet" href="{{ asset('') }}/assets/dist-assets/css/plugins/datatables.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @endsection
 
 @section('isi')
@@ -42,6 +41,7 @@
                                                         <th style="width: 5px;"></th>
                                                         <th style="width: 5px;">No</th>
                                                         <th>Nama</th>
+                                                        <th>OPD</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -104,9 +104,6 @@
 
 @section('tambah_js')
 
-    <script src="{{ asset('') }}assets/dist-assets/js/plugins/datatables.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/scripts/datatables.script.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             loadData();
@@ -211,6 +208,15 @@
                     {
                         data: 'nama',
                     },
+                    {
+                        data: 'opd.nama',
+                        render: function(data) {
+                            if(!data){
+                                return '';
+                            }
+                            return data;
+                        }
+                    },
                 ],
             });
         }
@@ -228,6 +234,7 @@
                     // console.log(data.data);
                     $('#e_id').val(id);
                     $('#nama').val(data.data.nama);
+                    $('#opd').val(data.data.opd.kode).change();
                     $('#keterangan').val('');
                 },
                 error: function(error) {

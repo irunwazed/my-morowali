@@ -3,8 +3,6 @@
 @section('judul', 'Data Jenis Lantai - SEPAKAD')
 
 @section('tambah_css')
-    <link rel="stylesheet" href="{{ asset('') }}/assets/dist-assets/css/plugins/datatables.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('isi')
@@ -104,10 +102,6 @@
 @endsection
 
 @section('tambah_js')
-
-    <script src="{{ asset('') }}assets/dist-assets/js/plugins/datatables.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/scripts/datatables.script.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             loadData();

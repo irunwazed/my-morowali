@@ -1,6 +1,6 @@
 <div class="sidebar-panel bg-white">
     <div class="gull-brand pr-3 text-center mt-4 mb-2 d-flex justify-content-center align-items-center">
-        <img class="pl-3" src="{{ asset('') }}/assets/dist-assets/images/logo.png" alt="alt" />
+        <img class="pl-3" src="{{ asset('') }}assets/dist-assets/images/logo.png" alt="alt" />
         <span class="ml-2 item-name text-20 text-primary font-weight-700">SEPAKAD</span>
         <div class="sidebar-compact-switch ml-auto"><span></span></div>
     </div>
@@ -18,41 +18,48 @@
                                 class="i-Pen-2 text-20 mr-2 text-muted"></i><span
                                 class="item-name text-15 text-muted">Entri Data</span></a>
                         <ul class="mm-collapse">
-                            <li class="item-name"><a href="{{ route('penduduk') }}"><i
-                                        class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
-                                        class="text-muted">Penduduk</span></a></li>
-                            <li class="item-name"><a href="{{ route('penduduk.pekerjaan') }}"><i
-                                        class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
-                                        class="text-muted">Pekerjaan</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="Ul_li--hover"><a class="has-arrow" href="#"><i
-                                class="i-Checked-User text-20 mr-2 text-muted"></i><span
-                                class="item-name text-15 text-muted">Kesejahteraan</span></a>
-                        <ul class="mm-collapse">
                             <li class="item-name"><a href="{{ route('kes.indikator') }}"><i
-                                        class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
-                                        class="text-muted">Indikator</span></a></li>
+                                        class="nav-icon i-Smile mr-2 text-muted"></i><span
+                                        class="text-muted">Kesejahteraan</span></a></li>
                             <li class="item-name"><a href="{{ route('kes.bantuan') }}"><i
-                                        class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
+                                        class="nav-icon i-Financial mr-2 text-muted"></i><span
                                         class="text-muted">Bantuan
                                     </span></a></li>
+
+                            <li class="Ul_li--hover"><a class="has-arrow" href="#"><i
+                                        class="i-Checked-User text-20 mr-2 text-muted"></i><span
+                                        class="item-name text-15 text-muted">Data Penduduk</span></a>
+                                <ul class="mm-collapse">
+                                    <li class="item-name"><a href="{{ route('penduduk') }}"><i
+                                                class="nav-icon i-Add-User mr-2 text-muted"></i><span
+                                                class="text-muted">Penduduk</span></a></li>
+                                    <li class="item-name"><a href="{{ route('penduduk.pekerjaan') }}"><i
+                                                class="nav-icon i-Management mr-2 text-muted"></i><span
+                                                class="text-muted">Pekerjaan</span></a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li class="Ul_li--hover"><a class="has-arrow" href="#"><i
                                 class="i-Letter-Open text-20 mr-2 text-muted"></i><span
                                 class="item-name text-15 text-muted">Laporan</span></a>
                         <ul class="mm-collapse">
-                            <li class="item-name"><a href="dashboard.v2.html"><i
+                            <li class="item-name"><a href="{{ route('laporan.kesejahteraan') }}"><i
                                         class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
-                                        class="text-muted">Penyakit
+                                        class="text-muted">Kesejahteraan
                                     </span></a></li>
-                            <li class="item-name"><a href="dashboard.v3.html"><i
+                            <li class="item-name"><a href="{{ route('laporan.bantuan') }}"><i
                                         class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
-                                        class="text-muted">Pekerjaan</span></a></li>
-                            <li class="item-name"><a href="dashboard.v4.html"><i
+                                        class="text-muted">Bantuan
+                                    </span></a></li>
+                            <li class="item-name"><a href="{{ route('laporan.penduduk') }}"><i
                                         class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
-                                        class="text-muted">Bantuan</span></a></li>
+                                        class="text-muted">Penduduk
+                                    </span></a></li>
+                            <li class="item-name"><a href="{{ route('laporan.keluarga') }}"><i
+                                        class="nav-icon i-Arrow-Next mr-2 text-muted"></i><span
+                                        class="text-muted">Keluarga
+                                    </span></a></li>
                         </ul>
                     </li>
                     <li class="Ul_li--hover"><a class="has-arrow" href="#"><i
@@ -71,7 +78,7 @@
                                         class="text-muted">Bantuan</span></a></li>
 
                             <li class="Ul_li--hover"><a class="has-arrow" href="#"><i
-                                        class="i-Tag text-20 mr-2 text-muted"></i><span
+                                        class="i-Check text-20 mr-2 text-muted"></i><span
                                         class="item-name text-15 text-muted">Indikator</span></a>
                                 <ul class="mm-collapse">
                                     <li class="item-name"><a href="{{ route('rumah') }}"><i

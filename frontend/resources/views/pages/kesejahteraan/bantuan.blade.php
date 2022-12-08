@@ -3,8 +3,7 @@
 @section('judul', 'Data Bantuan - SEPAKAD')
 
 @section('tambah_css')
-    <link rel="stylesheet" href="{{ asset('') }}/assets/dist-assets/css/plugins/datatables.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @endsection
 
 @section('isi')
@@ -61,12 +60,12 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal_data" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="modal_data" data-backdrop="static" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Form Bantuan</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    <button class="close m_close" type="button" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -89,7 +88,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Penerima</label>
-                                <select multiple id="penduduk" name="penduduk[]" class="form-control" style="width:100%;">
+                                <select multiple id="penduduk" name="penduduk" class="form-control" style="width:100%;">
                                 </select>
                                 <small style="color: red">*Masukkan NIK atau Nama penerima</small>
                             </div>
@@ -102,7 +101,7 @@
                             </div>
                             <div class="form-group" id="desa_drop">
                                 <label>Kelurahan/Desa</label>
-                                <select id="kelurahan" class="form-control" style="width:100%;" required aria-hidden="true">
+                                <select id="kelurahan" class="form-control" style="width:100%;" aria-hidden="true">
                                 </select>
                             </div>
 
@@ -123,15 +122,17 @@
                 </div>
                 <div class="modal-footer">
                     <div id="m_tambah">
-                        <button class="btn btn-outline-warning btn-sm" type="button" data-dismiss="modal">Batal</button>
-                        <button class="btn btn-outline-primary btn-sm" id="btn_tambah" type="button"><i
-                                class="i-Add"></i>
+                        <button class="btn btn-outline-warning btn-sm m_close" type="button"
+                            data-dismiss="modal">Batal</button>
+                        <button class="btn btn-outline-primary btn-sm" form="form_data" id="btn_tambah"
+                            type="submit"><i class="i-Add"></i>
                             Tambah Data</button>
                     </div>
                     <div id="m_edit">
-                        <button class="btn btn-outline-warning btn-sm" type="button" data-dismiss="modal">Batal</button>
-                        <button class="btn btn-outline-primary btn-sm" id="btn_update" type="button"><i
-                                class="i-Edit"></i>
+                        <button class="btn btn-outline-warning btn-sm m_close" type="button"
+                            data-dismiss="modal">Batal</button>
+                        <button class="btn btn-outline-primary btn-sm" form="form_data" id="btn_update"
+                            type="submit"><i class="i-Edit"></i>
                             Ubah Data</button>
                     </div>
                 </div>
@@ -142,10 +143,9 @@
 
 @section('tambah_js')
 
-    <script src="{{ asset('') }}assets/dist-assets/js/plugins/datatables.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/scripts/datatables.script.min.js"></script>
-    <script src="{{ asset('') }}assets/dist-assets/js/select2.min.js"></script>
     <script>
+        var formStatus = '';
+
         $(document).ready(function() {
             loadData();
             $('#m_tambah').hide();
@@ -166,6 +166,12 @@
 
             $('#penduduk').select2({
                 minimumInputLength: 3,
+                language: {
+                    inputTooShort: function() {
+                        return 'Cari berdasarkan Nama atau NIK';
+                    }
+                },
+                // allowClear: true,
                 ajax: {
                     headers: {
                         "Authorization": "Bearer {{ Session::get('token') }}"
@@ -195,23 +201,28 @@
             });
         });
 
+        $('.m_close').click(function() {
+            $("#form_data")[0].reset();
+            $('#show_data').hide();
+            $('#modal_data').modal('hide');
+        })
+
         $("#btn_modal").click(function() {
-
-
             $("#form_data")[0].reset();
             $('#m_tambah').show();
             $('#m_edit').hide();
+            formStatus = 'create';
+            $('#penduduk').val(null).change();
             $('#modal_data').modal('show');
         });
+
 
         function loadData() {
             $('#tabel_data').DataTable({
                 paging: true,
                 searching: true,
                 autoWidth: true,
-                processing: true,
-                destroy: true,
-                responsive: true,
+                responsive: false,
                 info: true,
                 destroy: true,
                 processing: true,
@@ -308,19 +319,46 @@
 
         function edit_data(id) {
             $("#form_data")[0].reset();
+            formStatus = 'edit';
+            $("#penduduk").val(null).trigger("change");
             // console.log(id);
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap/" + id,
+                url: "{{ env('API_URL') }}/kemiskinan/bantuan/" + id,
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    // console.log(data.data);
+                    console.log(data.data);
                     $('#e_id').val(id);
-                    $('#nama').val(data.data.nama);
-                    $('#bobot').val(data.data.bobot);
-                    $('#keterangan').val(data.data.keterangan);
+                    $('#tahun').val(data.data.tahun).change();
+                    $('#bantuan_id').val(data.data.bantuan.bantuan_id).change();
+                    $('#kecamatan').val(data.data.lokasi.kecamatan_kode).change();
+                    $('#alamat').val(data.data.lokasi.alamat_nama);
+                    $('#pagu').val(data.data.bantuan.pagu);
+                    $('#keterangan').val(data.data.bantuan.keterangan);
+
+                    if (data.data.lokasi.kelurahan_kode) {
+                        setTimeout(function() {
+                            $('#kelurahan').val(data.data.lokasi.kelurahan_kode).change();
+                        }, 500);
+                    }
+
+                    $.each(data.data.penduduk, function(key, value) {
+                        newOption = new Option(value.nama + " - " + value.nik, value.penduduk_id,
+                            true,
+                            true);
+                        $('#penduduk').append(newOption).trigger('change');
+                        $('#penduduk').trigger({
+                            type: 'select2:select',
+                            params: {
+                                data: data
+                            }
+                        });
+                    });
+                    // newOption = new Option(data.data.penduduk[0].nama + " - " + data.data.penduduk[0].nik, data
+                    //     .data.penduduk[0].penduduk_id)
+                    // $('#penduduk').append(newOption).trigger('change');
                 },
                 error: function(error) {
                     console.log(error);
@@ -329,11 +367,85 @@
             $('#m_tambah').hide();
             $('#m_edit').show();
             $('#modal_data').modal('show');
-
         }
 
+        $('#form_data').on('submit', function(e) {
+            e.preventDefault();
+            idata = new FormData($('#form_data')[0]);
+            kec = $('#kecamatan').val();
+            kel = $('#kelurahan').val();
+            if (!kel) {
+                wilayah = kec;
+            } else {
+                wilayah = kel;
+            }
+            idata.append('wilayah', wilayah);
+
+            // console.log(idata);
+
+            let url = ""
+            let method = ""
+            if (formStatus == 'edit') {
+                id = $('#e_id').val();
+                url = '{{ env('API_URL') }}/kemiskinan/bantuan/' + id;
+                method = 'PUT'
+                msg = "Data berhasil diubah!"
+            } else {
+                url = '{{ env('API_URL') }}/kemiskinan/bantuan'
+                method = 'POST'
+                msg = "Data berhasil ditambahkan!"
+            }
+
+            $.ajax({
+                type: method,
+                url: url,
+                data: idata,
+                headers: {
+                    "Authorization": "Bearer {{ Session::get('token') }}"
+                },
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function(data) {
+                    // console.log(data);
+                    Swal.fire({
+                        icon: 'success',
+                        title: "",
+                        text: msg,
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        }
+                    });
+                    $("#form_data")[0].reset();
+                    $('#modal_data').modal('hide');
+                    loadData();
+                    if (formStatus == 'edit') {
+                        setTimeout(function() {
+                            location.reload()
+                        }, 2000);
+                    }
+                },
+                error: function(error) {
+                    if (error.responseJSON.message) {
+                        title2 = error.responseJSON.message;
+                    } else {
+                        title2 = error.responseJSON.errors['0'].msg + " (" + error.responseJSON.errors[
+                            '0'].param + ")"
+                    }
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: title2,
+                        text: '',
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        }
+                    });
+                }
+            });
+        });
+
         function hapus_data(id) {
-            // console.log(id);
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -341,7 +453,6 @@
                 },
                 buttonsStyling: false,
             });
-
             swalWithBootstrapButtons
                 .fire({
                     title: "Data akan dihapus?",
@@ -355,7 +466,7 @@
                 .then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap/" + id,
+                            url: "{{ env('API_URL') }}/kemiskinan/bantuan/" + id,
                             type: "DELETE",
                             headers: {
                                 "Authorization": "Bearer {{ Session::get('token') }}"
@@ -363,105 +474,18 @@
                         });
                         loadData();
                         swalWithBootstrapButtons.fire(
-                            "Terhapus!",
-                            "Data Berhasil diHapus!.",
+                            "",
+                            "Data Terhapus!",
                             "success"
                         );
                     } else if (
                         /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
-                        swalWithBootstrapButtons.fire("Dibatalkan", "", "error");
+                        swalWithBootstrapButtons.fire("", "Dibatalkan!", "error");
                     }
                 });
         }
-
-        $('#btn_tambah').click(function() {
-            event.preventDefault();
-            idata = new FormData($('#form_data')[0]);
-            // console.log(idata);
-            $.ajax({
-                type: "POST",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap",
-                data: idata,
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil ditambahkan!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
-                    loadData();
-                    $("#form_data")[0].reset();
-                    $('#modal_data').modal('hide');
-                },
-                error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
-                    console.log(error);
-                }
-            });
-        });
-
-
-        $('#btn_update').click(function() {
-            event.preventDefault();
-            idata = new FormData($('#form_data')[0]);
-            id = $('#e_id').val();
-            $.ajax({
-                type: "PUT",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap/" + id,
-                data: idata,
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil diubah!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
-                    loadData();
-                    $("#form_data")[0].reset();
-                    $('#modal_data').modal('hide');
-                },
-                error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
-                    console.log(error);
-                }
-            });
-        });
 
         function rupiah(number) {
             return new Intl.NumberFormat("id-ID", {
