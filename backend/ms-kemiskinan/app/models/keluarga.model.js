@@ -17,6 +17,9 @@ module.exports = mongoose => {
 				type: String,
 				comment: 'NIK kepala keluarga',
 			},
+      kk_image: {
+				type: String,
+      }
     },
     { timestamps: true }
   );
