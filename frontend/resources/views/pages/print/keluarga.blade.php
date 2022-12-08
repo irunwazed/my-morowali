@@ -101,38 +101,38 @@
                 @php
                     $i = 1;
                 @endphp
-                @foreach ($data as $dat)
+                @foreach (@$data as $dat)
                     <tr>
                         <td>{{ $i }}</td>
-                        <td colspan="13"><b>Nomor Kartu Keluarga : {{ $dat->no_kk }} </b></td>
+                        <td colspan="13"><b>Nomor Kartu Keluarga : {{ @$dat->no_kk }} </b></td>
                     </tr>
-                    @foreach ($dat->anggota_keluarga as $dat_kel)
+                    @foreach (@$dat->anggota_keluarga as $dat_kel)
                         <tr>
                             @if ($loop->last)
                                 <td></td>
                             @else
                                 <td style="border-top-style: hidden;border-bottom-style: hidden;"></td>
                             @endif
-                            <td>{{ $dat_kel->nik }}</td>
-                            <td>{{ $dat_kel->nama }}</td>
-                            <td>{{ $dat_kel->jenis_kelamin }}</td>
-                            <td>{{ $dat_kel->agama }}</td>
-                            <td>{{ $dat_kel->lahir->tempat }}, {{ dateform($dat_kel->lahir->tanggal) }}</td>
-                            <td>{{ hitung_umur($dat_kel->lahir->tanggal) }}</td>
-                            <td>{{ $dat_kel->alamat->alamat_nama }}<br>Kelurahan
-                                {{ $dat_kel->alamat->kelurahan_nama }}<br>Kecamatan
-                                {{ $dat_kel->alamat->kecamatan_nama }}<br>Kabupaten
-                                {{ $dat_kel->alamat->kabupaten_nama }}</td>
-                            <td>{{ $dat_kel->status_pernikahan }}</td>
-                            <td>{{ $dat_kel->pendidikan }}</td>
-                            <td>{{ $dat_kel->fisik->kondisi }}</td>
-                            <td>{{ $dat_kel->penyakit->nama ? $dat_kel->penyakit->nama : '' }}
+                            <td>{{ @$dat_kel->nik }}</td>
+                            <td>{{ @$dat_kel->nama }}</td>
+                            <td>{{ @$dat_kel->jenis_kelamin }}</td>
+                            <td>{{ @$dat_kel->agama }}</td>
+                            <td>{{ @$dat_kel->lahir->tempat }}, {{ dateform(@$dat_kel->lahir->tanggal) }}</td>
+                            <td>{{ hitung_umur(@$dat_kel->lahir->tanggal) }}</td>
+                            <td>{{ @$dat_kel->alamat->alamat_nama }}<br>Kelurahan
+                                {{ @$dat_kel->alamat->kelurahan_nama }}<br>Kecamatan
+                                {{ @$dat_kel->alamat->kecamatan_nama }}<br>Kabupaten
+                                {{ @$dat_kel->alamat->kabupaten_nama }}</td>
+                            <td>{{ @$dat_kel->status_pernikahan }}</td>
+                            <td>{{ @$dat_kel->pendidikan }}</td>
+                            <td>{{ @$dat_kel->fisik->kondisi }}</td>
+                            <td>{{ @$dat_kel->penyakit->nama ? @$dat_kel->penyakit->nama : '' }}
                             </td>
-                            <td>{{ $dat_kel->hidup }}</td>
+                            <td>{{ @$dat_kel->hidup }}</td>
                             <td>
                                 @if (isset($dat_kel->pekerjaan[0]->pekerjaan_nama))
-                                    <b>{{ $dat_kel->pekerjaan[0]->pekerjaan_nama }}</b> <br>
-                                    <small>{{ rupiah($dat_kel->pekerjaan[0]->gaji) }}</small>
+                                    <b>{{ @$dat_kel->pekerjaan[0]->pekerjaan_nama }}</b> <br>
+                                    <small>{{ rupiah(@$dat_kel->pekerjaan[0]->gaji) }}</small>
                                 @else
                                     -
                                 @endif
@@ -149,8 +149,8 @@
 @php
     function dateform($tgl)
     {
-        $date = date_create($tgl);
-        $tanggal = date_format($date, 'd/m/Y');
+        @$date = date_create($tgl);
+        $tanggal = date_format(@$date, 'd/m/Y');
         return $tanggal;
     }
     function rupiah($angka)
@@ -160,8 +160,8 @@
     }
     function hitung_umur($tgl)
     {
-        $date = date_create($tgl);
-        $tanggal = date_format($date, 'Y-m-d');
+        @$date = date_create($tgl);
+        $tanggal = date_format(@$date, 'Y-m-d');
 
         $birthDate = new DateTime($tanggal);
         $today = new DateTime();
@@ -172,6 +172,6 @@
         return $y . ' tahun ';
     }
 @endphp
-{{-- {{ dd($data[0]) }} --}}
+{{-- {{ dd(@$data[0]) }} --}}
 
 </html>
