@@ -1,6 +1,10 @@
 const express = require('express');
 const userMiddleware = require('../middleware/UserMiddleware');
 
+// const multer = require("multer");
+// const upload = multer({ dest: "uploads/" });
+
+
 // setting export all Controller
 var exports = {};
 const route = (_route, validate = false) => {

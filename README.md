@@ -7,6 +7,7 @@ sudo ufw allow 8080
 
 
 ufw allow 'Nginx Full'
+sudo lsof -i -P -n
 ```
 
 ## perbaikan package lama
