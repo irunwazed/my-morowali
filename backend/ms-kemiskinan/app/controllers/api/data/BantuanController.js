@@ -9,6 +9,7 @@ exports.validate = {
   store: [ 
 		check('nama', 'please insert nama').exists(),
 		check('opd_kode', 'please insert OPD').exists(),
+		check('jenis', 'please insert jenis').exists(),
 		check('keterangan', 'please insert keterangan').exists(),
 	],
 }
@@ -34,8 +35,9 @@ exports.controller = class BantuanController {
 			let id = req.params.id;
 			let data = await table.findById(id);
 			if (!data) return res.status(400).send({
-						message: "Not found data with id " + id,
-					});
+				statusCode: 400,
+				message: "Not found data with id " + id,
+			});
 			else return res.send({ statusCode: 200, data: data });
 		}catch(err){
 			return res.status(500).send({
@@ -59,6 +61,7 @@ exports.controller = class BantuanController {
 			let nama = req.body.nama;
 			let keterangan = req.body.keterangan;
 			let opd_kode = req.body.opd_kode;
+			let jenis = req.body.jenis;
 			
 			let opd = await services.getOPDByKode(req, opd_kode);
 			
@@ -68,6 +71,7 @@ exports.controller = class BantuanController {
 					kode: opd.kode,
 					nama: opd.nama,
 				},
+				jenis: jenis,
 				keterangan: keterangan,
 			};
 			if(opd.kode)data['opd'] = opd;
@@ -75,7 +79,6 @@ exports.controller = class BantuanController {
 			result = await table.create(data);
 
 		}catch(err){
-			console.log(err);
 			return res.status(500).send({
 				statusCode: 500,
 				message: err.message || "Some error occurred while retrieving data.",
@@ -102,11 +105,13 @@ exports.controller = class BantuanController {
 			let keterangan = req.body.keterangan;
 			let opd_kode = req.body.opd_kode;
 			let id = req.params.id;
+			let jenis = req.body.jenis;
 
 			let opd = await services.getOPDByKode(req, opd_kode);
 			let data = {
 				nama: nama,
 				keterangan: keterangan,
+				jenis: jenis,
 			};
 			if(opd.kode)data['opd'] = opd;
 			

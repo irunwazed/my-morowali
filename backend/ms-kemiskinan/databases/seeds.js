@@ -12,38 +12,46 @@ const running = async () => {
   await db.keluarga.deleteMany({})
   await db.keluarga_penduduk.deleteMany({})
   
-  await db.bantuan.deleteMany({})
   await db.penduduk_bantuan.deleteMany({})
-  
-  await db.penyakit.deleteMany({})
-  await db.penyakit.insertMany([
-    {nama: 'Lainnya'},
-    {nama: 'Tidak Ada'},
-    {nama: 'Hipertensi'},
-    {nama: 'Rematik'},
-    {nama: 'Asma'},
-    {nama: 'Masalah Jantung'},
-    {nama: 'Diabetes'},
-    {nama: 'Tuberculosis'},
-    {nama: 'Stroke'},
-    {nama: 'Kanker /tumor'},
+
+  await db.bantuan.deleteMany({})
+  await db.bantuan.insertMany([
+    {nama: 'Lainnya', jenis: 2},
+    {nama: 'Lainnya', jenis: 3},
+    {nama: 'Lainnya', jenis: 4},
+    {nama: 'Lainnya', jenis: 5},
+    {nama: 'Lainnya', jenis: 6},
+    {nama: 'Lainnya', jenis: 7},
+    {nama: 'Lainnya', jenis: 8},
   ]);
-  console.log('insert data penyakit');
+  console.log('insert data bantuan');
+  
+  // await db.penyakit.deleteMany({})
+  // await db.penyakit.insertMany([
+  //   {nama: 'Lainnya'},
+  //   {nama: 'Tidak Ada'},
+  //   {nama: 'Hipertensi'},
+  //   {nama: 'Rematik'},
+  //   {nama: 'Asma'},
+  //   {nama: 'Masalah Jantung'},
+  //   {nama: 'Diabetes'},
+  //   {nama: 'Tuberculosis'},
+  //   {nama: 'Stroke'},
+  //   {nama: 'Kanker /tumor'},
+  // ]);
+  // console.log('insert data penyakit');
 
   await db.pekerjaan.deleteMany({})
   await db.pekerjaan.insertMany([
     {nama: 'Lainnya'},
-    {nama: 'Tidak Ada'},
-    {nama: 'Petani'},
     {nama: 'Nelayan'},
-    {nama: 'Buru'},
     {nama: 'Pedagang'},
-    {nama: 'Tukang'},
-    {nama: 'Pemerintah Desa'},
-    {nama: 'Pelajar / Mahasiswa'},
-    {nama: 'Petani Rumput Laut'},
-    {nama: 'Pengurus Rumah Tangga'},
-    {nama: 'Karyawan'},
+    {nama: 'Pegawai Swasta'},
+    {nama: 'Pekerja Lepas'},
+    {nama: 'Pensiunan'},
+    {nama: 'Petani'},
+    {nama: 'Tidak/belum bekerja'},
+    {nama: 'Wiraswasta'},
   ]);
   console.log('insert data pekerjaan');
 
@@ -51,20 +59,22 @@ const running = async () => {
   await db.ki_rumah.insertMany([
     {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
     {nama: 'Milik Sendiri', bobot: 0.8, keterangan: ''},
-    {nama: 'Kontrak/Sewa', bobot: 0.6, keterangan: ''},
-    {nama: 'Tidak Ada', bobot: 0.5, keterangan: ''},
+    {nama: 'Bebas Sewa', bobot: 0.6, keterangan: ''},
+    {nama: 'Dinas', bobot: 0.5, keterangan: ''},
+    {nama: 'Kontrak/Sewa', bobot: 0.4, keterangan: ''},
+    {nama: 'Menumpang', bobot: 0.3, keterangan: ''},
   ]);
   console.log('insert data indikator rumah');
 
   await db.ki_atap.deleteMany({})
   await db.ki_atap.insertMany([
     {nama: 'Lainnya', bobot: 0.1, keterangan: ''},
+    {nama: 'Asbes/Seng', bobot: 1, keterangan: ''},
     {nama: 'Beton', bobot: 1, keterangan: ''},
     {nama: 'Genteng', bobot: 0.9, keterangan: ''},
-    {nama: 'Sirap', bobot: 0.9, keterangan: ''},
-    {nama: 'Seng', bobot: 0.8, keterangan: ''},
-    {nama: 'Asbes', bobot: 0.8, keterangan: ''},
-    {nama: 'Ijuk/rumbia', bobot: 0.7, keterangan: ''},
+    {nama: 'Jerami/Ijuk/Rumbia/Daun-daunan', bobot: 0.7, keterangan: ''},
+    {nama: 'Bambu', bobot: 0.4, keterangan: ''},
+    {nama: 'Kayu/Sirap', bobot: 0.3, keterangan: ''},
   ]);
   console.log('insert data indikator atap');
 

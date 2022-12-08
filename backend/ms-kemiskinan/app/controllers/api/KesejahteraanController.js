@@ -96,9 +96,8 @@ exports.controller = class KesejahteraanController {
 		}
 
 		try{
-			
+
 			req.files = req.files?req.files:{};
-			
 			let keluarga_id = req.body.keluarga_id;
 			let status_kesejahteraan = req.body.status_kesejahteraan;
 			let tahun = req.body.tahun;
@@ -140,7 +139,6 @@ exports.controller = class KesejahteraanController {
 			indikator_lantai_image = await upload.upload(indikator_lantai_image, keluarga_id+'_'+tahun+'_lantai_'+datetime+'.gif', '/kesejahteraan/lantai/')
 			indikator_penerangan_image = await upload.upload(indikator_penerangan_image, keluarga_id+'_'+tahun+'_penerangan_'+datetime+'.gif', '/kesejahteraan/penerangan/')
 			indikator_sumber_air_image = await upload.upload(indikator_sumber_air_image, keluarga_id+'_'+tahun+'_sumber_air_'+datetime+'.gif', '/kesejahteraan/sumber_air/')
-			
 			
 			let dataInput = {
 				status_kesejahteraan: status_kesejahteraan,
@@ -275,7 +273,6 @@ exports.controller = class KesejahteraanController {
 		let id = req.params.id;
 		try{
 			let data = await table.findByIdAndRemove(id);
-			
 			if (!data) {
 				return res.status(400).send({
 					statusCode: 400,
@@ -287,7 +284,6 @@ exports.controller = class KesejahteraanController {
 					message: "data was deleted successfully!",
 				});
 			}
-
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,

@@ -68,7 +68,6 @@ exports.controller = class BantuanController {
 			let longitude = req.body.longitude;
 			let latitude = req.body.latitude;
 
-			console.log();
 			let dataPenduduk = [];
 			if(Array.isArray(penduduk)){
 

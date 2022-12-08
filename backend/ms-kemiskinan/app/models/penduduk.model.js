@@ -35,6 +35,9 @@ module.exports = mongoose => {
 				kecamatan_nama: String,
 				kelurahan_nama: String,
 				alamat_nama: String,
+				rt: String,
+				rw: String,
+				dusun: String,
 				longitude: Number,
 				latitude: Number,
 			},
@@ -46,7 +49,7 @@ module.exports = mongoose => {
 				fisik_id: {type: Number, comment: '1. Lainnya, 2. Sehat, 3. Cacat'},
 				keterangan: String,
 			},
-			pendidikan_id: {type: Number, comment: '1. Tidak punya ijazah, 2. SD, 3. SMP, 4. SMA, 5. S1, 6. S2, 7. S3'},
+			pendidikan_id: {type: Number, comment: '1. Tidak/belum sekolah 2. Tidak tamat SD/sederajat, 3. Siswa SD/sederajat, 4. Tamat SD/sederajat, 5. Siswa SMP/sederajat, 6. Tamat SMP/sederajat, 7. Siswa SMA/sederajat, 8. Tamat SMA/sederajat, 9. Mahasiswa Perguruan Tinggi, 10. Tamat Perguruan Tinggi'},
 			penyakit: {
 				penyakit_id: {type: Schema.Types.ObjectId, ref: 'penyakits'}, 
 				keterangan: String
@@ -55,6 +58,10 @@ module.exports = mongoose => {
 				type: Boolean,
 				comment: 'true = Hidup, false = Mati' 
 			},
+			data: {
+				type: Object,
+				comment: 'other data'
+			}
     },
     { timestamps: true }
   );
