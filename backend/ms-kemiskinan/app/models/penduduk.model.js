@@ -13,13 +13,16 @@ module.exports = mongoose => {
 				required: true,
         unique: true,
 			},
+      ktp_image: {
+				type: String,
+			},
 			jk: { 
 				type: String,
 				comment: 'L. Laki - Laki, P Perempuan' 
 			},
 			agama: { 
 				type: Number,
-				comment: '1. Islam, 2. Kristen, 3. Khatolik, 4. Hindu, 5 Buddha, 6. Konghucu'
+				comment: '1. Islam, 2. Kristen, 3. Khatolik, 4. Hindu, 5 Buddha, 6. Konghucu',
 			},
 			lahir: { 
 				tempat: String,
@@ -43,7 +46,7 @@ module.exports = mongoose => {
 			},
 			status_pernikahan: { 
 				type: Number,
-				comment: '1. Belum Menikah, 2. Menikah, 3 Cerai, 4. Duda, 5. Janda'
+				comment: '1. Belum Kawin, 2. Cerai Hidup, 3 Cerai Mati, 4. Kawin'
 			},
 			fisik: {
 				fisik_id: {type: Number, comment: '1. Lainnya, 2. Sehat, 3. Cacat'},
