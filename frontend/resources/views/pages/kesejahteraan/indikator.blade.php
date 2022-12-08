@@ -140,12 +140,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Pendapatan Sampingan (Tahun)</label>
-                                <input id="pendapatan_sampingan" name="pendapatan_sampingan" type="text"
+                                <input id="pendapatan_sampingan" name="pendapatan_sampingan" type="number"
                                     class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Pengeluaran Total (Tahun)</label>
-                                <input id="pengeluaran_total" name="pengeluaran_total" type="text" class="form-control"
+                                <input id="pengeluaran_total" name="pengeluaran_total" type="number" class="form-control"
                                     required>
                             </div>
 
@@ -480,19 +480,21 @@
         })
 
         $("#btn_modal").click(function() {
+            $('.img-uploaded').attr('src', "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+
             $("#input_kk_s").show(300);
             $("#no_kk_e").hide();
             $("#form_data")[0].reset();
             $('#m_tambah').hide();
             $('#m_edit').hide();
-            $('#indikator_rumah_image').attr('src', "");
-            $('#indikator_atap_image').attr('src', "");
-            $('#indikator_bahan_bakar_image').attr('src', "");
-            $('#indikator_jamban_image').attr('src', "");
-            $('#indikator_lantai_image').attr('src', "");
-            $('#indikator_penerangan_image').attr('src', "");
-            $('#indikator_dinding_image').attr('src', "");
-            $('#indikator_sumber_air_image').attr('src', "");
+            // $('#indikator_rumah_image').attr('src', "");
+            // $('#indikator_atap_image').attr('src', "");
+            // $('#indikator_bahan_bakar_image').attr('src', "");
+            // $('#indikator_jamban_image').attr('src', "");
+            // $('#indikator_lantai_image').attr('src', "");
+            // $('#indikator_penerangan_image').attr('src', "");
+            // $('#indikator_dinding_image').attr('src', "");
+            // $('#indikator_sumber_air_image').attr('src', "");
             $('#modal_data').modal('show');
             formStatus = 'create';
         });

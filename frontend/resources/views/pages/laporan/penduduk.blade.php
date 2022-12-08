@@ -9,7 +9,7 @@
 @section('isi')
 
     <div class="breadcrumb">
-        <h1>Laporan Data Keluarga</h1>
+        <h1>Laporan Data Penduduk</h1>
     </div>
     <div class="separator-breadcrumb border-top"></div>
     <div class="row">

@@ -90,32 +90,32 @@
                 @php
                     $i = 1;
                 @endphp
-                @foreach ($data as $dat)
+                @foreach (@$data as $dat)
                     <tr>
                         <td style="text-align:center">{{ $i }}</td>
-                        <td style="text-align:center">{{ $dat->tahun }}</td>
-                        <td>{{ $dat->lokasi->kecamatan_nama }}</td>
+                        <td style="text-align:center">{{ @$dat->tahun }}</td>
+                        <td>{{ @$dat->lokasi->kecamatan_nama }}</td>
                         <td>
                             @if (isset($dat->lokasi->kelurahan_nama))
-                                {{ $dat->lokasi->kelurahan_nama }}
+                                {{ @$dat->lokasi->kelurahan_nama }}
                             @else
                                 -
                             @endif
                         </td>
-                        <td>{{ $dat->bantuan->nama }}</td>
+                        <td>{{ @$dat->bantuan->nama }}</td>
                         <td>
                             <table class='table' style="width: 100%">
                                 @php
                                     $k = 1;
                                 @endphp
-                                @foreach ($dat->penduduk as $pen)
+                                @foreach (@$dat->penduduk as $pen)
                                     <tr>
                                         <td style="width: 1px;">
                                             {{ $k }}
                                         </td>
                                         <td>
-                                            <b> {{ $pen->nama }}</b>
-                                            <br> <small>{{ $pen->nik }} </small>
+                                            <b> {{ @$pen->nama }}</b>
+                                            <br> <small>{{ @$pen->nik }} </small>
                                         </td>
                                     </tr>
                                     @php
@@ -124,8 +124,8 @@
                                 @endforeach
                             </table>
                         </td>
-                        <td>{{ rupiah($dat->bantuan->pagu) }}</td>
-                        <td>{{ $dat->bantuan->keterangan }}</td>
+                        <td>{{ rupiah(@$dat->bantuan->pagu) }}</td>
+                        <td>{{ @$dat->bantuan->keterangan }}</td>
                         @php $i++ @endphp
                     </tr>
                 @endforeach
@@ -138,8 +138,8 @@
 @php
     function dateform($tgl)
     {
-        $date = date_create($tgl);
-        $tanggal = date_format($date, 'd/m/Y');
+        @$date = date_create($tgl);
+        $tanggal = date_format(@$date, 'd/m/Y');
         return $tanggal;
     }
     function rupiah($angka)
@@ -149,8 +149,8 @@
     }
     function hitung_umur($tgl)
     {
-        $date = date_create($tgl);
-        $tanggal = date_format($date, 'Y-m-d');
+        @$date = date_create($tgl);
+        $tanggal = date_format(@$date, 'Y-m-d');
 
         $birthDate = new DateTime($tanggal);
         $today = new DateTime();
@@ -161,6 +161,6 @@
         return $y . ' tahun ';
     }
 @endphp
-{{-- {{ dd($data[0]) }} --}}
+{{-- {{ dd(@$data[0]) }} --}}
 
 </html>

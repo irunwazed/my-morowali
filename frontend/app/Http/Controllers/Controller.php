@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Routing\Controller as BaseController;
+use PDF;
 
 
 class Controller extends BaseController

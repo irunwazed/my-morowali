@@ -77,7 +77,7 @@
                 @php
                     $i = 1;
                 @endphp
-                @foreach ($data as $dat)
+                @foreach (@$data as $dat)
                     <tr>
                         <td style="width: 5px;">{{ $i }}</td>
                         <td>
@@ -88,66 +88,66 @@
                                 <tr>
                                     <td>NIK</td>
                                     <td>:</td>
-                                    <td>{{ $dat->nik }}</td>
+                                    <td>{{ @$dat->nik }}</td>
                                 </tr>
                                 <tr>
                                     <td>Nama</td>
                                     <td>:</td>
-                                    <td>{{ $dat->nama }}</td>
+                                    <td>{{ @$dat->nama }}</td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td>{{ $dat->jenis_kelamin }}</td>
+                                    <td>{{ @$dat->jenis_kelamin }}</td>
                                 </tr>
                                 <tr>
                                     <td>Agama</td>
                                     <td>:</td>
-                                    <td>{{ $dat->agama }}</td>
+                                    <td>{{ @$dat->agama }}</td>
                                 </tr>
                                 <tr>
                                     <td>TTL</td>
                                     <td>:</td>
-                                    <td>{{ $dat->lahir->tempat }}, {{ dateform($dat->lahir->tanggal) }}</td>
+                                    <td>{{ @$dat->lahir->tempat }}, {{ dateform(@$dat->lahir->tanggal) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Umur</td>
                                     <td>:</td>
-                                    <td>{{ hitung_umur($dat->lahir->tanggal) }}</td>
+                                    <td>{{ hitung_umur(@$dat->lahir->tanggal) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Alamat</td>
                                     <td>:</td>
-                                    <td>{{ $dat->alamat->alamat_nama }}<br>Kelurahan
-                                        {{ $dat->alamat->kelurahan_nama }}<br>Kecamatan
-                                        {{ $dat->alamat->kecamatan_nama }}<br>Kabupaten
-                                        {{ $dat->alamat->kabupaten_nama }}</td>
+                                    <td>{{ @$dat->alamat->alamat_nama }}<br>Kelurahan
+                                        {{ @$dat->alamat->kelurahan_nama }}<br>Kecamatan
+                                        {{ @$dat->alamat->kecamatan_nama }}<br>Kabupaten
+                                        {{ @$dat->alamat->kabupaten_nama }}</td>
                                 </tr>
                                 <tr>
                                     <td>Status Pernikahan</td>
                                     <td>:</td>
-                                    <td>{{ $dat->status_pernikahan }}</td>
+                                    <td>{{ @$dat->status_pernikahan }}</td>
                                 </tr>
                                 <tr>
                                     <td>Pendidikan</td>
                                     <td>:</td>
-                                    <td>{{ $dat->pendidikan }}</td>
+                                    <td>{{ @$dat->pendidikan }}</td>
                                 </tr>
                                 <tr>
                                     <td>Kondisi Fisik</td>
                                     <td>:</td>
-                                    <td>{{ $dat->fisik->kondisi }}</td>
+                                    <td>{{ @$dat->fisik->kondisi }}</td>
                                 </tr>
                                 <tr>
                                     <td>Penyakit</td>
                                     <td>:</td>
-                                    <td>{{ $dat->penyakit->nama ? $dat->penyakit->nama : '' }}
+                                    <td>{{ @$dat->penyakit->nama }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Hidup</td>
                                     <td>:</td>
-                                    <td>{{ $dat->hidup }}</td>
+                                    <td>{{ @$dat->hidup }}</td>
                                 </tr>
                             </table>
                         </td>
@@ -157,7 +157,7 @@
                                 @php
                                     $k = 1;
                                 @endphp
-                                @foreach ($dat->pekerjaan as $pekerja)
+                                @foreach (@$dat->pekerjaan as $pekerja)
                                     <tr>
                                         <td rowspan="2" style="width: 5px;">{{ $k }}</td>
                                         <td>Nama Pekerjaan</td>
@@ -180,7 +180,7 @@
                                 @php
                                     $j = 1;
                                 @endphp
-                                @foreach ($dat->bantuan as $bantu)
+                                @foreach (@$dat->bantuan as $bantu)
                                     <tr>
                                         <td rowspan="3" style="width: 5px;">{{ $j }}</td>
                                         <td>Nama Bantuan</td>

@@ -88,67 +88,72 @@
                 @php
                     $i = 1;
                 @endphp
-                @foreach ($data as $dat)
+                @foreach (@$data as $dat)
                     <tr>
                         <td>{{ $i }}</td>
                         <td style="width: 20%">
                             <table class="tb_inside" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td><b>Data Diri</b></td>
+                                    <td><b>Data</b></td>
                                 </tr>
                                 <tr>
-                                    <td>NIK</td>
+                                    <td>No Kartu Keluarga</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->nik }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->no_kk }}</td>
                                 </tr>
                                 <tr>
                                     <td>Nama</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->nama }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td>NIK</td>
+                                    <td>:</td>
+                                    <td>{{ @$dat->kepala_keluarga->nik }}</td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->jk }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->jk }}</td>
                                 </tr>
                                 <tr>
                                     <td>Agama</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->agama }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->agama }}</td>
                                 </tr>
                                 <tr>
                                     <td>TTL</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->lahir->tempat }},
-                                        {{ dateform($dat->kepala_keluarga->lahir->tanggal) }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->lahir->tempat }},
+                                        {{ dateform(@$dat->kepala_keluarga->lahir->tanggal) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Umur</td>
                                     <td>:</td>
-                                    <td>{{ hitung_umur($dat->kepala_keluarga->lahir->tanggal) }}</td>
+                                    <td>{{ hitung_umur(@$dat->kepala_keluarga->lahir->tanggal) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Alamat</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->alamat->alamat_nama }}<br>Kelurahan
-                                        {{ $dat->kepala_keluarga->alamat->kelurahan_nama }}<br>Kecamatan
-                                        {{ $dat->kepala_keluarga->alamat->kecamatan_nama }}<br>Kabupaten
-                                        {{ $dat->kepala_keluarga->alamat->kabupaten_nama }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->alamat->alamat_nama }}<br>Kelurahan
+                                        {{ @$dat->kepala_keluarga->alamat->kelurahan_nama }}<br>Kecamatan
+                                        {{ @$dat->kepala_keluarga->alamat->kecamatan_nama }}<br>Kabupaten
+                                        {{ @$dat->kepala_keluarga->alamat->kabupaten_nama }}</td>
                                 </tr>
                                 <tr>
                                     <td>Pendidikan</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->pendidikan_id }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->pendidikan_id }}</td>
                                 </tr>
                                 <tr>
                                     <td>Kondisi Fisik</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->fisik->kondisi }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->fisik->kondisi }}</td>
                                 </tr>
                                 <tr>
                                     <td>Hidup</td>
                                     <td>:</td>
-                                    <td>{{ $dat->kepala_keluarga->hidup }}</td>
+                                    <td>{{ @$dat->kepala_keluarga->hidup }}</td>
                                 </tr>
                             </table>
                         </td>
@@ -158,17 +163,17 @@
                                 <tr>
                                     <td class="tb_wid_1">Pendapatan Utama (Tahun)</td>
                                     <td class="no_lr">:</td>
-                                    <td class="tb_wid_2"><b>{{ rupiah($dat->keuangan->pendapatan_utama) }}</b></td>
+                                    <td class="tb_wid_2"><b>{{ rupiah(@$dat->keuangan->pendapatan_utama) }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Pendapatan Sampingan (Tahun)</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ rupiah($dat->keuangan->pendapatan_sampingan) }}</b></td>
+                                    <td><b>{{ rupiah(@$dat->keuangan->pendapatan_sampingan) }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Pengeluaran (Tahun)</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ rupiah($dat->keuangan->pengeluaran_total) }}</b></td>
+                                    <td><b>{{ rupiah(@$dat->keuangan->pengeluaran_total) }}</b></td>
                                 </tr>
                             </table>
                             <br>
@@ -177,47 +182,47 @@
                                 <tr>
                                     <td class="tb_wid_1">Ukuran Rumah</td>
                                     <td class="no_lr">:</td>
-                                    <td class="tb_wid_2"><b>{{ $dat->indikator->rumah->ukuran }} m²</b></td>
+                                    <td class="tb_wid_2"><b>{{ @$dat->indikator->rumah->ukuran }} m²</b></td>
                                 </tr>
                                 <tr>
                                     <td>Kepemilikan Rumah</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->rumah->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->rumah->nama }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Atap</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->atap->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->atap->nama }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Dinding</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->dinding->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->dinding->nama }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Lantai</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->lantai->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->lantai->nama }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Penerangan</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->penerangan->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->penerangan->nama }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Jamban</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->jamban->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->jamban->nama }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Sumber Air</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->sumber_air->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->sumber_air->nama }}</b></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Bahan Bakar</td>
                                     <td class="no_lr">:</td>
-                                    <td><b>{{ $dat->indikator->bahan_bakar->nama }}</b></td>
+                                    <td><b>{{ @$dat->indikator->bahan_bakar->nama }}</b></td>
                                 </tr>
                             </table>
                             <br>
@@ -227,48 +232,48 @@
                                 <tr>
                                     <td><b>Rumah</b><br>
                                         <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->rumah->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->rumah->image }}"
                                             alt="">
                                     </td>
                                     <td><b>Atap</b><br>
                                         <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->atap->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->atap->image }}"
                                             alt="">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Dinding</b><br>
                                         <img style="width: 120px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->dinding->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->dinding->image }}"
                                             alt="">
                                     </td>
                                     <td><b>Lantai</b><br>
                                         <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->lantai->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->lantai->image }}"
                                             alt="">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Penerangan</b><br>
                                         <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->penerangan->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->penerangan->image }}"
                                             alt="">
                                     </td>
                                     <td><b>Jamban</b><br>
                                         <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->jamban->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->jamban->image }}"
                                             alt="">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Sumber Air</b><br>
                                         <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->sumber_air->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->sumber_air->image }}"
                                             alt="">
                                     </td>
                                     <td><b>Bahan Bakar</b><br>
                                         <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ $dat->indikator->bahan_bakar->image }}"
+                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->bahan_bakar->image }}"
                                             alt="">
                                     </td>
                                 </tr>
