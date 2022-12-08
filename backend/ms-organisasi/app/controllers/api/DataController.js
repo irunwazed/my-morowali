@@ -1,4 +1,4 @@
-import db from "../../models";
+const db = require("../../models");
 
 exports.controller = class DataController {
 
