@@ -126,6 +126,9 @@ exports.controller = class PendudukController {
 			let lahirTgl = req.body.lahirTgl;
 			let agama = req.body.agama;
 			let alamat = req.body.alamat;
+			let rw = req.body.rw;
+			let rt = req.body.rt;
+			let dusun = req.body.dusun;
 			let fisik = req.body.fisik;
 			let fisikKet = req.body.fisikKet;
 			let statKawin = req.body.statKawin;
@@ -183,6 +186,9 @@ exports.controller = class PendudukController {
 					kecamatan_nama: kecamatan[0].nama,
 					kelurahan_nama: desa[0].nama,
 					alamat_nama: alamat,
+					rw: rw,
+					rt: rt,
+					dusun: dusun,
 					longitude: longitude,
 					latitude: latitude,
 				},

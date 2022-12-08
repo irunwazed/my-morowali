@@ -7,12 +7,15 @@ module.exports = mongoose => {
       nama: {
 				type: String,
 				required: true,
-        unique: true,
 			},
       opd: {
 				kode: {type: String},
 				nama: {type: String},
 			},
+      jenis: {
+        type: Number,
+        comment: '1. Lainnya, 2. BPNT, 3. BPUM, 4. BST, 5. PKH, 6. PBI JKN, 7. BPNT-PPKM, 8. SEMBAKO',
+      },
       keterangan: {
 				type: String,
 			},

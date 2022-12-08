@@ -371,7 +371,7 @@ exports.controller = class DataController {
 
 	static async getKIAtap(req, res){
 		try{
-			let data = await db.ki_atap.find({});
+			let data = await db.ki_atap.find({}).sort({ bobot: 'desc' });
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -383,7 +383,7 @@ exports.controller = class DataController {
 
 	static async getKIBahanBakar(req, res){
 		try{
-			let data = await db.ki_bahan_bakar.find({});
+			let data = await db.ki_bahan_bakar.find({}).sort({ bobot: 'desc' });
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -395,7 +395,7 @@ exports.controller = class DataController {
 
 	static async getKIDinding(req, res){
 		try{
-			let data = await db.ki_dinding.find({});
+			let data = await db.ki_dinding.find({}).sort({ bobot: 'desc' });
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -407,7 +407,7 @@ exports.controller = class DataController {
 
 	static async getKIJamban(req, res){
 		try{
-			let data = await db.ki_jamban.find({});
+			let data = await db.ki_jamban.find({}).sort({ bobot: 'desc' });
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -419,7 +419,7 @@ exports.controller = class DataController {
 
 	static async getKILantai(req, res){
 		try{
-			let data = await db.ki_lantai.find({});
+			let data = await db.ki_lantai.find({}).sort({ bobot: 'desc' });
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -431,7 +431,7 @@ exports.controller = class DataController {
 
 	static async getKIPenerangan(req, res){
 		try{
-			let data = await db.ki_penerangan.find({});
+			let data = await db.ki_penerangan.find({}).sort({ bobot: 'desc' });
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
@@ -443,7 +443,7 @@ exports.controller = class DataController {
 
 	static async getKIRumah(req, res){
 		try{
-			let data = await db.ki_rumah.find({});
+			let data = await db.ki_rumah.find({}).sort({ bobot: 'desc' });
 			return res.send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({

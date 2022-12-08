@@ -69,6 +69,11 @@ module.exports = mongoose => {
 					image: String,
 					keterangan: String,
 				},
+				simpanan: {
+					type: Boolean,
+					comment: 'Memiliki Simpanan Uang/Perhiasan/Ternak/Lainnya',
+					default: false,
+				},
 			},
     },
     { timestamps: true }

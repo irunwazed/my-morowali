@@ -1430,17 +1430,22 @@
 											"urlencoded": [
 												{
 													"key": "nama",
-													"value": "beasiswa22",
+													"value": "beasiswa",
 													"type": "text"
 												},
 												{
 													"key": "opd_kode",
-													"value": "1.01.2.22.0.00.01.00001",
+													"value": "1.01.2.22.0.00.01.0000",
 													"type": "text"
 												},
 												{
 													"key": "keterangan",
 													"value": "-",
+													"type": "text"
+												},
+												{
+													"key": "jenis",
+													"value": "1",
 													"type": "text"
 												}
 											]
@@ -7903,6 +7908,203 @@
 							]
 						},
 						{
+							"name": "kesejahteraan",
+							"item": [
+								{
+									"name": "atap",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/atap",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"atap"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "bahan-bakar",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/bahan-bakar",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"bahan-bakar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "dinding",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/dinding",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"dinding"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "jamban",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/jamban",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"jamban"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "lantai",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/lantai",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"lantai"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "penerangan",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/penerangan",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"penerangan"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "rumah",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/rumah",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"rumah"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "sumber-air",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "127.0.0.1:3000/kemiskinan/get/ki/sumber-air",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "3000",
+											"path": [
+												"kemiskinan",
+												"get",
+												"ki",
+												"sumber-air"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "penduduk by nik or name",
 							"request": {
 								"method": "GET",
@@ -8530,7 +8732,7 @@
 										},
 										{
 											"key": "penyakit_id",
-											"value": "138c210e42be3f86c5930be6",
+											"value": "638ec0038a7cd3595b4c2b7b",
 											"type": "text"
 										},
 										{
@@ -9529,7 +9731,7 @@
 										},
 										{
 											"key": "tahun",
-											"value": "2018",
+											"value": "2015",
 											"type": "text"
 										},
 										{
@@ -9565,7 +9767,7 @@
 										{
 											"key": "indikator_rumah_image",
 											"type": "file",
-											"src": "/C:/Users/User/OneDrive/Screenshot/3.PNG"
+											"src": "/C:/Users/User/OneDrive/Screenshot/1.PNG"
 										},
 										{
 											"key": "indikator_rumah_ket",
@@ -11134,8 +11336,8 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "penduduk[]",
-											"value": "638c6eb8e32155829a4bce6d",
+											"key": "penduduk",
+											"value": "638efc0073a4b42752ed598b",
 											"type": "text"
 										},
 										{
@@ -11145,7 +11347,7 @@
 										},
 										{
 											"key": "bantuan_id",
-											"value": "638cbc138bc991c6bdee28a5",
+											"value": "638f1825dec789e7805b6015",
 											"type": "text"
 										},
 										{
@@ -11159,9 +11361,10 @@
 											"type": "text"
 										},
 										{
-											"key": "penduduk[]",
+											"key": "penduduk",
 											"value": "638c6e7fe32155829a4bce5d",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "alamat",
@@ -11176,7 +11379,8 @@
 										{
 											"key": "penduduk[]",
 											"value": "638c6d0387c0ada0ddd5d631",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
@@ -11613,7 +11817,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/bantuan/6387e1701a45bc6796dc9f35",
+									"raw": "127.0.0.1:3000/kemiskinan/bantuan/638cbc96ddc5339b1a602a4b",
 									"host": [
 										"127",
 										"0",
@@ -11624,7 +11828,7 @@
 									"path": [
 										"kemiskinan",
 										"bantuan",
-										"6387e1701a45bc6796dc9f35"
+										"638cbc96ddc5339b1a602a4b"
 									]
 								}
 							},
@@ -11761,13 +11965,19 @@
 										},
 										{
 											"key": "kelurahan",
-											"value": "7203030011",
+											"value": "7203030012",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "datatable",
+											"value": "",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/laporan/penduduk",
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/penduduk?kelurahan=7203030011&datatable=false",
 									"host": [
 										"127",
 										"0",
@@ -11779,6 +11989,16 @@
 										"kemiskinan",
 										"laporan",
 										"penduduk"
+									],
+									"query": [
+										{
+											"key": "kelurahan",
+											"value": "7203030011"
+										},
+										{
+											"key": "datatable",
+											"value": "false"
+										}
 									]
 								}
 							},
@@ -11810,12 +12030,13 @@
 										{
 											"key": "kabupaten",
 											"value": "7203",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/laporan/keluarga",
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/keluarga?datatable=true",
 									"host": [
 										"127",
 										"0",
@@ -11827,6 +12048,17 @@
 										"kemiskinan",
 										"laporan",
 										"keluarga"
+									],
+									"query": [
+										{
+											"key": "datatable",
+											"value": "true"
+										},
+										{
+											"key": "datatable",
+											"value": "",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -11834,6 +12066,58 @@
 						},
 						{
 							"name": "kesejahteraan",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "kecamatan",
+											"value": "7203030",
+											"type": "text"
+										},
+										{
+											"key": "kelurahan",
+											"value": "7203030011",
+											"type": "text"
+										},
+										{
+											"key": "kabupaten",
+											"value": "7203",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?datatable=false",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"kemiskinan",
+										"laporan",
+										"kesejahteraan"
+									],
+									"query": [
+										{
+											"key": "datatable",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bantuan",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -11863,7 +12147,7 @@
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/laporan/kesejahteraan",
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/bantuan?datatable=true",
 									"host": [
 										"127",
 										"0",
@@ -11874,7 +12158,13 @@
 									"path": [
 										"kemiskinan",
 										"laporan",
-										"kesejahteraan"
+										"bantuan"
+									],
+									"query": [
+										{
+											"key": "datatable",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -11944,7 +12234,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/penduduk/pekerjaan/638bfe421b403df248b0d252",
+									"raw": "127.0.0.1:3000/kemiskinan/penduduk/pekerjaan/638f183adec789e7805b601a",
 									"host": [
 										"127",
 										"0",
@@ -11956,7 +12246,7 @@
 										"kemiskinan",
 										"penduduk",
 										"pekerjaan",
-										"638bfe421b403df248b0d252"
+										"638f183adec789e7805b601a"
 									]
 								}
 							},
@@ -11972,12 +12262,12 @@
 									"formdata": [
 										{
 											"key": "penduduk_id",
-											"value": "638c221342be3f86c5930c34",
+											"value": "638efc0073a4b42752ed598b",
 											"type": "text"
 										},
 										{
 											"key": "pekerjaan_id",
-											"value": "638c1952b6565fb30d2144a1",
+											"value": "638ec0038a7cd3595b4c2b81",
 											"type": "text"
 										},
 										{
@@ -12196,7 +12486,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/organisasi/get/opd/7.01.0.00.0.00.06.0005",
+									"raw": "127.0.0.1:3000/organisasi/get/opd/1.01.2.22.0.00.01.0000",
 									"host": [
 										"127",
 										"0",
@@ -12208,7 +12498,7 @@
 										"organisasi",
 										"get",
 										"opd",
-										"7.01.0.00.0.00.06.0005"
+										"1.01.2.22.0.00.01.0000"
 									]
 								}
 							},
@@ -12272,28 +12562,6 @@
 					]
 				}
 			]
-		},
-		{
-			"name": "tes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "127.0.0.1:3000/kemiskinan/penduduk",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "3000",
-					"path": [
-						"kemiskinan",
-						"penduduk"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"auth": {
