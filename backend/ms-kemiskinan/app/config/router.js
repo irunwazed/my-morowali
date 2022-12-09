@@ -1,8 +1,16 @@
 const express = require('express');
 const userMiddleware = require('../middleware/UserMiddleware');
 
-// const multer = require("multer");
-// const upload = multer({ dest: "uploads/" });
+const multer = require("multer");
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'tmp')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now()+'.gif')
+  }
+});
+var upload = multer({ storage: storage });
 
 // setting export all Controller
 var exports = {};
@@ -53,9 +61,10 @@ routerAdmin.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 
 routerAdmin.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
 routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getData'));
-routerAdmin.post("/api/kesejahteraan", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
-routerAdmin.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
-routerAdmin.delete("/api/kesejahteraan/:id", route('api/KesejahteraanController@delete'));
+routerAdmin.post("/api/kesejahteraan", upload.any(), route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
+routerAdmin.put("/api/kesejahteraan/:id", upload.any(), route('api/KesejahteraanController@store', true),  route('api/KesejahteraanController@store'));
+routerAdmin.delete("/api/kesejahteraan/:id",  route('api/KesejahteraanController@delete'));
+
 
 routerAdmin.get("/api/bantuan", route('api/BantuanController@getData'));
 routerAdmin.get("/api/bantuan/:id", route('api/BantuanController@getOneData'));

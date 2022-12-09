@@ -4,12 +4,12 @@ const fileUpload = require("express-fileupload");
 
 
 const app = express();
-app.use(express.json());
+// app.use(express.json());
 // app.use(fileUpload({
-//   limits: { fileSize: 1 * 1024 * 1024 },
+//   limits: { fileSize: 20 * 1024 * 1024 },
 //   useTempFiles : true,
 // }));
-app.use(fileUpload());
+// app.use(fileUpload());
 app.use(express.static(__dirname + '/../public'));
 app.use(express.urlencoded({ extended: true }));
 app.use("/admin", routerAdmin);

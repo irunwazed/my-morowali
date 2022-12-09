@@ -1,4 +1,5 @@
 // const multer = require("multer");
+var fs = require('fs')
 
 module.exports = {
   upload:  async (file, name, path = '/', options = {maxSize: 200} ) => {
@@ -20,8 +21,8 @@ module.exports = {
     }
     // return { status: false, file: image };
   },
-  multer:  async (file, name, path = '/', options = {maxSize: 200} ) => {
-
+  mv:  async (file, name, path = '/', options = {maxSize: 200} ) => {
+    // console.log(file);
     let filePath = '/storages/images'+path+name;
     let image = '/storages/images/no-images.png';
     path = __dirname+'/../../public/storages/images'+path+name;
@@ -32,11 +33,12 @@ module.exports = {
     if(file.size > (maxSize*1024)) return { status: false, file: image, message: 'file is too big, max = '+ maxSize+ ' kb'};
     
     try{
-      await file.mv(path);
+      fs.renameSync(file.path, path);
       return { status: true, file: filePath }
     }catch(err){
+      console.log(err);
       return { status: false, file: image, message: err};
     }
     // return { status: false, file: image };
-  }
+  },
 }

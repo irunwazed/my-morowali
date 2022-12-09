@@ -2,6 +2,7 @@ const db = require("../../models");
 const { validationResult, check } = require("express-validator");
 const paginate = require("../../libraries/paginate");
 const upload = require("../../libraries/upload");
+const fs = require('fs')
 
 const table = db.keluarga_kesejahteraan;
 
@@ -130,15 +131,29 @@ exports.controller = class KesejahteraanController {
 			let indikator_sumber_air_image = req.files.indikator_sumber_air_image;
 			let indikator_sumber_air_ket = req.body.indikator_sumber_air_ket;
 
+			// console.log(req.files[0])
+
 			let datetime = new Date().getTime();
-			indikator_rumah_image = await upload.upload(indikator_rumah_image, keluarga_id+'_'+tahun+'_rumah_'+datetime+'.gif', '/kesejahteraan/rumah/')
-			indikator_atap_image = await upload.upload(indikator_atap_image, keluarga_id+'_'+tahun+'_atap_'+datetime+'.gif', '/kesejahteraan/atap/')
-			indikator_bahan_bakar_image = await upload.upload(indikator_bahan_bakar_image, keluarga_id+'_'+tahun+'_bahan_bakar_'+datetime+'.gif', '/kesejahteraan/bahan_bakar/')
-			indikator_dinding_image = await upload.upload(indikator_dinding_image, keluarga_id+'_'+tahun+'_dinding_'+datetime+'.gif', '/kesejahteraan/dinding/')
-			indikator_jamban_image = await upload.upload(indikator_jamban_image, keluarga_id+'_'+tahun+'_jamban_'+datetime+'.gif', '/kesejahteraan/jamban/')
-			indikator_lantai_image = await upload.upload(indikator_lantai_image, keluarga_id+'_'+tahun+'_lantai_'+datetime+'.gif', '/kesejahteraan/lantai/')
-			indikator_penerangan_image = await upload.upload(indikator_penerangan_image, keluarga_id+'_'+tahun+'_penerangan_'+datetime+'.gif', '/kesejahteraan/penerangan/')
-			indikator_sumber_air_image = await upload.upload(indikator_sumber_air_image, keluarga_id+'_'+tahun+'_sumber_air_'+datetime+'.gif', '/kesejahteraan/sumber_air/')
+			await req.files.forEach(async file => {
+				indikator_rumah_image = file.fieldname=="indikator_rumah_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_rumah_'+datetime+'.gif', '/kesejahteraan/rumah/'):indikator_rumah_image;
+				indikator_atap_image = file.fieldname=="indikator_atap_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_atap_'+datetime+'.gif', '/kesejahteraan/atap/'):indikator_atap_image;
+				indikator_bahan_bakar_image = file.fieldname=="indikator_bahan_bakar_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_bahan_bakar_'+datetime+'.gif', '/kesejahteraan/bahan_bakar/'):indikator_bahan_bakar_image;
+				indikator_dinding_image = file.fieldname=="indikator_dinding_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_dinding_'+datetime+'.gif', '/kesejahteraan/dinding/'):indikator_dinding_image;
+				indikator_jamban_image = file.fieldname=="indikator_jamban_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_jamban_'+datetime+'.gif', '/kesejahteraan/jamban/'):indikator_jamban_image;
+				indikator_lantai_image = file.fieldname=="indikator_lantai_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_lantai_'+datetime+'.gif', '/kesejahteraan/lantai/'):indikator_lantai_image;
+				indikator_penerangan_image = file.fieldname=="indikator_penerangan_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_penerangan_'+datetime+'.gif', '/kesejahteraan/penerangan/'):indikator_penerangan_image;
+				indikator_sumber_air_image = file.fieldname=="indikator_sumber_air_image"?await upload.mv(file, keluarga_id+'_'+tahun+'_sumber_air_'+datetime+'.gif', '/kesejahteraan/sumber_air/'):indikator_sumber_air_image;
+			});
+			console.log(indikator_sumber_air_image);
+
+			// indikator_rumah_image = await upload.mv(indikator_rumah_image, keluarga_id+'_'+tahun+'_rumah_'+datetime+'.gif', '/kesejahteraan/rumah/')
+			// indikator_atap_image = await upload.mv(indikator_atap_image, keluarga_id+'_'+tahun+'_atap_'+datetime+'.gif', '/kesejahteraan/atap/')
+			// indikator_bahan_bakar_image = await upload.mv(indikator_bahan_bakar_image, keluarga_id+'_'+tahun+'_bahan_bakar_'+datetime+'.gif', '/kesejahteraan/bahan_bakar/')
+			// indikator_dinding_image = await upload.mv(indikator_dinding_image, keluarga_id+'_'+tahun+'_dinding_'+datetime+'.gif', '/kesejahteraan/dinding/')
+			// indikator_jamban_image = await upload.mv(indikator_jamban_image, keluarga_id+'_'+tahun+'_jamban_'+datetime+'.gif', '/kesejahteraan/jamban/')
+			// indikator_lantai_image = await upload.mv(indikator_lantai_image, keluarga_id+'_'+tahun+'_lantai_'+datetime+'.gif', '/kesejahteraan/lantai/')
+			// indikator_penerangan_image = await upload.mv(indikator_penerangan_image, keluarga_id+'_'+tahun+'_penerangan_'+datetime+'.gif', '/kesejahteraan/penerangan/')
+			// indikator_sumber_air_image = await upload.mv(indikator_sumber_air_image, keluarga_id+'_'+tahun+'_sumber_air_'+datetime+'.gif', '/kesejahteraan/sumber_air/')
 			
 			let dataInput = {
 				status_kesejahteraan: status_kesejahteraan,
@@ -151,50 +166,50 @@ exports.controller = class KesejahteraanController {
 					rumah: {
 						rumah_id: indikator_rumah_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_rumah', indikator_rumah_id),
-						image: indikator_rumah_image.file,
+						image: KesejahteraanController.setImage(indikator_rumah_image),
 						ukuran: indikator_rumah_ukuran,
 						keterangan: indikator_rumah_ket,
 					},
 					atap: {
 						atap_id: indikator_atap_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_atap', indikator_atap_id),
-						image: indikator_atap_image.file,
+						image: KesejahteraanController.setImage(indikator_atap_image),
 						keterangan: indikator_atap_ket,
 					},
 					bahan_bakar: {
 						bahan_bakar_id: indikator_bahan_bakar_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_bahan_bakar', indikator_bahan_bakar_id),
-						image: indikator_bahan_bakar_image.file,
+						image: KesejahteraanController.setImage(indikator_bahan_bakar_image),
 						keterangan: indikator_bahan_bakar_ket,
 					},
 					dinding: {
 						dinding_id: indikator_dinding_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_dinding', indikator_dinding_id),
-						image: indikator_dinding_image.file,
+						image: KesejahteraanController.setImage(indikator_dinding_image),
 						keterangan: indikator_dinding_ket,
 					},
 					jamban: {
 						jamban_id: indikator_jamban_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_jamban', indikator_jamban_id),
-						image: indikator_jamban_image.file,
+						image: KesejahteraanController.setImage(indikator_jamban_image),
 						keterangan: indikator_jamban_ket,
 					},
 					lantai: {
 						lantai_id: indikator_lantai_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_lantai', indikator_lantai_id),
-						image: indikator_lantai_image.file,
+						image: KesejahteraanController.setImage(indikator_lantai_image),
 						keterangan: indikator_lantai_ket,
 					},
 					penerangan: {
 						penerangan_id: indikator_penerangan_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_penerangan', indikator_penerangan_id),
-						image: indikator_penerangan_image.file,
+						image: KesejahteraanController.setImage(indikator_penerangan_image),
 						keterangan: indikator_penerangan_ket,
 					},
 					sumber_air: {
 						sumber_air_id: indikator_sumber_air_id,
 						nama: await KesejahteraanController.getIndikatorName('ki_sumber_air', indikator_sumber_air_id),
-						image: indikator_sumber_air_image.file,
+						image: KesejahteraanController.setImage(indikator_sumber_air_image),
 						keterangan: indikator_sumber_air_ket,
 					},
 				},
@@ -205,28 +220,28 @@ exports.controller = class KesejahteraanController {
 				let id = req.params.id;
 				let tmp = await table.findById(id);
 
-				if(!indikator_rumah_image.status){
+				if(!indikator_rumah_image){
 					dataInput.indikator.rumah.image = tmp.indikator.rumah.image;
 				};
-				if(!indikator_atap_image.status){
+				if(!indikator_atap_image){
 					dataInput.indikator.atap.image = tmp.indikator.atap.image;
 				};
-				if(!indikator_bahan_bakar_image.status){
+				if(!indikator_bahan_bakar_image){
 					dataInput.indikator.bahan_bakar.image = tmp.indikator.bahan_bakar.image;
 				};
-				if(!indikator_dinding_image.status){
+				if(!indikator_dinding_image){
 					dataInput.indikator.dinding.image = tmp.indikator.dinding.image;
 				};
-				if(!indikator_jamban_image.status){
+				if(!indikator_jamban_image){
 					dataInput.indikator.jamban.image = tmp.indikator.jamban.image;
 				};
-				if(!indikator_lantai_image.status){
+				if(!indikator_lantai_image){
 					dataInput.indikator.lantai.image = tmp.indikator.lantai.image;
 				};
-				if(!indikator_penerangan_image.status){
+				if(!indikator_penerangan_image){
 					dataInput.indikator.penerangan.image = tmp.indikator.penerangan.image;
 				};
-				if(!indikator_sumber_air_image.status){
+				if(!indikator_sumber_air_image){
 					dataInput.indikator.sumber_air.image = tmp.indikator.sumber_air.image;
 				};
 
@@ -296,5 +311,10 @@ exports.controller = class KesejahteraanController {
 		let data = await db[table].findById(id);
 		if(!data) return '';
 		return data.nama;
+	}
+
+	static setImage(file){
+		if(file) return file.file;
+		return '/storages/images/no-images.png';
 	}
 }
