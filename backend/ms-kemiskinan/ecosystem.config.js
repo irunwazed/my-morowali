@@ -11,5 +11,6 @@ module.exports = {
     max_memory_restart: "512M",
     autorestart: true,
     // merge_logs: true,
+    
   }]
 }
