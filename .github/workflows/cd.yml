@@ -15,8 +15,8 @@ jobs:
     - name: test deploy
       uses: appleboy/ssh-action@v0.1.6
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
+        host: 103.181.183.131
+        username: root
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
