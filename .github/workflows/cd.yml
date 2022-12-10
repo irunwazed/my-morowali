@@ -12,12 +12,12 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - name: test deploy
+    - name: test deploy ok
       uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
+        key: ${{ secrets.PRIVATE_KEY_OPENSSH }}
         port: 22
         script: |
           cd /home/app/my-morowali
