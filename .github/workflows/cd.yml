@@ -15,5 +15,13 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: appleboy/ssh-action@master
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/app/my-morowali
+          git pull origin master
+          cd backend/ms-auth
+          npm install
+          
