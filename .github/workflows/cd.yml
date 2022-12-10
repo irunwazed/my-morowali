@@ -12,16 +12,12 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - name: test deploy
+    - name: test deploy 2
       uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME2 }}
+        username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: 22
-        script: |
-          cd /home/app/my-morowali
-          git pull origin master
-          cd backend/ms-auth
-          npm install
+        script: whoami
           
