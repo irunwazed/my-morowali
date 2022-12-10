@@ -1,5 +1,6 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+#appleboy/ssh-action@v0.1.6
 
 name: Node.js CI
 
@@ -13,15 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: test deploy
-      uses: appleboy/ssh-action@v0.1.6
+      uses: garygrossgarten/github-action-ssh@release
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
+        privateKey: ${{ secrets.PRIVATE_KEY }}
         port: 22
-        script: |
-          cd /home/app/my-morowali
-          git pull origin master
-          cd backend/ms-auth
-          npm install
+        command: ls -a
           
