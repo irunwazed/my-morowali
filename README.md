@@ -12,3 +12,9 @@ sudo lsof -i -P -n
 ```
 npm install --package-lock-only
 ```
+
+
+## buat ssh-keygen dari ssh
+```
+ssh-keygen -t rsa -b 4096 -m PEM -C "my-morowali"
+```
