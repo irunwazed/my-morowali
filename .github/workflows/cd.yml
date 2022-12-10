@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: test deploy
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.HOST }}
-        username: irunwazed@gmail.com
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
