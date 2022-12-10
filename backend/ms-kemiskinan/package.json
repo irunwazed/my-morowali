@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pm2 start",
     "start": "node ./app/server.js",
-    "seed": "node ./databases/seeds.js",
+    "seed": "node ./databases/seeds.js && node ./databases/seeds-penduduk.js && node ./databases/seeds-kesejahteraan.js",
     "test": "jest --watchAll --runInBand --detectOpenHandles",
     "dev": "nodemon --exec babel-node ./app/server.js"
   },
@@ -21,7 +21,8 @@
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.1",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
