@@ -18,3 +18,8 @@ npm install --package-lock-only
 ```
 ssh-keygen -t rsa -b 4096 -m PEM -C "my-morowali"
 ```
+
+## simpan ssh.pub
+```
+code ~/.ssh/authorized_keys
+```
