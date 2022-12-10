@@ -12,8 +12,8 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: appleboy/ssh-action@master
+    - name: test deploy
+      uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
