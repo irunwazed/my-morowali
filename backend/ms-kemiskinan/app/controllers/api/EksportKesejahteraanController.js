@@ -9,6 +9,7 @@ exports.controller = class EksportKesejahteraanController {
 
 		try{
 			let excel = req.files[0];
+			let setDelete = req.body.delete=='true'?true:false;
 
 			console.log(excel)
 
@@ -29,8 +30,9 @@ exports.controller = class EksportKesejahteraanController {
 			}
 				
 			console.log('proses input kesejahteraan')
-
-			await db.keluarga_kesejahteraan.deleteMany({}) 
+			if(setDelete){
+				await db.keluarga_kesejahteraan.deleteMany({});
+			}
 			await EksportKesejahteraanController.insert(data, 0);
 			
 			let tes = await db.keluarga_kesejahteraan.find({});
@@ -54,7 +56,7 @@ exports.controller = class EksportKesejahteraanController {
 	
 			let tmp = await setData(data[idx]);
 			await db.keluarga_kesejahteraan.insertMany([tmp]);
-			return insert(data, (idx+1));
+			return await insert(data, (idx+1));
 		}
 		return false;
 	}

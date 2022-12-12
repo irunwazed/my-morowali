@@ -9,8 +9,9 @@ exports.controller = class EksportController {
 
 		try{
 			let excel = req.files[0];
+			let setDelete = req.body.delete=='true'?true:false;
 
-			console.log(excel)
+			// console.log(excel)
 
 
 			console.log('proses load data keluarga')
@@ -30,14 +31,19 @@ exports.controller = class EksportController {
 				
 			console.log('proses input keluarga')
 
-			await db.penduduk.deleteMany({}) 
-			await db.keluarga.deleteMany({}) 
-			await db.keluarga_penduduk.deleteMany({}) 
+
+			if(setDelete){
+				console.log('hapus')
+				await db.penduduk.deleteMany({}) 
+				await db.keluarga.deleteMany({}) 
+				await db.keluarga_penduduk.deleteMany({}) 
+			}else{
+				console.log('tidak hapus')
+			}
+
 			await EksportController.insert(data, 0);
 			
 			let tes = await db.penduduk.find({});
-
-
 			console.log('insert data penduduk'+tes.length);
 
 			let api = {
@@ -52,46 +58,59 @@ exports.controller = class EksportController {
 	}
 
 	static async insert(data, idx){
-		if(data[idx]){
+
+		try{
+			if(data[idx]){
+				// if(data[idx]['NIK'] == '' || data[idx]['Nama'] == '') EksportController.insert(data, (idx+1));
 	
-			let hubkel = { 'Kepala Keluarga': 1, 'Istri': 2, 'Anak': 3, 'Lainnya': 4  }
-	
-			let penduduk = await db.penduduk.insertMany([EksportController.setPenduduk(data[idx])]);
-			let penduduk_id = penduduk[0]._id;
-			// console.log(EksportController.nikArr);
-			
-			let no_kk = data[idx]['ID Keluarga P3KE'];
-			let tmpKeluarga = {no_kk: no_kk};
+				let dataInput = await EksportController.setPenduduk(data[idx]);
 	
 	
-			let keluarga = await db.keluarga.find(tmpKeluarga);
-			let keluarga_id;
-			if(keluarga.length == 0){
-				let tmp = await db.keluarga.insertMany([tmpKeluarga]);
-				keluarga_id = tmp[0]._id;
-			}else{
-				keluarga_id = keluarga[0]._id;
+				let hubkel = { 'Kepala Keluarga': 1, 'Istri': 2, 'Anak': 3, 'Lainnya': 4  }
+		
+				let penduduk = await db.penduduk.insertMany([dataInput]);
+				let penduduk_id = penduduk[0]._id;
+				// console.log(EksportController.nikArr);
+				
+				let no_kk = data[idx]['ID Keluarga P3KE'];
+				let tmpKeluarga = {no_kk: no_kk};
+		
+		
+				let keluarga = await db.keluarga.find(tmpKeluarga);
+				let keluarga_id;
+				if(keluarga.length == 0){
+					let tmp = await db.keluarga.insertMany([tmpKeluarga]);
+					keluarga_id = tmp[0]._id;
+				}else{
+					keluarga_id = keluarga[0]._id;
+				}
+				
+		
+				let tmpHubKel = {
+					keluarga_id: keluarga_id,
+					penduduk_id: penduduk_id,
+					level: hubkel[data[idx]['Hubungan dengan Kepala Keluarga']],
+				};
+		
+				if(hubkel[data[idx]['Hubungan dengan Kepala Keluarga']] == 1){
+					tmpHubKel['kepala'] = true;
+				}
+				
+				await db.keluarga_penduduk.insertMany([tmpHubKel])
+				// console.log(idx);
+		
+				return await EksportController.insert(data, (idx+1));
 			}
-			
-	
-			let tmpHubKel = {
-				keluarga_id: keluarga_id,
-				penduduk_id: penduduk_id,
-				level: hubkel[data[idx]['Hubungan dengan Kepala Keluarga']],
-			};
-	
-			if(hubkel[data[idx]['Hubungan dengan Kepala Keluarga']] == 1){
-				tmpHubKel['kepala'] = true;
-			}
-			
-			await db.keluarga_penduduk.insertMany([tmpHubKel])
-	
-			return EksportController.insert(data, (idx+1));
+		}catch(err){
+			console.log(err);
+			console.log(data[idx]);
+			console.log(data[idx]['NIK'])
 		}
+		
 		return false;
 	}
 
-	static setPenduduk(res){
+	static async setPenduduk(res){
 		let tgl = res['Tanggal Lahir'].split(" ");
 	
 		tgl = tgl[0]?tgl[0]:'00/00/0000';
@@ -105,12 +124,16 @@ exports.controller = class EksportController {
 		let kawin = { 'Belum Kawin': 1, 'Cerai Hidup': 2, 'Cerai Mati': 3, 'Kawin': 4}; 
 		let pendidikan = {'Tidak/belum sekolah': 1, 'Tidak tamat SD/sederajat': 2, 'Siswa SD/sederajat': 3, 'Tamat SD/sederajat': 4, 'Siswa SMP/sederajat': 5, 'Tamat SMP/sederajat': 6, 'Siswa SMA/sederajat': 7, 'Tamat SMA/sederajat': 8, 'Mahasiswa Perguruan Tinggi': 9, 'Tamat Perguruan Tinggi': 10}; 
 		let hubkel = { 'Kepala Keluarga': 1, 'Istri': 2, 'Anak': 3, 'Lainnya': 4,  };
+
+
 	
-		let nik = res['NIK']?res['NIK']:'99'+Math.floor(Math.random()*100000000000000);
-		while(EksportController.nikArr.includes(nik)){
+		let nik = (res['NIK']!='' && res['NIK'] != undefined)?res['NIK']:'99'+Math.floor(Math.random()*100000000000000);
+		// nik = (nik == undefined) ?'99'+Math.floor(Math.random()*100000000000000):nik;
+		let tmp = await db.penduduk.find({nik: nik});
+		while(tmp.length > 0){
 			nik = '99'+Math.floor(Math.random()*100000000000000);
+			tmp = await db.penduduk.find({nik: nik});
 		}
-		EksportController.nikArr.push(nik);
 	
 		return {
 			nama: res['Nama'],
