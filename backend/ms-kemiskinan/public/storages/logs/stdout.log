@@ -1,0 +1,100 @@
+2022/12/12 16:14 +08:00: Server KESEJAHTERAAN-PENDUDUK is running on port 3003.
+2022/12/12 16:14 +08:00: Connected to the database!
+2022/12/12 16:15 +08:00: proses load data keluarga
+2022/12/12 16:15 +08:00: proses input keluarga
+2022/12/12 16:15 +08:00: hapus
+2022/12/12 16:15 +08:00: TypeError: Cannot read properties of undefined (reading 'kode')
+    at Function.setPenduduk (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\EksportController.js:152:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Function.insert (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\EksportController.js:66:21)
+    at async penduduk (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\EksportController.js:44:4)
+2022/12/12 16:15 +08:00: {
+  No: '1',
+  'ID Keluarga P3KE': '129991299',
+  Provinsi: 'SULAWESI TENGAH',
+  'Kabupaten/Kota': 'MOROWALI',
+  Kecamatan: 'BUNGKU TENGAH',
+  'Desa/Kelurahan': 'MENDUI',
+  'Desil Kesejahteraan': '1',
+  Alamat: 'KELURAHAN MENDUI',
+  'ID Individu': '1',
+  Nama: 'BASUKI ALI',
+  NIK: '7206050702800002',
+  'Padan Dukcapil': 'Ya',
+  'Jenis Kelamin': 'Laki-laki',
+  'Hubungan dengan Kepala Keluarga': 'Kepala Keluarga',
+  'Tanggal Lahir': '2/7/1980 12:00:00 AM',
+  'Status Kawin': 'Cerai Mati',
+  Pekerjaan: 'Pegawai Swasta',
+  Pendidikan: 'Tamat Perguruan Tinggi',
+  'Usia dibawah 7 tahun': 'Tidak',
+  'Usia 7-12': 'Tidak',
+  'Usia 13-15': 'Tidak',
+  'Usia 16-18': 'Tidak',
+  'Usia 19-21': 'Tidak',
+  'Usia 22-59': 'Ya',
+  'Usia 60 tahun keatas': 'Tidak',
+  'Penerima BPNT': 'Ya',
+  'Penerima BPUM': 'Tidak',
+  'Penerima BST': 'Tidak',
+  'Penerima PKH': 'Tidak',
+  'Penerima SEMBAKO': 'Tidak'
+}
+2022/12/12 16:15 +08:00: 7206050702800002
+2022/12/12 16:15 +08:00: insert data penduduk0
+2022/12/12 16:18 +08:00: Server KESEJAHTERAAN-PENDUDUK is running on port 3003.
+2022/12/12 16:18 +08:00: Connected to the database!
+2022/12/12 16:18 +08:00: Server KESEJAHTERAAN-PENDUDUK is running on port 3003.
+2022/12/12 16:18 +08:00: Connected to the database!
+2022/12/12 16:18 +08:00: {
+  fieldname: 'file',
+  originalname: 'penduduk1.xlsx',
+  encoding: '7bit',
+  mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  destination: 'uploads',
+  filename: 'file-1670833112478.xlsx',
+  path: 'uploads\\file-1670833112478.xlsx',
+  size: 2420136
+}
+2022/12/12 16:18 +08:00: proses load data keluarga
+2022/12/12 16:18 +08:00: proses input keluarga
+2022/12/12 16:18 +08:00: hapus
+2022/12/12 16:18 +08:00: TypeError: Cannot read properties of undefined (reading 'kode')
+    at Function.setPenduduk (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\EksportController.js:152:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Function.insert (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\EksportController.js:66:21)
+    at async penduduk (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\EksportController.js:44:4)
+2022/12/12 16:18 +08:00: {
+  No: '1',
+  'ID Keluarga P3KE': '129991299',
+  Provinsi: 'SULAWESI TENGAH',
+  'Kabupaten/Kota': 'MOROWALI',
+  Kecamatan: 'BUNGKU TENGAH',
+  'Desa/Kelurahan': 'MENDUI',
+  'Desil Kesejahteraan': '1',
+  Alamat: 'KELURAHAN MENDUI',
+  'ID Individu': '1',
+  Nama: 'BASUKI ALI',
+  NIK: '7206050702800002',
+  'Padan Dukcapil': 'Ya',
+  'Jenis Kelamin': 'Laki-laki',
+  'Hubungan dengan Kepala Keluarga': 'Kepala Keluarga',
+  'Tanggal Lahir': '2/7/1980 12:00:00 AM',
+  'Status Kawin': 'Cerai Mati',
+  Pekerjaan: 'Pegawai Swasta',
+  Pendidikan: 'Tamat Perguruan Tinggi',
+  'Usia dibawah 7 tahun': 'Tidak',
+  'Usia 7-12': 'Tidak',
+  'Usia 13-15': 'Tidak',
+  'Usia 16-18': 'Tidak',
+  'Usia 19-21': 'Tidak',
+  'Usia 22-59': 'Ya',
+  'Usia 60 tahun keatas': 'Tidak',
+  'Penerima BPNT': 'Ya',
+  'Penerima BPUM': 'Tidak',
+  'Penerima BST': 'Tidak',
+  'Penerima PKH': 'Tidak',
+  'Penerima SEMBAKO': 'Tidak'
+}
+2022/12/12 16:18 +08:00: 7206050702800002
+2022/12/12 16:18 +08:00: insert data penduduk 0

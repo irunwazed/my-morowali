@@ -11,7 +11,7 @@ exports.controller = class EksportController {
 			let excel = req.files[0];
 			let setDelete = req.body.delete=='true'?true:false;
 
-			// console.log(excel)
+			console.log(excel)
 
 
 			console.log('proses load data keluarga')
@@ -44,7 +44,7 @@ exports.controller = class EksportController {
 			await EksportController.insert(data, 0);
 			
 			let tes = await db.penduduk.find({});
-			console.log('insert data penduduk'+tes.length);
+			console.log('insert data penduduk '+tes.length);
 
 			let api = {
 				statusCode: 200,
@@ -134,6 +134,9 @@ exports.controller = class EksportController {
 			nik = '99'+Math.floor(Math.random()*100000000000000);
 			tmp = await db.penduduk.find({nik: nik});
 		}
+
+		let kec = await db.wil_kecamatan.find({nama: res['Kecamatan']});
+		let kel = await db.wil_desa.find({nama: res['Desa/Kelurahan']});
 	
 		return {
 			nama: res['Nama'],
@@ -146,8 +149,8 @@ exports.controller = class EksportController {
 			alamat: {
 				provinsi_kode: '72',
 				kabupaten_kode: '7203',
-				kecamatan_kode: String,
-				kelurahan_kode: String,
+				kecamatan_kode: kec[0]?kec[0].kode.toString():'',
+				kelurahan_kode: kel[0]?kel[0].kode.toString():'',
 				provinsi_nama: res['Provinsi'],
 				kabupaten_nama: res['Kabupaten/Kota'],
 				kecamatan_nama: res['Kecamatan'],
