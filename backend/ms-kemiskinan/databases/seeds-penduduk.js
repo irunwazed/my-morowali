@@ -8,6 +8,7 @@ const running = async () => {
     useUnifiedTopology: true
   })
 
+  console.log('proses load data keluarga')
   const file = reader.readFile('./../../documentation/data/penduduk.xlsx')
   
   let data = []
@@ -21,8 +22,6 @@ const running = async () => {
         data.push(res)
     })
   }
-
-  
     
   console.log('proses input keluarga')
 

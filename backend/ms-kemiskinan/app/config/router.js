@@ -8,7 +8,8 @@ var storage = multer.diskStorage({
     cb(null, 'uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now()+'.gif')
+		let name = file.originalname.split('.');
+    cb(null, file.fieldname + '-' + Date.now()+'.'+name[name.length-1])
   }
 });
 var upload = multer({ storage: storage });
@@ -145,6 +146,11 @@ routerAdmin.get("/api/laporan/penduduk", route('api/LaporanController@penduduk')
 routerAdmin.get("/api/laporan/keluarga", route('api/LaporanController@keluarga'));
 routerAdmin.get("/api/laporan/kesejahteraan", route('api/LaporanController@kesejahteraan'));
 routerAdmin.get("/api/laporan/bantuan", route('api/LaporanController@bantuan'));
+
+// export import
+routerAdmin.post("/api/eksport/penduduk", upload.any(), route('api/EksportController@penduduk'));
+routerAdmin.post("/api/eksport/kesejahteraan", upload.any(), route('api/EksportKesejahteraanController@penduduk'));
+
 
 // get data to foreign
 routerAdmin.get("/api/get/penduduk", route('api/DataController@getPendudukBySearch'))
