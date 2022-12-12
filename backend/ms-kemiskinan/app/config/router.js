@@ -44,6 +44,7 @@ router.get("/api", route('api/HomeController@index'));
 
 // ADMIN
 routerAdmin.use('/api', userMiddleware.checkAdmin);
+
 routerAdmin.get("/api/penduduk/pekerjaan", route('api/PendudukPekerjaanController@getData'));
 routerAdmin.get("/api/penduduk/pekerjaan/:id", route('api/PendudukPekerjaanController@getOneData'));
 routerAdmin.post("/api/penduduk/pekerjaan", route('api/PendudukPekerjaanController@store', true), route('api/PendudukPekerjaanController@store'));
@@ -62,6 +63,7 @@ routerAdmin.get("/api/keluarga/:id", route('api/KeluargaController@getData'));
 routerAdmin.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 
 routerAdmin.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
+routerAdmin.get("/api/kesejahteraan/:no_kk/:tahun", route('api/KesejahteraanController@getData'));
 routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getData'));
 routerAdmin.post("/api/kesejahteraan", upload.any(), route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
 routerAdmin.put("/api/kesejahteraan/:id", upload.any(), route('api/KesejahteraanController@store', true),  route('api/KesejahteraanController@store'));
@@ -172,6 +174,7 @@ routerAdmin.get("/api/get/ki/lantai", route('api/DataController@getKILantai'))
 routerAdmin.get("/api/get/ki/penerangan", route('api/DataController@getKIPenerangan'))
 routerAdmin.get("/api/get/ki/rumah", route('api/DataController@getKIRumah'))
 routerAdmin.get("/api/get/ki/sumber-air", route('api/DataController@getKISumberAir'))
+routerAdmin.get("/api/get/beranda", route('api/DataController@beranda'));
 
 
 router.get("*", route('api/HomeController@notFound'));

@@ -230,7 +230,7 @@ const running = async () => {
     { kode: '7203010012', nama: 'Pulau Tiga', level: 2 },
     { kode: '7203010013', nama: 'Matano', level: 2 },
     { kode: '7203010014', nama: 'Matarape', level: 2 },
-    { kode: '7203010015', nama: 'BURANGA', level: 2 },
+    { kode: '7203010015', nama: 'Buranga', level: 2 },
     { kode: '7203010016', nama: 'Ulunipa', level: 2 },
     { kode: '7203010017', nama: 'Wawongkolono', level: 2 },
     { kode: '7203010018', nama: 'Dongkalang', level: 2 },

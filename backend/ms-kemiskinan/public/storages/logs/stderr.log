@@ -1,0 +1,150 @@
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)
+D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\controllers\api\KesejahteraanController.js:80
+				condition.push({ $match: { 'kepala_keluarga.no_kk': req.params.no_kk, tahun: req.params.tahun });
+				                                                                                               ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at Module.Hook._require.Module.require (C:\laragon\bin\nodejs\node-v12\node_modules\pm2\node_modules\require-in-the-middle\index.js:101:39)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at route (D:\PROJEK\BELAJAR\express\part5\my-morowali\backend\ms-kemiskinan\app\config\router.js:24:21)

@@ -260,6 +260,63 @@ exports.controller = class DataController {
 		}
 	}
 
+	static async beranda(req, res){
+		try{
+			let year = new Date().getFullYear();
+			let jumPendudukPerKec = await db.penduduk.aggregate([ 
+				{ $group : {_id: {$toInt: "$alamat.kecamatan_kode"} , count:{$sum:1}}}, 
+				{
+					$lookup: {
+						from: 'wil_kecamatans',
+						localField: '_id',
+						foreignField: 'kode',
+						as: 'kecamatan',
+					},
+				},
+				{ $unwind: "$kecamatan" },
+				{ $project: {
+					kode: "$kecamatan.kode",
+					nama: "$kecamatan.nama",
+					jum_penduduk: "$count",
+				} }
+			]);
+			let jumPenduduk = await db.penduduk.count({});
+			let jumKeluarga = await db.keluarga.count({});
+			let jumBantuan = await db.penduduk_bantuan.count({});
+			let jumBantuanTahunIni = await db.penduduk_bantuan.count({tahun: year});
+			let jumDataKesejahteraan = await db.keluarga_kesejahteraan.count({});
+			let jumDataKesejahteraanTahunan = await db.keluarga_kesejahteraan.aggregate([
+				{ $group : {_id: { tahun: {$toInt: "$tahun"}, status_kesejahteraan: '$status_kesejahteraan' },  count:{$sum:1}}}, 
+				{ $project: {
+					tahun: '$_id.tahun',
+					status_kesejahteraan: '$_id.status_kesejahteraan',
+					jumlah: '$count',
+				} }
+			]);
+			let jumDataKesejahteraanTahunIni = await db.keluarga_kesejahteraan.count({tahun: year});
+			
+			return res.send({
+				statusCode: 200,
+				data: {
+					jumPenduduk: jumPenduduk,
+					jumPendudukPerKec: jumPendudukPerKec,
+					jumKeluarga: jumKeluarga,
+					jumBantuan: jumBantuan,
+					jumBantuanTahunIni: jumBantuanTahunIni,
+					jumDataKesejahteraan: jumDataKesejahteraan,
+					jumDataKesejahteraanTahunan: jumDataKesejahteraanTahunan,
+					jumDataKesejahteraanTahunIni: jumDataKesejahteraanTahunIni,
+				},
+			});
+
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
 	static async getProvinsi(req, res) {
 		try{
 			let data = await db.wil_provinsi.find({  });
@@ -267,6 +324,7 @@ exports.controller = class DataController {
 			return res.send({ statusCode: 200, data: data });
 		}catch(err){
 			return res.status(500).send({
+				statusCode: 500,
 				message: err.message || "Data is invalid",
 			});
 		}

@@ -135,8 +135,8 @@ exports.controller = class EksportController {
 			tmp = await db.penduduk.find({nik: nik});
 		}
 
-		let kec = await db.wil_kecamatan.find({nama: res['Kecamatan']});
-		let kel = await db.wil_desa.find({nama: res['Desa/Kelurahan']});
+		let kec = await db.wil_kecamatan.find({nama: res['Kecamatan'].toUpperCase()});
+		let kel = await db.wil_desa.find({nama: EksportController.setName(res['Desa/Kelurahan'])});
 	
 		return {
 			nama: res['Nama'],
@@ -167,6 +167,15 @@ exports.controller = class EksportController {
 				dukcapil_padan: res['Padan Dukcapil'],
 			}
 		};
+	}
+
+	static setName(string){
+		string = string.toLowerCase();
+		let arr = string.split(" ");
+		for (let i = 0; i < arr.length; i++) {
+			arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+		}
+		return arr.join(" ");
 	}
 
 }

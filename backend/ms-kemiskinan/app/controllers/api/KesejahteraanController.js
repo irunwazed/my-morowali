@@ -70,7 +70,17 @@ exports.controller = class KesejahteraanController {
 		try{
 
 			if(req.params.id){
-				condition.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id) } });
+				condition.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id)} });
+				let data = await table.aggregate(condition);
+				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
+				return res.send({statusCode: 200, data: data[0]});
+			}
+			if(req.params.no_kk && req.params.tahun){
+				console.log(req.params);
+				condition.push({ $match: { $and: [
+					{ 'kepala_keluarga.no_kk': req.params.no_kk },
+					{ tahun: parseInt(req.params.tahun) }
+				] } });
 				let data = await table.aggregate(condition);
 				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
