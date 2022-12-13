@@ -6,7 +6,7 @@
             <img class="logo" src="{{ asset('') }}assets/dist-assets/images/logo.png" alt="">
             <div style="margin-left:15px;">
                 <p class="m-0">&copy; 2022</p>
-                <p class="m-0">v.0.4.5</p>
+                <p class="m-0">v.1.4.5</p>
             </div>
         </div>
     </div>
