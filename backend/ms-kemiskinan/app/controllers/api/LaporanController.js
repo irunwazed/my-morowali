@@ -92,7 +92,6 @@ exports.controller = class LaporanController {
           'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
         } },
       ];
-      console.log(query)
 
       let data = [];
       let tmp = [];
@@ -120,8 +119,8 @@ exports.controller = class LaporanController {
           alamat: e.alamat,
           status_pernikahan: status_pernikahan[e.status_pernikahan],
 					fisik: {
-						kondisi: fisik[e.fisik.fisik_id],
-						keterangan: e.fisik.keterangan,
+						kondisi: fisik[e.fisik?e.fisik.fisik_id:0],
+						keterangan: e.fisik?e.fisik.keterangan:'-',
 					},
           pendidikan: pendidikan[e.pendidikan_id],
           penyakit: {
@@ -153,6 +152,7 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
+      let search = '';
 
       let query = [
 				{
@@ -227,17 +227,38 @@ exports.controller = class LaporanController {
                   pekerjaan: '$penduduk.pekerjaan',
                   hidup: '$penduduk.hidup',
                 }
-              }
+              },
+              { $match: { 
+                'alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+                'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+                'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+              } }
 						],
 						as: 'anggota_keluarga', 
 					},
 				},
-        { $match: { 
-          'anggota_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-          'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-          'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-        } }
+        // { $unwind: "$anggota_keluarga" },
+        // {
+        //   $project: {
+        //     _id: 1,
+        //     no_kk: '$no_kk',
+        //     nik_kepala: 1,
+        //     anggota_keluarga: 1,
+        //     jum: { $size: ["$anggota_keluarga"] }
+        //   }
+        // },
+        // {
+        //   $match: {
+        //     anggota_keluarga: { $size: 0 }
+        //   }
+        // }
+        // { $match: { 
+        //   'anggota_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+        //   'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+        //   'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+        // } }
 			];
+      console.log('tes1');
 
       let data = [];
       let tmp = {};
@@ -247,6 +268,7 @@ exports.controller = class LaporanController {
       }else{
         data = await db.keluarga.aggregate(query);
       }
+      console.log('tes2');
 
       let hubKel = ['', 'Istri / Suami', 'Anak', 'Wali', 'Lainnya'];  
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
@@ -254,44 +276,45 @@ exports.controller = class LaporanController {
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu'];
 
-      let dataAll = data.map(e => {
-        return {
-          no_kk: e.no_kk,
-          nik_kepala: e.nik_kepala,
-          anggota_keluarga: e.anggota_keluarga.map(ak => {
-            return {
-              kepala_keluarga: ak.kepala_keluarga?'Ya':'Tidak',
-              nama: ak.nama,
-              nik: ak.nik,
-              hubungan_keluarga: hubKel[ak.level],
-              jenis_kelamin: ak.jk=='P'?'Perempuan':'Laki - Laki',
-              agama: agama[ak.agama],
-              lahir: ak.lahir,
-              alamat: ak.alamat,
-              status_pernikahan: status_pernikahan[ak.status_pernikahan],
-              fisik: {
-                kondisi: fisik[ak.fisik.fisik_id],
-                keterangan: ak.fisik.keterangan,
-              },
-              pendidikan: pendidikan[ak.pendidikan_id],
-              penyakit: {
-                nama: ak.penyakit.nama,
-                keterangan: ak.penyakit.keterangan,
-              },
-              pekerjaan: ak.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }),
-              hidup: ak.hidup?'Ya':'Tidak',
-            }
-          }),
-        }
-      });
+      // let dataAll = data.map(e => {
+      //   return {
+      //     no_kk: e.no_kk,
+      //     nik_kepala: e.nik_kepala,
+      //     anggota_keluarga: e.anggota_keluarga.map(ak => {
+      //       return {
+      //         kepala_keluarga: ak.kepala_keluarga?'Ya':'Tidak',
+      //         nama: ak.nama,
+      //         nik: ak.nik,
+      //         hubungan_keluarga: hubKel[ak.level],
+      //         jenis_kelamin: ak.jk=='P'?'Perempuan':'Laki - Laki',
+      //         agama: agama[ak.agama],
+      //         lahir: ak.lahir,
+      //         alamat: ak.alamat,
+      //         status_pernikahan: status_pernikahan[ak.status_pernikahan],
+      //         fisik: {
+      //           kondisi: fisik[ak.fisik?ak.fisik.fisik_id:0],
+      //           keterangan: ak.fisik?ak.fisik.keterangan:'-',
+      //         },
+      //         pendidikan: pendidikan[ak.pendidikan_id],
+      //         penyakit: {
+      //           nama: ak.penyakit.nama,
+      //           keterangan: ak.penyakit.keterangan,
+      //         },
+      //         pekerjaan: ak.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }),
+      //         hidup: ak.hidup?'Ya':'Tidak',
+      //       }
+      //     }),
+      //   }
+      // });
 
       if(datatable){
-        tmp.data = dataAll;
+        // tmp.data = dataAll;
         data = tmp;
         return res.send(data);
       }
       
-      return res.send({statusCode: 200, data: dataAll});
+      return res.send({statusCode: 200, data: data});
+      // return res.send({statusCode: 200, data: dataAll});
     }catch(err){
       return res.send({statusCode: 500, message: err});
     }
