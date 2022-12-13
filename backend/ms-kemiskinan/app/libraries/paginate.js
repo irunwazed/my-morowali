@@ -15,7 +15,7 @@ module.exports = {
 				.sort({ updatedAt: 'desc' })
 				.skip(start)
 				.limit(length);
-			let tmp = await db[table].find({});
+			let tmp = await db[table].find({}).limit(1000);
 			jumData = tmp.length;
 	
 			result = {
