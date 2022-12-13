@@ -92,6 +92,7 @@ exports.controller = class LaporanController {
           'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
         } },
       ];
+      console.log(query)
 
       let data = [];
       let tmp = [];

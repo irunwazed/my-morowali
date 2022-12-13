@@ -1,14 +1,14 @@
 const db = require("../../models");
 const { validationResult, check } = require("express-validator");
 const paginate = require("../../libraries/paginate");
+const upload = require("../../libraries/upload");
 
 const table = db.penduduk;
 
 exports.validate = {
   store: [ 
 		check('no_kk').exists().isInt(),
-		check('kepala_keluarga').exists().isIn([true, false]),
-		check('hubungan_keluarga').exists().isInt({ min: 1, max: 4 }), //1. Istri / Suami, 2 Anak, 3 Wali, 4 Lainnya
+		check('hubungan_keluarga').exists().isInt({ min: 1, max: 4 }), //1. Kepala , 2 Istri / Suami, 3 Anak, 4 Lainnya
 		check('nik').exists().isInt(),
 		check('nama', 'nama tidak ada').exists(),
 		check('jk', 'jk tidak ada').exists().isIn(['L', 'P']),
@@ -119,8 +119,8 @@ exports.controller = class PendudukController {
 		try{
 			
 			req.files = req.files?req.files:[];
-			let kk_image;
-			let ktp_image;
+			let kk_image = req.files.kk_image;
+			let ktp_image = req.files.ktp_image;
 			let no_kk = req.body.no_kk;
 			let nik = req.body.nik;
 			let nama = req.body.nama;
@@ -141,8 +141,10 @@ exports.controller = class PendudukController {
 			let wilayah = req.body.wilayah;
 			let hidup = req.body.hidup;
 			let kb = req.body.kb;
-			let kepala_keluarga = req.body.kepala_keluarga;
+
 			let hubungan_keluarga = req.body.hubungan_keluarga;
+			let kepala_keluarga = hubungan_keluarga == '1'?true:false;
+
 			let penyakit_id = req.body.penyakit_id;
 			let penyakit_ket = req.body.penyakit_ket;
 			
@@ -151,11 +153,10 @@ exports.controller = class PendudukController {
 			let kabupaten = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)});
 			let kecamatan = await db.wil_kecamatan.find({kode: wilayah.slice(0, 7)});
 			let desa = await db.wil_desa.find({kode: wilayah.slice(0, 10)});
-
-			await req.files.forEach(async file => {
-				kk_image = file.fieldname=="kk_image"?await upload.mv(file, nik+'_'+nama+'_'+datetime+'.gif', '/keluarga/ktp/'):kk_image;
-				ktp_image = file.fieldname=="ktp_image"?await upload.mv(file, no_kk+'_'+datetime+'.gif', '/keluarga/kk/'):ktp_image;
-			});
+			
+			let datetime = new Date().getTime();
+			kk_image = await upload.upload(kk_image, no_kk+'_'+datetime+'.gif', '/keluarga/kk/')
+			ktp_image = await upload.upload(ktp_image, nik+'_'+datetime+'.gif', '/keluarga/ktp/')
 
 			// insert data keluarga
 			let cekNoKK = await db.keluarga.find({ no_kk: no_kk });

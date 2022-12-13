@@ -2,17 +2,17 @@ const express = require('express');
 const userMiddleware = require('../middleware/UserMiddleware');
 
 // upload
-const multer = require("multer");
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
-  filename: function (req, file, cb) {
-		let name = file.originalname.split('.');
-    cb(null, file.fieldname + '-' + Date.now()+'.'+name[name.length-1])
-  }
-});
-var upload = multer({ storage: storage });
+// const multer = require("multer");
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads')
+//   },
+//   filename: function (req, file, cb) {
+// 		let name = file.originalname.split('.');
+//     cb(null, file.fieldname + '-' + Date.now()+'.'+name[name.length-1])
+//   }
+// });
+// var upload = multer({ storage: storage });
 
 // setting export all Controller
 var exports = {};
@@ -54,7 +54,7 @@ routerAdmin.delete("/api/penduduk/pekerjaan/:id", route('api/PendudukPekerjaanCo
 routerAdmin.get("/api/penduduk", route('api/PendudukController@getData'));
 routerAdmin.get("/api/penduduk/no_kk/:no_kk", route('api/PendudukController@getOneData'));
 routerAdmin.get("/api/penduduk/:id", route('api/PendudukController@getOneData'));
-routerAdmin.post("/api/penduduk", upload.any(), route('api/PendudukController@store', true), route('api/PendudukController@store'));
+routerAdmin.post("/api/penduduk", route('api/PendudukController@store', true), route('api/PendudukController@store'));
 routerAdmin.delete("/api/penduduk/:id", route('api/PendudukController@delete'));
 
 routerAdmin.get("/api/keluarga", route('api/KeluargaController@getData'));
@@ -65,8 +65,8 @@ routerAdmin.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 routerAdmin.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
 routerAdmin.get("/api/kesejahteraan/:no_kk/:tahun", route('api/KesejahteraanController@getData'));
 routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getData'));
-routerAdmin.post("/api/kesejahteraan", upload.any(), route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
-routerAdmin.put("/api/kesejahteraan/:id", upload.any(), route('api/KesejahteraanController@store', true),  route('api/KesejahteraanController@store'));
+routerAdmin.post("/api/kesejahteraan", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
+routerAdmin.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true),  route('api/KesejahteraanController@store'));
 routerAdmin.delete("/api/kesejahteraan/:id",  route('api/KesejahteraanController@delete'));
 
 
@@ -150,8 +150,8 @@ routerAdmin.get("/api/laporan/kesejahteraan", route('api/LaporanController@kesej
 routerAdmin.get("/api/laporan/bantuan", route('api/LaporanController@bantuan'));
 
 // export import
-routerAdmin.post("/api/eksport/penduduk", upload.any(), route('api/EksportController@penduduk'));
-routerAdmin.post("/api/eksport/kesejahteraan", upload.any(), route('api/EksportKesejahteraanController@penduduk'));
+// routerAdmin.post("/api/eksport/penduduk", upload.any(), route('api/EksportController@penduduk'));
+// routerAdmin.post("/api/eksport/kesejahteraan", upload.any(), route('api/EksportKesejahteraanController@penduduk'));
 
 
 // get data to foreign

@@ -10,12 +10,13 @@ module.exports = {
 			let data = [];
 			let jumData = 0;
 			let draw = req.query.draw;
+			let limit = 1000;
 	
 			data = await db[table].find(condition)
 				.sort({ updatedAt: 'desc' })
 				.skip(start)
 				.limit(length);
-			let tmp = await db[table].find({}).limit(1000);
+			let tmp = await db[table].find({}).limit(limit);
 			jumData = tmp.length;
 	
 			result = {
@@ -46,6 +47,7 @@ module.exports = {
 			let data = [];
 			let jumData = 0;
 			let draw = req.query.draw;
+			let limit = 1000;
 	
 			// condition.push({ "$sort": { updatedAt: 'desc' }, });
 			// condition.push({ "$skip": start, });
@@ -55,7 +57,7 @@ module.exports = {
 				.sort({ updatedAt: 'desc' })
 				.skip(start)
 				.limit(length);
-			let tmp = await db[table].find({});
+			let tmp = await db[table].find({}).limit(limit);
 			jumData = tmp.length;
 	
 			result = {
