@@ -118,6 +118,9 @@ exports.controller = class PendudukController {
 
 		try{
 			
+			req.files = req.files?req.files:[];
+			let kk_image;
+			let ktp_image;
 			let no_kk = req.body.no_kk;
 			let nik = req.body.nik;
 			let nama = req.body.nama;
@@ -148,6 +151,11 @@ exports.controller = class PendudukController {
 			let kabupaten = await db.wil_kabupaten.find({kode: wilayah.slice(0, 4)});
 			let kecamatan = await db.wil_kecamatan.find({kode: wilayah.slice(0, 7)});
 			let desa = await db.wil_desa.find({kode: wilayah.slice(0, 10)});
+
+			await req.files.forEach(async file => {
+				kk_image = file.fieldname=="kk_image"?await upload.mv(file, nik+'_'+nama+'_'+datetime+'.gif', '/keluarga/ktp/'):kk_image;
+				ktp_image = file.fieldname=="ktp_image"?await upload.mv(file, no_kk+'_'+datetime+'.gif', '/keluarga/kk/'):ktp_image;
+			});
 
 			// insert data keluarga
 			let cekNoKK = await db.keluarga.find({ no_kk: no_kk });
@@ -204,6 +212,11 @@ exports.controller = class PendudukController {
 					keterangan: penyakit_ket,
 				}
 			};
+
+			if(ktp_image.status){
+				dataPenduduk['ktp_image'] = ktp_image.file;
+			}
+
 			let penduduk_id = '';
 			let cekNIK = await db.penduduk.find({ nik: nik });
 			if(cekNIK.length > 0){
