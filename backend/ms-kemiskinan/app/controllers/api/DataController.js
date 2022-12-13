@@ -144,7 +144,7 @@ exports.controller = class DataController {
 					]
 				} },
 			]);
-			return res.status(200).send({statusCode: 404, data: data});
+			return res.status(200).send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,

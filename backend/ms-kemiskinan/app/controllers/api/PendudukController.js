@@ -6,10 +6,10 @@ const table = db.penduduk;
 
 exports.validate = {
   store: [ 
-		check('no_kk').exists().isInt().isLength({ min: 16, max:16 }),
+		check('no_kk').exists().isInt(),
 		check('kepala_keluarga').exists().isIn([true, false]),
 		check('hubungan_keluarga').exists().isInt({ min: 1, max: 4 }), //1. Istri / Suami, 2 Anak, 3 Wali, 4 Lainnya
-		check('nik').exists().isInt().isLength({ min: 16, max:16 }),
+		check('nik').exists().isInt(),
 		check('nama', 'nama tidak ada').exists(),
 		check('jk', 'jk tidak ada').exists().isIn(['L', 'P']),
 		check('lahirTempat', 'lahirTempat tidak ada').exists(),

@@ -5,12 +5,11 @@ module.exports = {
     watch: true,
     log_date_format: "YYYY/MM/DD HH:mm Z",
     ignore_watch : ["node_modules", "public", "uploads", "tmp"],
-    error_file: "./public/storages/logs/stderr.log",
-    out_file: "./public/storages/logs/stdout.log",
+    // error_file: "./public/storages/logs/stderr.log",
+    // out_file: "./public/storages/logs/stdout.log",
     instances: 1,
-    max_memory_restart: "824M",
+    max_memory_restart: "512M",
     autorestart: true,
-    merge_logs: true,
-    
+    // merge_logs: true,
   }]
 }

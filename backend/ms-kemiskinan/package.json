@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pm2 start",
     "start": "node ./app/server.js",
-    "seed": "node ./databases/seeds.js && node ./databases/seeds-penduduk.js && node ./databases/seeds-kesejahteraan.js",
+    "seed": "node ./databases/seeds.js",
     "test": "jest --watchAll --runInBand --detectOpenHandles",
     "dev": "nodemon --exec babel-node ./app/server.js"
   },

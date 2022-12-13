@@ -61,7 +61,14 @@ exports.controller = class EksportController {
 
 		try{
 			if(data[idx]){
-				// if(data[idx]['NIK'] == '' || data[idx]['Nama'] == '') EksportController.insert(data, (idx+1));
+
+				
+				let no_kk = data[idx]['ID Keluarga P3KE'];
+				
+				let tmp = await db.penduduk.find({ nama: data[idx]['Nama'], no_kk: no_kk });
+				if(tmp.length > 0){
+					return await EksportController.insert(data, (idx+1));
+				}
 	
 				let dataInput = await EksportController.setPenduduk(data[idx]);
 	
@@ -72,7 +79,6 @@ exports.controller = class EksportController {
 				let penduduk_id = penduduk[0]._id;
 				// console.log(EksportController.nikArr);
 				
-				let no_kk = data[idx]['ID Keluarga P3KE'];
 				let tmpKeluarga = {no_kk: no_kk};
 		
 		
@@ -85,7 +91,6 @@ exports.controller = class EksportController {
 					keluarga_id = keluarga[0]._id;
 				}
 				
-		
 				let tmpHubKel = {
 					keluarga_id: keluarga_id,
 					penduduk_id: penduduk_id,
