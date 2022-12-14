@@ -15,6 +15,7 @@ exports.controller = class PenyakitController {
 
 	static async getData(req, res) {
 		let nama = new RegExp(req.query.nama);
+		console.log(req.query);
 		var condition = {nama: {$regex: nama, $options: 'i'}};
 		try{
 			let result = await paginate.find(req, 'penyakit', condition);
