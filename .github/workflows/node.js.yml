@@ -23,3 +23,13 @@ jobs:
           git pull origin master
           cd ./backend/api-gateway
           npm install
+          pm2 start
+          cd ../ms-auth
+          npm install
+          pm2 start
+          cd ../ms-kemiskinan
+          npm install
+          pm2 start
+          cd ../ms-organisasi
+          npm install
+          pm2 start
