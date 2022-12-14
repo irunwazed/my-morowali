@@ -37,7 +37,7 @@ exports.controller = class KeluargaController {
 			if(req.params.id){
 				query.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id) } });
 				let data = await db.keluarga.aggregate(query);
-				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
+				if(!data[0]) return res.status(400).send({statusCode: 400, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
 			let result = await paginate.aggregate(req, 'keluarga', query);
@@ -55,7 +55,7 @@ exports.controller = class KeluargaController {
 		let query = KeluargaController.query();
 		query.push({ $match: { no_kk: req.params.no_kk } });
 		let data = await db.keluarga.aggregate(query);
-		if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
+		if(!data[0]) return res.status(400).send({statusCode: 400, message: 'data not found!'});
 		return res.send({statusCode: 200, data: data[0]});
 	}
 	

@@ -4,20 +4,32 @@
 name: Node.js CI
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 12
-      uses: actions/setup-node@v3
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v0.1.6
       with:
-        node-version: 12.x
-        cache: 'npm'
-    - run: cd backend/ms-auth
-    - run: npm i
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/kominfo/app/my-morowali/
+          git pull origin master
+          cd ./backend/api-gateway
+          npm install
+          pm2 start
+          cd ../ms-auth
+          npm install
+          pm2 start
+          cd ../ms-kemiskinan
+          npm install
+          pm2 start
+          cd ../ms-organisasi
+          npm install
+          pm2 start

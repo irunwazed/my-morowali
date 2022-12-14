@@ -144,7 +144,7 @@ exports.controller = class DataController {
 					]
 				} },
 			]);
-			return res.status(200).send({statusCode: 404, data: data});
+			return res.status(200).send({statusCode: 200, data: data});
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,
@@ -231,15 +231,15 @@ exports.controller = class DataController {
 						lahir: e.penduduk.lahir,
 						alamat: e.penduduk.alamat,
 						fisik: {
-							kondisi: fisik[e.penduduk.fisik.fisik_id],
-							keterangan: e.penduduk.fisik.keterangan,
+							kondisi: fisik[e.penduduk.fisik?e.penduduk.fisik.fisik_id:0],
+							keterangan: e.penduduk.fisik?e.penduduk.fisik.keterangan:'-',
 						},
 						status_pernikahan: status_pernikahan[e.penduduk.status_pernikahan],
 						jenis_kelamin: e.penduduk.jk=='P'?'Perempuan':'Laki - Laki',
 						pendidikan_terakhir: pendidikan[e.penduduk.pendidikan_id],
 						penyakit: {
-							nama: e.penduduk.penyakit_diderita.nama,
-							keterangan: e.penduduk.penyakit.keterangan,
+							nama: e.penduduk.penyakit_diderita?e.penduduk.penyakit_diderita.nama:'-',
+							keterangan: e.penduduk.penyakit?e.penduduk.penyakit.keterangan:'-',
 						},
 						hidup: e.penduduk.hidup?'Ya':'Tidak',
 					});
@@ -252,6 +252,67 @@ exports.controller = class DataController {
 				}});
 			}
 			else return res.status(404).send({ statusCode: 404, message: 'data not found' });
+		}catch(err){
+			return res.status(500).send({
+				statusCode: 500,
+				message: err.message || "Data is invalid",
+			});
+		}
+	}
+
+	static async getKeluargaBySearch(req, res) {
+		let search = req.query.search?req.query.search:'';
+		let searchAll = req.query.searchAll=='true'?true:false;
+		
+		let or = [
+			{ no_kk: { $regex: new RegExp(search), $options: "i" }, },
+		];
+		if(searchAll){
+			or.push({ nik: { $regex: new RegExp(search), $options: "i" }, },)
+			or.push({ nama: { $regex: new RegExp(search), $options: "i" }, },)
+		}
+		
+		try{
+			let data = await db.keluarga.aggregate([
+				{
+					$lookup:{
+						from: 'keluarga_penduduks',
+						localField: '_id',
+						foreignField: 'keluarga_id',
+						pipeline: [
+							{
+								$lookup:{
+									from: 'penduduks',
+									localField: 'penduduk_id',
+									foreignField: '_id',
+									as: 'detail'
+								},
+							}, 
+							{ $unwind: "$detail" },
+						],
+						as: 'penduduk',
+					},
+				},
+				{ $unwind: "$penduduk" },
+				{
+					$project: {
+						_id: 1,
+						no_kk: 1,
+						nik_kepala: 1,
+						level: '$penduduk.level',
+						nama: '$penduduk.detail.nama',
+						nik: '$penduduk.detail.nik',
+					}
+				},
+				{ $match: { 
+					level: 1,
+					$or: or,
+				} }
+			])
+			.limit(10);
+
+			return res.send({statusCode: 200, data: data});
+
 		}catch(err){
 			return res.status(500).send({
 				statusCode: 500,

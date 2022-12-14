@@ -119,8 +119,8 @@ exports.controller = class LaporanController {
           alamat: e.alamat,
           status_pernikahan: status_pernikahan[e.status_pernikahan],
 					fisik: {
-						kondisi: fisik[e.fisik.fisik_id],
-						keterangan: e.fisik.keterangan,
+						kondisi: fisik[e.fisik?e.fisik.fisik_id:0],
+						keterangan: e.fisik?e.fisik.keterangan:'-',
 					},
           pendidikan: pendidikan[e.pendidikan_id],
           penyakit: {
@@ -152,100 +152,253 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
+      let search = '';
 
+      // let query = [
+			// 	{
+			// 		$lookup:{
+			// 			from: 'keluarga_penduduks',
+			// 			localField: '_id',
+			// 			foreignField: 'keluarga_id',
+			// 			pipeline: [
+			// 				{
+			// 					$lookup:{
+			// 						from: 'penduduks',
+			// 						localField: 'penduduk_id',
+			// 						foreignField: '_id',
+			// 						pipeline: [
+			// 							{
+			// 								$lookup: {
+			// 									from: 'penyakits',
+			// 									localField: 'penyakit.penyakit_id',
+			// 									foreignField: '_id',
+			// 									as: 'penyakit_diderita',
+			// 								},
+			// 							},
+			// 							{
+			// 								$lookup: {
+			// 									from: 'penduduk_pekerjaans',
+			// 									localField: '_id',
+			// 									foreignField: 'penduduk_id',
+      //                   pipeline: [
+      //                     {
+      //                       $lookup: {
+      //                         from: 'pekerjaans',
+      //                         localField: 'pekerjaan_id',
+      //                         foreignField: '_id',
+      //                         as: 'pekerjaan',
+      //                       },
+      //                     },
+      //                     { $unwind: "$pekerjaan" },
+      //                     { $project: {
+      //                       pekerjaan_id: '$pekerjaan_id',
+      //                       pekerjaan_nama: '$pekerjaan.nama',
+      //                       gaji: '$gaji',
+      //                       keterangan: '$keterangan',
+      //                     } }
+      //                   ],
+			// 									as: 'pekerjaan',
+			// 								},
+			// 							},
+			// 						],
+			// 						as: 'penduduk'
+			// 					},
+			// 				}, 
+			// 				{ $unwind: "$penduduk" },
+      //         {
+      //           $project: {
+      //             penduduk_id: '$penduduk_id',
+      //             level: '$level',
+      //             kepala_keluarga: '$kepala',
+      //             nama: '$penduduk.nama',
+      //             nik: '$penduduk.nik',
+      //             jk: '$penduduk.jk',
+      //             agama: '$penduduk.agama',
+      //             lahir: '$penduduk.lahir',
+      //             alamat: '$penduduk.alamat',
+      //             status_pernikahan: '$penduduk.status_pernikahan',
+      //             fisik: '$penduduk.fisik',
+      //             pendidikan_id: '$penduduk.pendidikan_id',
+      //             penyakit: {
+      //               penyakit_id: '$penduduk.penyakit.penyakit_id',
+      //               nama: { $arrayElemAt: ['$penduduk.penyakit_diderita.nama', 0] },
+      //               keterangan: '$penduduk.penyakit.keterangan',
+      //             },
+      //             pekerjaan: '$penduduk.pekerjaan',
+      //             hidup: '$penduduk.hidup',
+      //           }
+      //         },
+      //         // { $match: { 
+      //         //   'alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+      //         //   'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+      //         //   'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+      //         // } }
+			// 			],
+			// 			as: 'anggota_keluarga', 
+			// 		},
+			// 	},
+      //   // { $unwind: "$anggota_keluarga" },
+      //   // {
+      //   //   $project: {
+      //   //     _id: 1,
+      //   //     no_kk: '$no_kk',
+      //   //     nik_kepala: 1,
+      //   //     anggota_keluarga: 1,
+      //   //     jum: { $size: ["$anggota_keluarga"] }
+      //   //   }
+      //   // },
+      //   // {
+      //   //   $match: {
+      //   //     anggota_keluarga: { $size: 0 }
+      //   //   }
+      //   // }
+      //   // { $match: { 
+      //   //   'anggota_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+      //   //   'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+      //   //   'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+      //   // } }
+			// ];
+      
       let query = [
-				{
-					$lookup:{
-						from: 'keluarga_penduduks',
-						localField: '_id',
-						foreignField: 'keluarga_id',
-						pipeline: [
-							{
-								$lookup:{
-									from: 'penduduks',
-									localField: 'penduduk_id',
-									foreignField: '_id',
-									pipeline: [
-										{
-											$lookup: {
-												from: 'penyakits',
-												localField: 'penyakit.penyakit_id',
-												foreignField: '_id',
-												as: 'penyakit_diderita',
-											},
-										},
-										{
-											$lookup: {
-												from: 'penduduk_pekerjaans',
-												localField: '_id',
-												foreignField: 'penduduk_id',
-                        pipeline: [
-                          {
-                            $lookup: {
-                              from: 'pekerjaans',
-                              localField: 'pekerjaan_id',
-                              foreignField: '_id',
-                              as: 'pekerjaan',
-                            },
-                          },
-                          { $unwind: "$pekerjaan" },
-                          { $project: {
-                            pekerjaan_id: '$pekerjaan_id',
-                            pekerjaan_nama: '$pekerjaan.nama',
-                            gaji: '$gaji',
-                            keterangan: '$keterangan',
-                          } }
-                        ],
-												as: 'pekerjaan',
-											},
-										},
-									],
-									as: 'penduduk'
-								},
-							}, 
-							{ $unwind: "$penduduk" },
+        
+        {
+          $lookup: {
+            from: 'keluarga_penduduks',
+            localField: '_id',
+            foreignField: 'penduduk_id',
+            pipeline: [
+              {
+                $lookup: {
+                  from: 'keluargas',
+                  localField: 'keluarga_id',
+                  foreignField: '_id',
+                  as: 'keluarga',
+                },
+              },
+              { $unwind: "$keluarga" },
+              { $sort: { updatedAt: -1 } },
+            ],
+            as: 'keluarga',
+          },
+        },
+        {
+          $lookup: {
+            from: 'penyakits',
+            localField: 'penyakit.penyakit_id',
+            foreignField: '_id',
+            as: 'penyakit_diderita',
+          },
+        },
+        {
+          $lookup: {
+            from: 'penduduk_pekerjaans',
+            localField: '_id',
+            foreignField: 'penduduk_id',
+            pipeline: [
+              {
+                $lookup: {
+                  from: 'pekerjaans',
+                  localField: 'pekerjaan_id',
+                  foreignField: '_id',
+                  as: 'pekerjaan',
+                },
+              },
+              { $unwind: "$pekerjaan" },
+              { $project: {
+                pekerjaan_id: '$pekerjaan_id',
+                pekerjaan_nama: '$pekerjaan.nama',
+                gaji: '$gaji',
+                keterangan: '$keterangan',
+              } }
+            ],
+            as: 'pekerjaan',
+          },
+        },
+        {
+          $lookup: {
+            from: 'penduduk_bantuans',
+            localField: '_id',
+            foreignField: 'penduduk.penduduk_id',
+            pipeline: [
               {
                 $project: {
-                  penduduk_id: '$penduduk_id',
-                  level: '$level',
-                  kepala_keluarga: '$kepala',
-                  nama: '$penduduk.nama',
-                  nik: '$penduduk.nik',
-                  jk: '$penduduk.jk',
-                  agama: '$penduduk.agama',
-                  lahir: '$penduduk.lahir',
-                  alamat: '$penduduk.alamat',
-                  status_pernikahan: '$penduduk.status_pernikahan',
-                  fisik: '$penduduk.fisik',
-                  pendidikan_id: '$penduduk.pendidikan_id',
-                  penyakit: {
-                    penyakit_id: '$penduduk.penyakit.penyakit_id',
-                    nama: { $arrayElemAt: ['$penduduk.penyakit_diderita.nama', 0] },
-                    keterangan: '$penduduk.penyakit.keterangan',
+                  tahun: '$tahun',
+                  bantuan: {
+                    nama: '$bantuan.nama',
+                    pagu: '$bantuan.pagu',
+                    keterangan: '$bantuan.keterangan',
                   },
-                  pekerjaan: '$penduduk.pekerjaan',
-                  hidup: '$penduduk.hidup',
+                  lokasi: '$lokasi',
                 }
               }
-						],
-						as: 'anggota_keluarga', 
-					},
-				},
+            ],
+            as: 'bantuan',
+          },
+        },
+        {
+          $project: {
+            nama: '$nama',
+            nik: '$nik',
+            jk: '$jk',
+            agama: '$agama',
+            lahir: '$lahir',
+            alamat: '$alamat',
+            status_pernikahan: '$status_pernikahan',
+            fisik: '$fisik',
+            pendidikan_id: '$pendidikan_id',
+            penyakit: {
+              penyakit_id: '$penyakit.penyakit_id',
+              nama: { $arrayElemAt: ['$penyakit_diderita.nama', 0] },
+              keterangan: '$penyakit.keterangan',
+            },
+            pekerjaan: '$pekerjaan',
+            bantuan: '$bantuan',
+            hidup: '$hidup',
+            keluarga: { $arrayElemAt: ['$keluarga', 0] },
+          }
+        },
         { $match: { 
-          'anggota_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-          'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-          'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-        } }
-			];
+          'alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+          'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+          'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+        } },
+        {
+          $group: {
+            _id: '$keluarga.keluarga.no_kk',
+            no_kk: { $first: '$keluarga.keluarga.no_kk' },
+            nik_kepala: { $first: '$keluarga.keluarga.nik_kepala' },
+            anggota_keluarga: {
+              $push:{
+                no_kk: '$keluarga.keluarga.no_kk',
+                nama: '$nama',
+                nik: '$nik',
+                agama: '$agama',
+                lahir: '$lahir',
+                alamat: '$alamat',
+                status_pernikahan: '$status_pernikahan',
+                fisik: '$fisik',
+                pendidikan_id: '$pendidikan_id',
+                penyakit: '$penyakit',
+                pekerjaan: '$pekerjaan',
+                bantuan: '$bantuan',
+                hidup: '$hidup',
+              }
+            }
+          }
+        }
+      ];
+
+      console.log('tes1');
 
       let data = [];
       let tmp = {};
       if(datatable){
-        tmp = await paginate.aggregate(req, 'keluarga', query);
+        tmp = await paginate.aggregate(req, 'penduduk', query);
         data = tmp.data;
       }else{
-        data = await db.keluarga.aggregate(query);
+        data = await db.penduduk.aggregate(query);
       }
+      console.log('tes2');
 
       let hubKel = ['', 'Istri / Suami', 'Anak', 'Wali', 'Lainnya'];  
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
@@ -269,8 +422,8 @@ exports.controller = class LaporanController {
               alamat: ak.alamat,
               status_pernikahan: status_pernikahan[ak.status_pernikahan],
               fisik: {
-                kondisi: fisik[ak.fisik.fisik_id],
-                keterangan: ak.fisik.keterangan,
+                kondisi: fisik[ak.fisik?ak.fisik.fisik_id:0],
+                keterangan: ak.fisik?ak.fisik.keterangan:'-',
               },
               pendidikan: pendidikan[ak.pendidikan_id],
               penyakit: {
@@ -290,7 +443,8 @@ exports.controller = class LaporanController {
         return res.send(data);
       }
       
-      return res.send({statusCode: 200, data: dataAll});
+      return res.send({statusCode: 200, data: data});
+      // return res.send({statusCode: 200, data: dataAll});
     }catch(err){
       return res.send({statusCode: 500, message: err});
     }
@@ -345,6 +499,14 @@ exports.controller = class LaporanController {
                   as: 'penduduk'
                 },
               }, 
+              // {
+              //   $lookup: {
+              //     from: 'keluarga_penduduk',
+              //     localField: 'keluarga_id',
+              //     foreignField: 'keluarga_id',
+              //     as: 'penduduk'
+              //   }
+              // }
               {
                 $project: {
                   // keluarga_id: '$_id',
@@ -370,13 +532,13 @@ exports.controller = class LaporanController {
           },
         }, 
 			  { $unwind: "$keluarga" },
-        // { $match: { 
-        //   'anggota_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-        //   'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-        //   'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-        // } }
+        { $match: { 
+          'keluarga.kepala_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+          'keluarga.kepala_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+          'keluarga.kepala_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+        } }
       ];
-
+      console.log('tes1');
       let data = [];
       let tmp = {};
       if(datatable){
@@ -385,10 +547,12 @@ exports.controller = class LaporanController {
       }else{
         data = await db.keluarga_kesejahteraan.aggregate(query);;
       }
+      console.log('tes2');
+      console.log(data[0]);
 
       let kesejahteraan = ['', 'Sangat Miskin', 'Miskin', 'Rentan Miskin', 'Menuju Miskin', 'Middle Class'];
-      let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
-      let status_pernikahan = ['', 'Belum Menikah', 'Menikah', 'Duda', 'Janda'];
+      let pendidikan = ['', 'Tidak/belum sekolah', 'Tidak tamat SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat', 'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat', 'Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi'];  
+      let status_pernikahan = ['', 'Belum Menikah', 'Cerai Hidup', 'Cerai Mati', 'Kawin'];
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu'];
 
@@ -400,20 +564,20 @@ exports.controller = class LaporanController {
           indikator: e.indikator,
           kepala_keluarga: {
             no_kk: e.keluarga.no_kk,
-            nama: e.keluarga.kepala_keluarga.nama,
-            nik: e.keluarga.kepala_keluarga.nik,
-            jk: e.keluarga.kepala_keluarga.jk=='P'?'Perempuan':'Laki - Laki',
-            agama: agama[e.keluarga.kepala_keluarga.agama],
-            lahir: e.keluarga.kepala_keluarga.lahir,
-            alamat: e.keluarga.kepala_keluarga.alamat,
+            nama: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.nama:'',
+            nik: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.nik:'',
+            jk: (e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.jk:'')=='P'?'Perempuan':'Laki - Laki',
+            agama: agama[e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.agama:0],
+            lahir: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.lahir:'',
+            alamat: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.alamat:'',
             fisik: {
-              kondisi: fisik[e.keluarga.kepala_keluarga.fisik.fisik_id],
-              keterangan: e.keluarga.kepala_keluarga.fisik.keterangan,
+              kondisi: fisik[e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.fisik?e.keluarga.kepala_keluarga.fisik.fisik_id:0:0],
+              keterangan: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.fisik?e.keluarga.kepala_keluarga.fisik.keterangan:'-':'-',
             },
-            pendidikan_id: pendidikan[e.keluarga.kepala_keluarga.pendidikan_id],
-            penyakit: e.keluarga.kepala_keluarga.penyakit,
-            pekerjaan: e.keluarga.kepala_keluarga.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }),
-            hidup: e.keluarga.kepala_keluarga.hidup?'Ya':'Tidak',
+            pendidikan_id: pendidikan[e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.pendidikan_id:0],
+            penyakit: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.penyakit:'',
+            pekerjaan: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.pekerjaan?e.keluarga.kepala_keluarga.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }):[]:[],
+            hidup: e.keluarga.kepala_keluarga?e.keluarga.kepala_keluarga.hidup:false?'Ya':'Tidak',
           },
         }
       });
