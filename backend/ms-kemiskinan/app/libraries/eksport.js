@@ -20,6 +20,10 @@ async function  insertKeluarga(data, idx){
 			
 			let dataInput = await setPenduduk(data[idx]);
 
+			if(idx%50 == 0){
+				console.log('proses => '+idx);
+			}
+
 
 			let hubkel = { 'Kepala Keluarga': 1, 'Istri': 2, 'Anak': 3, 'Lainnya': 4  }
 	
