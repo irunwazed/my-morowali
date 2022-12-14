@@ -119,7 +119,9 @@
             loadData();
             $('#m_tambah').hide();
             $('#m_edit').hide();
-            getPekerjaan();
+
+            var pekerjaan = $('#pekerjaan');
+            getPekerjaan(pekerjaan);
             getPenduduk();
         });
 
@@ -219,13 +221,15 @@
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    console.log(data.data);
+                    if (data.statusCode != 200) {
+                        return;
+                    }
                     $('#e_id').val(id);
-                    // $('#nama').val(data.data.penduduk_id).change();
                     $('#pekerjaan').val(data.data.pekerjaan_id).change();
                     $('#gaji').val(data.data.gaji);
                     $('#keterangan').val(data.data.keterangan);
-                    newOption = new Option(data.data.penduduk.nama + " - " + data.data.nik, data.data.penduduk_id,
+                    newOption = new Option(data.data.penduduk.nama + " - " + data.data.nik, data.data
+                        .penduduk_id,
                         true, true);
                     $('#nama').append(newOption).trigger('change');
                 },
@@ -276,7 +280,7 @@
                         /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
-                        swalWithBootstrapButtons.fire("Dibatalkan", "", "error");
+                        swalWithBootstrapButtons.fire("", "Dibatalkan", "error");
                     }
                 });
         }
@@ -284,9 +288,6 @@
         $('#form_data').on('submit', function(e) {
             e.preventDefault();
             idata = new FormData($('#form_data')[0]);
-            console.log(idata)
-            // die()
-
             let url = ""
             let method = ""
             if (formStatus == 'edit') {
@@ -311,7 +312,6 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
                     Swal.fire({
                         icon: 'success',
                         title: "",
@@ -344,35 +344,6 @@
             });
         });
 
-        function getPekerjaan(id) {
-            var select = $('#pekerjaan');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/data/pekerjaan",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Pekerjaan -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
 
         function getPenduduk() {
             $('#nama').select2({
@@ -410,14 +381,6 @@
                     }
                 }
             });
-        }
-
-        function rupiah(number) {
-            return new Intl.NumberFormat("id-ID", {
-                style: "currency",
-                currency: "IDR",
-                minimumFractionDigits: 0,
-            }).format(number);
         }
     </script>
 @endsection

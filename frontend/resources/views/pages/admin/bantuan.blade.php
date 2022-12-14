@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Data Bantuan - SEPAKAD')
+@section('judul', 'Data Bantuan - SEPEKAN')
 
 @section('tambah_css')
 
@@ -24,7 +24,7 @@
                             {{-- <button class="btn btn-primary" style="float: right" type="button" data-toggle="modal"
                                 data-target="#exampleModal">Tambah Data</button> --}}
                             <button class="btn btn-secondary" style="position: absolute; right:25px;" type="button"
-                                id="btn_modal">Tambah Data</button>
+                                id="btn_modal"><i class="i-Add"></i> Tambah Data</button>
                         </div>
                     </div>
                 </div>
@@ -41,6 +41,7 @@
                                                         <th style="width: 5px;"></th>
                                                         <th style="width: 5px;">No</th>
                                                         <th>Nama</th>
+                                                        <th>Jenis bantuan</th>
                                                         <th>OPD</th>
                                                     </tr>
                                                 </thead>
@@ -72,9 +73,23 @@
                                 <label>Nama Bantuan</label>
                                 <input id="nama" name="nama" type="text" class="form-control" required="">
                             </div>
+                            <div class="form-group">
+                                <label>Jenis Bantuan</label>
+                                <select id="jenis" name="jenis" class="form-control" style="width:100%;" required="">
+                                    <option value="" selected disabled>- Pilih Jenis -</option>
+                                    <option value="2">BPNT</option>
+                                    <option value="3">BPUM</option>
+                                    <option value="4">BST</option>
+                                    <option value="5">PKH</option>
+                                    <option value="6">PBI JKN</option>
+                                    <option value="7">BPNT-PPKM</option>
+                                    <option value="8">SEMBAKO</option>
+                                    <option value="1">Lainnya</option>
+                                </select>
+                            </div>
                             <div class="form-group" id="opd_drop">
                                 <label>OPD</label>
-                                <select id="opd" name="opd_kode" class="form-control select" style="width:100%;"
+                                <select id="opd" name="opd_kode" class="form-control select opd" style="width:100%;"
                                     required="">
                                 </select>
                             </div>
@@ -112,7 +127,9 @@
             $("#opd").select2({
                 dropdownParent: $('#opd_drop')
             });
-            getOPD()
+
+            var select = $('.opd');
+            getOPD(select)
         });
 
         $("#btn_modal").click(function() {
@@ -122,34 +139,6 @@
             $('#modal_data').modal('show');
         });
 
-        function getOPD() {
-            var select = $('#opd');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/organisasi/get/opd",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih OPD -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item].kode + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
 
         function loadData() {
             $('#tabel_data').DataTable({
@@ -209,9 +198,19 @@
                         data: 'nama',
                     },
                     {
+                        data: 'jenis',
+                        render: function(data, type, row) {
+                            let arr = ['',
+                                'Lainnya', 'BPNT', 'BPUM', 'BST', 'PKH', 'PBI JKN', 'BPNT-PPKM',
+                                'SEMBAKO'
+                            ]
+                            return arr[data];
+                        }
+                    },
+                    {
                         data: 'opd.nama',
                         render: function(data) {
-                            if(!data){
+                            if (!data) {
                                 return '';
                             }
                             return data;
@@ -232,10 +231,14 @@
                 },
                 success: function(data) {
                     // console.log(data.data);
+                    if (!data.data) {
+                        return;
+                    }
                     $('#e_id').val(id);
                     $('#nama').val(data.data.nama);
-                    $('#opd').val(data.data.opd.kode).change();
-                    $('#keterangan').val('');
+                    $('#jenis').val(data.data.jenis).change();
+                    $('#opd').val(data.data.opd ? data.data.opd.kode : null).change();
+                    $('#keterangan').val(data.data.keterangan);
                 },
                 error: function(error) {
                     console.log(error);
@@ -306,29 +309,21 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil ditambahkan!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!data.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('success', '', "Data berhasil ditambahkan!")
+
                     loadData();
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
                 },
                 error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!error.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('error', (error.responseJSON.errors['0'].msg + " (" + error.responseJSON
+                        .errors['0'].param + ")"), "test")
                     console.log(error);
                 }
             });
@@ -350,29 +345,22 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil diubah!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!data.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('success', '', "Data berhasil diubah!")
+
                     loadData();
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
                 },
                 error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!error.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('error', '', (error.responseJSON.errors['0'].msg + " (" + error
+                        .responseJSON
+                        .errors['0'].param + ")"))
                     console.log(error);
                 }
             });
