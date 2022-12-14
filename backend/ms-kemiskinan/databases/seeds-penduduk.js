@@ -13,7 +13,7 @@ const running = async () => {
 	let setDelete = process.argv[3]=='true'?true:false;
 
   console.log('proses load data keluarga => '+nameFile)
-  const file = reader.readFile('./../../documentation/data/'+nameFile+'.xlsx')
+  const file = reader.readFile('./../../documentation/data/'+nameFile+'.csv')
   
   let data = []
     

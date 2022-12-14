@@ -20,8 +20,8 @@ async function  insertKeluarga(data, idx){
 			
 			let dataInput = await setPenduduk(data[idx]);
 
-			if(idx%50 == 0){
-				console.log('proses => '+idx);
+			if(idx%100 == 0){
+				console.log('proses => '+(idx/100));
 			}
 
 
