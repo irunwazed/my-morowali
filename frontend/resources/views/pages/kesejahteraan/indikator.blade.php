@@ -5,6 +5,7 @@
 @section('tambah_css')
 
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
     <style>
         * {
             box-sizing: border-box;
@@ -441,6 +442,7 @@
 
     <script src="{{ asset('') }}assets/dist-assets/js/jquery.mask.js"></script>
     <script src="{{ asset('') }}assets/dist-assets/js/jquery.inputfilter.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <script>
         var formStatus = '';
@@ -544,21 +546,22 @@
                 responsive: false,
                 info: true,
                 destroy: true,
-                processing: true,
-                serverSide: false,
+                processing: false,
                 ordering: true,
+                serverSide: true,
                 ajax: {
                     url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan",
                     type: 'GET',
                     headers: {
                         "Authorization": "Bearer {{ Session::get('token') }}"
                     },
-                    // success: function(data) {
-                    // console.log(data);
-                    // },
-                    // error: function(error) {
-                    // console.log(error);
-                    // },
+                    "dataSrc": "data",
+                    success: function(data) {
+                    console.log(data);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    },
                 },
                 columns: [{
                         data: null,
@@ -590,27 +593,33 @@
                         }
                     },
                     {
-                        data: 'kepala_keluarga.no_kk',
+                        data: null,
+                        render: function(data, type, row) {
+                            return data.kepala_keluarga.no_kk ? data.kepala_keluarga.no_kk : "-";
+                        }
                     },
                     {
-                        data: 'kepala_keluarga.nama',
+                        data: null,
+                        render: function(data, type, row) {
+                            return data.kepala_keluarga.nama ? data.kepala_keluarga.nama : "-";
+                        }
                     },
                     {
                         data: 'keuangan.pendapatan_utama',
                         render: function(data, type, row) {
-                            return rupiah(data);
+                            return data ? rupiah(data) : "-";
                         }
                     },
                     {
                         data: 'keuangan.pendapatan_sampingan',
                         render: function(data, type, row) {
-                            return rupiah(data);
+                            return data ? rupiah(data) : "-";
                         }
                     },
                     {
                         data: 'keuangan.pengeluaran_total',
                         render: function(data, type, row) {
-                            return rupiah(data);
+                            return data ? rupiah(data) : "-";
                         }
                     },
                     {
@@ -672,7 +681,7 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
+                    console.log(data);
 
                     Swal.fire({
                         icon: 'success',
@@ -702,7 +711,7 @@
                             confirmButton: 'btn btn-success'
                         }
                     });
-                    // console.log(error);
+                    console.log(error);
                 }
             });
         });
@@ -724,14 +733,24 @@
                 },
                 success: function(data) {
                     // console.log(data.data);
+                    if (data.statusCode != 200) {
+                        return;
+                    }
+
                     $('#e_id').val(data.data._id);
                     $('#asd_id').val(data.data._id);
                     $('#keluarga_id').val(data.data.keluarga_id);
                     $('#no_kk_ed').val(data.data.kepala_keluarga.no_kk);
                     $('#tahun').val(data.data.tahun).change();
-                    $('#pendapatan_utama').val(data.data.keuangan.pendapatan_utama);
-                    $('#pendapatan_sampingan').val(data.data.keuangan.pendapatan_sampingan);
-                    $('#pengeluaran_total').val(data.data.keuangan.pengeluaran_total);
+                    if (typeof data.data.keuangan === "undefined") {
+                        $('#pendapatan_utama').val('')
+                        $('#pendapatan_sampingan').val('')
+                        $('#pengeluaran_total').val('')
+                    } else {
+                        $('#pendapatan_utama').val(data.data.keuangan.pendapatan_utama)
+                        $('#pendapatan_sampingan').val(data.data.keuangan.pendapatan_sampingan);
+                        $('#pengeluaran_total').val(data.data.keuangan.pengeluaran_total);
+                    }
                     $('#indikator_rumah_ukuran').val(data.data.indikator.rumah.ukuran);
                     $('#indikator_rumah_id').val(data.data.indikator.rumah.rumah_id);
                     $('#indikator_rumah_ket').val(data.data.indikator.rumah.keterangan);
@@ -832,7 +851,7 @@
             var select = $('#indikator_rumah_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/rumah",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/rumah",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
@@ -861,7 +880,7 @@
             var select = $('#indikator_atap_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/atap",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/atap",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
@@ -890,7 +909,7 @@
             var select = $('#indikator_bahan_bakar_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/bahan-bakar",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/bahan-bakar",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
@@ -919,7 +938,7 @@
             var select = $('#indikator_dinding_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/dinding",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/dinding",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
@@ -948,7 +967,7 @@
             var select = $('#indikator_jamban_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/jamban",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/jamban",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
@@ -977,7 +996,7 @@
             var select = $('#indikator_lantai_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/lantai",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/lantai",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
@@ -1006,7 +1025,7 @@
             var select = $('#indikator_penerangan_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/penerangan",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/penerangan",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
@@ -1035,7 +1054,7 @@
             var select = $('#indikator_sumber_air_id');
             $.ajax({
                 type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/sumber-air",
+                url: "{{ env('API_URL') }}/kemiskinan/get/ki/sumber-air",
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },

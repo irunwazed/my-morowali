@@ -122,7 +122,7 @@
                                 <label>Nomor Kartu Keluarga</label>
                                 <input id="no_kk" name="no_kk" type="text" class="form-control" readonly>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Kepala Keluarga</label>
                                 <select id="kepala_keluarga" name="kepala_keluarga" class="form-control" style="width:100%;"
                                     required="">
@@ -130,15 +130,15 @@
                                     <option value="true">Ya</option>
                                     <option value="false">Tidak</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label>Hubungan Keluarga</label>
                                 <select id="hubungan_keluarga" name="hubungan_keluarga" class="form-control"
                                     style="width:100%;" required="">
                                     <option value="" selected disabled>- Pilih Hubungan Keluarga -</option>
-                                    <option value="1">Istri / Suami</option>
-                                    <option value="2">Anak</option>
-                                    <option value="3">Wali</option>
+                                    <option value="1">Kepala Keluarga</option>
+                                    <option value="2">Suami/Istri</option>
+                                    <option value="3">Anak</option>
                                     <option value="4">Lainnya</option>
                                 </select>
                             </div>
@@ -239,11 +239,10 @@
                                 <select name="statKawin" id="e_statKawin" class="form-control select"
                                     style="width:100%;" required="">
                                     <option value="" selected disabled>- Pilih Status Perkawinan -</option>
-                                    <option value="1">Belum Menikah</option>
-                                    <option value="2">Menikah</option>
-                                    <option value="3">Cerai</option>
-                                    <option value="4">Duda</option>
-                                    <option value="5">Janda</option>
+                                    <option value="1">Belum Kawin</option>
+                                    <option value="2">Cerai Hidup</option>
+                                    <option value="3">Cerai Mati</option>
+                                    <option value="4">Kawin</option>
                                 </select>
                             </div>
 
@@ -252,13 +251,12 @@
                                 <select name="statPendidikan" id="e_statPendidikan" class="form-control select"
                                     style="width:100%;" required="">
                                     <option value="" selected disabled>- Pilih Status Pendidikan -</option>
-                                    <option value="1">Tidak punya ijazah</option>
-                                    <option value="2">SD/sederajat</option>
-                                    <option value="3">SMP/sederajat</option>
-                                    <option value="4">SMA/sederajat</option>
-                                    <option value="5">S1</option>
-                                    <option value="6">S2</option>
-                                    <option value="7">S3</option>
+                                    @php
+                                        $arr = ['', 'Tidak/belum sekolah', 'Tidak tamat', 'SD/sederajat', 'Siswa SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat', 'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat', 'Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi'];
+                                    @endphp
+                                    @for ($i = 1; $i < count($arr); $i++)
+                                        <option value="{{ $i }}">{{ $arr[$i] }}</option>
+                                    @endfor
                                 </select>
                             </div>
                             <div class="form-group">
@@ -299,7 +297,7 @@
 
     <script>
         $(document).ready(function() {
-            // loadData();
+            // loadData('asd');
             $('#m_tambah').hide();
             $('#m_edit').hide();
 
@@ -328,11 +326,9 @@
                 },
                 success: function(data) {
                     if (data.data) {
-                        // console.log(data.data.no_kk);
                         $("#btn_tam_hid").show(300);
                         $('#no_kk').val(data.data.no_kk);
                         $('#kk_dummy').val(data.data.no_kk);
-                        // $("input[name='no_kk']").val(data.data.no_kk);
 
                         loadData(id);
                     } else {
@@ -521,6 +517,9 @@
                     dataSrc: "data.keluarga_penduduk",
                     // success: function(data) {
                     //     console.log(data);
+                    //     if(!data.data){
+                    //         alert('Tidak Ada Data')
+                    //     }
                     // },
                     // error: function(error) {
                     //     console.log(error);
@@ -583,6 +582,15 @@
                         }
                     },
                     {
+                        data: 'data_penduduk.status_pernikahan',
+                        render: function(data, type, row) {
+                            let arr = ['',
+                                'Belum Kawin', 'Cerai Hidup', 'Cerai Mati', 'Kawin'
+                            ]
+                            return arr[data];
+                        }
+                    },
+                    {
                         data: 'data_penduduk.jk',
                         render: function(data, type, row) {
                             if (data == "L") {
@@ -593,39 +601,14 @@
                         }
                     },
                     {
-                        data: 'data_penduduk.status_pernikahan',
-                        render: function(data, type, row) {
-                            if (data == "1") {
-                                return "Belum Menikah";
-                            } else if (data == "2") {
-                                return "Menikah";
-                            } else if (data == "3") {
-                                return "Cerai";
-                            } else if (data == "4") {
-                                return "Duda";
-                            } else if (data == "5") {
-                                return "Janda";
-                            }
-                        }
-                    },
-                    {
                         data: 'data_penduduk.pendidikan_id',
                         render: function(data, type, row) {
-                            if (data == "1") {
-                                return "Tidak punya ijazah";
-                            } else if (data == "2") {
-                                return "SD";
-                            } else if (data == "3") {
-                                return "SMP";
-                            } else if (data == "4") {
-                                return "SMA";
-                            } else if (data == "5") {
-                                return "S1";
-                            } else if (data == "6") {
-                                return "S2";
-                            } else if (data == "7") {
-                                return "S3";
-                            }
+                            let arr = ['', 'Tidak/belum sekolah', 'Tidak tamat', 'SD/sederajat',
+                                'Siswa SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat',
+                                'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat',
+                                'Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi'
+                            ]
+                            return arr[data];
                         }
                     },
                 ],
@@ -645,16 +628,23 @@
                 },
                 success: function(data) {
                     // console.log(data.data);
+                    if (data.statusCode != 200) {
+                        return;
+                    }
                     $('#kecamatan').val(data.data.alamat.kecamatan_kode).change();
                     $('#e_nik').val(data.data.nik);
                     $('#e_nama').val(data.data.nama);
                     $('#e_lahirTempat').val(data.data.lahir.tempat);
                     $('#e_lahirTgl').val(dateformatEdit(data.data.lahir.tanggal));
                     $('#e_alamat').val(data.data.alamat.alamat_nama);
-                    $('#e_fisikKet').val(data.data.fisik.keterangan);
-                    $('#e_penyakit_ket').val(data.data.penyakit.keterangan);
                     $('#e_agama').val(data.data.agama).change();
-                    $('#e_fisik').val(data.data.fisik.fisik_id).change();
+                    if (data.data.fisik) {
+                        $('#e_fisik').val(data.data.fisik.fisik_id).change()
+                        $('#e_fisikKet').val(data.data.fisik.keterangan)
+                    }
+
+                    $('#e_penyakit_ket').val(data.data.penyakit ? data.data.penyakit.keterangan : '-')
+
                     $('#e_statKawin').val(data.data.status_pernikahan).change();
                     $('#e_statPendidikan').val(data.data.pendidikan_id).change();
                     $('#e_jk').val(data.data.jk).change();
@@ -664,11 +654,6 @@
                         $('#e_hidup').val('false').change();
                     }
 
-                    if (data.data.keluarga_penduduk['0'].kepala == true) {
-                        $('#kepala_keluarga').val('true').change();
-                    } else {
-                        $('#kepala_keluarga').val('false').change();
-                    }
                     $('#no_kk').val(data.data.keluarga_penduduk['0'].keluarga.no_kk);
                     $('#hubungan_keluarga').val(data.data.keluarga_penduduk['0'].level).change();
 
@@ -724,7 +709,7 @@
                             "success"
                         );
 
-                        idkk = $('#kk_dummy').val();
+                        idkk = $('#id_cari').val();
                         loadData(idkk);
                     } else if (
                         /* Read more about handling dismissals below */
@@ -733,21 +718,6 @@
                         swalWithBootstrapButtons.fire("Dibatalkan", "", "error");
                     }
                 });
-        }
-
-        function dateformat(date) {
-            var date = new Date(date);
-            formattedDate = ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + ((date.getMonth() >
-                8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + date.getFullYear();
-            return formattedDate;
-        }
-
-        function dateformatEdit(date) {
-            var date = new Date(date);
-            formattedDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date
-                    .getMonth() + 1))) + '-' +
-                ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
-            return formattedDate;
         }
 
         $('#btn_tambah').click(function() {

@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Data Pekerjaan - SEPAKAD')
+@section('judul', 'Data Pekerjaan - SEPEKAN')
 
 @section('tambah_css')
 
@@ -24,7 +24,7 @@
                             {{-- <button class="btn btn-primary" style="float: right" type="button" data-toggle="modal"
                                 data-target="#exampleModal">Tambah Data</button> --}}
                             <button class="btn btn-secondary" style="position: absolute; right:25px;" type="button"
-                                id="btn_modal">Tambah Data</button>
+                            id="btn_modal"><i class="i-Add"></i> Tambah Data</button>
                         </div>
                     </div>
                 </div>

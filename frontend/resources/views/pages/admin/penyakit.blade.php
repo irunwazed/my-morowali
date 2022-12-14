@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Data Penyakit - SEPAKAD')
+@section('judul', 'Data Penyakit - SEPEKAN')
 
 @section('tambah_css')
 
@@ -24,7 +24,7 @@
                             {{-- <button class="btn btn-primary" style="float: right" type="button" data-toggle="modal"
                                 data-target="#exampleModal">Tambah Data</button> --}}
                             <button class="btn btn-secondary" style="position: absolute; right:25px;" type="button"
-                                id="btn_modal">Tambah Data</button>
+                                id="btn_modal"><i class="i-Add"></i> Tambah Data</button>
                         </div>
                     </div>
                 </div>
@@ -135,6 +135,10 @@
                     // error: function(error) {
                     //     console.log(error);
                     // },
+                    // error: function(jqXHR, textStatus, errorThrown) {
+                    //     sweetRes('error', '500', "Server Error!");
+                    //     $('#tabel_data').DataTable().clear().draw();
+                    // },
                 },
                 columns: [{
                         data: null,
@@ -174,7 +178,6 @@
 
         function edit_data(id) {
             $("#form_data")[0].reset();
-            // console.log(id);
             $.ajax({
                 type: "GET",
                 url: "{{ env('API_URL') }}/kemiskinan/data/penyakit/" + id,
@@ -182,10 +185,12 @@
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    // console.log(data.data);
+                    if (!data.data) {
+                        return
+                    }
                     $('#e_id').val(id);
                     $('#nama').val(data.data.nama);
-                    $('#keterangan').val('');
+                    $('#keterangan').val(data.data.keterangan);
                 },
                 error: function(error) {
                     console.log(error);
@@ -198,7 +203,6 @@
         }
 
         function hapus_data(id) {
-            // console.log(id);
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -256,29 +260,21 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil ditambahkan!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!data.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('success', '', "Data berhasil ditambahkan!")
+
                     loadData();
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
                 },
                 error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!error.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('error', (error.responseJSON.errors['0'].msg + " (" + error.responseJSON
+                        .errors['0'].param + ")"), "test")
                     console.log(error);
                 }
             });
@@ -300,29 +296,22 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil diubah!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!data.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('success', '', "Data berhasil diubah!")
+
                     loadData();
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
                 },
                 error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!error.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('error', '', (error.responseJSON.errors['0'].msg + " (" + error
+                        .responseJSON
+                        .errors['0'].param + ")"))
                     console.log(error);
                 }
             });

@@ -188,7 +188,6 @@
 
         function edit_data(id) {
             $("#form_data")[0].reset();
-            // console.log(id);
             $.ajax({
                 type: "GET",
                 url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/indikator/penerangan/" + id,
@@ -196,7 +195,9 @@
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    // console.log(data.data);
+                    if (!data.data) {
+                        return
+                    }
                     $('#e_id').val(id);
                     $('#nama').val(data.data.nama);
                     $('#bobot').val(data.data.bobot);
@@ -213,7 +214,6 @@
         }
 
         function hapus_data(id) {
-            // console.log(id);
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -240,18 +240,19 @@
                             headers: {
                                 "Authorization": "Bearer {{ Session::get('token') }}"
                             },
+                            success: function(data) {
+                                if (!data.responseJSON) {
+                                    sweetRes('error', '500', "Server Error!")
+                                }
+                                sweetRes('success', '', "Data berhasil dihapus!")
+                            }
                         });
                         loadData();
-                        swalWithBootstrapButtons.fire(
-                            "Terhapus!",
-                            "Data Berhasil diHapus!.",
-                            "success"
-                        );
                     } else if (
                         /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
-                        swalWithBootstrapButtons.fire("Dibatalkan", "", "error");
+                        sweetRes('error', '', "Dibatalkan")
                     }
                 });
         }
@@ -271,29 +272,21 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil ditambahkan!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!data.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('success', '', "Data berhasil ditambahkan!")
+
                     loadData();
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
                 },
                 error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!error.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('error', (error.responseJSON.errors['0'].msg + " (" + error.responseJSON
+                        .errors['0'].param + ")"), "test")
                     console.log(error);
                 }
             });
@@ -315,29 +308,22 @@
                 contentType: false,
                 cache: false,
                 success: function(data) {
-                    // console.log(data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: "Data berhasil diubah!",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!data.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('success', '', "Data berhasil diubah!")
+
                     loadData();
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
                 },
                 error: function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON.errors['0'].msg + " (" + error.responseJSON
-                            .errors['0'].param + ")",
-                        text: '',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
+                    if (!error.responseJSON) {
+                        sweetRes('error', '500', "Server Error!")
+                    }
+                    sweetRes('error', '', (error.responseJSON.errors['0'].msg + " (" + error
+                        .responseJSON
+                        .errors['0'].param + ")"))
                     console.log(error);
                 }
             });
