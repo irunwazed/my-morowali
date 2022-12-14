@@ -8,14 +8,14 @@ exports.controller = class EksportController {
 	static async penduduk(req, res) {
 
 		try{
-			let excel = req.files[0];
+			let excel = req.files.file;
 			let setDelete = req.body.delete=='true'?true:false;
 
 			console.log(excel)
 
 
 			console.log('proses load data keluarga')
-			const file = reader.readFile(excel.path)
+			const file = reader.readFile(excel.tempFilePath)
 
 			let data = []
 
@@ -64,11 +64,12 @@ exports.controller = class EksportController {
 
 				
 				let no_kk = data[idx]['ID Keluarga P3KE'];
+				let nik = data[idx]['NIK'];
 				
-				let tmp = await db.penduduk.find({ nama: data[idx]['Nama'], no_kk: no_kk });
-				if(tmp.length > 0){
-					return await EksportController.insert(data, (idx+1));
-				}
+				// let tmp = await db.penduduk.find({ nama: data[idx]['Nama'], no_kk: no_kk });
+				// if(tmp.length > 0){
+				// 	return await EksportController.insert(data, (idx+1));
+				// }
 	
 				let dataInput = await EksportController.setPenduduk(data[idx]);
 	
@@ -80,8 +81,11 @@ exports.controller = class EksportController {
 				// console.log(EksportController.nikArr);
 				
 				let tmpKeluarga = {no_kk: no_kk};
-		
-		
+
+				if(hubkel[data[idx]['Hubungan dengan Kepala Keluarga']] == 1){
+					tmpKeluarga['nik_kepala'] =  nik;
+				}
+
 				let keluarga = await db.keluarga.find(tmpKeluarga);
 				let keluarga_id;
 				if(keluarga.length == 0){

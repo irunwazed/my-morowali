@@ -150,13 +150,14 @@ routerAdmin.get("/api/laporan/kesejahteraan", route('api/LaporanController@kesej
 routerAdmin.get("/api/laporan/bantuan", route('api/LaporanController@bantuan'));
 
 // export import
-// routerAdmin.post("/api/eksport/penduduk", upload.any(), route('api/EksportController@penduduk'));
-// routerAdmin.post("/api/eksport/kesejahteraan", upload.any(), route('api/EksportKesejahteraanController@penduduk'));
+routerAdmin.post("/api/eksport/penduduk", route('api/EksportController@penduduk'));
+routerAdmin.post("/api/eksport/kesejahteraan", route('api/EksportKesejahteraanController@penduduk'));
 
 
 // get data to foreign
 routerAdmin.get("/api/get/penduduk", route('api/DataController@getPendudukBySearch'))
 routerAdmin.get("/api/get/penduduk/:nik", route('api/DataController@getPendudukByNIK'))
+routerAdmin.get("/api/get/keluarga/search", route('api/DataController@getKeluargaBySearch'))
 routerAdmin.get("/api/get/keluarga/:no_kk", route('api/DataController@getKeluargaByNoKK'))
 routerAdmin.get("/api/get/provinsi", route('api/DataController@getProvinsi'))
 routerAdmin.get("/api/get/provinsi/:kode", route('api/DataController@getProvinsiKode'))

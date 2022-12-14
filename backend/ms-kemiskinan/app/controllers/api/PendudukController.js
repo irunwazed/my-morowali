@@ -166,13 +166,25 @@ exports.controller = class PendudukController {
 				if(kepala_keluarga){
 					await db.keluarga.findByIdAndUpdate(kk_id, {nik_kepala: nik}, {useFindAndModify: false,});
 				}
+
+				if(kk_image.status){
+					await db.keluarga.findByIdAndUpdate(kk_id, {kk_image: kk_image.file}, {useFindAndModify: false,});
+				}
+
 			}else{
 				kepala_keluarga = true;
-				let dataKK = await db.keluarga.create({
+
+				let tmpKeluarga = {
 					no_kk: no_kk,
 					kb: kb,
 					nik_kepala: nik
-				});
+				};
+				
+				if(kk_image.status){
+					tmpKeluarga['kk_image'] = kk_image.file;
+				}
+
+				let dataKK = await db.keluarga.create(tmpKeluarga);
 				kk_id = dataKK._id;
 			}
 

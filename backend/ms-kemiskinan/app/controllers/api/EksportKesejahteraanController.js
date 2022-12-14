@@ -8,14 +8,15 @@ exports.controller = class EksportKesejahteraanController {
 	static async penduduk(req, res) {
 
 		try{
-			let excel = req.files[0];
+			let excel = req.files.file;
+			let tahun = req.body.tahun;
 			let setDelete = req.body.delete=='true'?true:false;
 
 			console.log(excel)
 
 
 			console.log('proses load data kesejahteraan')
-			const file = reader.readFile(excel.path)
+			const file = reader.readFile(excel.tempFilePath)
 
 			let data = []
 
@@ -25,7 +26,7 @@ exports.controller = class EksportKesejahteraanController {
 			{
 				const temp = reader.utils.sheet_to_json(file.Sheets[file.SheetNames[i]])
 				temp.forEach((res) => {
-						data.push(res)
+						data.push({ ...res, tahun})
 				})
 			}
 				
@@ -36,8 +37,6 @@ exports.controller = class EksportKesejahteraanController {
 			await EksportKesejahteraanController.insert(data, 0);
 			
 			let tes = await db.keluarga_kesejahteraan.find({});
-
-
 			console.log('insert data kesejahteraan'+tes.length);
 
 			let api = {
@@ -54,9 +53,16 @@ exports.controller = class EksportKesejahteraanController {
 	static async insert(data, idx){
 		if(data[idx]){
 	
-			let tmp = await setData(data[idx]);
+			// console.log(data[idx]);
+			let check = await db.keluarga.find({no_kk: data[idx]['ID Keluarga P3KE']});
+			if(check.length == 0) return await EksportKesejahteraanController.insert(data, (idx+1));
+
+			check = await db.keluarga_kesejahteraan.find({keluarga_id: check[0]._id, tahun: data[idx].tahun});
+			if(check.length > 0) return await EksportKesejahteraanController.insert(data, (idx+1));
+
+			let tmp = await EksportKesejahteraanController.setData(data[idx]);
 			await db.keluarga_kesejahteraan.insertMany([tmp]);
-			return await insert(data, (idx+1));
+			return await EksportKesejahteraanController.insert(data, (idx+1));
 		}
 		return false;
 	}
@@ -64,7 +70,7 @@ exports.controller = class EksportKesejahteraanController {
 	static async setData(e){
 		let no_kk =  e['ID Keluarga P3KE'];
 		let tmp = await db.keluarga.find({no_kk: no_kk});
-	
+
 		let rumah = await db.ki_rumah.find({ nama: e['Kepemilikan Rumah'] });
 		let atap = await db.ki_atap.find({ nama: e['Jenis Atap'] });
 		let dinding = await db.ki_dinding.find({ nama: e['Jenis Dinding'] });
@@ -73,42 +79,41 @@ exports.controller = class EksportKesejahteraanController {
 		let bahan_bakar = await db.ki_bahan_bakar.find({ nama: e['Bahan Bakar Memasak'] });
 		let sumber_air = await db.ki_sumber_air.find({ nama: e['Sumber Air Minum'] });
 		let jamban = await db.ki_jamban.find({ nama: e['Memiliki fasilitas Buang Air Besar'] });
-	
 		return {
 			keluarga_id: tmp[0]._id,
 			status_kesejahteraan: e['Desil Kesejahteraan'],
-			tahun: 2022,
+			tahun: e.tahun,
 			indikator: {
 				rumah: {
-					rumah_id: rumah[0]._id,
+					rumah_id: rumah[0]?rumah[0]._id:undefined,
 					nama: e['Kepemilikan Rumah'],
 				},
 				atap: {
-					atap_id: atap[0]._id,
+					atap_id: atap[0]?atap[0]._id:undefined,
 					nama: e['Jenis Atap'],
 				},
 				dinding: {
-					dinding_id: dinding[0]._id,
+					dinding_id: dinding[0]?dinding[0]._id:undefined,
 					nama: e['Jenis Dinding'],
 				},
 				lantai: {
-					lantai_id: lantai[0]._id,
+					lantai_id: lantai[0]?lantai[0]._id:undefined,
 					nama: e['Jenis Lantai'],
 				},
 				penerangan: {
-					penerangan_id: penerangan[0]._id,
+					penerangan_id: penerangan[0]?penerangan[0]._id:undefined,
 					nama: e['Sumber Penerangan'],
 				},
 				bahan_bakar: {
-					bahan_bakar_id: bahan_bakar[0]._id,
+					bahan_bakar_id: bahan_bakar[0]?bahan_bakar[0]._id:undefined,
 					nama: e['Bahan Bakar Memasak'],
 				},
 				sumber_air: {
-					sumber_air_id: sumber_air[0]._id,
+					sumber_air_id: sumber_air[0]?sumber_air[0]._id:undefined,
 					nama: e['Sumber Air Minum'],
 				},
 				jamban: {
-					jamban_id: jamban[0]._id,
+					jamban_id: jamban[0]?jamban[0]._id:undefined,
 					nama: e['Memiliki fasilitas Buang Air Besar'],
 				},
 				simpanan: e['Memiliki Simpanan Uang/Perhiasan/Ternak/Lainnya']=='Ya'?true:false,
