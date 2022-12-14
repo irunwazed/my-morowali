@@ -8,7 +8,7 @@ module.exports = {
     // error_file: "./storages/logs/stderr.log",
     // out_file: "./storages/logs/stdout.log",
     instances: 1,
-    max_memory_restart: "212M",
+    max_memory_restart: "512M",
     autorestart: true,
     // merge_logs: true,
   }]
