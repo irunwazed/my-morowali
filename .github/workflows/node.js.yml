@@ -9,9 +9,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v0.1.6
@@ -21,4 +19,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-          ls
+          cd /home/kominfo/app/my-morowali/
+          git pull origin master
+          cd ./backend/api-gateway
+          npm install
