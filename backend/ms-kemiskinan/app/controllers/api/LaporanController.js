@@ -93,6 +93,7 @@ exports.controller = class LaporanController {
         } },
       ];
 
+      console.log('search data');
       let data = [];
       let tmp = [];
       if(datatable){
@@ -101,7 +102,7 @@ exports.controller = class LaporanController {
       }else{
         data = await db.penduduk.aggregate(query);
       }
-      
+      console.log('get data');
 
       
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
