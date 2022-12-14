@@ -4,7 +4,7 @@ module.exports = {
     script: "./app/server.js",
     watch: true,
     log_date_format: "YYYY/MM/DD HH:mm Z",
-    ignore_watch : ["node_modules", "public", "uploads", "tmp"],
+    ignore_watch : ["node_modules", "public", "tmp"],
     // error_file: "./public/storages/logs/stderr.log",
     // out_file: "./public/storages/logs/stdout.log",
     instances: 1,

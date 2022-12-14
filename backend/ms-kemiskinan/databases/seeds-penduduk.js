@@ -1,5 +1,6 @@
 const db = require('../app/models');
 const reader = require('xlsx');
+const { penduduk } = require('../app/models');
 
 const running = async () => {
 
@@ -8,8 +9,10 @@ const running = async () => {
     useUnifiedTopology: true
   })
 
-  console.log('proses load data keluarga')
-  const file = reader.readFile('./../../documentation/data/penduduk.xlsx')
+	let nameFile = process.argv[2]?process.argv[2]:'penduduk';
+
+  // console.log('proses load data keluarga')
+  const file = reader.readFile('./../../documentation/data/'+nameFile+'.xlsx')
   
   let data = []
     
@@ -29,11 +32,8 @@ const running = async () => {
   await db.keluarga.deleteMany({}) 
   await db.keluarga_penduduk.deleteMany({}) 
   await insert(data, 0);
-  
 
   let tes = await db.penduduk.find({});
-
-
   console.log('insert data penduduk'+tes.length);
   process.exit();
 }
