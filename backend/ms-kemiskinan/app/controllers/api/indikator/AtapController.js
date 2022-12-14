@@ -17,6 +17,7 @@ exports.controller = class AtapController {
 	static async getData(req, res) {
 		let nama = new RegExp(req.query.nama);
 		var condition = {nama: {$regex: nama, $options: 'i'}};
+		console.log(condition);
 		try{
 			let result = await paginate.find(req, 'ki_atap', condition);
 			return res.send(result);

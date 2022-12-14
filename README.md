@@ -31,6 +31,7 @@ code ~/.ssh/authorized_keys
 sudo fuser -k 80/tcp
 ```
 
+
 ## NGINX LARAVEL
 ```
 server {

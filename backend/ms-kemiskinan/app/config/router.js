@@ -62,12 +62,6 @@ routerAdmin.get("/api/keluarga/no_kk/:no_kk", route('api/KeluargaController@getD
 routerAdmin.get("/api/keluarga/:id", route('api/KeluargaController@getData'));
 routerAdmin.delete("/api/keluarga/:id", route('api/KeluargaController@delete'));
 
-routerAdmin.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
-routerAdmin.get("/api/kesejahteraan/:no_kk/:tahun", route('api/KesejahteraanController@getData'));
-routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getData'));
-routerAdmin.post("/api/kesejahteraan", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
-routerAdmin.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true),  route('api/KesejahteraanController@store'));
-routerAdmin.delete("/api/kesejahteraan/:id",  route('api/KesejahteraanController@delete'));
 
 
 routerAdmin.get("/api/bantuan", route('api/BantuanController@getData'));
@@ -142,6 +136,13 @@ routerAdmin.get("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indika
 routerAdmin.post("/api/kesejahteraan/indikator/sumber-air", route('api/indikator/SumberAirController@store', true), route('api/indikator/SumberAirController@store'));
 routerAdmin.put("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@store', true), route('api/indikator/SumberAirController@update'));
 routerAdmin.delete("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@delete'));
+
+routerAdmin.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
+routerAdmin.get("/api/kesejahteraan/:no_kk/:tahun", route('api/KesejahteraanController@getData'));
+routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getData'));
+routerAdmin.post("/api/kesejahteraan", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
+routerAdmin.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true),  route('api/KesejahteraanController@store'));
+routerAdmin.delete("/api/kesejahteraan/:id",  route('api/KesejahteraanController@delete'));
 
 // laporan
 routerAdmin.get("/api/laporan/penduduk", route('api/LaporanController@penduduk'));
