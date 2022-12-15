@@ -1,7 +1,7 @@
 <div class="sidebar-panel bg-white">
     <div class="gull-brand pr-3 text-center mt-4 mb-2 d-flex justify-content-center align-items-center">
         <img class="pl-3" src="{{ asset('') }}assets/dist-assets/images/logo.png" alt="alt" />
-        <span class="ml-2 item-name text-20 text-primary font-weight-700">SEPAKAD</span>
+        <span class="ml-2 item-name text-20 text-primary font-weight-700">SEPEKAN</span>
         <div class="sidebar-compact-switch ml-auto"><span></span></div>
     </div>
     <!--  user -->
