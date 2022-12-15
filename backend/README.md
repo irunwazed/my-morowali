@@ -5,7 +5,6 @@
 npm install
 ```
 
-
 ## running all
 ```
 npm run dev
