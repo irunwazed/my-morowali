@@ -11,14 +11,14 @@ module.exports = {
 			let data = [];
 			let jumData = 0;
 			let draw = req.query.draw?req.query.draw:0;
-			let limit = 5000;
+			let limit = 100000;
 	
 			data = await db[table].find(condition)
 				.sort({ updatedAt: 'desc' })
 				.skip(start)
 				.limit(length);
-			let tmp = await db[table].find(condition).limit(limit);
-			// let tmp = await db[table].find(condition);
+			// let tmp = await db[table].find(condition).limit(limit);
+			let tmp = await db[table].find(condition);
 			jumData = tmp.length;
 	
 			result = {
@@ -51,17 +51,15 @@ module.exports = {
 			let data = [];
 			let jumData = 0;
 			let draw = req.query.draw;
-			let limit = 5000;
-
-			console.log('data');
+			let limit = 100000;
 	
 			data = await db[table].aggregate(condition)
 				.sort({ updatedAt: 'desc' })
 				.skip(start)
 				.limit(length);
 
-			let tmp = await db[table].aggregate(condition).limit(limit);
-			// let tmp = await db[table].aggregate(condition);
+			// let tmp = await db[table].aggregate(condition).limit(limit);
+			let tmp = await db[table].aggregate(condition);
 			jumData = tmp.length;
 	
 			result = {

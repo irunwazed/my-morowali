@@ -37,6 +37,7 @@ exports.validate = {
 exports.controller = class KesejahteraanController {
 
 	static async getData(req, res) {
+
 		var condition = [
 			{
 				$lookup:{
@@ -69,12 +70,15 @@ exports.controller = class KesejahteraanController {
 		];
 		try{
 
+			console.log('condition2');
 			if(req.params.id){
 				condition.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id)} });
 				let data = await table.aggregate(condition);
 				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
+
+			console.log('condition');
 			if(req.params.no_kk && req.params.tahun){
 				console.log(req.params);
 				condition.push({ $match: { $and: [
@@ -85,7 +89,7 @@ exports.controller = class KesejahteraanController {
 				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
-
+			console.log(condition);
 			let data = await paginate.aggregate(req, 'keluarga_kesejahteraan', condition);
 			return res.send(data);
 		}catch(err){
