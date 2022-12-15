@@ -15,7 +15,7 @@ class LoginController extends Controller
             $client = new \GuzzleHttp\Client();
             $response = $client->request(
                 'POST',
-                env('API_URL') . '/auth/login',
+                'http://127.0.0.1:3000/auth/login',
                 [
                     'form_params' => [
                         'username' => $request->username,
@@ -28,7 +28,7 @@ class LoginController extends Controller
             $client2 = new \GuzzleHttp\Client();
             $response2 = $client2->request(
                 'get',
-                env('API_URL') . '/auth/cek-login',
+                'http://127.0.0.1:3000/auth/cek-login',
                 [
                     'headers' =>
                     [
