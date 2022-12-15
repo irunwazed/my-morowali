@@ -263,6 +263,7 @@ exports.controller = class DataController {
 	static async getKeluargaBySearch(req, res) {
 		let search = req.query.search?req.query.search:'';
 		let searchAll = req.query.searchAll=='true'?true:false;
+		let jenis = req.query.jenis?req.query.jenis:1;
 		
 		let or = [
 			{ no_kk: { $regex: new RegExp(search), $options: "i" }, },
@@ -271,9 +272,12 @@ exports.controller = class DataController {
 			or.push({ nik: { $regex: new RegExp(search), $options: "i" }, },)
 			or.push({ nama: { $regex: new RegExp(search), $options: "i" }, },)
 		}
-		
-		try{
-			let data = await db.keluarga.aggregate([
+
+		let query = [];
+		let data;
+		if(jenis== 1){
+
+			data = await db.keluarga.aggregate([
 				{
 					$lookup:{
 						from: 'keluarga_penduduks',
@@ -296,7 +300,7 @@ exports.controller = class DataController {
 				{ $unwind: "$penduduk" },
 				{
 					$project: {
-						_id: 1,
+						keluarga_id: '$_id',
 						no_kk: 1,
 						nik_kepala: 1,
 						level: '$penduduk.level',
@@ -305,11 +309,51 @@ exports.controller = class DataController {
 					}
 				},
 				{ $match: { 
-					level: 1,
-					$or: or,
+					no_kk: { $regex: new RegExp(search), $options: "i" },
 				} }
-			])
-			.limit(10);
+			]).limit(10);
+		}else{
+			data = await db.penduduk.aggregate([
+				{
+					$lookup:{
+						from: 'keluarga_penduduks',
+						localField: '_id',
+						foreignField: 'penduduk_id',
+						pipeline: [
+							{
+								$lookup:{
+									from: 'keluargas',
+									localField: 'keluarga_id',
+									foreignField: '_id',
+									as: 'detail'
+								},
+							}, 
+							{ $unwind: "$detail" },
+						],
+						as: 'keluarga',
+					},
+				},
+				{ $unwind: "$keluarga" },
+				{
+					$project: {
+						keluarga_id: '$keluarga.detail._id',
+						no_kk: '$keluarga.detail.no_kk',
+						nik_kepala: '$keluarga.detail.nik_kepala',
+						level: '$keluarga.level',
+						nama: '$nama',
+						nik: '$nik',
+					}
+				},
+				{ $match: { 
+					$or:[
+						{ nama: { $regex: new RegExp(search), $options: "i" }, },
+						{ nik: { $regex: new RegExp(search), $options: "i" }, }
+					]
+				} }
+			]).limit(10);
+		}
+		
+		try{
 
 			return res.send({statusCode: 200, data: data});
 

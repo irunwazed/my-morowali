@@ -5,10 +5,15 @@ exports.controller = class LaporanController {
 	static async penduduk(req, res) {
     try{
 
+      let year = new Date().getFullYear();
+
       let datatable = req.query.datatable=='true'?true:false;
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
+			let search = req.query.search?req.query.search:{ value: '', regex: false };
+      
+      console.log(req.query);
 
       let query = [
         {
@@ -87,12 +92,16 @@ exports.controller = class LaporanController {
           }
         },
         { $match: { 
-          'alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-          'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-          'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
+          $or: [
+            { 'nama': { $regex: new RegExp(search.value), $options: "i" } },
+            { 'alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" } },
+            { 'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" } },
+            { 'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" } },
+          ]
         } },
       ];
-
+      search
+      console.log('search data');
       let data = [];
       let tmp = [];
       if(datatable){
@@ -101,7 +110,7 @@ exports.controller = class LaporanController {
       }else{
         data = await db.penduduk.aggregate(query);
       }
-      
+      console.log('get data');
 
       
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
@@ -152,113 +161,8 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
-      let search = '';
+			let search = req.query.search?req.query.search:{ value: '', regex: false };
 
-      // let query = [
-			// 	{
-			// 		$lookup:{
-			// 			from: 'keluarga_penduduks',
-			// 			localField: '_id',
-			// 			foreignField: 'keluarga_id',
-			// 			pipeline: [
-			// 				{
-			// 					$lookup:{
-			// 						from: 'penduduks',
-			// 						localField: 'penduduk_id',
-			// 						foreignField: '_id',
-			// 						pipeline: [
-			// 							{
-			// 								$lookup: {
-			// 									from: 'penyakits',
-			// 									localField: 'penyakit.penyakit_id',
-			// 									foreignField: '_id',
-			// 									as: 'penyakit_diderita',
-			// 								},
-			// 							},
-			// 							{
-			// 								$lookup: {
-			// 									from: 'penduduk_pekerjaans',
-			// 									localField: '_id',
-			// 									foreignField: 'penduduk_id',
-      //                   pipeline: [
-      //                     {
-      //                       $lookup: {
-      //                         from: 'pekerjaans',
-      //                         localField: 'pekerjaan_id',
-      //                         foreignField: '_id',
-      //                         as: 'pekerjaan',
-      //                       },
-      //                     },
-      //                     { $unwind: "$pekerjaan" },
-      //                     { $project: {
-      //                       pekerjaan_id: '$pekerjaan_id',
-      //                       pekerjaan_nama: '$pekerjaan.nama',
-      //                       gaji: '$gaji',
-      //                       keterangan: '$keterangan',
-      //                     } }
-      //                   ],
-			// 									as: 'pekerjaan',
-			// 								},
-			// 							},
-			// 						],
-			// 						as: 'penduduk'
-			// 					},
-			// 				}, 
-			// 				{ $unwind: "$penduduk" },
-      //         {
-      //           $project: {
-      //             penduduk_id: '$penduduk_id',
-      //             level: '$level',
-      //             kepala_keluarga: '$kepala',
-      //             nama: '$penduduk.nama',
-      //             nik: '$penduduk.nik',
-      //             jk: '$penduduk.jk',
-      //             agama: '$penduduk.agama',
-      //             lahir: '$penduduk.lahir',
-      //             alamat: '$penduduk.alamat',
-      //             status_pernikahan: '$penduduk.status_pernikahan',
-      //             fisik: '$penduduk.fisik',
-      //             pendidikan_id: '$penduduk.pendidikan_id',
-      //             penyakit: {
-      //               penyakit_id: '$penduduk.penyakit.penyakit_id',
-      //               nama: { $arrayElemAt: ['$penduduk.penyakit_diderita.nama', 0] },
-      //               keterangan: '$penduduk.penyakit.keterangan',
-      //             },
-      //             pekerjaan: '$penduduk.pekerjaan',
-      //             hidup: '$penduduk.hidup',
-      //           }
-      //         },
-      //         // { $match: { 
-      //         //   'alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-      //         //   'alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-      //         //   'alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-      //         // } }
-			// 			],
-			// 			as: 'anggota_keluarga', 
-			// 		},
-			// 	},
-      //   // { $unwind: "$anggota_keluarga" },
-      //   // {
-      //   //   $project: {
-      //   //     _id: 1,
-      //   //     no_kk: '$no_kk',
-      //   //     nik_kepala: 1,
-      //   //     anggota_keluarga: 1,
-      //   //     jum: { $size: ["$anggota_keluarga"] }
-      //   //   }
-      //   // },
-      //   // {
-      //   //   $match: {
-      //   //     anggota_keluarga: { $size: 0 }
-      //   //   }
-      //   // }
-      //   // { $match: { 
-      //   //   'anggota_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-      //   //   'anggota_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-      //   //   'anggota_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-      //   // } }
-			// ];
-      
       let query = [
         
         {
@@ -388,7 +292,6 @@ exports.controller = class LaporanController {
         }
       ];
 
-      console.log('tes1');
 
       let data = [];
       let tmp = {};
@@ -398,7 +301,6 @@ exports.controller = class LaporanController {
       }else{
         data = await db.penduduk.aggregate(query);
       }
-      console.log('tes2');
 
       let hubKel = ['', 'Istri / Suami', 'Anak', 'Wali', 'Lainnya'];  
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
@@ -443,8 +345,7 @@ exports.controller = class LaporanController {
         return res.send(data);
       }
       
-      return res.send({statusCode: 200, data: data});
-      // return res.send({statusCode: 200, data: dataAll});
+      return res.send({statusCode: 200, data: dataAll});
     }catch(err){
       return res.send({statusCode: 500, message: err});
     }
@@ -456,6 +357,19 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
+      let status_kesejahteraan = req.query.status_kesejahteraan?req.query.status_kesejahteraan:null;
+
+      let match = { 
+        'keluarga.kepala_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+        'keluarga.kepala_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+        'keluarga.kepala_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" },
+      };
+
+      if(status_kesejahteraan != null){
+        match['status_kesejahteraan'] = parseInt(status_kesejahteraan);
+      }      
+      // console.log(match);
+
 
       let query = [
         {
@@ -532,13 +446,9 @@ exports.controller = class LaporanController {
           },
         }, 
 			  { $unwind: "$keluarga" },
-        { $match: { 
-          'keluarga.kepala_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-          'keluarga.kepala_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-          'keluarga.kepala_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-        } }
+        { $match: match }
       ];
-      console.log('tes1');
+      
       let data = [];
       let tmp = {};
       if(datatable){
@@ -547,8 +457,6 @@ exports.controller = class LaporanController {
       }else{
         data = await db.keluarga_kesejahteraan.aggregate(query);;
       }
-      console.log('tes2');
-      console.log(data[0]);
 
       let kesejahteraan = ['', 'Sangat Miskin', 'Miskin', 'Rentan Miskin', 'Menuju Miskin', 'Middle Class'];
       let pendidikan = ['', 'Tidak/belum sekolah', 'Tidak tamat SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat', 'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat', 'Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi'];  

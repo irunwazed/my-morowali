@@ -37,44 +37,54 @@ exports.validate = {
 exports.controller = class KesejahteraanController {
 
 	static async getData(req, res) {
-		var condition = [
-			{
-				$lookup:{
-					from: 'keluargas',
-					localField: 'keluarga_id',
-					foreignField: '_id',
-					pipeline: [
-						{
-							$lookup:{
-								from: 'penduduks',
-								localField: 'nik_kepala',
-								foreignField: 'nik',
-								as: 'penduduk'
-							},
-						}, 
-						{
-							$project: {
-								keluarga_id: '$_id',
-								no_kk: '$no_kk',
-								penduduk_id: { $arrayElemAt: ['$penduduk._id', 0] },
-								nama: { $arrayElemAt: ['$penduduk.nama', 0] },
-								nik: { $arrayElemAt: ['$penduduk.nik', 0] },
-							}
-						}
-					],
-					as: 'kepala_keluarga'
-				},
-			}, 
-			{ $unwind: "$kepala_keluarga" },
-		];
+
+		let keluarga_id = req.query.keluarga_id?req.query.keluarga_id:'';
+		
 		try{
 
+			var condition = [
+				{
+					$lookup:{
+						from: 'keluargas',
+						localField: 'keluarga_id',
+						foreignField: '_id',
+						pipeline: [
+							{
+								$lookup:{
+									from: 'penduduks',
+									localField: 'nik_kepala',
+									foreignField: 'nik',
+									as: 'penduduk'
+								},
+							}, 
+							{
+								$project: {
+									keluarga_id: '$_id',
+									no_kk: '$no_kk',
+									penduduk_id: { $arrayElemAt: ['$penduduk._id', 0] },
+									nama: { $arrayElemAt: ['$penduduk.nama', 0] },
+									nik: { $arrayElemAt: ['$penduduk.nik', 0] },
+									alamat: { $arrayElemAt: ['$penduduk.alamat', 0] },
+								}
+							}
+						],
+						as: 'kepala_keluarga'
+					},
+				}, 
+				{ $unwind: "$kepala_keluarga" },
+				{
+					$match: {
+						keluarga_id: db.mongoose.Types.ObjectId(keluarga_id)
+					}
+				}
+			];
 			if(req.params.id){
 				condition.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id)} });
 				let data = await table.aggregate(condition);
 				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
+
 			if(req.params.no_kk && req.params.tahun){
 				console.log(req.params);
 				condition.push({ $match: { $and: [
@@ -85,7 +95,7 @@ exports.controller = class KesejahteraanController {
 				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
-
+			
 			let data = await paginate.aggregate(req, 'keluarga_kesejahteraan', condition);
 			return res.send(data);
 		}catch(err){
