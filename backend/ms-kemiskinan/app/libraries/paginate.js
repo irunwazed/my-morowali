@@ -1,7 +1,7 @@
 const db = require('../models');
 
 module.exports = {
-  find: async (req, table, condition) => {
+  find: async (req, table, condition, match = {}) => {
 		var result = {}
 		try{
 			req.query = req.query?req.query:{};
@@ -20,6 +20,7 @@ module.exports = {
 			// let tmp = await db[table].find(condition).limit(limit);
 			let tmp = await db[table].find(condition);
 			jumData = tmp.length;
+			// jumData = 100;
 	
 			result = {
 				statusCode: 200,
@@ -41,7 +42,7 @@ module.exports = {
     
 		return result;
   },
-	aggregate: async (req, table, condition = []) => {
+	aggregate: async (req, table, condition = [], match = {}) => {
 		var result = {}
 		try{
 			req.query = req.query?req.query:{};
@@ -58,10 +59,11 @@ module.exports = {
 				.skip(start)
 				.limit(length);
 
-			// let tmp = await db[table].aggregate(condition).limit(limit);
-			let tmp = await db[table].aggregate(condition);
-			jumData = tmp.length;
-	
+			if(data.length > 0){
+				let tmp = await db[table].aggregate([...condition,  { $group: { _id: null, count: { $sum: 1 } } }]);
+				jumData = tmp[0].count;
+			}
+
 			result = {
 				statusCode: 200,
 				draw: draw,

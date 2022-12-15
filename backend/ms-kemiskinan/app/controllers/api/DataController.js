@@ -309,6 +309,7 @@ exports.controller = class DataController {
 					}
 				},
 				{ $match: { 
+					level:1,
 					no_kk: { $regex: new RegExp(search), $options: "i" },
 				} }
 			]).limit(10);
@@ -345,6 +346,7 @@ exports.controller = class DataController {
 					}
 				},
 				{ $match: { 
+					level:1,
 					$or:[
 						{ nama: { $regex: new RegExp(search), $options: "i" }, },
 						{ nik: { $regex: new RegExp(search), $options: "i" }, }
