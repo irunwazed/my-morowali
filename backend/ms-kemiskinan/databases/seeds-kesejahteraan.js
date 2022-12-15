@@ -40,6 +40,10 @@ let arrKK = [];
 async function insert(data, idx){
   if(data[idx]){
 
+    if(idx%10 == 0){
+      console.log('proses => '+(idx/10));
+    }
+
     let tmp = await setData(data[idx]);
     await db.keluarga_kesejahteraan.insertMany([tmp]);
     return insert(data, (idx+1));

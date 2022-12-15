@@ -292,7 +292,6 @@ exports.controller = class LaporanController {
         }
       ];
 
-      console.log('tes1');
 
       let data = [];
       let tmp = {};
@@ -302,7 +301,6 @@ exports.controller = class LaporanController {
       }else{
         data = await db.penduduk.aggregate(query);
       }
-      console.log('tes2');
 
       let hubKel = ['', 'Istri / Suami', 'Anak', 'Wali', 'Lainnya'];  
       let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
@@ -347,8 +345,7 @@ exports.controller = class LaporanController {
         return res.send(data);
       }
       
-      return res.send({statusCode: 200, data: data});
-      // return res.send({statusCode: 200, data: dataAll});
+      return res.send({statusCode: 200, data: dataAll});
     }catch(err){
       return res.send({statusCode: 500, message: err});
     }
@@ -360,6 +357,18 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
+      let status_kesejahteraan = req.query.status_kesejahteraan?req.query.status_kesejahteraan:null;
+
+      let match = { 
+        'keluarga.kepala_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
+        'keluarga.kepala_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
+        'keluarga.kepala_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" },
+      };
+
+      if(status_kesejahteraan != null){
+        match['status_kesejahteraan'] = parseInt(status_kesejahteraan);
+      }      
+      // console.log(match);
 
 
       let query = [
@@ -437,13 +446,9 @@ exports.controller = class LaporanController {
           },
         }, 
 			  { $unwind: "$keluarga" },
-        { $match: { 
-          'keluarga.kepala_keluarga.alamat.kabupaten_kode': { $regex: new RegExp(kabupaten), $options: "i" },
-          'keluarga.kepala_keluarga.alamat.kecamatan_kode': { $regex: new RegExp(kecamatan), $options: "i" },
-          'keluarga.kepala_keluarga.alamat.kelurahan_kode': { $regex: new RegExp(kelurahan), $options: "i" }
-        } }
+        { $match: match }
       ];
-      console.log('tes1');
+      
       let data = [];
       let tmp = {};
       if(datatable){
