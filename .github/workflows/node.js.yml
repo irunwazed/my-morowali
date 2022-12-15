@@ -19,9 +19,9 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-          cp -r /home/kominfo/app/my-morowali/frontend/* /var/www/html/source
           cd /home/kominfo/app/my-morowali/
           git pull
+          cp -r /home/kominfo/app/my-morowali/frontend/* /var/www/html/source
           cd ./backend/api-gateway
           npm install
           pm2 start
