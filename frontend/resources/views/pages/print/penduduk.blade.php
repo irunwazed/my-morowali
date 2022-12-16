@@ -4,6 +4,7 @@
 <head>
     <title>Print Laporan Penduduk</title>
     <link rel="stylesheet" href="{{ asset('') }}assets/dist-assets/js/bootstrap.min.css" />
+
     <style>
         .tb_inside td {
             border: 0 !important;
@@ -14,24 +15,9 @@
             border-right-style: hidden;
         }
 
-        table {
-            border-collapse: collapse;
-        }
-
         table td,
         table th {
-            font-size: 10px;
-        }
-
-        @page {
-            margin: 0cm 0cm;
-        }
-
-        body {
-            margin-top: 1cm;
-            margin-left: 1cm;
-            margin-right: 1cm;
-            margin-bottom: 1cm;
+            font-size: 20px;
         }
 
         header {
@@ -39,13 +25,14 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.6cm;
+            height: 1cm;
             background-color: #c9c9c9;
-            font-size: 10px;
+            font-size: 20px;
+            ;
             font-weight: bold;
             color: rgb(0, 0, 0);
             text-align: right;
-            line-height: 0.5cm;
+            line-height: 0.8cm;
         }
 
         footer {
@@ -53,25 +40,57 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.5cm;
+            height: 1cm;
             background-color: #c9c9c9;
             color: rgb(0, 0, 0);
-            font-size: 10px;
+            font-size: 20px;
+            ;
             text-align: left;
-            line-height: 0.4cm;
+            line-height: 0.6cm;
+        }
+
+        body {
+            line-height: 1.5;
+        }
+
+        table {
+            table-layout: auto !important;
+        }
+
+        th,
+        td,
+        thead th,
+        tbody td,
+        tfoot td,
+        tfoot th {
+            width: auto !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+            }
+
         }
     </style>
+
+
 </head>
 
 <body>
     <header>
-        <b> Laporan Data Penduduk - Dicetak dari: SEPAKAD Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
+        <b> Laporan Data Penduduk - Dicetak dari: SEPEKAN Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
     </header>
     <footer>
         <b> &nbsp;&nbsp; Copyright &copy; Sumber : LITBANG - BAPPEDA {{ date('Y') }} </b>
     </footer>
 
-    <div class="m-4">
+    <div class="m-3">
         <table class='table table-bordered'>
             <tbody>
                 @php
@@ -79,8 +98,13 @@
                 @endphp
                 @foreach (@$data as $dat)
                     <tr>
-                        <td style="width: 5px;">{{ $i }}</td>
+                        <td style="width: 5px; ">
+                            <div style="height: 50px; overflow:hidden;">
+                            </div>{{ $i }}
+                        </td>
                         <td>
+                            <div style="height: 40px; overflow:hidden;">
+                            </div>
                             <table class="tb_inside" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td><b>Data Diri</b></td>
@@ -152,6 +176,8 @@
                             </table>
                         </td>
                         <td>
+                            <div style="height: 40px; overflow:hidden;">
+                            </div>
                             <b>Pekerjaan</b>
                             <table class="my-2" style="width: 100%">
                                 @php

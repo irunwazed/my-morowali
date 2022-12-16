@@ -133,15 +133,25 @@
             $('#show_dat').show(500);
             // die()
             $('#tabel_data').DataTable({
-                paging: false,
-                searching: false,
+                paging: true,
+                searching: true,
                 autoWidth: false,
                 responsive: false,
-                info: false,
+                info: true,
                 destroy: true,
                 processing: true,
-                serverSide: false,
-                processData: true,
+                serverSide: true,
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'csv',
+                        className: 'mr-3',
+                        text: '<i class="i-File-CSV"></i> CSV'
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="i-File-Excel"></i> Excel'
+                    }
+                ],
                 ajax: {
                     url: "{{ env('API_URL') }}/kemiskinan/laporan/kesejahteraan",
                     type: 'GET',

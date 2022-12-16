@@ -10,7 +10,7 @@ $(document).on({
     },
     ajaxError: function () {
         $("#modal_loading").hide();
-        sweetRes("error", "500", "Server Error!");
+        // sweetRes("error", "500", "Server Error!");
     },
 });
 
@@ -79,6 +79,262 @@ function getPekerjaan(pekerjaan) {
     });
 }
 
+function getRumah(rumah) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/rumah",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Kepemilikan Rumah -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                rumah.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function getAtap(atap) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/atap",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Jenis Atap -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                atap.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function getBahanbakar(bahan) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/bahan-bakar",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Jenis Bahan Bakar -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                bahan.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function getdinding(dinding) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/dinding",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Jenis Dinding -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                dinding.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function getJamban(jamban) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/jamban",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Jenis Jamban -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                jamban.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function getLantai(lantai) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/lantai",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Jenis Lantai -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                lantai.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function getPenerangan(penerang) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/penerangan",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Jenis Penerangan -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                penerang.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function getSumberair(sumair) {
+    $.ajax({
+        type: "GET",
+        url: baseAPI + "/kemiskinan/get/ki/sumber-air",
+        headers: {
+            Authorization: "Bearer " + bearer,
+        },
+        success: function (data) {
+            // console.log(data);
+            var htmlOptions = [];
+            if (data.data.length) {
+                html =
+                    '<option value="" selected disabled>- Pilih Sumber Air Minum -</option>';
+                htmlOptions[htmlOptions.length] = html;
+                for (item in data.data) {
+                    html =
+                        '<option value="' +
+                        data.data[item]._id +
+                        '">' +
+                        data.data[item].nama +
+                        "</option>";
+                    htmlOptions[htmlOptions.length] = html;
+                }
+                sumair.empty().append(htmlOptions.join(""));
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
 function sweetRes(status, title, text) {
     Swal.fire({
         icon: status,
@@ -123,6 +379,7 @@ function dateformatEdit(date) {
         (date.getDate() > 9 ? date.getDate() : "0" + date.getDate());
     return formattedDate;
 }
+
 
 if ($.fn.dataTable) {
     $.extend(true, $.fn.dataTable.defaults, {
