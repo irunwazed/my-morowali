@@ -125,7 +125,7 @@ exports.controller = class LaporanController {
       
       return res.send({statusCode: 200, data: dataAll});
     }catch(err){
-      return res.send({statusCode: 500, message: err});
+      return res.send({statusCode: 500, data: [], message: err});
     }
 	}
   
