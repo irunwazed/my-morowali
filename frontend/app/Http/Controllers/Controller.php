@@ -123,7 +123,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/penduduk?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/penduduk?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         // dd($auth);
         try {
@@ -175,7 +175,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/penduduk?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/penduduk?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         // dd($auth);
         try {
@@ -192,7 +192,6 @@ class Controller extends BaseController
             );
             $respon = json_decode($response->getBody()->getContents());
             $data = $respon->data;
-            // dd($data[0]);
 
             $pdf = PDF::loadview(
                 'pages.print.penduduk',
@@ -200,16 +199,11 @@ class Controller extends BaseController
                     'data' => $respon->data
                 ]
             );
-            $pdf->set_paper('legal', 'portrait');
-            return $pdf->download('laporan-penduduk');
 
-            // return view(
-            //     'pages.print.penduduk',
-            //     [
-            //         'data' => $data
-            //     ]
-            // );
-            // dd($respon);
+            $pdf->setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+            $pdf->set_paper('Legal', 'landscape');
+            $pdf->render();
+            return $pdf->download('laporan-penduduk');
         } catch (RequestException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = json_decode($response->getBody()->getContents());
@@ -226,7 +220,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/kesejahteraan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -263,7 +257,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/kesejahteraan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -303,7 +297,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/bantuan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/bantuan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -340,7 +334,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/bantuan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/bantuan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -362,7 +356,8 @@ class Controller extends BaseController
                     'data' => $respon->data
                 ]
             );
-            $pdf->set_paper('a4', 'landscape');
+            $pdf->setOption(['dpi' => 75, 'defaultFont' => 'sans-serif']);
+            $pdf->set_paper('Legal', 'landscape');
             return $pdf->download('laporan-bantuan');
         } catch (RequestException $e) {
             $response = $e->getResponse();
@@ -380,7 +375,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/keluarga?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/keluarga?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -396,12 +391,13 @@ class Controller extends BaseController
             );
             $respon = json_decode($response->getBody()->getContents());
             $data = $respon->data;
-            return view(
-                'pages.print.keluarga',
-                [
-                    'data' => $data
-                ]
-            );
+
+            // return view(
+            //     'pages.print.keluarga',
+            //     [
+            //         'data' => $data
+            //     ]
+            // );
         } catch (RequestException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = json_decode($response->getBody()->getContents());
@@ -417,7 +413,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = env('API_URL') . '/kemiskinan/laporan/keluarga?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/keluarga?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -433,14 +429,15 @@ class Controller extends BaseController
             );
             $respon = json_decode($response->getBody()->getContents());
             $data = $respon->data;
-            $pdf = PDF::loadview(
-                'pages.print.keluarga',
-                [
-                    'data' => $respon->data
-                ]
-            );
-            $pdf->set_paper('a4', 'landscape');
-            return $pdf->download('laporan-keluarga');
+
+            // $pdf = PDF::loadview(
+            //     'pages.print.keluarga',
+            //     [
+            //         'data' => $respon->data
+            //     ]
+            // );
+            // $pdf->set_paper('a4', 'landscape');
+            // return $pdf->download('laporan-keluarga');
         } catch (RequestException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = json_decode($response->getBody()->getContents());

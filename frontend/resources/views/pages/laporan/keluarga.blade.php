@@ -125,15 +125,24 @@
             $('#show_dat').show(500);
             // die()
             $('#tabel_data').DataTable({
-                paging: false,
-                searching: false,
-                autoWidth: false,
-                responsive: false,
-                info: false,
+                paging: true,
+                ordering: true,
+                info: true,
                 destroy: true,
                 processing: false,
-                serverSide: false,
-                processData: false,
+                serverSide: true,
+                "iDisplayLength": 10000,
+                dom: 'Brtip',
+                buttons: [{
+                        extend: 'csv',
+                        className: 'mr-3',
+                        text: '<i class="i-File-CSV"></i> CSV',
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="i-File-Excel"></i> Excel',
+                    },
+                ],
                 ajax: {
                     url: "{{ env('API_URL') }}/kemiskinan/laporan/keluarga",
                     type: 'GET',
@@ -163,19 +172,22 @@
                     {
                         data: null,
                         render: function(data, row) {
-                            return data.anggota_keluarga[0].alamat.kecamatan_nama ? data.anggota_keluarga[0].alamat.kecamatan_nama : "-";
+                            return data.anggota_keluarga[0].alamat.kecamatan_nama ? data.anggota_keluarga[0]
+                                .alamat.kecamatan_nama : "-";
                         }
                     },
                     {
                         data: null,
                         render: function(data, row) {
-                            return data.anggota_keluarga[0].alamat.kelurahan_nama ? data.anggota_keluarga[0].alamat.kelurahan_nama : "-";
+                            return data.anggota_keluarga[0].alamat.kelurahan_nama ? data.anggota_keluarga[0]
+                                .alamat.kelurahan_nama : "-";
                         }
                     },
                     {
                         data: null,
                         render: function(data, row) {
-                            return "<b>"+data.anggota_keluarga[0].nama + "</b><br><small>" + data.anggota_keluarga[0].nik +"</small>";
+                            return "<b>" + data.anggota_keluarga[0].nama + "</b><br><small>" + data
+                                .anggota_keluarga[0].nik + "</small>";
                         }
                     },
                 ],

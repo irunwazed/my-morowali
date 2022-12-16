@@ -106,7 +106,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal_data" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="modal_data" data-backdrop="static" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -331,7 +331,13 @@
                         $('#kk_dummy').val(data.data.no_kk);
 
                         loadData(id);
-                    } else {
+                    }else{
+                        sweetRes("error", "500", "Server Error!");
+                    }
+                },
+                error: function(error) {
+                    // console.log(error.responseJSON.statusCode)
+                    if (error.responseJSON.statusCode == 400) {
                         $("#tabel_show").hide()
                         $("#btn_tam_hid").hide(300);
 
@@ -370,10 +376,9 @@
                                     swalWithBootstrapButtons.fire("", "Dibatalkan", "error");
                                 }
                             });
+                    } else {
+                        sweetRes("error", "500", "Server Error!");
                     }
-                },
-                error: function(error) {
-                    console.log(error);
                 }
             });
         });
@@ -391,13 +396,14 @@
             id = $('#id_cari').val();
             $('#no_kk').val(id);
             $('#kk_dummy').val(id);
-            getPenyakit();
-            getCamat();
             $('#m_tambah').show();
             $('#m_edit').hide();
             $('.mode_edit').prop('readonly', false);
 
             $('#modal_data').modal('show');
+
+            getPenyakit();
+            getCamat();
         });
 
         $('#kecamatan').on('change', function() {
@@ -564,11 +570,11 @@
                         data: 'level',
                         render: function(data, type, row) {
                             if (data == "1") {
-                                return "Istri / Suami";
+                                return "Kepala Keluarga";
                             } else if (data == "2") {
-                                return "Anak";
+                                return "Suami/Istri";
                             } else if (data == "3") {
-                                return "Wali";
+                                return "Anak";
                             } else if (data == "4") {
                                 return "Lainnya";
                             }

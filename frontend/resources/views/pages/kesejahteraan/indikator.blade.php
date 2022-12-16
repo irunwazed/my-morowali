@@ -3,15 +3,11 @@
 @section('judul', 'Kesejahteraan - SEPAKAD')
 
 @section('tambah_css')
-
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
     <style>
         * {
             box-sizing: border-box;
         }
 
-        /* Style the search field */
         div.carian input[type=text] {
             padding: 10px;
             font-size: 13px;
@@ -19,7 +15,6 @@
             width: 85%;
         }
 
-        /* Style the submit button */
         div.carian button {
             float: left;
             width: 40px;
@@ -30,7 +25,6 @@
 
         div.carian button:hover {}
 
-        /* Clear floats */
         div.carian::after {
             content: "";
             clear: both;
@@ -66,7 +60,23 @@
                             <div class="ul-contact-content" style="width: 100%">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="table-responsive" style="margin-top: 10px;">
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="radio-inline mb-2">
+                                                        <input type="radio" name="optradio" value="1" checked> No KK
+                                                    </label>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="optradio" value="2"> NIK / Nama
+                                                    </label>
+                                                    <select id="search_kes" name="search_kes" class="form-control pt-2"
+                                                        style="width:100%;">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab_hid" class="table-responsive" style="margin-top: 10px;">
                                             <table class="display table table-bordered" id="tabel_data" style="width:100%">
                                                 <thead>
                                                     <tr>
@@ -103,317 +113,299 @@
                 </div>
                 <div class="modal-body">
                     <form id="form_data" class="m-3">
-                        <input id="e_id" hidden>
+                        <input hidden id="keluarga_id" name="keluarga_id" type="text" class="form-control">
+                        <input hidden id="e_id">
 
-                        <div class="form-group" id="input_kk_s">
+                        <div class="form-group" id="">
                             <label>Nomor Kartu Keluarga</label>
-                            <div class="carian">
-                                <input type="text" class="form-control" id="id_cari" placeholder="" name="search">
-                                <button style="padding-top: 8px;" class="btn btn-outline-primary btn-sm" id="btn_cari"
-                                    type="button"><i class="i-Magnifi-Glass1"></i>
-                                </button>
-                            </div>
-                            <hr>
+                            <input id="no_kk_ed" readonly type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Tahun</label>
+                            <select id="tahun" name="tahun" class="form-control" style="width:100%;" required>
+                                <option value="" selected disabled>- Pilih Tahun -</option>
+                                @for ($tah = date('Y') + 1; $tah > 2010; $tah--)
+                                    <option value={{ $tah }}>{{ $tah }}</option>
+                                @endfor
+                            </select>
                         </div>
 
-                        <div id="show_data">
-
-                            <input hidden id="asd_id" type="text" class="form-control">
-                            <input hidden id="keluarga_id" name="keluarga_id" type="text" class="form-control">
-                            <div class="form-group" id="no_kk_e">
-                                <label>Nomor Kartu Keluarga</label>
-                                <input id="no_kk_ed" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Tahun</label>
-                                <select id="tahun" name="tahun" class="form-control" style="width:100%;" required>
-                                    <option value="" selected disabled>- Pilih Tahun -</option>
-                                    @for ($tah = date('Y') + 1; $tah > 2010; $tah--)
-                                        <option value={{ $tah }}>{{ $tah }}</option>
-                                    @endfor
-                                </select>
-                            </div>
-
-                            <div class="form-group mt-4">
-                                <label>Pendapatan Utama (Tahun)</label>
-                                <input id="pendapatan_utama" name="pendapatan_utama" type="number" class="form-control"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label>Pendapatan Sampingan (Tahun)</label>
-                                <input id="pendapatan_sampingan" name="pendapatan_sampingan" type="number"
-                                    class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Pengeluaran Total (Tahun)</label>
-                                <input id="pengeluaran_total" name="pengeluaran_total" type="number" class="form-control"
-                                    required>
-                            </div>
+                        <div class="form-group mt-4">
+                            <label>Pendapatan Utama (Tahun)</label>
+                            <input id="pendapatan_utama" name="pendapatan_utama" type="number" class="form-control"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Pendapatan Sampingan (Tahun)</label>
+                            <input id="pendapatan_sampingan" name="pendapatan_sampingan" type="number" class="form-control"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Pengeluaran Total (Tahun)</label>
+                            <input id="pengeluaran_total" name="pengeluaran_total" type="number" class="form-control"
+                                required>
+                        </div>
 
 
 
 
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group ">
-                                        <label>Kepemilikan Rumah</label>
-                                        <select id="indikator_rumah_id" name="indikator_rumah_id" class="form-control"
-                                            style="width:100%;" required>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Ukuran Rumah (m²)</label>
-                                        <input id="indikator_rumah_ukuran" name="indikator_rumah_ukuran" type="text"
-                                            class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Rumah</label>
-                                        <textarea name="indikator_rumah_ket" id="indikator_rumah_ket" class="form-control" rows="5" required></textarea>
-                                    </div>
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Kepemilikan Rumah</label>
+                                    <select id="indikator_rumah_id" name="indikator_rumah_id" class="form-control"
+                                        style="width:100%;" required>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Rumah</label>
-                                        <input id="" name="indikator_rumah_image" type="file"
-                                            onchange="viewImg(this)" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_rumah_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+
+                                <div class="form-group">
+                                    <label>Ukuran Rumah (m²)</label>
+                                    <input id="indikator_rumah_ukuran" name="indikator_rumah_ukuran" type="text"
+                                        class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan Rumah</label>
+                                    <textarea name="indikator_rumah_ket" id="indikator_rumah_ket" class="form-control" rows="5" required></textarea>
                                 </div>
                             </div>
-
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group ">
-                                        <label>Atap</label>
-                                        <select id="indikator_atap_id" name="indikator_atap_id" class="form-control"
-                                            style="width:100%;" required>
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Atap</label>
-                                        <textarea name="indikator_atap_ket" id="indikator_atap_ket" class="form-control" rows="5" required></textarea>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Rumah</label>
+                                    <input id="" name="indikator_rumah_image" type="file"
+                                        onchange="viewImg(this)" class="form-control"
+                                        accept="image/png, image/jpg, image/jpeg">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Atap</label>
-                                        <input id="" name="indikator_atap_image" type="file"
-                                            onchange="viewImg(this)" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_atap_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_rumah_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Atap</label>
+                                    <select id="indikator_atap_id" name="indikator_atap_id" class="form-control"
+                                        style="width:100%;" required>
 
-
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group  ">
-                                        <label>Bahan Bakar</label>
-                                        <select id="indikator_bahan_bakar_id" name="indikator_bahan_bakar_id"
-                                            class="form-control" style="width:100%;" required>
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Bahan Bakar</label>
-                                        <textarea name="indikator_bahan_bakar_ket" id="indikator_bahan_bakar_ket" class="form-control" rows="5"
-                                            required></textarea>
-                                    </div>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Bahan Bakar</label>
-                                        <input id="" name="indikator_bahan_bakar_image" onchange="viewImg(this)"
-                                            type="file" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_bahan_bakar_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+                                <div class="form-group">
+                                    <label>Keterangan Atap</label>
+                                    <textarea name="indikator_atap_ket" id="indikator_atap_ket" class="form-control" rows="5" required></textarea>
                                 </div>
                             </div>
-
-
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Dinding</label>
-                                        <select id="indikator_dinding_id" name="indikator_dinding_id"
-                                            class="form-control" style="width:100%;" required>
-                                            <option value="" selected disabled>- Pilih Dinding -</option>
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Dinding</label>
-                                        <textarea name="indikator_dinding_ket" id="indikator_dinding_ket" class="form-control" rows="5" required></textarea>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Atap</label>
+                                    <input id="" name="indikator_atap_image" type="file"
+                                        onchange="viewImg(this)" class="form-control"
+                                        accept="image/png, image/jpg, image/jpeg">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Dinding</label>
-                                        <input id="" name="indikator_dinding_image" type="file"
-                                            onchange="viewImg(this)" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_dinding_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_atap_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
                                 </div>
                             </div>
+                        </div>
 
 
 
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group ">
-                                        <label>Jamban</label>
-                                        <select id="indikator_jamban_id" name="indikator_jamban_id" class="form-control"
-                                            style="width:100%;" required>
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group  ">
+                                    <label>Bahan Bakar</label>
+                                    <select id="indikator_bahan_bakar_id" name="indikator_bahan_bakar_id"
+                                        class="form-control" style="width:100%;" required>
 
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Jamban</label>
-                                        <textarea name="indikator_jamban_ket" id="indikator_jamban_ket" class="form-control" rows="5" required></textarea>
-                                    </div>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Jamban</label>
-                                        <input id="" name="indikator_jamban_image" type="file"
-                                            onchange="viewImg(this)" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_jamban_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+                                <div class="form-group">
+                                    <label>Keterangan Bahan Bakar</label>
+                                    <textarea name="indikator_bahan_bakar_ket" id="indikator_bahan_bakar_ket" class="form-control" rows="5"
+                                        required></textarea>
                                 </div>
                             </div>
-
-
-
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Lantai</label>
-                                        <select id="indikator_lantai_id" name="indikator_lantai_id" class="form-control"
-                                            style="width:100%;" required>
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Lantai</label>
-                                        <textarea name="indikator_lantai_ket" id="indikator_lantai_ket" class="form-control" rows="5" required></textarea>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Bahan Bakar</label>
+                                    <input id="" name="indikator_bahan_bakar_image" onchange="viewImg(this)"
+                                        type="file" class="form-control" accept="image/png, image/jpg, image/jpeg">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Lantai</label>
-                                        <input id="" name="indikator_lantai_image" type="file"
-                                            onchange="viewImg(this)" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_lantai_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_bahan_bakar_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
                                 </div>
                             </div>
+                        </div>
 
 
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Penerangan</label>
-                                        <select id="indikator_penerangan_id" name="indikator_penerangan_id"
-                                            class="form-control" style="width:100%;" required>
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Dinding</label>
+                                    <select id="indikator_dinding_id" name="indikator_dinding_id" class="form-control"
+                                        style="width:100%;" required>
+                                        <option value="" selected disabled>- Pilih Dinding -</option>
 
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Penerangan</label>
-                                        <textarea name="indikator_penerangan_ket" id="indikator_penerangan_ket" class="form-control" rows="5"
-                                            required></textarea>
-                                    </div>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Penerangan</label>
-                                        <input id="" name="indikator_penerangan_image" onchange="viewImg(this)"
-                                            type="file" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_penerangan_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+                                <div class="form-group">
+                                    <label>Keterangan Dinding</label>
+                                    <textarea name="indikator_dinding_ket" id="indikator_dinding_ket" class="form-control" rows="5" required></textarea>
                                 </div>
                             </div>
-
-                            <div class="row  mt-4">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Sumber Air Minum</label>
-                                        <select id="indikator_sumber_air_id" name="indikator_sumber_air_id"
-                                            class="form-control" style="width:100%;" required>
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Keterangan Sumber Air Minum</label>
-                                        <textarea name="indikator_sumber_air_ket" id="indikator_sumber_air_ket" class="form-control" rows="5"
-                                            required></textarea>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Dinding</label>
+                                    <input id="" name="indikator_dinding_image" type="file"
+                                        onchange="viewImg(this)" class="form-control"
+                                        accept="image/png, image/jpg, image/jpeg">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Foto Sumber Air Minum</label>
-                                        <input id="" name="indikator_sumber_air_image" onchange="viewImg(this)"
-                                            type="file" class="form-control"
-                                            accept="image/png, image/jpg, image/jpeg">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <img id="indikator_sumber_air_image"
-                                            style="object-fit: contain; width: 100%; height: 250px;"
-                                            class="col-sm-12 img-uploaded" />
-                                    </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_dinding_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="form-group mt-4">
-                                <label>Status Kesejahteraan</label>
-                                <select id="status_kesejahteraan" name="status_kesejahteraan" class="form-control"
-                                    style="width:100%;" required>
-                                    <option value="" selected disabled>- Pilih Status Kesejahteraan -</option>
-                                    <option value="1">Sangat Miskin</option>
-                                    <option value="2">Miskin</option>
-                                    <option value="3">Rentan Miskin</option>
-                                    <option value="4">Menuju Miskin</option>
-                                    <option value="5">Middle Class</option>
-                                </select>
+
+
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Jamban</label>
+                                    <select id="indikator_jamban_id" name="indikator_jamban_id" class="form-control"
+                                        style="width:100%;" required>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan Jamban</label>
+                                    <textarea name="indikator_jamban_ket" id="indikator_jamban_ket" class="form-control" rows="5" required></textarea>
+                                </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Jamban</label>
+                                    <input id="" name="indikator_jamban_image" type="file"
+                                        onchange="viewImg(this)" class="form-control"
+                                        accept="image/png, image/jpg, image/jpeg">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_jamban_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Lantai</label>
+                                    <select id="indikator_lantai_id" name="indikator_lantai_id" class="form-control"
+                                        style="width:100%;" required>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan Lantai</label>
+                                    <textarea name="indikator_lantai_ket" id="indikator_lantai_ket" class="form-control" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Lantai</label>
+                                    <input id="" name="indikator_lantai_image" type="file"
+                                        onchange="viewImg(this)" class="form-control"
+                                        accept="image/png, image/jpg, image/jpeg">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_lantai_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Penerangan</label>
+                                    <select id="indikator_penerangan_id" name="indikator_penerangan_id"
+                                        class="form-control" style="width:100%;" required>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan Penerangan</label>
+                                    <textarea name="indikator_penerangan_ket" id="indikator_penerangan_ket" class="form-control" rows="5"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Penerangan</label>
+                                    <input id="" name="indikator_penerangan_image" onchange="viewImg(this)"
+                                        type="file" class="form-control" accept="image/png, image/jpg, image/jpeg">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_penerangan_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row  mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sumber Air Minum</label>
+                                    <select id="indikator_sumber_air_id" name="indikator_sumber_air_id"
+                                        class="form-control" style="width:100%;" required>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan Sumber Air Minum</label>
+                                    <textarea name="indikator_sumber_air_ket" id="indikator_sumber_air_ket" class="form-control" rows="5"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Foto Sumber Air Minum</label>
+                                    <input id="" name="indikator_sumber_air_image" onchange="viewImg(this)"
+                                        type="file" class="form-control" accept="image/png, image/jpg, image/jpeg">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <img id="indikator_sumber_air_image"
+                                        style="object-fit: contain; width: 100%; height: 250px;"
+                                        class="col-sm-12 img-uploaded" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label>Status Kesejahteraan</label>
+                            <select id="status_kesejahteraan" name="status_kesejahteraan" class="form-control"
+                                style="width:100%;" required>
+                                <option value="" selected disabled>- Pilih Status Kesejahteraan -</option>
+                                <option value="1">Sangat Miskin</option>
+                                <option value="2">Miskin</option>
+                                <option value="3">Rentan Miskin</option>
+                                <option value="4">Menuju Miskin</option>
+                                <option value="5">Middle Class</option>
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -442,29 +434,33 @@
 
     <script src="{{ asset('') }}assets/dist-assets/js/jquery.mask.js"></script>
     <script src="{{ asset('') }}assets/dist-assets/js/jquery.inputfilter.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <script>
         var formStatus = '';
+        var no_kk = '';
+        var id_kel = '';
 
         $(document).ready(function() {
-            loadData();
             $('#m_tambah').hide();
             $('#m_edit').hide();
-            $('#show_data').hide();
+            $('#tab_hid').hide();
 
-            getRumah();
-            getAtap();
-            getBahanbakar();
-            getdinding();
-            getJamban();
-            getLantai();
-            getPenerangan();
-            getSumberair();
-
-            // $(".angka").inputFilter(function(value) {
-            //     return /^-?\d*$/.test(value);
-            // }, "");
+            var ki1 = $('#indikator_rumah_id');
+            getRumah(ki1);
+            var ki2 = $("#indikator_atap_id");
+            getAtap(ki2);
+            var ki3 = $("#indikator_bahan_bakar_id");
+            getBahanbakar(ki3);
+            var ki4 = $("#indikator_dinding_id");
+            getdinding(ki4);
+            var ki5 = $("#indikator_jamban_id");
+            getJamban(ki5);
+            var ki6 = $("#indikator_lantai_id");
+            getLantai(ki6);
+            var ki7 = $("#indikator_penerangan_id");
+            getPenerangan(ki7);
+            var ki8 = $('#indikator_sumber_air_id');
+            getSumberair(ki8);
 
             $('.uang').mask('000.000.000.000.000', {
                 reverse: true
@@ -477,68 +473,69 @@
 
         $('.m_close').click(function() {
             $("#form_data")[0].reset();
-            $('#show_data').hide();
             $('#modal_data').modal('hide');
         })
 
         $("#btn_modal").click(function() {
             $('.img-uploaded').attr('src', "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
-
-            $("#input_kk_s").show(300);
-            $("#no_kk_e").hide();
-            $("#form_data")[0].reset();
-            $('#m_tambah').hide();
+            $('#m_tambah').show();
             $('#m_edit').hide();
-            // $('#indikator_rumah_image').attr('src', "");
-            // $('#indikator_atap_image').attr('src', "");
-            // $('#indikator_bahan_bakar_image').attr('src', "");
-            // $('#indikator_jamban_image').attr('src', "");
-            // $('#indikator_lantai_image').attr('src', "");
-            // $('#indikator_penerangan_image').attr('src', "");
-            // $('#indikator_dinding_image').attr('src', "");
-            // $('#indikator_sumber_air_image').attr('src', "");
+            $('#no_kk_ed').val(no_kk);
+            $('#keluarga_id').val(id_kel);
             $('#modal_data').modal('show');
             formStatus = 'create';
         });
 
-        $("#btn_cari").click(function() {
-            $('#m_tambah').show();
-            $('#m_edit').hide();
-            id = $('#id_cari').val();
 
+        $('#search_kes').on('change', function() {
+            text2 = this.value
+            const myArray = text2.split("-");
+            no_kk = myArray[1];
+            id_kel = myArray[0];
+            loadData(id_kel);
+        });
 
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/keluarga/no_kk/" + id,
+        var id = $('#id_cari').val();
+        $('#search_kes').select2({
+            minimumInputLength: 3,
+            language: {
+                inputTooShort: function() {
+                    rad = $('input[name=optradio]:checked').val();
+                    if (rad == 1) return 'Cari berdasarkan No KK';
+                    if (rad == 2) return 'Cari berdasarkan Nama atau NIK Kepala Keluarga';
+                }
+            },
+            // allowClear: true,
+            ajax: {
                 headers: {
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
-                success: function(data) {
-                    // console.log(data)
-                    if (data.data) {
-                        $('#keluarga_id').val(data.data._id);
-                        $("#show_data").show(1000);
-                    } else {
-                        $("#show_data").hide(1000);
-                        $('#m_tambah').hide();
-                        Swal.fire({
-                            icon: 'error',
-                            title: data.message,
-                            // title: 'Nomor Kartu Keluarga Tidak Terdaftar',
-                            text: '',
-                            customClass: {
-                                confirmButton: 'btn btn-danger'
-                            }
-                        });
+                url: "{{ env('API_URL') }}/kemiskinan/get/keluarga/search",
+                data: function(params) {
+
+                    rad = $('input[name=optradio]:checked').val();
+                    var query = {
+                        search: params.term,
+                        jenis: rad
                     }
+                    return query;
                 },
-                error: function(error) {
-                    console.log(error);
+                processResults: function(data) {
+                    // console.log(data.data)
+                    return {
+                        results: data.data.map(e => {
+                            return {
+                                id: e.keluarga_id + "-" + e.no_kk,
+                                text: e.no_kk + " ( " + e.nama + " ) "
+                            }
+                        })
+                    };
                 }
-            });
+            }
         });
 
-        function loadData() {
+
+        function loadData(id) {
             $('#tabel_data').DataTable({
                 paging: true,
                 searching: true,
@@ -546,21 +543,22 @@
                 responsive: false,
                 info: true,
                 destroy: true,
-                processing: false,
                 ordering: true,
                 serverSide: true,
+                processing: true,
                 ajax: {
-                    url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan",
+                    url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan?keluarga_id=" + id,
                     type: 'GET',
                     headers: {
                         "Authorization": "Bearer {{ Session::get('token') }}"
                     },
-                    "dataSrc": "data",
-                    success: function(data) {
-                    console.log(data);
-                    },
+                    // "dataSrc": "data",
+                    // success: function(data) {
+                    //     console.log(data);
+                    // },
                     error: function(error) {
                         console.log(error);
+                        sweetRes("error", "500", "Server Error!");
                     },
                 },
                 columns: [{
@@ -574,7 +572,7 @@
                                     <span class="_dot _r_block-dot bg-dark"></span>
                                 </button>
                                 <div class="dropdown-menu" x-placement="bottom-start">
-                                    <button id="` + data._id + `" onClick="edit_data(this.id)" type="button" class="dropdown-item">
+                                    <button disabled id="` + data._id + `" onClick="edit_data(this.id)" type="button" class="dropdown-item">
                                         <i class="nav-icon i-Pen-2 text-success font-weight-bold mr-2"></i>
                                         Ubah
                                     </button>
@@ -650,6 +648,8 @@
                     "className": "text-center",
                 }, ]
             });
+
+            $('#tab_hid').show(500);
         }
 
         $('#form_data').on('submit', function(e) {
@@ -658,8 +658,9 @@
             // console.log(idata);
             let url = ""
             let method = ""
+
             if (formStatus == 'edit') {
-                id = $('#asd_id').val();
+                id = $('#e_id').val();
                 url = '{{ env('API_URL') }}/kemiskinan/kesejahteraan/' + id
                 method = 'PUT'
                 msg = "Data berhasil diubah!"
@@ -668,7 +669,6 @@
                 method = 'POST'
                 msg = "Data berhasil ditambahkan!"
             }
-
 
             $.ajax({
                 type: method,
@@ -693,7 +693,7 @@
                     });
                     $("#form_data")[0].reset();
                     $('#modal_data').modal('hide');
-                    loadData();
+                    loadData(id_kel);
                 },
                 error: function(error) {
                     if (error.responseJSON.message) {
@@ -717,14 +717,12 @@
         });
 
         function edit_data(id) {
-            $('#show_data').show();
             $("#no_kk_e").show();
-            $("#input_kk_s").hide();
             $("#no_kk_ed").attr('disabled', 'disabled');
             $("#form_data")[0].reset();
             formStatus = 'edit';
 
-            // console.log(id);
+            console.log(id);
             $.ajax({
                 type: "GET",
                 url: "{{ env('API_URL') }}/kemiskinan/kesejahteraan/" + id,
@@ -732,15 +730,15 @@
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    // console.log(data.data);
+                    console.log(data.data);
                     if (data.statusCode != 200) {
                         return;
                     }
 
                     $('#e_id').val(data.data._id);
-                    $('#asd_id').val(data.data._id);
+                    // $('#asd_id').val(data.data._id);
                     $('#keluarga_id').val(data.data.keluarga_id);
-                    $('#no_kk_ed').val(data.data.kepala_keluarga.no_kk);
+                    $('#no_kk_ed').val(no_kk);
                     $('#tahun').val(data.data.tahun).change();
                     if (typeof data.data.keuangan === "undefined") {
                         $('#pendapatan_utama').val('')
@@ -798,6 +796,7 @@
 
         function hapus_data(id) {
             // console.log(id);
+            // let no_kk = $('#no_kk_ed').val();
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: "btn btn-success",
@@ -827,7 +826,7 @@
                             success: function(data) {
                                 // console.log(data);
 
-                                loadData();
+                                loadData(id_kel);
                                 swalWithBootstrapButtons.fire(
                                     "Terhapus!",
                                     "Data Berhasil diHapus!.",
@@ -847,237 +846,6 @@
                 });
         }
 
-        function getRumah() {
-            var select = $('#indikator_rumah_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/rumah",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Kepemilikan Rumah -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function getAtap() {
-            var select = $('#indikator_atap_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/atap",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Jenis Atap -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function getBahanbakar() {
-            var select = $('#indikator_bahan_bakar_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/bahan-bakar",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Jenis Bahan Bakar -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function getdinding() {
-            var select = $('#indikator_dinding_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/dinding",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Jenis Dinding -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function getJamban() {
-            var select = $('#indikator_jamban_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/jamban",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Jenis Jamban -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function getLantai() {
-            var select = $('#indikator_lantai_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/lantai",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Jenis Lantai -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function getPenerangan() {
-            var select = $('#indikator_penerangan_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/penerangan",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Jenis Penerangan -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function getSumberair() {
-            var select = $('#indikator_sumber_air_id');
-            $.ajax({
-                type: "GET",
-                url: "{{ env('API_URL') }}/kemiskinan/get/ki/sumber-air",
-                headers: {
-                    "Authorization": "Bearer {{ Session::get('token') }}"
-                },
-                success: function(data) {
-                    // console.log(data);
-                    var htmlOptions = [];
-                    if (data.data.length) {
-                        html = '<option value="" selected disabled>- Pilih Sumber Air Minum -</option>';
-                        htmlOptions[htmlOptions.length] = html;
-                        for (item in data.data) {
-                            html = '<option value="' + data.data[item]._id + '">' + data.data[item]
-                                .nama +
-                                '</option>';
-                            htmlOptions[htmlOptions.length] = html;
-                        }
-                        select.empty().append(htmlOptions.join(''));
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
 
 
         function viewImg(input) {
