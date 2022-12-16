@@ -22,6 +22,7 @@ const running = async () => {
     { name: 'Super Administrator', username: 'super-admin', level: 1, password: bcrypt.hashSync('123456', 10), status: 1 },
     { name: 'Administrator', username: 'admin', level: 2, password: bcrypt.hashSync('123456', 10), status: 1 },
     { name: 'Admin Kemiskinan', username: 'admin-kemiskinan', level: 3, level_akun: 1, password: bcrypt.hashSync('123456', 10), status: 1 },
+    { name: 'Admin Testing', username: 'admin-testing', level: 3, level_akun: 1, password: bcrypt.hashSync('testing', 10), status: 1 },
   ]);
   console.log('insert data user');
 
