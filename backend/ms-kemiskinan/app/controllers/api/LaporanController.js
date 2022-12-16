@@ -93,32 +93,32 @@ exports.controller = class LaporanController {
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu']; 
 
-      let dataAll = data.map(e => {
-        return {
-          nama: e.nama,
-          nik: e.nik,
-          jenis_kelamin: e.jk=='P'?'Perempuan':'Laki - Laki',
-          agama: agama[e.agama],
-          lahir: e.lahir,
-          alamat: e.alamat,
-          status_pernikahan: status_pernikahan[e.status_pernikahan],
-					fisik: {
-						kondisi: fisik[e.fisik?e.fisik.fisik_id:0],
-						keterangan: e.fisik?e.fisik.keterangan:'-',
-					},
-          pendidikan: pendidikan[e.pendidikan_id],
-          penyakit: {
-            nama: e.penyakit?e.penyakit.nama:'-',
-            keterangan: e.penyakit?e.penyakit.keterangan:'',
-          },
-          pekerjaan: e.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }),
-          bantuan: e.bantuan,
-          hidup: e.hidup?'Ya':'Tidak',
-        }
-      });
+      // let dataAll = data.map(e => {
+      //   return {
+      //     nama: e.nama,
+      //     nik: e.nik,
+      //     jenis_kelamin: e.jk=='P'?'Perempuan':'Laki - Laki',
+      //     agama: agama[e.agama],
+      //     lahir: e.lahir,
+      //     alamat: e.alamat,
+      //     status_pernikahan: status_pernikahan[e.status_pernikahan],
+			// 		fisik: {
+			// 			kondisi: fisik[e.fisik?e.fisik.fisik_id:0],
+			// 			keterangan: e.fisik?e.fisik.keterangan:'-',
+			// 		},
+      //     pendidikan: pendidikan[e.pendidikan_id],
+      //     penyakit: {
+      //       nama: e.penyakit?e.penyakit.nama:'-',
+      //       keterangan: e.penyakit?e.penyakit.keterangan:'',
+      //     },
+      //     pekerjaan: e.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }),
+      //     bantuan: e.bantuan,
+      //     hidup: e.hidup?'Ya':'Tidak',
+      //   }
+      // });
 
       if(datatable){
-        tmp.data = dataAll;
+        tmp.data = data;
         data = tmp;
         return res.send(data);
       }
