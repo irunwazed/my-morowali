@@ -1,6 +1,25 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
+          # cd /home/kominfo/app/my-morowali/
+          # git pull
+          # cp -r /home/kominfo/app/my-morowali/frontend/* /var/www/html/source
+          # cp -r /home/kominfo/app/my-morowali/frontend/public/assets/* /var/www/html/assets/
+          # cd ./backend/api-gateway
+          # npm install
+          # pm2 start
+          # cd ../ms-auth
+          # npm install
+          # pm2 start
+          # cd ../ms-kemiskinan
+          # npm install
+          # pm2 start
+          # cd ../ms-organisasi
+          # npm install
+          # pm2 start
+          # pm2 save
+
+
 name: Node.js CD
 
 on:
@@ -21,18 +40,3 @@ jobs:
         script: |
           cd /home/kominfo/app/my-morowali/
           git pull
-          cp -r /home/kominfo/app/my-morowali/frontend/* /var/www/html/source
-          cp -r /home/kominfo/app/my-morowali/frontend/public/assets/* /var/www/html/assets/
-          cd ./backend/api-gateway
-          npm install
-          pm2 start
-          cd ../ms-auth
-          npm install
-          pm2 start
-          cd ../ms-kemiskinan
-          npm install
-          pm2 start
-          cd ../ms-organisasi
-          npm install
-          pm2 start
-          pm2 save

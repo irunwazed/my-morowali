@@ -235,7 +235,7 @@ exports.controller = class LaporanController {
       if(kelurahan!='') match['keluarga.kepala_keluarga.alamat.kelurahan_kode'] = kelurahan;
 
       if(status_kesejahteraan != null) match['status_kesejahteraan'] = parseInt(status_kesejahteraan);  
-      if(tahun != null) match['tahun'] = parseInt(tahun);;
+      if(tahun != null) match['tahun'] = parseInt(tahun);
 
       let query = [
 				{
