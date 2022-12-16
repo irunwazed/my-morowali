@@ -22,7 +22,7 @@ jobs:
           cd /home/kominfo/app/my-morowali/
           git pull
           cp -r /home/kominfo/app/my-morowali/frontend/* /var/www/html/source
-          cp -r /home/kominfo/app/my-morowali/frontend/public/* /var/www/html/
+          cp -r /home/kominfo/app/my-morowali/frontend/public/assets/* /var/www/html/assets/
           cd ./backend/api-gateway
           npm install
           pm2 start
