@@ -77,7 +77,7 @@ module.exports = {
 		}catch(err){
 			result = {
 				statusCode: 500,
-				data: [],
+				// data: [],
 				message: err
 			}
 			console.log(result);
