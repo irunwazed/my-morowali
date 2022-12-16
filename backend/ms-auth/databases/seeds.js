@@ -26,7 +26,6 @@ const running = async () => {
   ]);
   console.log('insert data user');
 
-
 	let dataPenduduk = [
 		{nama: 'Muhammad Fahri Rahman', nik: '654321', alamat: { kabupaten_kode: '1', kecamatan_kode: '1', kelurahan_kode: '1', kabupaten_nama: 'Morowali', kecamatan_nama: 'Bungku Tengah', kelurahan_nama: 'Bente', alamat_nama: 'Jalur 2', }},
 		{nama: 'Muhammad Fahri Rahman2', nik: '1654321', alamat: { kabupaten_kode: '1', kecamatan_kode: '1', kelurahan_kode: '1', kabupaten_nama: 'Morowali', kecamatan_nama: 'Bungku Tengah', kelurahan_nama: 'Bente', alamat_nama: 'Jalur 2', }},
