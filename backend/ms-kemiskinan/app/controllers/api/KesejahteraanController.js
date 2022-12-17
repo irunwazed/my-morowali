@@ -67,6 +67,8 @@ exports.controller = class KesejahteraanController {
 			condition.push({ $match: { keluarga_id: db.mongoose.Types.ObjectId(keluarga_id) } });
 			
 			let data = await paginate.aggregate(req, 'keluarga_kesejahteraan', condition);
+			await db.keluarga_kesejahteraan.populate(data, {path:"keluarga_id"});
+			await db.keluarga_kesejahteraan.populate(data, {path:"kepala_keluarga"});
 			return res.send(data);
 		}catch(err){
 			return res.status(500).send({
