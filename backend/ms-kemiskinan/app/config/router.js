@@ -52,7 +52,7 @@ routerAdmin.put("/api/penduduk/pekerjaan/:id", route('api/PendudukPekerjaanContr
 routerAdmin.delete("/api/penduduk/pekerjaan/:id", route('api/PendudukPekerjaanController@delete'));
 
 routerAdmin.get("/api/penduduk", route('api/PendudukController@getData'));
-routerAdmin.get("/api/penduduk/no_kk/:no_kk", route('api/PendudukController@getOneData'));
+// routerAdmin.get("/api/penduduk/no_kk/:no_kk", route('api/PendudukController@getOneData'));
 routerAdmin.get("/api/penduduk/:id", route('api/PendudukController@getOneData'));
 routerAdmin.post("/api/penduduk", route('api/PendudukController@store', true), route('api/PendudukController@store'));
 routerAdmin.delete("/api/penduduk/:id", route('api/PendudukController@delete'));

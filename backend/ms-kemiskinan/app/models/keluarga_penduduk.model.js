@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
-      keluarga_id: {type: Schema.Types.ObjectId, ref: 'keluargas', required: true},
-      penduduk_id: {type: Schema.Types.ObjectId, ref: 'penduduks', required: true},
+      keluarga_id: {type: Schema.Types.ObjectId, ref: 'keluarga', required: true},
+      penduduk_id: {type: Schema.Types.ObjectId, ref: 'penduduk', required: true},
       level: {
 				type: Number,
 				required: true,
