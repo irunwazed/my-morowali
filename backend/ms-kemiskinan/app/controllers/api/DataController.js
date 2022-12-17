@@ -14,31 +14,6 @@ exports.controller = class DataController {
 					as: 'penyakit_diderita',
 				},
 			},
-			{
-				$lookup: {
-					from: 'penduduk_pekerjaans',
-					localField: '_id',
-					foreignField: 'penduduk_id',
-					pipeline: [
-						{
-							$lookup: {
-								from: 'pekerjaans',
-								localField: 'pekerjaan_id',
-								foreignField: '_id',
-								as: 'pekerjaan',
-							},
-						},
-						{ $unwind: "$pekerjaan" },
-						{ $project: {
-							pekerjaan_id: '$pekerjaan_id',
-							pekerjaan_nama: '$pekerjaan.nama',
-							gaji: '$gaji',
-							keterangan: '$keterangan',
-						} }
-					],
-					as: 'pekerjaan',
-				},
-			},
 		];
 	}
 
@@ -67,7 +42,6 @@ exports.controller = class DataController {
               nama: { $arrayElemAt: ['$penyakit_diderita.nama', 0] },
               keterangan: '$penyakit.keterangan',
             },
-            pekerjaan: '$pekerjaan',
             hidup: '$hidup',
           }
         }
@@ -87,8 +61,8 @@ exports.controller = class DataController {
 					agama: agama[data[0].agama],
 					alamat: data[0].alamat,
 					fisik: {
-						kondisi: fisik[data[0].fisik.fisik_id],
-						keterangan: data[0].fisik.keterangan,
+						kondisi: fisik[data[0].fisik?data[0].fisik.fisik_id:0],
+						keterangan: data[0].fisik?data[0].fisik.keterangan:'-',
 					},
 					status_pernikahan: status_pernikahan[data[0].status_pernikahan],
 					pendidikan_terakhir: pendidikan[data[0].pendidikan_id],
@@ -96,7 +70,6 @@ exports.controller = class DataController {
 						nama: data[0].penyakit.nama,
 						keterangan: data[0].penyakit.keterangan,
 					},
-					pekerjaan: data[0].pekerjaan.map(e => { return { nama: e.pekerjaan_nama, gaji: e.gaji, keterangan: e.keterangan, } }),
 					hidup: data[0].hidup?'Ya':'Tidak',
 				}});
 			}else return res.status(404).send({statusCode: 404, message: 'data not found'});
@@ -133,7 +106,6 @@ exports.controller = class DataController {
               nama: { $arrayElemAt: ['$penyakit_diderita.nama', 0] },
               keterangan: '$penyakit.keterangan',
             },
-            pekerjaan: '$pekerjaan',
             hidup: '$hidup',
           }
         },
@@ -162,52 +134,6 @@ exports.controller = class DataController {
 						from: 'keluarga_penduduks',
 						localField: '_id',
 						foreignField: 'keluarga_id',
-						pipeline: [
-							{
-								$lookup:{
-									from: 'penduduks',
-									localField: 'penduduk_id',
-									foreignField: '_id',
-									pipeline: [
-										{
-											$lookup: {
-												from: 'penyakits',
-												localField: 'penyakit.penyakit_id',
-												foreignField: '_id',
-												as: 'penyakit_diderita',
-											},
-										},
-										{
-											$lookup: {
-												from: 'penduduk_pekerjaans',
-												localField: '_id',
-												foreignField: 'penduduk_id',
-												pipeline: [
-													{
-														$lookup: {
-															from: 'pekerjaans',
-															localField: 'pekerjaan_id',
-															foreignField: '_id',
-															as: 'pekerjaan',
-														},
-													},
-													{ $unwind: "$pekerjaan" },
-													{ $project: {
-														pekerjaan_id: '$pekerjaan_id',
-														pekerjaan_nama: '$pekerjaan.nama',
-														gaji: '$gaji',
-														keterangan: '$keterangan',
-													} }
-												],
-												as: 'pekerjaan',
-											},
-										},
-									],
-									as: 'penduduk'
-								},
-							}, 
-							{ $unwind: "$penduduk" },
-						],
 						as: 'anggota_keluarga',
 					},
 				},
@@ -222,28 +148,33 @@ exports.controller = class DataController {
 				let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
 				let hubkel = ['', 'Istri / Suami', 'Anak', 'Wali', 'Lainnya'];
 				let anggota = [];
-				data[0].anggota_keluarga.forEach(e => {
-					anggota.push({
-						nik: e.penduduk.nik,
-						nama: e.penduduk.nama,
+
+				anggota = await Promise.all(data[0].anggota_keluarga.map( async e => {
+
+					let penduduk = await db.penduduk.findById(e.penduduk_id);
+
+					return {
+						nik: penduduk.nik,
+						nama: penduduk.nama,
 						kepala_keluarga: e.kepala?'Ya':'Tidak',
 						hubungan_keluarga: hubkel[e.level],
-						lahir: e.penduduk.lahir,
-						alamat: e.penduduk.alamat,
+						lahir: penduduk.lahir,
+						alamat: penduduk.alamat,
 						fisik: {
-							kondisi: fisik[e.penduduk.fisik?e.penduduk.fisik.fisik_id:0],
-							keterangan: e.penduduk.fisik?e.penduduk.fisik.keterangan:'-',
+							kondisi: fisik[penduduk.fisik?penduduk.fisik.fisik_id:0],
+							keterangan: penduduk.fisik?penduduk.fisik.keterangan:'-',
 						},
-						status_pernikahan: status_pernikahan[e.penduduk.status_pernikahan],
-						jenis_kelamin: e.penduduk.jk=='P'?'Perempuan':'Laki - Laki',
-						pendidikan_terakhir: pendidikan[e.penduduk.pendidikan_id],
+						status_pernikahan: status_pernikahan[penduduk.status_pernikahan],
+						jenis_kelamin: penduduk.jk=='P'?'Perempuan':'Laki - Laki',
+						pendidikan_terakhir: pendidikan[penduduk.pendidikan_id],
 						penyakit: {
-							nama: e.penduduk.penyakit_diderita?e.penduduk.penyakit_diderita.nama:'-',
-							keterangan: e.penduduk.penyakit?e.penduduk.penyakit.keterangan:'-',
+							nama: penduduk.penyakit?penduduk.penyakit.nama:'-',
+							keterangan: penduduk.penyakit?penduduk.penyakit.keterangan:'-',
 						},
-						hidup: e.penduduk.hidup?'Ya':'Tidak',
-					});
-				});
+						hidup: penduduk.hidup?'Ya':'Tidak',
+					};
+				}));
+
 
 				return res.send({ statusCode: 200, data: { 
 					no_kk: data[0].no_kk,
@@ -286,79 +217,59 @@ exports.controller = class DataController {
 				data = await db.keluarga.aggregate([
 					{
 						$lookup:{
-							from: 'keluarga_penduduks',
-							localField: '_id',
-							foreignField: 'keluarga_id',
-							pipeline: [
-								{
-									$lookup:{
-										from: 'penduduks',
-										localField: 'penduduk_id',
-										foreignField: '_id',
-										as: 'detail'
-									},
-								}, 
-								{ $unwind: "$detail" },
-							],
+							from: 'penduduks',
+							localField: 'nik_kepala',
+							foreignField: 'nik',
 							as: 'penduduk',
 						},
 					},
 					{ $unwind: "$penduduk" },
-					{
-						$project: {
-							keluarga_id: '$_id',
-							no_kk: 1,
-							nik_kepala: 1,
-							level: '$penduduk.level',
-							nama: '$penduduk.detail.nama',
-							nik: '$penduduk.detail.nik',
-						}
-					},
 					{ $match: { 
-						level:1,
-						no_kk: { $regex: new RegExp(search), $options: "i" },
+						no_kk: { $regex: new RegExp(search), $options: "i" }
 					} }
 				]).limit(10);
+
+				data = data.map(e => {
+					return {
+						_id: e._id,
+						keluarga_id: e._id,
+						no_kk: e.no_kk,
+						nik_kepala: e.nik_kepala,
+						level: 1,
+						nama: e.penduduk.nama,
+						nik: e.penduduk.nik,
+					};
+				})
+
 			}else{
 				data = await db.penduduk.aggregate([
 					{
 						$lookup:{
-							from: 'keluarga_penduduks',
-							localField: '_id',
-							foreignField: 'penduduk_id',
-							pipeline: [
-								{
-									$lookup:{
-										from: 'keluargas',
-										localField: 'keluarga_id',
-										foreignField: '_id',
-										as: 'detail'
-									},
-								}, 
-								{ $unwind: "$detail" },
-							],
+							from: 'keluargas',
+							localField: 'nik',
+							foreignField: 'nik_kepala',
 							as: 'keluarga',
 						},
 					},
 					{ $unwind: "$keluarga" },
-					{
-						$project: {
-							keluarga_id: '$keluarga.detail._id',
-							no_kk: '$keluarga.detail.no_kk',
-							nik_kepala: '$keluarga.detail.nik_kepala',
-							level: '$keluarga.level',
-							nama: '$nama',
-							nik: '$nik',
-						}
-					},
 					{ $match: { 
-						level:1,
 						$or:[
 							{ nama: { $regex: new RegExp(search), $options: "i" }, },
 							{ nik: { $regex: new RegExp(search), $options: "i" }, }
 						]
 					} }
 				]).limit(10);
+				data = data.map(e => {
+					return {
+						_id: e.keluarga._id,
+						keluarga_id: e.keluarga._id,
+						no_kk: e.keluarga.no_kk,
+						nik_kepala: e.keluarga.nik_kepala,
+						level: 1,
+						nama: e.nama,
+						nik: e.nik,
+					};
+				})
 			}
 
 			return res.send({statusCode: 200, data: data});

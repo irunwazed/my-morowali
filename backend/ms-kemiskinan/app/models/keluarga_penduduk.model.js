@@ -20,6 +20,13 @@ module.exports = mongoose => {
     { timestamps: true }
   );
 
+  // schema.virtual('penduduk',{
+  //   ref: 'penduduk',
+  //   localField: 'keluarga_id.nik_kepala',
+  //   foreignField: 'nik',
+  //   justOne: true
+  // });
+
   const Table = mongoose.model('keluarga_penduduk', schema);
   return Table
 }
