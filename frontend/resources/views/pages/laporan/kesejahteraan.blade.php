@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Laporan Data Kesejahteraan - SEPAKAD')
+@section('judul', 'Laporan Data Kesejahteraan - SEPEKAN')
 
 @section('tambah_css')
 
@@ -309,15 +309,12 @@
 
         $('#_print').click(function() {
 
-            kab = $('#kabupaten').val();
-            camat = $('#kecamatan').val();
-            desa = $('#kelurahan').val();
-            if (!kab) kab = "";
-            if (!camat) camat = "";
-            if (!desa) desa = "";
+            status = $('#status_kesejahteraan').val();
+            tahun = $('#tahun').val();
+            if (!status) status = "";
+            if (!tahun) tahun = "";
 
-            url = "{{ url('') }}/admin/print/kesejahteraan/stream?kabupaten=" + kab + "&kecamatan=" + camat +
-                "&kelurahan=" + desa;
+            url = "{{ url('') }}/admin/print/kesejahteraan/stream?status_kesejahteraan=" + status + "&tahun=" + tahun;
             window.open(url, '_blank');
         })
 

@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Data Kepemilikan Rumah - SEPAKAD')
+@section('judul', 'Data Kepemilikan Rumah - SEPEKAN')
 
 @section('tambah_css')
 @endsection

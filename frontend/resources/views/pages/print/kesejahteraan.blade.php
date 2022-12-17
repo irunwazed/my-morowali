@@ -4,6 +4,7 @@
 <head>
     <title>Print Laporan Kesejahteraan</title>
     <link rel="stylesheet" href="{{ asset('') }}assets/dist-assets/js/bootstrap.min.css" />
+
     <style>
         .tb_inside td {
             border: 0 !important;
@@ -12,35 +13,11 @@
         td .no_lr {
             border-left-style: hidden;
             border-right-style: hidden;
-            width: 5px;
-        }
-
-        td .tb_wid_1 {
-            width: 180px;
-        }
-
-        td .tb_wid_2 {
-            width: 150px;
-        }
-
-        table {
-            border-collapse: collapse;
         }
 
         table td,
         table th {
-            font-size: 10px;
-        }
-
-        @page {
-            margin: 0cm 0cm;
-        }
-
-        body {
-            margin-top: 1cm;
-            margin-left: 0.2cm;
-            margin-right: 0.2cm;
-            margin-bottom: 1cm;
+            font-size: 20px;
         }
 
         header {
@@ -48,13 +25,14 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.6cm;
+            height: 1cm;
             background-color: #c9c9c9;
-            font-size: 10px;
+            font-size: 20px;
+            ;
             font-weight: bold;
             color: rgb(0, 0, 0);
             text-align: right;
-            line-height: 0.5cm;
+            line-height: 0.8cm;
         }
 
         footer {
@@ -62,19 +40,57 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.5cm;
+            height: 1cm;
             background-color: #c9c9c9;
             color: rgb(0, 0, 0);
-            font-size: 10px;
+            font-size: 20px;
+            ;
             text-align: left;
-            line-height: 0.4cm;
+            line-height: 0.9cm;
+        }
+
+        body {
+            line-height: 1.5;
+        }
+
+        table {
+            table-layout: auto !important;
+        }
+
+        th,
+        td,
+        thead th,
+        tbody td,
+        tfoot td,
+        tfoot th {
+            width: auto !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+            }
+
+        }
+
+        @page {
+            margin: 0px;
+        }
+
+        body {
+            margin: 0px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <b>Laporan Data Kesejahteraan - Dicetak dari: SEPAKAD Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp;</b>
+        <b>Laporan Data Kesejahteraan - Dicetak dari: SEPEKAN Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp;</b>
 
     </header>
     <footer>
@@ -82,16 +98,21 @@
 
     </footer>
 
-    <div class="m-2">
-        <table class='table table-bordered'>
+    <div class="m-3" style="padding-top: 50px;">
+        <table class='table table-bordered' style="margin-top: -50px;">
             <tbody>
                 @php
                     $i = 1;
                 @endphp
                 @foreach (@$data as $dat)
                     <tr>
-                        <td>{{ $i }}</td>
+                        <td>
+                            <div style="height: 50px; overflow:hidden;">
+                            </div>{{ $i }}
+                        </td>
                         <td style="width: 20%">
+                            <div style="height: 40px; overflow:hidden;">
+                            </div>
                             <table class="tb_inside" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td><b>Data</b></td>
@@ -157,7 +178,9 @@
                                 </tr>
                             </table>
                         </td>
-                        <td style="width: 40%">
+                        <td style="width: 35%">
+                            <div style="height: 50px; overflow:hidden;">
+                            </div>
                             <b>Pendapatan / Pengeluaran</b>
                             <table class="my-2">
                                 <tr>
@@ -227,54 +250,107 @@
                             </table>
                             <br>
                         </td>
-                        <td style="width: 35%">
+                        <td style="width: 40%">
+                            <div style="height: 50px; overflow:hidden;">
+                            </div>
                             <table class="my-2" style="text-align: center">
                                 <tr>
                                     <td><b>Rumah</b><br>
-                                        <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->rumah->image }}"
-                                            alt="">
+                                        @if (@$dat->indikator->rumah->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->rumah->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
+
                                     </td>
                                     <td><b>Atap</b><br>
-                                        <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->atap->image }}"
-                                            alt="">
+                                        @if (@$dat->indikator->atap->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->atap->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Dinding</b><br>
-                                        <img style="width: 120px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->dinding->image }}"
-                                            alt="">
+
+                                        @if (@$dat->indikator->dinding->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->dinding->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
                                     </td>
                                     <td><b>Lantai</b><br>
-                                        <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->lantai->image }}"
-                                            alt="">
+                                        @if (@$dat->indikator->lantai->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->lantai->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Penerangan</b><br>
-                                        <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->penerangan->image }}"
-                                            alt="">
+                                        @if (@$dat->indikator->penerangan->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->penerangan->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
                                     </td>
                                     <td><b>Jamban</b><br>
-                                        <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->jamban->image }}"
-                                            alt="">
+                                        @if (@$dat->indikator->jamban->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->jamban->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><b>Sumber Air</b><br>
-                                        <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->sumber_air->image }}"
-                                            alt="">
+                                        @if (@$dat->indikator->sumber_air->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->sumber_air->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
                                     </td>
                                     <td><b>Bahan Bakar</b><br>
-                                        <img style="width: 150px; height: 120px; object-fit: contain;"
-                                            src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->bahan_bakar->image }}"
-                                            alt="">
+
+                                        @if (@$dat->indikator->bahan_bakar->image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->indikator->bahan_bakar->image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
                                     </td>
                                 </tr>
                             </table>
@@ -317,5 +393,7 @@
     }
 
 @endphp
+{{ dd($data[0]) }}
+{{ dd($data[1]) }}
 
 </html>

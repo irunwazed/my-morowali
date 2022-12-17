@@ -96,7 +96,7 @@
     </footer>
 
     <div class="m-3" style="padding-top: 50px;">
-        <table class='table table-bordered'>
+        <table class='table table-bordered' >
             <thead>
                 <tr>
                     <th style="width: 5px;">#</th>

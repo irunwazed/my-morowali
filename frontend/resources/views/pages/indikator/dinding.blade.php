@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Data Jenis Dinding - SEPAKAD')
+@section('judul', 'Data Jenis Dinding - SEPEKAN')
 
 @section('tambah_css')
 @endsection

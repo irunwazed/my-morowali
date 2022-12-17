@@ -123,7 +123,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/penduduk?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/penduduk?datatable=true&kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         // dd($auth);
         try {
@@ -214,13 +214,12 @@ class Controller extends BaseController
 
     public function print_kesejahteraan_stream(HttpRequest $request)
     {
-        $kab = $request->kabupaten;
-        $kec = $request->kecamatan;
-        $kel = $request->kelurahan;
-        if (!$kab) $kab = "";
-        if (!$kec) $kec = "";
-        if (!$kel) $kel = "";
-        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $status_kesejahteraan = $request->status_kesejahteraan;
+        $tahun = $request->tahun;
+        if (!$status_kesejahteraan) $status_kesejahteraan = "";
+        if (!$tahun) $tahun = "";
+        // dd($request->all());
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?datatable=true&status_kesejahteraan=' . $status_kesejahteraan . '&tahun=' . $tahun;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -236,6 +235,45 @@ class Controller extends BaseController
             );
             $respon = json_decode($response->getBody()->getContents());
             $data = $respon->data;
+            // dd($data);
+            return view(
+                'pages.print.kesejahteraan',
+                [
+                    'data' => $data
+                ]
+            );
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = json_decode($response->getBody()->getContents());
+            return \redirect()->back()->with('error', $responseBodyAsString->message);
+        }
+    }
+
+
+    public function print_kesejahteraan_stream_v2(HttpRequest $request)
+    {
+        $status_kesejahteraan = $request->status_kesejahteraan;
+        $tahun = $request->tahun;
+        if (!$status_kesejahteraan) $status_kesejahteraan = "";
+        if (!$tahun) $tahun = "";
+        // dd($request->all());
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?datatable=true&status_kesejahteraan=' . $status_kesejahteraan . '&tahun=' . $tahun;
+        $auth = "Bearer " . $request->session()->get('token');
+        try {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request(
+                'GET',
+                $url,
+                [
+                    'headers' =>
+                    [
+                        'Authorization' => $auth
+                    ]
+                ],
+            );
+            $respon = json_decode($response->getBody()->getContents());
+            $data = $respon->data;
+            // dd($data);
             return view(
                 'pages.print.kesejahteraan',
                 [
@@ -297,7 +335,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/bantuan?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/bantuan?datatable=true&kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -375,7 +413,7 @@ class Controller extends BaseController
         if (!$kab) $kab = "";
         if (!$kec) $kec = "";
         if (!$kel) $kel = "";
-        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/keluarga?kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/keluarga?datatable=true&kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();

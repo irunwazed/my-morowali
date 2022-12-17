@@ -89,15 +89,14 @@
 
 <body>
     <header>
-        <b> Laporan Data Bantuan - Dicetak dari: SEPAKAD Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
+        <b> Laporan Data Bantuan - Dicetak dari: SEPEKAN Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
     </header>
     <footer>
         <b> &nbsp;&nbsp; Copyright &copy; Sumber : LITBANG - BAPPEDA {{ date('Y') }} </b>
     </footer>
 
-    <div class="m-3" style="padding-top: 40px;">
-        {{-- <h4 style="font-size: 16px; text-align:center"><b>Data Bantuan</b></h4><br> --}}
-        <table class='table table-bordered' style="width: 100%">
+    <div class="m-3" style="padding-top: 50px;">
+        <table class='table table-bordered'>
             <thead>
                 <tr>
                     <th style="width: 5px;">No</th>
