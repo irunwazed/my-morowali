@@ -2084,20 +2084,22 @@
 														{
 															"key": "nama",
 															"value": "sakit1",
-															"type": "text",
-															"disabled": true
+															"type": "text"
 														},
 														{
 															"key": "bobot",
 															"value": "0.1",
-															"type": "text",
-															"disabled": true
+															"type": "text"
 														},
 														{
 															"key": "keterangan",
 															"value": "-",
-															"type": "text",
-															"disabled": true
+															"type": "text"
+														},
+														{
+															"key": "jenis",
+															"value": "1",
+															"type": "text"
 														}
 													]
 												},
@@ -8233,7 +8235,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/2124567890123451",
+									"raw": "127.0.0.1:3000/kemiskinan/get/penduduk/7206050107800049",
 									"host": [
 										"127",
 										"0",
@@ -8245,7 +8247,7 @@
 										"kemiskinan",
 										"get",
 										"penduduk",
-										"2124567890123451"
+										"7206050107800049"
 									]
 								}
 							},
@@ -8499,7 +8501,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/get/keluarga/search?search=AMIR&searchAll=false",
+									"raw": "127.0.0.1:3000/kemiskinan/get/keluarga/search?jenis=2&search=7373011210850002",
 									"host": [
 										"127",
 										"0",
@@ -8515,13 +8517,19 @@
 									],
 									"query": [
 										{
-											"key": "search",
-											"value": "AMIR"
+											"key": "searchAll",
+											"value": "true",
+											"description": "true => akan mencari nama, nik dan no_kk, false => cuma no_kk",
+											"disabled": true
 										},
 										{
-											"key": "searchAll",
-											"value": "false",
-											"description": "true => akan mencari nama, nik dan no_kk, false => cuma no_kk"
+											"key": "jenis",
+											"value": "2",
+											"description": "1 => berdasarkan nokk, 2 => berdasarkan nama atau nik"
+										},
+										{
+											"key": "search",
+											"value": "7373011210850002"
 										}
 									]
 								}
@@ -8753,7 +8761,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/penduduk/638c221342be3f86c5930c34",
+									"raw": "127.0.0.1:3000/kemiskinan/penduduk/639adf757fb5dcc53dfbd1b9",
 									"host": [
 										"127",
 										"0",
@@ -8764,7 +8772,7 @@
 									"path": [
 										"kemiskinan",
 										"penduduk",
-										"638c221342be3f86c5930c34"
+										"639adf757fb5dcc53dfbd1b9"
 									]
 								}
 							},
@@ -9670,11 +9678,18 @@
 					"item": [
 						{
 							"name": "data",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan",
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan?keluarga_id=639aded47fb5dcc53df5bf4a",
 									"host": [
 										"127",
 										"0",
@@ -9685,6 +9700,12 @@
 									"path": [
 										"kemiskinan",
 										"kesejahteraan"
+									],
+									"query": [
+										{
+											"key": "keluarga_id",
+											"value": "639aded47fb5dcc53df5bf4a"
+										}
 									]
 								}
 							},
@@ -9749,7 +9770,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/639723f533feab09e6f1b7f8",
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/639adfdd0563d204a830b176",
 									"host": [
 										"127",
 										"0",
@@ -9760,7 +9781,7 @@
 									"path": [
 										"kemiskinan",
 										"kesejahteraan",
-										"639723f533feab09e6f1b7f8"
+										"639adfdd0563d204a830b176"
 									]
 								}
 							},
@@ -9874,12 +9895,12 @@
 							]
 						},
 						{
-							"name": "data by nokk tahun",
+							"name": "data by keluarga_id tahun",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/133603537/2015",
+									"raw": "127.0.0.1:3000/kemiskinan/kesejahteraan/639aded47fb5dcc53df5bf4a/2022",
 									"host": [
 										"127",
 										"0",
@@ -9890,8 +9911,8 @@
 									"path": [
 										"kemiskinan",
 										"kesejahteraan",
-										"133603537",
-										"2015"
+										"639aded47fb5dcc53df5bf4a",
+										"2022"
 									]
 								}
 							},
@@ -11625,7 +11646,7 @@
 									"urlencoded": [
 										{
 											"key": "penduduk",
-											"value": "638efc0073a4b42752ed598b",
+											"value": "639adf747fb5dcc53dfbc3a1",
 											"type": "text"
 										},
 										{
@@ -11635,7 +11656,7 @@
 										},
 										{
 											"key": "bantuan_id",
-											"value": "638f1825dec789e7805b6015",
+											"value": "639a5e926e977c303f8aff74",
 											"type": "text"
 										},
 										{
@@ -12259,13 +12280,14 @@
 										},
 										{
 											"key": "datatable",
-											"value": "",
-											"type": "text"
+											"value": "true",
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/laporan/penduduk?datatable=true",
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/penduduk?kelurahan=7203031008&datatable=true",
 									"host": [
 										"127",
 										"0",
@@ -12281,12 +12303,21 @@
 									"query": [
 										{
 											"key": "kelurahan",
-											"value": "7203030011",
-											"disabled": true
+											"value": "7203031008"
 										},
 										{
 											"key": "datatable",
 											"value": "true"
+										},
+										{
+											"key": "kabupaten",
+											"value": "7203",
+											"disabled": true
+										},
+										{
+											"key": "kecamatan",
+											"value": "7203031",
+											"disabled": true
 										}
 									]
 								}
@@ -12325,7 +12356,7 @@
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/laporan/keluarga?datatable=true&kelurahan=7203030012",
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/keluarga?datatable=true&kelurahan=7203030011",
 									"host": [
 										"127",
 										"0",
@@ -12345,7 +12376,12 @@
 										},
 										{
 											"key": "kelurahan",
-											"value": "7203030012"
+											"value": "7203030011"
+										},
+										{
+											"key": "kecamatan",
+											"value": "7203031",
+											"disabled": true
 										}
 									]
 								}
@@ -12381,7 +12417,7 @@
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?datatable=true&kelurahan=7203030011",
+									"raw": "127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?datatable=true&status_kesejahteraan=4&tahun=2022",
 									"host": [
 										"127",
 										"0",
@@ -12401,7 +12437,16 @@
 										},
 										{
 											"key": "kelurahan",
-											"value": "7203030011"
+											"value": "7203030011",
+											"disabled": true
+										},
+										{
+											"key": "status_kesejahteraan",
+											"value": "4"
+										},
+										{
+											"key": "tahun",
+											"value": "2022"
 										}
 									]
 								}
@@ -12463,16 +12508,6 @@
 							"response": []
 						}
 					],
-					"auth": {
-						"type": "bearer",
-						"bearer": [
-							{
-								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluLWtlbWlza2luYW4iLCJpZCI6IjYzOGMxOTUyNDk4YWQzYTkyMTBiYTBhNCIsImxldmVsIjozLCJsZXZlbF9ha3VuIjoxLCJpYXQiOjE2NzAxMjYzNTR9.PUlwBjGkxsbjVqkBfyQKi0NjSTk_x0f-t98mDdNLCiM",
-								"type": "string"
-							}
-						]
-					},
 					"event": [
 						{
 							"listen": "prerequest",
@@ -12554,12 +12589,12 @@
 									"formdata": [
 										{
 											"key": "penduduk_id",
-											"value": "638efc0073a4b42752ed598b",
+											"value": "639adf747fb5dcc53dfbc3a1",
 											"type": "text"
 										},
 										{
 											"key": "pekerjaan_id",
-											"value": "638ec0038a7cd3595b4c2b81",
+											"value": "639a5e926e977c303f8aff8b",
 											"type": "text"
 										},
 										{
@@ -12673,6 +12708,16 @@
 						{
 							"name": "penduduk",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2Mzk2NzllNzA4NzNkNTEzMTZkZGRlYWIiLCJsZXZlbCI6MiwiaWF0IjoxNjcwODA3ODM2fQ.aLszpTOp-e39RtKiNbEgbMIFvmkNwshyobW1KB4M3so",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -12681,13 +12726,12 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/D:/PROJEK/BELAJAR/express/part5/my-morowali/documentation/data/penduduk7.xlsx"
+											"src": "/Users/ahmadkhairun/Documents/BELAJAR/express/app/my-morowali/documentation/data/penduduk11.xlsx"
 										},
 										{
 											"key": "delete",
 											"value": "true",
-											"type": "text",
-											"disabled": true
+											"type": "text"
 										}
 									]
 								},
@@ -12948,7 +12992,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluLWtlbWlza2luYW4iLCJpZCI6IjYzOGVjMDA0ZDhjOTI0ZmQ5MDQzYjc5YSIsImxldmVsIjozLCJsZXZlbF9ha3VuIjoxLCJpYXQiOjE2NzA2NDcxOTh9.skkySrcEa7Gkkf1Z64UznF5uE4BV6VvcFOvMQOJXiMk",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluLWtlbWlza2luYW4iLCJpZCI6IjYzOGVjMDA0ZDhjOTI0ZmQ5MDQzYjc5YSIsImxldmVsIjozLCJsZXZlbF9ha3VuIjoxLCJpYXQiOjE2NzEyMzQxMTF9.cI6Kdm24m6eOu3qTiWQ2x-iLJQUa2Y3VEe6b3Q5B1wI",
 				"type": "string"
 			}
 		]
