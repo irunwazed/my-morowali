@@ -72,13 +72,13 @@
                                                         PRINT
                                                     </button>
                                                 </div>
-                                                <div class="p-2">
+                                                {{-- <div class="p-2">
                                                     <button class="btn btn-outline-primary" style="margin-top: 8px;"
                                                         id="_pdf" type="button">
                                                         <i class="i-File-Download"></i>&nbsp;
                                                         PDF
                                                     </button>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="table-responsive" style="margin-top: 10px;">
                                                 <table class="display table table-bordered" id="tabel_data"
@@ -86,9 +86,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th style="width: 5px;">No</th>
-                                                            <th style="width: ;">Kecamatan</th>
-                                                            <th style="width: ;">Desa/Kelurahan</th>
-                                                            <th style="width: ;">Nama Kepala Keluarga</th>
+                                                            <th style="">No KK</th>
+                                                            <th style="">Kecamatan</th>
+                                                            <th style="">Desa/Kelurahan</th>
+                                                            <th style="width: 50%;">Anggota Keluarga</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -121,28 +122,27 @@
             console.log(prov);
             console.log(camat);
             console.log(desa);
-            // die()
             $('#show_dat').show(500);
-            // die()
             $('#tabel_data').DataTable({
                 paging: true,
-                ordering: true,
+                searching: true,
+                autoWidth: false,
+                responsive: false,
                 info: true,
                 destroy: true,
-                processing: false,
+                processing: true,
                 serverSide: true,
-                "iDisplayLength": 10000,
-                dom: 'Brtip',
-                buttons: [{
-                        extend: 'csv',
-                        className: 'mr-3',
-                        text: '<i class="i-File-CSV"></i> CSV',
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="i-File-Excel"></i> Excel',
-                    },
-                ],
+                // dom: 'Bfrtip',
+                // buttons: [{
+                //         extend: 'csv',
+                //         className: 'mr-3',
+                //         text: '<i class="i-File-CSV"></i> CSV'
+                //     },
+                //     {
+                //         extend: 'excel',
+                //         text: '<i class="i-File-Excel"></i> Excel'
+                //     }
+                // ],
                 ajax: {
                     url: "{{ env('API_URL') }}/kemiskinan/laporan/keluarga",
                     type: 'GET',
@@ -158,9 +158,9 @@
                     // success: function(data) {
                     //     console.log(data);
                     // },
-                    // error: function(error) {
-                    //     console.log(error);
-                    // },
+                    error: function(error) {
+                        sweetRes("error", "500", "Server Error!");
+                    },
                 },
                 columns: [{
                         "data": null,
@@ -170,30 +170,53 @@
                         }
                     },
                     {
+                        data: 'no_kk',
+                        render: function(data, row) {
+                            return data ? data : "-";
+                        }
+                    },
+                    {
                         data: null,
                         render: function(data, row) {
-                            return data.anggota_keluarga[0].alamat.kecamatan_nama ? data.anggota_keluarga[0]
+                            return data.anggota_keluarga ? data.anggota_keluarga[0]
                                 .alamat.kecamatan_nama : "-";
                         }
                     },
                     {
                         data: null,
                         render: function(data, row) {
-                            return data.anggota_keluarga[0].alamat.kelurahan_nama ? data.anggota_keluarga[0]
+                            return data.anggota_keluarga ? data.anggota_keluarga[0]
                                 .alamat.kelurahan_nama : "-";
                         }
                     },
                     {
                         data: null,
-                        render: function(data, row) {
-                            return "<b>" + data.anggota_keluarga[0].nama + "</b><br><small>" + data
-                                .anggota_keluarga[0].nik + "</small>";
+                        render: function(data, type, row) {
+                            if (data.anggota_keluarga) {
+                                nam = "";
+                                $.each(data.anggota_keluarga, function(key, value) {
+                                    var isLastElement = key == data.anggota_keluarga.length - 1;
+                                    if (isLastElement) {
+                                        batas = "";
+                                    } else {
+                                        batas = "<hr style='margin-top: 5px;margin-bottom: 5px;'>"
+                                    }
+                                    if (value.kepala_keluarga == "Ya") {
+                                        value.hubungan_keluarga = "Kepala Keluarga"
+                                    }
+                                    nam = nam + "<b>" + value.nama + "</b><br> <small>" + value
+                                        .nik + "<br>" + value.hubungan_keluarga + "<br>" + value
+                                        .jenis_kelamin + "<br>" + value.lahir.tempat + ", " + dateformat(value.lahir.tanggal) +
+                                    "</small>" + batas
+
+                                });
+                                return nam;
+
+                            }
+                            return "-";
                         }
-                    },
-                ],
-                rowGroup: {
-                    dataSrc: 'no_kk'
-                },
+                    }
+                ]
             });
         }
 
