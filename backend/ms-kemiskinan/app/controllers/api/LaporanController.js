@@ -243,11 +243,11 @@ exports.controller = class LaporanController {
       let tmp = {};
       if(datatable){
         tmp = await paginate.aggregate(req, 'keluarga_kesejahteraan', query);
-        await db.keluarga_kesejahteraan.populate(tmp.data, {path:"keluarga_id"});
-        await db.keluarga_kesejahteraan.populate(tmp.data, {path:"kepala_keluarga"});
         data = tmp.data;
       }else{
-        data = await db.keluarga.aggregate(query);;
+        data = await db.keluarga_kesejahteraan.aggregate(query);
+        await db.keluarga_kesejahteraan.populate(data, {path:"keluarga_id"});
+        await db.keluarga_kesejahteraan.populate(data, {path:"kepala_keluarga"});
       }
 
       
