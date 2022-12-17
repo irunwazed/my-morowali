@@ -7,7 +7,7 @@ module.exports = mongoose => {
       no_kk: {
 				type: String,
 			},
-      keluarga_id: {type: Schema.Types.ObjectId, ref: 'keluargas', required: true},
+      keluarga_id: {type: Schema.Types.ObjectId, ref: 'keluarga', required: true},
       status_kesejahteraan: {
 				type: Number,
 				required: true,
@@ -21,50 +21,50 @@ module.exports = mongoose => {
 			},
 			indikator: {
 				rumah: {
-					rumah_id: {type: Schema.Types.ObjectId, ref: 'ki_rumahs', required: true},
+					rumah_id: {type: Schema.Types.ObjectId, ref: 'ki_rumah', required: true},
 					nama: String,
 					ukuran: Number,
 					image: String,
 					keterangan: String,
 				},
 				atap: {
-					atap_id: {type: Schema.Types.ObjectId, ref: 'ki_ataps', required: true},
+					atap_id: {type: Schema.Types.ObjectId, ref: 'ki_atap', required: true},
 					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				bahan_bakar: {
-					bahan_bakar_id: {type: Schema.Types.ObjectId, ref: 'ki_bahan_bakars', required: true},
+					bahan_bakar_id: {type: Schema.Types.ObjectId, ref: 'ki_bahan_bakar', required: true},
 					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				dinding: {
-					dinding_id: {type: Schema.Types.ObjectId, ref: 'ki_dindings', required: true},
+					dinding_id: {type: Schema.Types.ObjectId, ref: 'ki_dinding', required: true},
 					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				jamban: {
-					jamban_id: {type: Schema.Types.ObjectId, ref: 'ki_jambans', required: true},
+					jamban_id: {type: Schema.Types.ObjectId, ref: 'ki_jamban', required: true},
 					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				lantai: {
-					lantai_id: {type: Schema.Types.ObjectId, ref: 'ki_lantais', required: true},
+					lantai_id: {type: Schema.Types.ObjectId, ref: 'ki_lantai', required: true},
 					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				penerangan: {
-					penerangan_id: {type: Schema.Types.ObjectId, ref: 'ki_penerangans', required: true},
+					penerangan_id: {type: Schema.Types.ObjectId, ref: 'ki_penerangan', required: true},
 					nama: String,
 					image: String,
 					keterangan: String,
 				},
 				sumber_air: {
-					sumber_air_id: {type: Schema.Types.ObjectId, ref: 'ki_sumber_airs', required: true},
+					sumber_air_id: {type: Schema.Types.ObjectId, ref: 'ki_sumber_air', required: true},
 					nama: String,
 					image: String,
 					keterangan: String,
@@ -78,6 +78,13 @@ module.exports = mongoose => {
     },
     { timestamps: true }
   );
+
+	schema.virtual('kepala_keluarga',{
+    ref: 'penduduk',
+    localField: 'keluarga_id.nik_kepala',
+    foreignField: 'nik',
+    justOne: true
+  });
 
   const Table = mongoose.model('keluarga_kesejahteraan', schema);
   return Table

@@ -24,6 +24,13 @@ module.exports = mongoose => {
     { timestamps: true }
   );
 
+  schema.virtual('kepala_keluarga',{
+    ref: 'penduduk',
+    localField: 'nik_kepala',
+    foreignField: 'nik',
+    justOne: true
+  });
+
   const Table = mongoose.model('keluarga', schema);
   return Table
 }

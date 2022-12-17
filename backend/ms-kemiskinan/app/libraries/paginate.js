@@ -18,8 +18,8 @@ module.exports = {
 				.skip(start)
 				.limit(length);
 			// let tmp = await db[table].find(condition).limit(limit);
-			let tmp = await db[table].find(condition);
-			jumData = tmp.length;
+			let tmp = await db[table].count(condition);
+			jumData = tmp;
 			// jumData = 100;
 	
 			result = {

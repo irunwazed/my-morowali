@@ -42,19 +42,6 @@ exports.controller = class LaporanController {
             from: 'penduduk_bantuans',
             localField: '_id',
             foreignField: 'penduduk.penduduk_id',
-            // pipeline: [
-            //   {
-            //     $project: {
-            //       tahun: '$tahun',
-            //       bantuan: {
-            //         nama: '$bantuan.nama',
-            //         pagu: '$bantuan.pagu',
-            //         keterangan: '$bantuan.keterangan',
-            //       },
-            //       lokasi: '$lokasi',
-            //     }
-            //   }
-            // ],
             as: 'bantuan',
           },
         },
@@ -228,45 +215,30 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
-      let status_kesejahteraan = req.query.status_kesejahteraan?req.query.status_kesejahteraan:1;
+      let status_kesejahteraan = req.query.status_kesejahteraan?parseInt(req.query.status_kesejahteraan):1;
       let tahun = req.query.tahun?req.query.tahun:null;
 
       let match = {}
-      if(kabupaten!='') match['keluarga.kepala_keluarga.alamat.kabupaten_kode'] = kabupaten;
-      if(kecamatan!='') match['keluarga.kepala_keluarga.alamat.kecamatan_kode'] = kecamatan;
-      if(kelurahan!='') match['keluarga.kepala_keluarga.alamat.kelurahan_kode'] = kelurahan;
+      // if(kabupaten!='') match['alamat.kabupaten_kode'] = kabupaten;
+      // if(kecamatan!='') match['alamat.kecamatan_kode'] = kecamatan;
+      // if(kelurahan!='') match['alamat.kelurahan_kode'] = kelurahan;
 
       if(status_kesejahteraan != null) match['status_kesejahteraan'] = parseInt(status_kesejahteraan);  
       if(tahun != null) match['tahun'] = parseInt(tahun);
 
       let query = [
-				{
-					$lookup:{
-						from: 'keluargas',
-						localField: 'keluarga_id',
-						foreignField: '_id',
-            pipeline:[
-              {
-                $lookup:{
-                  from: 'penduduks',
-                  localField: 'nik_kepala',
-                  foreignField: 'nik',
-                  as: 'kepala_keluarga'
-                },
-              },
-            ],
-						as: 'keluarga'
-					},
-				}, 
         {
           $match: match
-        }
+        },
       ]
       
       let data = [];
       let tmp = {};
       if(datatable){
         tmp = await paginate.aggregate(req, 'keluarga_kesejahteraan', query);
+        
+        await db.keluarga_kesejahteraan.populate(tmp.data, {path:"keluarga_id"});
+        await db.keluarga_kesejahteraan.populate(tmp.data, {path:"kepala_keluarga"});
         data = tmp.data;
       }else{
         data = await db.keluarga.aggregate(query);;
@@ -279,29 +251,27 @@ exports.controller = class LaporanController {
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu'];
 
       let dataAll = data.map(e => {
-        e.keluarga[0] = e.keluarga[0]?e.keluarga[0]:{kepala_keluarga:[]};
-        e.keluarga[0].kepala_keluarga[0] = e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0]:{};
         return {
           tahun: e.tahun,
           status_kesejahteraan: kesejahteraan[e.status_kesejahteraan],
           keuangan: e.keuangan,
           indikator: e.indikator,
           kepala_keluarga: {
-            no_kk: e.keluarga[0].no_kk,
-            nama: e.keluarga[0].kepala_keluarga[0].nama,
-            nik: e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].nik:'',
-            jk: (e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].jk:'')=='P'?'Perempuan':'Laki - Laki',
-            agama: agama[e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].agama:0],
-            lahir: e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].lahir:'',
-            alamat: e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].alamat:'',
+            no_kk: e.keluarga_id.no_kk,
+            nama: e.kepala_keluarga.nama,
+            nik: e.kepala_keluarga?e.kepala_keluarga.nik:'',
+            jk: (e.kepala_keluarga?e.kepala_keluarga.jk:'')=='P'?'Perempuan':'Laki - Laki',
+            agama: agama[e.kepala_keluarga?e.kepala_keluarga.agama:0],
+            lahir: e.kepala_keluarga?e.kepala_keluarga.lahir:'',
+            alamat: e.kepala_keluarga?e.kepala_keluarga.alamat:'',
             fisik: {
-              kondisi: fisik[e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].fisik?e.keluarga[0].kepala_keluarga[0].fisik.fisik_id:0:0],
-              keterangan: e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].fisik?e.keluarga[0].kepala_keluarga[0].fisik.keterangan:'-':'-',
+              kondisi: fisik[e.kepala_keluarga?e.kepala_keluarga.fisik?e.kepala_keluarga.fisik.fisik_id:0:0],
+              keterangan: e.kepala_keluarga?e.kepala_keluarga.fisik?e.kepala_keluarga.fisik.keterangan:'-':'-',
             },
-            pendidikan_id: pendidikan[e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].pendidikan_id:0],
-            penyakit: e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].penyakit:'',
-            pekerjaan: e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].pekerjaan?e.keluarga[0].kepala_keluarga[0].pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }):[]:[],
-            hidup: e.keluarga[0].kepala_keluarga[0]?e.keluarga[0].kepala_keluarga[0].hidup:false?'Ya':'Tidak',
+            pendidikan_id: pendidikan[e.kepala_keluarga?e.kepala_keluarga.pendidikan_id:0],
+            penyakit: e.kepala_keluarga?e.kepala_keluarga.penyakit:'',
+            pekerjaan: e.kepala_keluarga?e.kepala_keluarga.pekerjaan?e.kepala_keluarga.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }):[]:[],
+            hidup: e.kepala_keluarga?e.kepala_keluarga.hidup:false?'Ya':'Tidak',
           },
         }
       });
