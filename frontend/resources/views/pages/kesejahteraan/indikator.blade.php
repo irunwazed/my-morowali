@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Kesejahteraan - SEPAKAD')
+@section('judul', 'Kesejahteraan - SEPEKAN')
 
 @section('tambah_css')
     <style>
@@ -49,8 +49,6 @@
                             <div class="col-md-6">
                                 <h4 class=" text-white">Tabel Data Kesejahteraan</h4>
                             </div>
-                            <div class="col-md-6 text-right"><button class="btn btn-secondary" style="padding-top:8px;"
-                                    type="button" id="btn_modal"><i class="i-Add"></i> Tambah Data</button></div>
                         </div>
                     </div>
                 </div>
@@ -73,6 +71,13 @@
                                                     <select id="search_kes" name="search_kes" class="form-control pt-2"
                                                         style="width:100%;">
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <div id="btn_tam_hid">
+                                                    <button class="btn btn-outline-success" style="padding-top:px;"
+                                                        type="button" id="btn_modal"><i class="i-Add"></i> Tambah
+                                                        Data</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -444,6 +449,7 @@
             $('#m_tambah').hide();
             $('#m_edit').hide();
             $('#tab_hid').hide();
+            $("#btn_tam_hid").hide()
 
             var ki1 = $('#indikator_rumah_id');
             getRumah(ki1);
@@ -478,6 +484,7 @@
 
         $("#btn_modal").click(function() {
             $('.img-uploaded').attr('src', "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+            $("#tahun").attr('disabled', false);
             $('#m_tambah').show();
             $('#m_edit').hide();
             $('#no_kk_ed').val(no_kk);
@@ -488,6 +495,7 @@
 
 
         $('#search_kes').on('change', function() {
+            $("#btn_tam_hid").show(300);
             text2 = this.value
             const myArray = text2.split("-");
             no_kk = myArray[1];
@@ -656,7 +664,7 @@
         $('#form_data').on('submit', function(e) {
             e.preventDefault();
             idata = new FormData($('#form_data')[0]);
-            // console.log(idata);
+            console.log(idata);
             let url = ""
             let method = ""
 
@@ -720,6 +728,7 @@
         function edit_data(id) {
             $("#no_kk_e").show();
             $("#no_kk_ed").attr('disabled', 'disabled');
+            $("#tahun").attr('disabled', 'disabled');
             $("#form_data")[0].reset();
             formStatus = 'edit';
 
@@ -738,7 +747,7 @@
 
                     $('#e_id').val(data.data._id);
                     // $('#asd_id').val(data.data._id);
-                    $('#keluarga_id').val(data.data.keluarga_id);
+                    $('#keluarga_id').val(data.data.keluarga_id._id);
                     $('#no_kk_ed').val(no_kk);
                     $('#tahun').val(data.data.tahun).change();
                     if (typeof data.data.keuangan === "undefined") {
@@ -753,36 +762,77 @@
                     $('#indikator_rumah_ukuran').val(data.data.indikator.rumah.ukuran);
                     $('#indikator_rumah_id').val(data.data.indikator.rumah.rumah_id);
                     $('#indikator_rumah_ket').val(data.data.indikator.rumah.keterangan);
-                    $('#indikator_rumah_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
-                        .data.indikator.rumah.image);
+                    if (data.data.indikator.rumah.image) {
+                        $('#indikator_rumah_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.rumah.image);
+                    } else {
+                        $('#indikator_rumah_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_atap_id').val(data.data.indikator.atap.atap_id);
                     $('#indikator_atap_ket').val(data.data.indikator.atap.keterangan);
-                    $('#indikator_atap_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data.data
-                        .indikator.atap.image);
+                    if (data.data.indikator.atap.image) {
+                        $('#indikator_atap_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.atap.image);
+                    } else {
+                        $('#indikator_atap_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_bahan_bakar_id').val(data.data.indikator.bahan_bakar.bahan_bakar_id);
                     $('#indikator_bahan_bakar_ket').val(data.data.indikator.bahan_bakar.keterangan);
-                    $('#indikator_bahan_bakar_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.bahan_bakar.image);
+
+                    if (data.data.indikator.bahan_bakar.image) {
+                        $('#indikator_bahan_bakar_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.bahan_bakar.image);
+                    } else {
+                        $('#indikator_bahan_bakar_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_jamban_id').val(data.data.indikator.jamban.jamban_id);
                     $('#indikator_jamban_ket').val(data.data.indikator.jamban.keterangan);
-                    $('#indikator_jamban_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
-                        .data.indikator.jamban.image);
+                    if (data.data.indikator.jamban.image) {
+                        $('#indikator_jamban_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.jamban.image);
+                    } else {
+                        $('#indikator_jamban_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_lantai_id').val(data.data.indikator.lantai.lantai_id);
                     $('#indikator_lantai_ket').val(data.data.indikator.lantai.keterangan);
-                    $('#indikator_lantai_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
-                        .data.indikator.lantai.image);
+                    if (data.data.indikator.lantai.image) {
+                        $('#indikator_lantai_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.lantai.image);
+                    } else {
+                        $('#indikator_lantai_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_penerangan_id').val(data.data.indikator.penerangan.penerangan_id);
                     $('#indikator_penerangan_ket').val(data.data.indikator.penerangan.keterangan);
-                    $('#indikator_penerangan_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.penerangan.image);
+                    if (data.data.indikator.penerangan.image) {
+                        $('#indikator_penerangan_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.penerangan.image);
+                    } else {
+                        $('#indikator_penerangan_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_dinding_id').val(data.data.indikator.dinding.dinding_id);
                     $('#indikator_dinding_ket').val(data.data.indikator.dinding.keterangan);
-                    $('#indikator_dinding_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.dinding.image);
+                    if (data.data.indikator.dinding.image) {
+                        $('#indikator_dinding_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.dinding.image);
+                    } else {
+                        $('#indikator_dinding_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_sumber_air_id').val(data.data.indikator.sumber_air.sumber_air_id);
                     $('#indikator_sumber_air_ket').val(data.data.indikator.sumber_air.keterangan);
-                    $('#indikator_sumber_air_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.sumber_air.image);
+                    if (data.data.indikator.sumber_air.image) {
+                        $('#indikator_sumber_air_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.sumber_air.image);
+                    } else {
+                        $('#indikator_sumber_air_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#status_kesejahteraan').val(data.data.status_kesejahteraan);
                 },
                 error: function(error) {

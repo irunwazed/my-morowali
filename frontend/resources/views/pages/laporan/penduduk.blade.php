@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Laporan Penduduk - SEPAKAD')
+@section('judul', 'Laporan Penduduk - SEPEKAN')
 
 @section('tambah_css')
 
@@ -72,13 +72,13 @@
                                                         PRINT
                                                     </button>
                                                 </div>
-                                                <div class="p-2">
+                                                {{-- <div class="p-2">
                                                     <button class="btn btn-outline-primary" style="margin-top: 8px;"
                                                         id="_pdf" type="button">
                                                         <i class="i-File-Download"></i>&nbsp;
                                                         PDF
                                                     </button>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="table-responsive" style="margin-top: 10px;">
                                                 <table class="display table table-bordered" id="tabel_data"

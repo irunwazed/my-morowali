@@ -14,24 +14,9 @@
             border-right-style: hidden;
         }
 
-        table {
-            border-collapse: collapse;
-        }
-
         table td,
         table th {
-            font-size: 10px;
-        }
-
-        @page {
-            margin: 0cm 0cm;
-        }
-
-        body {
-            margin-top: 1cm;
-            margin-left: 1cm;
-            margin-right: 1cm;
-            margin-bottom: 1cm;
+            font-size: 20px;
         }
 
         header {
@@ -39,13 +24,14 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.6cm;
+            height: 1cm;
             background-color: #c9c9c9;
-            font-size: 10px;
+            font-size: 20px;
+            ;
             font-weight: bold;
             color: rgb(0, 0, 0);
             text-align: right;
-            line-height: 0.5cm;
+            line-height: 0.8cm;
         }
 
         footer {
@@ -53,27 +39,64 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.5cm;
+            height: 1cm;
             background-color: #c9c9c9;
             color: rgb(0, 0, 0);
-            font-size: 10px;
+            font-size: 20px;
+            ;
             text-align: left;
-            line-height: 0.4cm;
+            line-height: 0.9cm;
+        }
+
+        body {
+            line-height: 1.5;
+        }
+
+        table {
+            table-layout: auto !important;
+        }
+
+        th,
+        td,
+        thead th,
+        tbody td,
+        tfoot td,
+        tfoot th {
+            width: auto !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+            }
+
+        }
+
+        @page {
+            margin: 0px;
+        }
+
+        body {
+            margin: 0px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <b> Laporan Data Bantuan - Dicetak dari: SEPAKAD Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
+        <b> Laporan Data Bantuan - Dicetak dari: SEPEKAN Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
     </header>
     <footer>
         <b> &nbsp;&nbsp; Copyright &copy; Sumber : LITBANG - BAPPEDA {{ date('Y') }} </b>
     </footer>
 
-    <div class="m-2">
-        {{-- <h4 style="font-size: 16px; text-align:center"><b>Data Bantuan</b></h4><br> --}}
-        <table class='table table-bordered' style="width: 100%">
+    <div class="m-3" style="padding-top: 50px;">
+        <table class='table table-bordered'>
             <thead>
                 <tr>
                     <th style="width: 5px;">No</th>
