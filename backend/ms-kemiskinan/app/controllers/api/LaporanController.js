@@ -33,24 +33,24 @@ exports.controller = class LaporanController {
             from: 'penduduk_pekerjaans',
             localField: '_id',
             foreignField: 'penduduk_id',
-            // pipeline: [
-            //   {
-            //     $lookup: {
-            //       from: 'pekerjaans',
-            //       localField: 'pekerjaan_id',
-            //       foreignField: '_id',
-            //       as: 'pekerjaan',
-            //     },
-            //   },
-            //   // { $unwind: "$pekerjaan" },
-            //   // { $project: {
-            //   //   pekerjaan_id: '$pekerjaan_id',
-            //   //   pekerjaan_nama: '$pekerjaan.nama',
-            //   //   gaji: '$gaji',
-            //   //   keterangan: '$keterangan',
-            //   // } }
-            // ],
             as: 'pekerjaan',
+            pipeline: [
+              {
+                $lookup: {
+                  from: 'pekerjaans',
+                  localField: 'pekerjaan_id',
+                  foreignField: '_id',
+                  as: 'pekerjaan',
+                },
+              },
+              // { $unwind: "$pekerjaan" },
+              // { $project: {
+              //   pekerjaan_id: '$pekerjaan_id',
+              //   pekerjaan_nama: '$pekerjaan.nama',
+              //   gaji: '$gaji',
+              //   keterangan: '$keterangan',
+              // } }
+            ],
           },
         },
         // {
