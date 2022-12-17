@@ -221,7 +221,7 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
-      let status_kesejahteraan = req.query.status_kesejahteraan?parseInt(req.query.status_kesejahteraan):1;
+      let status_kesejahteraan = req.query.status_kesejahteraan?req.query.status_kesejahteraan:1;
       let tahun = req.query.tahun?req.query.tahun:null;
 
       let match = {}
