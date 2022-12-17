@@ -138,7 +138,7 @@ routerAdmin.put("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indika
 routerAdmin.delete("/api/kesejahteraan/indikator/sumber-air/:id", route('api/indikator/SumberAirController@delete'));
 
 routerAdmin.get("/api/kesejahteraan", route('api/KesejahteraanController@getData'));
-routerAdmin.get("/api/kesejahteraan/:no_kk/:tahun", route('api/KesejahteraanController@getData'));
+routerAdmin.get("/api/kesejahteraan/:keluarga_id/:tahun", route('api/KesejahteraanController@getData'));
 routerAdmin.get("/api/kesejahteraan/:id", route('api/KesejahteraanController@getData'));
 routerAdmin.post("/api/kesejahteraan", route('api/KesejahteraanController@store', true), route('api/KesejahteraanController@store'));
 routerAdmin.put("/api/kesejahteraan/:id", route('api/KesejahteraanController@store', true),  route('api/KesejahteraanController@store'));

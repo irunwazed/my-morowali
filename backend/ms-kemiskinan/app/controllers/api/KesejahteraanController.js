@@ -72,29 +72,25 @@ exports.controller = class KesejahteraanController {
 					},
 				}, 
 				{ $unwind: "$kepala_keluarga" },
-				{
-					$match: {
-						keluarga_id: db.mongoose.Types.ObjectId(keluarga_id)
-					}
-				}
 			];
 			if(req.params.id){
 				condition.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id)} });
 				let data = await table.aggregate(condition);
-				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
+				if(!data[0]) return res.send({statusCode: 400, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
-
-			if(req.params.no_kk && req.params.tahun){
+			if(req.params.keluarga_id && req.params.tahun){
 				console.log(req.params);
 				condition.push({ $match: { $and: [
-					{ 'kepala_keluarga.no_kk': req.params.no_kk },
+					{ keluarga_id: db.mongoose.Types.ObjectId(req.params.keluarga_id) },
 					{ tahun: parseInt(req.params.tahun) }
 				] } });
 				let data = await table.aggregate(condition);
-				if(!data[0]) return res.send({statusCode: 200, message: 'data not found!'});
+				if(!data[0]) return res.send({statusCode: 400, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
+
+			condition.push({ $match: { keluarga_id: db.mongoose.Types.ObjectId(keluarga_id) } });
 			
 			let data = await paginate.aggregate(req, 'keluarga_kesejahteraan', condition);
 			return res.send(data);
