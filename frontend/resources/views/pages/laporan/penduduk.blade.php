@@ -140,17 +140,17 @@
                 destroy: true,
                 processing: true,
                 serverSide: true,
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'csv',
-                        className: 'mr-3',
-                        text: '<i class="i-File-CSV"></i> CSV'
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="i-File-Excel"></i> Excel'
-                    }
-                ],
+                // dom: 'Bfrtip',
+                // buttons: [{
+                //         extend: 'csv',
+                //         className: 'mr-3',
+                //         text: '<i class="i-File-CSV"></i> CSV'
+                //     },
+                //     {
+                //         extend: 'excel',
+                //         text: '<i class="i-File-Excel"></i> Excel'
+                //     }
+                // ],
                 ajax: {
                     url: "{{ env('API_URL') }}/kemiskinan/laporan/penduduk",
                     type: 'GET',
@@ -158,7 +158,7 @@
                         "Authorization": "Bearer {{ Session::get('token') }}"
                     },
                     data: {
-                        datatable: false,
+                        datatable: 'true',
                         kabupaten: prov,
                         kecamatan: camat,
                         kelurahan: desa

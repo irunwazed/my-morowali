@@ -46,7 +46,7 @@
             font-size: 20px;
             ;
             text-align: left;
-            line-height: 0.6cm;
+            line-height: 0.9cm;
         }
 
         body {

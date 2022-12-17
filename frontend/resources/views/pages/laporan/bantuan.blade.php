@@ -155,7 +155,7 @@
                         "Authorization": "Bearer {{ Session::get('token') }}"
                     },
                     data: {
-                        datatable: true,
+                        datatable: 'true',
                         kabupaten: prov,
                         kecamatan: camat,
                         kelurahan: desa
