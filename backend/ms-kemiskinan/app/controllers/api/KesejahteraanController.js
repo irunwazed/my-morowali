@@ -42,40 +42,12 @@ exports.controller = class KesejahteraanController {
 		
 		try{
 
-			var condition = [
-				{
-					$lookup:{
-						from: 'keluargas',
-						localField: 'keluarga_id',
-						foreignField: '_id',
-						pipeline: [
-							{
-								$lookup:{
-									from: 'penduduks',
-									localField: 'nik_kepala',
-									foreignField: 'nik',
-									as: 'penduduk'
-								},
-							}, 
-							{
-								$project: {
-									keluarga_id: '$_id',
-									no_kk: '$no_kk',
-									penduduk_id: { $arrayElemAt: ['$penduduk._id', 0] },
-									nama: { $arrayElemAt: ['$penduduk.nama', 0] },
-									nik: { $arrayElemAt: ['$penduduk.nik', 0] },
-									alamat: { $arrayElemAt: ['$penduduk.alamat', 0] },
-								}
-							}
-						],
-						as: 'kepala_keluarga'
-					},
-				}, 
-				{ $unwind: "$kepala_keluarga" },
-			];
+			var condition = [];
 			if(req.params.id){
 				condition.push({ $match: { _id: db.mongoose.Types.ObjectId(req.params.id)} });
 				let data = await table.aggregate(condition);
+        await db.keluarga_kesejahteraan.populate(data, {path:"keluarga_id"});
+        await db.keluarga_kesejahteraan.populate(data, {path:"kepala_keluarga"});
 				if(!data[0]) return res.send({statusCode: 400, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
@@ -86,6 +58,8 @@ exports.controller = class KesejahteraanController {
 					{ tahun: parseInt(req.params.tahun) }
 				] } });
 				let data = await table.aggregate(condition);
+        await db.keluarga_kesejahteraan.populate(data, {path:"keluarga_id"});
+        await db.keluarga_kesejahteraan.populate(data, {path:"kepala_keluarga"});
 				if(!data[0]) return res.send({statusCode: 400, message: 'data not found!'});
 				return res.send({statusCode: 200, data: data[0]});
 			}
@@ -100,6 +74,21 @@ exports.controller = class KesejahteraanController {
 				message: err.message || "Some error occurred while retrieving data.",
 			});
 		}
+	}
+
+	static async loadPenduduk(data){
+
+		let result = await Promise.all(data.map( async e => {
+			
+			let penduduk = await db.penduduk.find(e.penduduk_id);
+			return {
+				penduduk_id: penduduk._id,
+				nama: penduduk.nama,
+				nik: penduduk.nik,
+				alamat: penduduk.alamat,
+			};
+		}));
+		return result
 	}
 
 
