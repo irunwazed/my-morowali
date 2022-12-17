@@ -5,6 +5,7 @@ exports.controller = class LaporanController {
 	static async penduduk(req, res) {
     try{
 
+      // return res.send({statusCode: 200, data: []});
       let year = new Date().getFullYear();
 
       let datatable = req.query.datatable=='true'?true:false;
@@ -20,60 +21,43 @@ exports.controller = class LaporanController {
       if(kelurahan!='') match['alamat.kelurahan_kode'] = kelurahan;
       
       let query = [
-        // {
-        //   $lookup: {
-        //     from: 'penyakits',
-        //     localField: 'penyakit.penyakit_id',
-        //     foreignField: '_id',
-        //     as: 'penyakit_diderita',
-        //   },
-        // },
+        {
+          $lookup: {
+            from: 'penyakits',
+            localField: 'penyakit.penyakit_id',
+            foreignField: '_id',
+            as: 'penyakit_diderita',
+          },
+        },
         {
           $lookup: {
             from: 'penduduk_pekerjaans',
             localField: '_id',
             foreignField: 'penduduk_id',
             as: 'pekerjaan',
-            pipeline: [
-              {
-                $lookup: {
-                  from: 'pekerjaans',
-                  localField: 'pekerjaan_id',
-                  foreignField: '_id',
-                  as: 'pekerjaan',
-                },
-              },
-              // { $unwind: "$pekerjaan" },
-              // { $project: {
-              //   pekerjaan_id: '$pekerjaan_id',
-              //   pekerjaan_nama: '$pekerjaan.nama',
-              //   gaji: '$gaji',
-              //   keterangan: '$keterangan',
-              // } }
-            ],
           },
         },
-        // {
-        //   $lookup: {
-        //     from: 'penduduk_bantuans',
-        //     localField: '_id',
-        //     foreignField: 'penduduk.penduduk_id',
-        //     pipeline: [
-        //       {
-        //         $project: {
-        //           tahun: '$tahun',
-        //           bantuan: {
-        //             nama: '$bantuan.nama',
-        //             pagu: '$bantuan.pagu',
-        //             keterangan: '$bantuan.keterangan',
-        //           },
-        //           lokasi: '$lokasi',
-        //         }
-        //       }
-        //     ],
-        //     as: 'bantuan',
-        //   },
-        // },
+        {
+          $lookup: {
+            from: 'penduduk_bantuans',
+            localField: '_id',
+            foreignField: 'penduduk.penduduk_id',
+            // pipeline: [
+            //   {
+            //     $project: {
+            //       tahun: '$tahun',
+            //       bantuan: {
+            //         nama: '$bantuan.nama',
+            //         pagu: '$bantuan.pagu',
+            //         keterangan: '$bantuan.keterangan',
+            //       },
+            //       lokasi: '$lokasi',
+            //     }
+            //   }
+            // ],
+            as: 'bantuan',
+          },
+        },
         { $match: match },
       ];
       
@@ -93,32 +77,50 @@ exports.controller = class LaporanController {
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu']; 
 
-      // let dataAll = data.map(e => {
-      //   return {
-      //     nama: e.nama,
-      //     nik: e.nik,
-      //     jenis_kelamin: e.jk=='P'?'Perempuan':'Laki - Laki',
-      //     agama: agama[e.agama],
-      //     lahir: e.lahir,
-      //     alamat: e.alamat,
-      //     status_pernikahan: status_pernikahan[e.status_pernikahan],
-			// 		fisik: {
-			// 			kondisi: fisik[e.fisik?e.fisik.fisik_id:0],
-			// 			keterangan: e.fisik?e.fisik.keterangan:'-',
-			// 		},
-      //     pendidikan: pendidikan[e.pendidikan_id],
-      //     penyakit: {
-      //       nama: e.penyakit?e.penyakit.nama:'-',
-      //       keterangan: e.penyakit?e.penyakit.keterangan:'',
-      //     },
-      //     pekerjaan: e.pekerjaan.map(pk => { return {pekerjaan_nama: pk.pekerjaan_nama, gaji: pk.gaji, keterangan: pk.keterangan, } }),
-      //     bantuan: e.bantuan,
-      //     hidup: e.hidup?'Ya':'Tidak',
-      //   }
-      // });
+      let dataAll = await  Promise.all(data.map( async e => {
+
+        return {
+          _id: e._id,
+          nama: e.nama,
+          nik: e.nik,
+          jenis_kelamin: e.jk=='P'?'Perempuan':'Laki - Laki',
+          agama: agama[e.agama],
+          lahir: e.lahir,
+          alamat: e.alamat,
+          status_pernikahan: status_pernikahan[e.status_pernikahan],
+					fisik: {
+						kondisi: fisik[e.fisik?e.fisik.fisik_id:0],
+						keterangan: e.fisik?e.fisik.keterangan:'-',
+					},
+          pendidikan: pendidikan[e.pendidikan_id],
+          penyakit: {
+            nama: e.penyakit?e.penyakit.nama:'-',
+            keterangan: e.penyakit?e.penyakit.keterangan:'',
+          },
+          pekerjaan: await Promise.all(e.pekerjaan.map( async pk => { 
+
+            let kerjaan = await db.pekerjaan.findById(pk.pekerjaan_id);
+
+            return {pekerjaan_nama: kerjaan.nama, gaji: pk.gaji, keterangan: pk.keterangan, 
+            
+          }})),
+          bantuan: e.bantuan.map(bt => {
+            return {
+              tahun: bt.tahun,
+              bantuan: {
+                nama: bt.bantuan.nama,
+                pagu: bt.bantuan.pagu,
+                keterangan: bt.bantuan.keterangan,
+              },
+              lokasi: bt.lokasi,
+            };
+          }),
+          hidup: e.hidup?'Ya':'Tidak',
+        }
+      }));
 
       if(datatable){
-        tmp.data = data;
+        tmp.data = dataAll;
         data = tmp;
         return res.send(data);
       }
