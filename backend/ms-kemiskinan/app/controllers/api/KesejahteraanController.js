@@ -76,21 +76,6 @@ exports.controller = class KesejahteraanController {
 		}
 	}
 
-	static async loadPenduduk(data){
-
-		let result = await Promise.all(data.map( async e => {
-			
-			let penduduk = await db.penduduk.find(e.penduduk_id);
-			return {
-				penduduk_id: penduduk._id,
-				nama: penduduk.nama,
-				nik: penduduk.nik,
-				alamat: penduduk.alamat,
-			};
-		}));
-		return result
-	}
-
 
 	static async store(req, res) {
 		const errors = validationResult(req);

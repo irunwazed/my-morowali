@@ -40,3 +40,20 @@ jobs:
         script: |
           cd /home/kominfo/app/my-morowali/
           git pull
+          cd /home/kominfo/app/my-morowali/
+          git pull
+          cp -r /home/kominfo/app/my-morowali/frontend/* /var/www/html/source
+          cp -r /home/kominfo/app/my-morowali/frontend/public/assets/* /var/www/html/assets/
+          cd ./backend/api-gateway
+          npm install
+          pm2 start
+          cd ../ms-auth
+          npm install
+          pm2 start
+          cd ../ms-kemiskinan
+          npm install
+          pm2 start
+          cd ../ms-organisasi
+          npm install
+          pm2 start
+          pm2 save

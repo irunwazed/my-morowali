@@ -242,7 +242,6 @@ exports.controller = class LaporanController {
       let tmp = {};
       if(datatable){
         tmp = await paginate.aggregate(req, 'keluarga_kesejahteraan', query);
-        
         await db.keluarga_kesejahteraan.populate(tmp.data, {path:"keluarga_id"});
         await db.keluarga_kesejahteraan.populate(tmp.data, {path:"kepala_keluarga"});
         data = tmp.data;
@@ -291,6 +290,7 @@ exports.controller = class LaporanController {
       return res.send({statusCode: 200, data: dataAll});
 
     }catch(err){
+      console.log(err);
       return res.send({statusCode: 500, message: err});
     }
   }
