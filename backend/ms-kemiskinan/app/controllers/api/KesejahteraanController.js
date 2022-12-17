@@ -138,6 +138,8 @@ exports.controller = class KesejahteraanController {
 			// });
 			// console.log(indikator_sumber_air_image);
 
+			console.log(indikator_rumah_image);
+
 			indikator_rumah_image = await upload.upload(indikator_rumah_image, keluarga_id+'_'+tahun+'_rumah_'+datetime+'.gif', '/kesejahteraan/rumah/')
 			indikator_atap_image = await upload.upload(indikator_atap_image, keluarga_id+'_'+tahun+'_atap_'+datetime+'.gif', '/kesejahteraan/atap/')
 			indikator_bahan_bakar_image = await upload.upload(indikator_bahan_bakar_image, keluarga_id+'_'+tahun+'_bahan_bakar_'+datetime+'.gif', '/kesejahteraan/bahan_bakar/')

@@ -61,26 +61,26 @@ exports.controller = class PendudukController {
 						from: 'keluarga_penduduks',
 						localField: '_id',
 						foreignField: 'penduduk_id',
-						pipeline: [
-							{
-								$lookup:{
-									from: 'keluargas',
-									localField: 'keluarga_id',
-									foreignField: '_id',
-									pipeline: [
-										{
-											$project: { 
-												no_kk: '$no_kk',
-												kb: '$kb',
-												nik_kepala: '$nik_kepala',
-											}
-										}
-									],
-									as: 'keluarga'
-								},
-							}, 
-							{ $unwind: "$keluarga" },
-						],
+						// pipeline: [
+						// 	{
+						// 		$lookup:{
+						// 			from: 'keluargas',
+						// 			localField: 'keluarga_id',
+						// 			foreignField: '_id',
+						// 			pipeline: [
+						// 				{
+						// 					$project: { 
+						// 						no_kk: '$no_kk',
+						// 						kb: '$kb',
+						// 						nik_kepala: '$nik_kepala',
+						// 					}
+						// 				}
+						// 			],
+						// 			as: 'keluarga'
+						// 		},
+						// 	}, 
+						// 	{ $unwind: "$keluarga" },
+						// ],
 						as: 'keluarga_penduduk',
 					},
 				},
@@ -88,11 +88,38 @@ exports.controller = class PendudukController {
 
 			if(id != 0){
 				query.push({ $match: { _id: db.mongoose.Types.ObjectId(id) } });
-			}else if(no_kk){
-				query.push({ $unwind: "$keluarga_penduduk" },);
-				query.push({ $match: { 'keluarga_penduduk.keluarga.no_kk': no_kk } });
 			}
 			let data = await table.aggregate(query)
+
+			data = await Promise.all(data.map(async dt => {
+
+				return {
+					_id: dt._id,
+					nama: dt.nama,
+					nik: dt.nik,
+					jk: dt.jk,
+					lahir: dt.lahir,
+					alamat: dt.alamat,
+					status_pernikahan: dt.status_pernikahan,
+					pendidikan_id: dt.pendidikan_id,
+					data: dt.data,
+					hidup: dt.hidup,
+					keluarga_penduduk: await Promise.all(dt.keluarga_penduduk.map(async e => {
+						let keluarga = await db.keluarga.findById(e.keluarga_id);
+						return {
+							_id: e._id,
+							keluarga_id: e.keluarga_id,
+							penduduk_id: e.penduduk_id,
+							level: e.level,
+							kepala: e.kepala,
+							keluarga: keluarga,
+						}
+					}))
+				}
+			}));
+
+			
+
 			// let data = await table.findById(id);
 			if (!data[0]) return res.status(400).send({
 				statusCode: 400,

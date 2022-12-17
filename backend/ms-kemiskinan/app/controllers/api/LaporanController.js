@@ -59,8 +59,8 @@ exports.controller = class LaporanController {
       }
 
       
-      let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
-      let status_pernikahan = ['', 'Belum Menikah', 'Menikah', 'Duda', 'Janda'];
+      let pendidikan = ['', 'Tidak/belum sekolah', 'Tidak tamat SD/sederajat', 'Siswa SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat', 'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat', ' Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi']; 
+      let status_pernikahan = ['', 'Belum Kawin', 'Cerai Hidup', 'Cerai Mati', 'Kawin'];  
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu']; 
 
@@ -161,11 +161,12 @@ exports.controller = class LaporanController {
         data = await db.keluarga.aggregate(query);
       }
 
-      let hubKel = ['', 'Istri / Suami', 'Anak', 'Wali', 'Lainnya'];  
-      let pendidikan = ['', 'Tidak punya ijazah', 'SD', 'SMP', 'SMA', 'S1', 'S2', 'S3'];
-      let status_pernikahan = ['', 'Belum Menikah', 'Menikah', 'Duda', 'Janda'];
+      
+      let pendidikan = ['', 'Tidak/belum sekolah', 'Tidak tamat SD/sederajat', 'Siswa SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat', 'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat', ' Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi']; 
+      let status_pernikahan = ['', 'Belum Kawin', 'Cerai Hidup', 'Cerai Mati', 'Kawin'];  
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
-      let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu'];
+      let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu']; 
+      let hubKel = ['', 'Kepala Keluarga', 'Suami/Istri', 'Anak', 'Lainnya']; 
 
       let dataAll = await Promise.all(data.map( async e => {
 
@@ -249,12 +250,13 @@ exports.controller = class LaporanController {
         data = await db.keluarga.aggregate(query);;
       }
 
-      let kesejahteraan = ['', 'Sangat Miskin', 'Miskin', 'Rentan Miskin', 'Menuju Miskin', 'Middle Class'];
-      let pendidikan = ['', 'Tidak/belum sekolah', 'Tidak tamat SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat', 'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat', 'Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi'];  
-      let status_pernikahan = ['', 'Belum Menikah', 'Cerai Hidup', 'Cerai Mati', 'Kawin'];
+      
+      let pendidikan = ['', 'Tidak/belum sekolah', 'Tidak tamat SD/sederajat', 'Siswa SD/sederajat', 'Tamat SD/sederajat', 'Siswa SMP/sederajat', 'Tamat SMP/sederajat', 'Siswa SMA/sederajat', 'Tamat SMA/sederajat', ' Mahasiswa Perguruan Tinggi', 'Tamat Perguruan Tinggi']; 
+      let status_pernikahan = ['', 'Belum Kawin', 'Cerai Hidup', 'Cerai Mati', 'Kawin'];  
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
-      let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu'];
-
+      let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu']; 
+      let kesejahteraan = ['', 'Sangat Miskin', 'Miskin', 'Rentan Miskin', 'Menuju Miskin', 'Middle Class'];
+      
       let dataAll = data.map(e => {
         e.keluarga_id = e.keluarga_id?e.keluarga_id:{};
         e.kepala_keluarga = e.kepala_keluarga?e.kepala_keluarga:{};
@@ -269,6 +271,7 @@ exports.controller = class LaporanController {
             nik: e.kepala_keluarga?e.kepala_keluarga.nik:'',
             jk: (e.kepala_keluarga?e.kepala_keluarga.jk:'')=='P'?'Perempuan':'Laki - Laki',
             agama: agama[e.kepala_keluarga?e.kepala_keluarga.agama:0],
+            status_pernikahan: status_pernikahan[e.kepala_keluarga?e.kepala_keluarga.status_pernikahan:0],
             lahir: e.kepala_keluarga?e.kepala_keluarga.lahir:'',
             alamat: e.kepala_keluarga?e.kepala_keluarga.alamat:'',
             fisik: {
