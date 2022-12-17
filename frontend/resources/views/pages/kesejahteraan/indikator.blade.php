@@ -492,6 +492,7 @@
             const myArray = text2.split("-");
             no_kk = myArray[1];
             id_kel = myArray[0];
+            console.log(id_kel)
             loadData(id_kel);
         });
 
@@ -572,7 +573,7 @@
                                     <span class="_dot _r_block-dot bg-dark"></span>
                                 </button>
                                 <div class="dropdown-menu" x-placement="bottom-start">
-                                    <button disabled id="` + data._id + `" onClick="edit_data(this.id)" type="button" class="dropdown-item">
+                                    <button    id="` + data._id + `" onClick="edit_data(this.id)" type="button" class="dropdown-item">
                                         <i class="nav-icon i-Pen-2 text-success font-weight-bold mr-2"></i>
                                         Ubah
                                     </button>
@@ -593,13 +594,13 @@
                     {
                         data: null,
                         render: function(data, type, row) {
-                            return data.kepala_keluarga.no_kk ? data.kepala_keluarga.no_kk : "-";
+                            return data.keluarga_id ? data.keluarga_id.no_kk : "-";
                         }
                     },
                     {
                         data: null,
                         render: function(data, type, row) {
-                            return data.kepala_keluarga.nama ? data.kepala_keluarga.nama : "-";
+                            return data.kepala_keluarga ? data.kepala_keluarga.nama : "-";
                         }
                     },
                     {
@@ -845,8 +846,6 @@
                     }
                 });
         }
-
-
 
         function viewImg(input) {
             if (input.files && input.files[0]) {
