@@ -167,35 +167,41 @@ exports.controller = class LaporanController {
       let fisik = ['', 'Lainnya', 'Sehat', 'Cacat'];
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu'];
 
-      let dataAll = data.map(e => {
+      let dataAll = await Promise.all(data.map( async e => {
+
+        let anggota_keluarga = [];
+        let anggota = await db.keluarga_penduduk.find({ keluarga_id: e._id }).sort({ level: 'asc' })
+        
+ 
         return {
           no_kk: e.no_kk,
           nik_kepala: e.nik_kepala,
-          anggota_keluarga: e.anggota_keluarga.map(ak => {
+          anggota_keluarga: await  Promise.all(anggota.map( async ak => {
+            let penduduk = await db.penduduk.findById(ak.penduduk_id)
             return {
-              kepala_keluarga: ak.kepala_keluarga?'Ya':'Tidak',
-              nama: ak.nama,
-              nik: ak.nik,
+              kepala_keluarga: ak.kepala?'Ya':'Tidak',
+              nama: penduduk.nama,
+              nik: penduduk.nik,
               hubungan_keluarga: hubKel[ak.level],
-              jenis_kelamin: ak.jk=='P'?'Perempuan':'Laki - Laki',
-              agama: agama[ak.agama],
-              lahir: ak.lahir,
-              alamat: ak.alamat,
-              status_pernikahan: status_pernikahan[ak.status_pernikahan],
+              jenis_kelamin: penduduk.jk=='P'?'Perempuan':'Laki - Laki',
+              agama: agama[penduduk.agama],
+              lahir: penduduk.lahir,
+              alamat: penduduk.alamat,
+              status_pernikahan: status_pernikahan[penduduk.status_pernikahan],
               fisik: {
-                kondisi: fisik[ak.fisik?ak.fisik.fisik_id:0],
-                keterangan: ak.fisik?ak.fisik.keterangan:'-',
+                kondisi: fisik[penduduk.fisik?penduduk.fisik.fisik_id:0],
+                keterangan: penduduk.fisik?penduduk.fisik.keterangan:'-',
               },
-              pendidikan: pendidikan[ak.pendidikan_id],
+              pendidikan: pendidikan[penduduk.pendidikan_id],
               penyakit: {
-                nama: ak.penyakit?ak.penyakit.nama:'',
-                keterangan: ak.penyakit?ak.penyakit.keterangan:'',
+                nama: penduduk.penyakit?penduduk.penyakit.nama:'',
+                keterangan: penduduk.penyakit?penduduk.penyakit.keterangan:'',
               },
-              hidup: ak.hidup?'Ya':'Tidak',
+              hidup: penduduk.hidup?'Ya':'Tidak',
             }
-          }),
+          })),
         }
-      });
+      }));
 
       if(datatable){
         tmp.data = dataAll;
