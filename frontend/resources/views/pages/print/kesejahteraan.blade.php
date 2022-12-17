@@ -393,7 +393,5 @@
     }
 
 @endphp
-{{ dd($data[0]) }}
-{{ dd($data[1]) }}
 
 </html>
