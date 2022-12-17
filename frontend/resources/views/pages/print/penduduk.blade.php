@@ -98,8 +98,8 @@
         <b> &nbsp;&nbsp; Copyright &copy; Sumber : LITBANG - BAPPEDA {{ date('Y') }} </b>
     </footer>
 
-    <div class="m-3">
-        <table class='table table-bordered'>
+    <div class="m-3" style="padding-top: 50px;">
+        <table class='table table-bordered' style="margin-top: -50px;">
             <tbody>
                 @php
                     $i = 1;
@@ -107,11 +107,11 @@
                 @foreach (@$data as $dat)
                     <tr>
                         <td style="width: 5px; ">
-                            <div style="height: 50px; overflow:hidden;">
+                            <div style="height: 60px; overflow:hidden;">
                             </div>{{ $i }}
                         </td>
                         <td>
-                            <div style="height: 40px; overflow:hidden;">
+                            <div style="height: 50px; overflow:hidden;">
                             </div>
                             <table class="tb_inside" cellspacing="0" cellpadding="0">
                                 <tr>
@@ -184,7 +184,7 @@
                             </table>
                         </td>
                         <td>
-                            <div style="height: 40px; overflow:hidden;">
+                            <div style="height: 60px; overflow:hidden;">
                             </div>
                             <b>Pekerjaan</b>
                             <table class="my-2" style="width: 100%">

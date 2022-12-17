@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Kesejahteraan - SEPAKAD')
+@section('judul', 'Kesejahteraan - SEPEKAN')
 
 @section('tambah_css')
     <style>
@@ -740,7 +740,7 @@
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    // console.log(data.data);
+                    console.log(data.data);
                     if (data.statusCode != 200) {
                         return;
                     }
@@ -762,36 +762,77 @@
                     $('#indikator_rumah_ukuran').val(data.data.indikator.rumah.ukuran);
                     $('#indikator_rumah_id').val(data.data.indikator.rumah.rumah_id);
                     $('#indikator_rumah_ket').val(data.data.indikator.rumah.keterangan);
-                    $('#indikator_rumah_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
-                        .data.indikator.rumah.image);
+                    if (data.data.indikator.rumah.image) {
+                        $('#indikator_rumah_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.rumah.image);
+                    } else {
+                        $('#indikator_rumah_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_atap_id').val(data.data.indikator.atap.atap_id);
                     $('#indikator_atap_ket').val(data.data.indikator.atap.keterangan);
-                    $('#indikator_atap_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data.data
-                        .indikator.atap.image);
+                    if (data.data.indikator.atap.image) {
+                        $('#indikator_atap_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.atap.image);
+                    } else {
+                        $('#indikator_atap_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_bahan_bakar_id').val(data.data.indikator.bahan_bakar.bahan_bakar_id);
                     $('#indikator_bahan_bakar_ket').val(data.data.indikator.bahan_bakar.keterangan);
-                    $('#indikator_bahan_bakar_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.bahan_bakar.image);
+
+                    if (data.data.indikator.bahan_bakar.image) {
+                        $('#indikator_bahan_bakar_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.bahan_bakar.image);
+                    } else {
+                        $('#indikator_bahan_bakar_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_jamban_id').val(data.data.indikator.jamban.jamban_id);
                     $('#indikator_jamban_ket').val(data.data.indikator.jamban.keterangan);
-                    $('#indikator_jamban_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
-                        .data.indikator.jamban.image);
+                    if (data.data.indikator.jamban.image) {
+                        $('#indikator_jamban_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.jamban.image);
+                    } else {
+                        $('#indikator_jamban_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_lantai_id').val(data.data.indikator.lantai.lantai_id);
                     $('#indikator_lantai_ket').val(data.data.indikator.lantai.keterangan);
-                    $('#indikator_lantai_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
-                        .data.indikator.lantai.image);
+                    if (data.data.indikator.lantai.image) {
+                        $('#indikator_lantai_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.lantai.image);
+                    } else {
+                        $('#indikator_lantai_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_penerangan_id').val(data.data.indikator.penerangan.penerangan_id);
                     $('#indikator_penerangan_ket').val(data.data.indikator.penerangan.keterangan);
-                    $('#indikator_penerangan_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.penerangan.image);
+                    if (data.data.indikator.penerangan.image) {
+                        $('#indikator_penerangan_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.penerangan.image);
+                    } else {
+                        $('#indikator_penerangan_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_dinding_id').val(data.data.indikator.dinding.dinding_id);
                     $('#indikator_dinding_ket').val(data.data.indikator.dinding.keterangan);
-                    $('#indikator_dinding_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.dinding.image);
+                    if (data.data.indikator.dinding.image) {
+                        $('#indikator_dinding_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.dinding.image);
+                    } else {
+                        $('#indikator_dinding_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#indikator_sumber_air_id').val(data.data.indikator.sumber_air.sumber_air_id);
                     $('#indikator_sumber_air_ket').val(data.data.indikator.sumber_air.keterangan);
-                    $('#indikator_sumber_air_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" +
-                        data.data.indikator.sumber_air.image);
+                    if (data.data.indikator.sumber_air.image) {
+                        $('#indikator_sumber_air_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data
+                            .data.indikator.sumber_air.image);
+                    } else {
+                        $('#indikator_sumber_air_image').attr('src',
+                            "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+                    }
                     $('#status_kesejahteraan').val(data.data.status_kesejahteraan);
                 },
                 error: function(error) {

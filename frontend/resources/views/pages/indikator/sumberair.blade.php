@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Data Sumber Air Minum - SEPAKAD')
+@section('judul', 'Data Sumber Air Minum - SEPEKAN')
 
 @section('tambah_css')
 @endsection

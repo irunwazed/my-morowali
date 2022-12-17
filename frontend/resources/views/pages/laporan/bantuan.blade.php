@@ -1,6 +1,6 @@
 @extends('temp.temp')
 
-@section('judul', 'Laporan Bantuan - SEPAKAD')
+@section('judul', 'Laporan Bantuan - SEPEKAN')
 
 @section('tambah_css')
 
