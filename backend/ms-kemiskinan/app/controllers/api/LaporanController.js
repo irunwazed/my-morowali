@@ -256,13 +256,15 @@ exports.controller = class LaporanController {
       let agama = ['', 'Islam', 'Kristen', 'Khatolik', 'Hindu', 'Buddha', 'Konghucu'];
 
       let dataAll = data.map(e => {
+        e.keluarga_id = e.keluarga_id?e.keluarga_id:{};
+        e.kepala_keluarga = e.kepala_keluarga?e.kepala_keluarga:{};
         return {
           tahun: e.tahun,
           status_kesejahteraan: kesejahteraan[e.status_kesejahteraan],
           keuangan: e.keuangan,
           indikator: e.indikator,
           kepala_keluarga: {
-            no_kk: e.keluarga_id.no_kk,
+            no_kk: e.keluarga_id?e.keluarga_id.no_kk:'',
             nama: e.kepala_keluarga.nama,
             nik: e.kepala_keluarga?e.kepala_keluarga.nik:'',
             jk: (e.kepala_keluarga?e.kepala_keluarga.jk:'')=='P'?'Perempuan':'Laki - Laki',
