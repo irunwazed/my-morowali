@@ -49,8 +49,6 @@
                             <div class="col-md-6">
                                 <h4 class=" text-white">Tabel Data Kesejahteraan</h4>
                             </div>
-                            <div class="col-md-6 text-right"><button class="btn btn-secondary" style="padding-top:8px;"
-                                    type="button" id="btn_modal"><i class="i-Add"></i> Tambah Data</button></div>
                         </div>
                     </div>
                 </div>
@@ -73,6 +71,13 @@
                                                     <select id="search_kes" name="search_kes" class="form-control pt-2"
                                                         style="width:100%;">
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <div id="btn_tam_hid">
+                                                    <button class="btn btn-outline-success" style="padding-top:px;"
+                                                        type="button" id="btn_modal"><i class="i-Add"></i> Tambah
+                                                        Data</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -444,6 +449,7 @@
             $('#m_tambah').hide();
             $('#m_edit').hide();
             $('#tab_hid').hide();
+            $("#btn_tam_hid").hide()
 
             var ki1 = $('#indikator_rumah_id');
             getRumah(ki1);
@@ -478,6 +484,7 @@
 
         $("#btn_modal").click(function() {
             $('.img-uploaded').attr('src', "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
+            $("#tahun").attr('disabled', false);
             $('#m_tambah').show();
             $('#m_edit').hide();
             $('#no_kk_ed').val(no_kk);
@@ -488,6 +495,7 @@
 
 
         $('#search_kes').on('change', function() {
+            $("#btn_tam_hid").show(300);
             text2 = this.value
             const myArray = text2.split("-");
             no_kk = myArray[1];
@@ -656,7 +664,7 @@
         $('#form_data').on('submit', function(e) {
             e.preventDefault();
             idata = new FormData($('#form_data')[0]);
-            // console.log(idata);
+            console.log(idata);
             let url = ""
             let method = ""
 
@@ -720,6 +728,7 @@
         function edit_data(id) {
             $("#no_kk_e").show();
             $("#no_kk_ed").attr('disabled', 'disabled');
+            $("#tahun").attr('disabled', 'disabled');
             $("#form_data")[0].reset();
             formStatus = 'edit';
 
@@ -731,14 +740,14 @@
                     "Authorization": "Bearer {{ Session::get('token') }}"
                 },
                 success: function(data) {
-                    console.log(data.data);
+                    // console.log(data.data);
                     if (data.statusCode != 200) {
                         return;
                     }
 
                     $('#e_id').val(data.data._id);
                     // $('#asd_id').val(data.data._id);
-                    $('#keluarga_id').val(data.data.keluarga_id);
+                    $('#keluarga_id').val(data.data.keluarga_id._id);
                     $('#no_kk_ed').val(no_kk);
                     $('#tahun').val(data.data.tahun).change();
                     if (typeof data.data.keuangan === "undefined") {

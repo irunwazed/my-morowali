@@ -14,30 +14,9 @@
             border-right-style: hidden;
         }
 
-        td .no_ud {
-            border-top-style: hidden;
-            border-bottom-style: hidden;
-        }
-
-
-        table {
-            border-collapse: collapse;
-        }
-
         table td,
         table th {
-            font-size: 10px;
-        }
-
-        @page {
-            margin: 0cm 0cm;
-        }
-
-        body {
-            margin-top: 1cm;
-            margin-left: 1cm;
-            margin-right: 1cm;
-            margin-bottom: 1cm;
+            font-size: 16px;;
         }
 
         header {
@@ -45,13 +24,14 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.6cm;
+            height: 1cm;
             background-color: #c9c9c9;
-            font-size: 10px;
+            font-size: 20px;
+            ;
             font-weight: bold;
             color: rgb(0, 0, 0);
             text-align: right;
-            line-height: 0.5cm;
+            line-height: 0.8cm;
         }
 
         footer {
@@ -59,25 +39,63 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 0.5cm;
+            height: 1cm;
             background-color: #c9c9c9;
             color: rgb(0, 0, 0);
-            font-size: 10px;
+            font-size: 20px;
+            ;
             text-align: left;
-            line-height: 0.4cm;
+            line-height: 0.9cm;
+        }
+
+        body {
+            line-height: 1.5;
+        }
+
+        table {
+            table-layout: auto !important;
+        }
+
+        th,
+        td,
+        thead th,
+        tbody td,
+        tfoot td,
+        tfoot th {
+            width: auto !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+            }
+
+        }
+
+        @page {
+            margin: 0px;
+        }
+
+        body {
+            margin: 0px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <b> Laporan Data Keluarga - Dicetak dari: SEPAKAD Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
+        <b> Laporan Data Keluarga - Dicetak dari: SEPEKAN Kab Morowali pada {{ date('d-m-Y') }} &nbsp;&nbsp; </b>
     </header>
     <footer>
         <b> &nbsp;&nbsp; Copyright &copy; Sumber : LITBANG - BAPPEDA {{ date('Y') }} </b>
     </footer>
 
-    <div class="m-2">
+    <div class="m-3" style="padding-top: 50px;">
         <table class='table table-bordered'>
             <thead>
                 <tr>
@@ -126,9 +144,8 @@
                             <td>{{ @$dat_kel->status_pernikahan }}</td>
                             <td>{{ @$dat_kel->pendidikan }}</td>
                             <td>{{ @$dat_kel->fisik->kondisi }}</td>
-                            <td>{{ @$dat_kel->penyakit->nama ? @$dat_kel->penyakit->nama : '' }}
+                            <td>{{ @$dat_kel->penyakit->nama ? @$dat_kel->penyakit->nama : '-' }}
                             </td>
-                            <td>{{ @$dat_kel->hidup }}</td>
                             <td>
                                 @if (isset($dat_kel->pekerjaan[0]->pekerjaan_nama))
                                     <b>{{ @$dat_kel->pekerjaan[0]->pekerjaan_nama }}</b> <br>
@@ -137,8 +154,12 @@
                                     -
                                 @endif
                             </td>
+                            <td>{{ @$dat_kel->hidup }}</td>
                         </tr>
                     @endforeach
+                    @php
+                        $i++;
+                    @endphp
                 @endforeach
             </tbody>
         </table>
@@ -166,12 +187,12 @@
         $birthDate = new DateTime($tanggal);
         $today = new DateTime();
         if ($birthDate > $today) {
-            exit('0 tahun');
+            exit('0');
         }
         $y = $today->diff($birthDate)->y;
-        return $y . ' tahun ';
+        return $y;
     }
 @endphp
-{{-- {{ dd(@$data[0]) }} --}}
+{{ dd(@$data[0]) }}
 
 </html>

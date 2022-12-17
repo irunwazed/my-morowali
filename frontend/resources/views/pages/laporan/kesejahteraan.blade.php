@@ -27,38 +27,41 @@
                                             <div class="row mb-4">
                                                 <div class="col-md-3 mb-2">
                                                     <div class="form-group">
-                                                        <label><b>Kabupaten</b> </label>
-                                                        <select id="kabupaten" name="kabupaten" class="form-control select2"
-                                                            style="width:100%;" required>
-                                                            <option value="7203" selected>Kabupaten Morowali</option>
+                                                        <label><b>Status Kesejahteraan</b> </label>
+                                                        <select id="status_kesejahteraan" name="status_kesejahteraan"
+                                                            class="form-control" style="width:100%;">
+                                                            <option value="" selected disabled>- Pilih Status
+                                                                Kesejahteraan -</option>
+                                                            <option value="1">Sangat Miskin</option>
+                                                            <option value="2">Miskin</option>
+                                                            <option value="3">Rentan Miskin</option>
+                                                            <option value="4">Menuju Miskin</option>
+                                                            <option value="5">Middle Class</option>
                                                         </select>
                                                     </div>
-
                                                 </div>
                                                 <div class="col-md-3 mb-2">
                                                     <div class="form-group">
-                                                        <label><b>Kecamatan</b> </label>
-                                                        <select id="kecamatan" name="kecamatan" class="form-control select2"
-                                                            style="width:100%;" required>
+                                                        <label><b>Tahun</b> </label>
+                                                        <select id="tahun" name="tahun" class="form-control"
+                                                            style="width:100%;">
+                                                            <option value="" selected disabled>- Pilih Tahun -
+                                                            </option>
+                                                            @for ($tah = date('Y') + 1; $tah > 2010; $tah--)
+                                                                <option value={{ $tah }}>{{ $tah }}
+                                                                </option>
+                                                            @endfor
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <div class="carian">
-                                                        <div class="form-group">
-                                                            <label><b> Kelurahan</b></label>
-                                                            <select id="kelurahan" name="kelurahan"
-                                                                class="form-control select2" style="width:100%;" required>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 mb-2">
                                                     <div class="form-group" style="margin-top: 20px;">
                                                         <button class="btn btn-outline-primary" style="padding-top: 8px;"
                                                             id="btn_cari" type="button"><i class="i-Magnifi-Glass1"></i>
                                                         </button>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-3 mb-2">
                                                 </div>
                                             </div>
                                         </form>
@@ -72,13 +75,13 @@
                                                         PRINT
                                                     </button>
                                                 </div>
-                                                <div class="p-2">
+                                                {{-- <div class="p-2">
                                                     <button class="btn btn-outline-primary" style="margin-top: 8px;"
                                                         id="_pdf" type="button">
                                                         <i class="i-File-Download"></i>&nbsp;
                                                         PDF
                                                     </button>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="table-responsive" style="margin-top: 10px;">
                                                 <table class="display table table-bordered" id="tabel_data"
@@ -125,10 +128,9 @@
             $(".select2").select2();
         });
 
-        function loadData(prov, camat, desa) {
-            console.log(prov);
-            console.log(camat);
-            console.log(desa);
+        function loadData(status, tahun) {
+            console.log(status);
+            console.log(tahun);
             // die()
             $('#show_dat').show(500);
             // die()
@@ -141,17 +143,17 @@
                 destroy: true,
                 processing: true,
                 serverSide: true,
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'csv',
-                        className: 'mr-3',
-                        text: '<i class="i-File-CSV"></i> CSV'
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="i-File-Excel"></i> Excel'
-                    }
-                ],
+                // dom: 'Bfrtip',
+                // buttons: [{
+                //         extend: 'csv',
+                //         className: 'mr-3',
+                //         text: '<i class="i-File-CSV"></i> CSV'
+                //     },
+                //     {
+                //         extend: 'excel',
+                //         text: '<i class="i-File-Excel"></i> Excel'
+                //     }
+                // ],
                 ajax: {
                     url: "{{ env('API_URL') }}/kemiskinan/laporan/kesejahteraan",
                     type: 'GET',
@@ -160,9 +162,8 @@
                     },
                     data: {
                         datatable: 'true',
-                        kabupaten: prov,
-                        kecamatan: camat,
-                        kelurahan: desa
+                        status_kesejahteraan: status,
+                        tahun: tahun,
                     },
                     // success: function(data) {
                     //     console.log(data);
@@ -197,7 +198,8 @@
                         data: null,
                         render: function(data, row) {
                             return data.kepala_keluarga.lahir.tempat + ", " + dateformat(data
-                                .kepala_keluarga.lahir.tanggal) + "<br>" + hit_umur(data.kepala_keluarga.lahir.tanggal);
+                                .kepala_keluarga.lahir.tanggal) + "<br>" + hit_umur(data.kepala_keluarga
+                                .lahir.tanggal);
                         }
                     },
                     {
@@ -206,19 +208,19 @@
                     {
                         data: 'keuangan.pendapatan_utama',
                         render: function(data, row) {
-                            return rupiah(data);
+                            return data ? rupiah(data) : "-";
                         }
                     },
                     {
                         data: 'keuangan.pendapatan_sampingan',
                         render: function(data, row) {
-                            return rupiah(data);
+                            return data ? rupiah(data) : "-";
                         }
                     },
                     {
                         data: 'keuangan.pengeluaran_total',
                         render: function(data, row) {
-                            return rupiah(data);
+                            return data ? rupiah(data) : "-";
                         }
                     },
                     {
@@ -236,10 +238,9 @@
         }
 
         $('#btn_cari').click(function() {
-            prov = $('#kabupaten').val();
-            camat = $('#kecamatan').val();
-            desa = $('#kelurahan').val();
-            loadData(prov, camat, desa);
+            status = $('#status_kesejahteraan').val();
+            tahun = $('#tahun').val();
+            loadData(status, tahun);
         })
 
         function getCamat() {

@@ -356,7 +356,7 @@ class Controller extends BaseController
                     'data' => $respon->data
                 ]
             );
-            $pdf->setOption(['dpi' => 75, 'defaultFont' => 'sans-serif']);
+            $pdf->setOption(['dpi' => 100, 'defaultFont' => 'sans-serif']);
             $pdf->set_paper('Legal', 'landscape');
             return $pdf->download('laporan-bantuan');
         } catch (RequestException $e) {
@@ -391,13 +391,9 @@ class Controller extends BaseController
             );
             $respon = json_decode($response->getBody()->getContents());
             $data = $respon->data;
+            // dd($data);
 
-            // return view(
-            //     'pages.print.keluarga',
-            //     [
-            //         'data' => $data
-            //     ]
-            // );
+            return view('pages.print.keluarga', ['data' => $data]);
         } catch (RequestException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = json_decode($response->getBody()->getContents());

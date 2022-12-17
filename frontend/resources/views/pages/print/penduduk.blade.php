@@ -77,6 +77,14 @@
             }
 
         }
+
+        @page {
+            margin: 0px;
+        }
+
+        body {
+            margin: 0px;
+        }
     </style>
 
 
