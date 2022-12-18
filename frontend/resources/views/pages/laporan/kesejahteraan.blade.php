@@ -168,9 +168,9 @@
                     // success: function(data) {
                     //     console.log(data);
                     // },
-                    // error: function(error) {
-                    //     console.log(error);
-                    // },
+                    error: function(error) {
+                        console.log(error);
+                    },
                 },
                 columns: [{
                         "data": null,
@@ -197,9 +197,12 @@
                     {
                         data: null,
                         render: function(data, row) {
+                            if(data.kepala_keluarga.lahir){
                             return data.kepala_keluarga.lahir.tempat + ", " + dateformat(data
                                 .kepala_keluarga.lahir.tanggal) + "<br>" + hit_umur(data.kepala_keluarga
                                 .lahir.tanggal);
+
+                            }return "-";
                         }
                     },
                     {

@@ -37,7 +37,6 @@ class LoginController extends Controller
                 ]
             );
             $respon2 = json_decode($response2->getBody()->getContents());
-
             $token = $respon->token;
             $session = $respon2->session;
 
@@ -57,6 +56,7 @@ class LoginController extends Controller
         } catch (RequestException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = json_decode($response->getBody()->getContents());
+            dd($responseBodyAsString);
             return \redirect()->back()->with('error', $responseBodyAsString->message);
             // dd(json_decode($responseBodyAsString));
         }
