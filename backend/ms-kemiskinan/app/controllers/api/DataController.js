@@ -29,6 +29,7 @@ exports.controller = class DataController {
           $project: {
             _id: '$_id',
             nama: '$nama',
+            ktp_image: '$ktp_image',
             nik: '$nik',
             jk: '$jk',
             agama: '$agama',
@@ -54,6 +55,7 @@ exports.controller = class DataController {
 				
 				return res.send({statusCode: 200, data: {
 					_id: data[0]._id,
+					ktp_image: data[0].ktp_image?data[0].ktp_image:'',
 					nama: data[0].nama,
 					nik: data[0].nik,
 					jenis_kelamin: data[0].jk=='P'?'Perempuan':'Laki - Laki',
@@ -92,6 +94,7 @@ exports.controller = class DataController {
         {
           $project: {
             _id: '$_id',
+            ktp_image: '$ktp_image',
             nama: '$nama',
             nik: '$nik',
             jk: '$jk',
@@ -154,6 +157,7 @@ exports.controller = class DataController {
 					let penduduk = await db.penduduk.findById(e.penduduk_id);
 
 					return {
+						ktp_image: penduduk.ktp_image,
 						nik: penduduk.nik,
 						nama: penduduk.nama,
 						kepala_keluarga: e.kepala?'Ya':'Tidak',
@@ -268,6 +272,7 @@ exports.controller = class DataController {
 						no_kk: e.keluarga.no_kk,
 						nik_kepala: e.keluarga.nik_kepala,
 						level: 1,
+						ktp_image: e.ktp_image,
 						nama: e.nama,
 						nik: e.nik,
 						kk_image: e.keluarga.kk_image?e.keluarga.kk_image:'',

@@ -95,6 +95,7 @@ exports.controller = class PendudukController {
 
 				return {
 					_id: dt._id,
+					ktp_image: dt.ktp_image,
 					nama: dt.nama,
 					nik: dt.nik,
 					jk: dt.jk,
