@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{ asset('') }}assets/dist-assets/images/logo.png">
-    <title>Login - SEPAKAD</title>
+    <title>Login - SEPEKAN</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
     <link href="{{ asset('') }}assets/dist-assets/css/themes/lite-purple.min.css" rel="stylesheet">
 </head>

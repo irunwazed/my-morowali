@@ -75,6 +75,13 @@
                                                         PRINT
                                                     </button>
                                                 </div>
+                                                <div class="p-2">
+                                                    <button class="btn btn-outline-primary" style="margin-top: 8px;"
+                                                        id="_print_v2" type="button">
+                                                        <i class="i-Files"></i>&nbsp;
+                                                        PRINT V2
+                                                    </button>
+                                                </div>
                                                 {{-- <div class="p-2">
                                                     <button class="btn btn-outline-primary" style="margin-top: 8px;"
                                                         id="_pdf" type="button">
@@ -197,12 +204,15 @@
                     {
                         data: null,
                         render: function(data, row) {
-                            if(data.kepala_keluarga.lahir){
-                            return data.kepala_keluarga.lahir.tempat + ", " + dateformat(data
-                                .kepala_keluarga.lahir.tanggal) + "<br>" + hit_umur(data.kepala_keluarga
-                                .lahir.tanggal);
+                            if (data.kepala_keluarga.lahir) {
+                                return data.kepala_keluarga.lahir.tempat ? data.kepala_keluarga.lahir
+                                    .tempat : "-" + ", " + dateformat(data
+                                        .kepala_keluarga.lahir.tanggal) + "<br>" + hit_umur(data
+                                        .kepala_keluarga
+                                        .lahir.tanggal);
 
-                            }return "-";
+                            }
+                            return "-";
                         }
                     },
                     {
@@ -317,7 +327,18 @@
             if (!status) status = "";
             if (!tahun) tahun = "";
 
-            url = "{{ url('') }}/admin/print/kesejahteraan/stream?status_kesejahteraan=" + status + "&tahun=" + tahun;
+            url = "{{ url('') }}/admin/print/kesejahteraan/stream?status_kesejahteraan=" + status +
+                "&tahun=" + tahun;
+            window.open(url, '_blank');
+        })
+
+        $('#_print_v2').click(function() {
+            tahun = $('#tahun').val();
+            if (!status) status = "";
+            if (!tahun) tahun = "";
+
+            url = "{{ url('') }}/admin/print/kesejahteraan/stream_v2?status_kesejahteraan=" + status +
+                "&tahun=" + tahun;
             window.open(url, '_blank');
         })
 

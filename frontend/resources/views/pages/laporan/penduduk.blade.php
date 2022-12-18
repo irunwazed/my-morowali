@@ -72,6 +72,13 @@
                                                         PRINT
                                                     </button>
                                                 </div>
+                                                <div class="p-2">
+                                                    <button class="btn btn-outline-primary" style="margin-top: 8px;"
+                                                        id="_print_v2" type="button">
+                                                        <i class="i-Files"></i>&nbsp;
+                                                        PRINT V2
+                                                    </button>
+                                                </div>
                                                 {{-- <div class="p-2">
                                                     <button class="btn btn-outline-primary" style="margin-top: 8px;"
                                                         id="_pdf" type="button">
@@ -315,6 +322,20 @@
             if (!desa) desa = "";
 
             url = "{{ url('') }}/admin/print/penduduk/stream?kabupaten=" + kab + "&kecamatan=" + camat +
+                "&kelurahan=" + desa;
+            window.open(url, '_blank');
+        })
+
+        $('#_print_v2').click(function() {
+
+            kab = $('#kabupaten').val();
+            camat = $('#kecamatan').val();
+            desa = $('#kelurahan').val();
+            if (!kab) kab = "";
+            if (!camat) camat = "";
+            if (!desa) desa = "";
+
+            url = "{{ url('') }}/admin/print/penduduk/stream_v2?kabupaten=" + kab + "&kecamatan=" + camat +
                 "&kelurahan=" + desa;
             window.open(url, '_blank');
         })

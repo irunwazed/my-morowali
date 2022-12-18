@@ -132,6 +132,24 @@
                                 </select>
                             </div> --}}
                             <div class="form-group">
+                                <label>Foto Kartu Keluarga</label>
+                                <input id="" name="kk_image" type="file" onchange="viewImg(this)"
+                                    class="form-control" accept="image/png, image/jpg, image/jpeg">
+                            </div>
+                            <div class="form-group mt-2">
+                                <img id="kk_image" style="object-fit: contain; width: 100%; height: 250px;"
+                                    class="col-sm-12 img-uploaded" />
+                            </div>
+                            <div class="form-group">
+                                <label>Foto KTP</label>
+                                <input id="" name="ktp_image" type="file" onchange="viewImg(this)"
+                                    class="form-control" accept="image/png, image/jpg, image/jpeg">
+                            </div>
+                            <div class="form-group mt-2">
+                                <img id="ktp_image" style="object-fit: contain; width: 100%; height: 250px;"
+                                    class="col-sm-12 img-uploaded img-uploaded-ktp" />
+                            </div>
+                            <div class="form-group">
                                 <label>Hubungan Keluarga</label>
                                 <select id="hubungan_keluarga" name="hubungan_keluarga" class="form-control"
                                     style="width:100%;" required="">
@@ -149,7 +167,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama</label>
-                                <input id="e_nama" name="nama" type="text" class="form-control" required="">
+                                <input id="e_nama" name="nama" type="text" class="form-control"
+                                    required="">
                             </div>
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
@@ -311,6 +330,7 @@
                 dropdownParent: $('#desa_drop')
             });
 
+            $('.img-uploaded').attr('src', "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
             $("#tabel_show").hide()
             $("#btn_tam_hid").hide()
         });
@@ -329,9 +349,11 @@
                         $("#btn_tam_hid").show(300);
                         $('#no_kk').val(data.data.no_kk);
                         $('#kk_dummy').val(data.data.no_kk);
+                        $('#kk_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data.data
+                            .kk_image)
 
                         loadData(id);
-                    }else{
+                    } else {
                         sweetRes("error", "500", "Server Error!");
                     }
                 },
@@ -392,7 +414,8 @@
         })
 
         $("#btn_modal").click(function() {
-
+            $('.img-uploaded-ktp').attr('src',
+                "{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png")
             id = $('#id_cari').val();
             $('#no_kk').val(id);
             $('#kk_dummy').val(id);
@@ -648,6 +671,7 @@
                         $('#e_fisik').val(data.data.fisik.fisik_id).change()
                         $('#e_fisikKet').val(data.data.fisik.keterangan)
                     }
+                    $('#ktp_image').attr('src', "{{ env('API_URL') }}/kemiskinan-public" + data.data.ktp_image)
 
                     $('#e_penyakit_ket').val(data.data.penyakit ? data.data.penyakit.keterangan : '-')
 
@@ -665,7 +689,8 @@
 
                     setTimeout(function() {
                         $('#desa').val(data.data.alamat.kelurahan_kode).change();
-                        $('#select_penyakit').val(data.data.penyakit.penyakit_id).change();
+                        $('#select_penyakit').val(data.data.penyakit ? data.data.penyakit.penyakit_id :
+                            '-').change();
                     }, 500);
 
                     $('.mode_edit').prop('readonly', true);
@@ -814,138 +839,33 @@
             });
         });
 
-        // function loadData(id) {
-        //     $('#tabel_penduduk').DataTable({
-        //         paging: true,
-        //         searching: true,
-        //         autoWidth: true,
-        //         processing: true,
-        //         destroy: true,
-        //         responsive: true,
-        //         info: true,
-        //         destroy: true,
-        //         processing: true,
-        //         serverSide: true,
-        //         ajax: {
-        //             url: "{{ env('API_URL') }}/kemiskinan/keluarga/no_kk/"id,
-        //             type: 'GET',
-        //             headers: {
-        //                 "Authorization": "Bearer {{ Session::get('token') }}"
-        //             },
-        //             success: function(data) {
-        //                 console.log(data);
-        //             },
-        //             error: function(error) {
-        //                 console.log(error);
-        //             },
-        //         },
-        //         columns: [{
-        //                 data: null,
-        //                 render: function(data, type, row) {
-        //                     return `
-    //                     <button class="btn bg-transparent _r_btn btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    //                         <span class="_dot _r_block-dot bg-dark"></span>
-    //                         <span class="_dot _r_block-dot bg-dark"></span>
-    //                         <span class="_dot _r_block-dot bg-dark"></span>
-    //                     </button>
-    //                     <div class="dropdown-menu" x-placement="bottom-start">
-    //                         <button id="` + data._id + `" onClick="edit_data(this.id)" type="button" class="dropdown-item" >
-    //                             <i class="nav-icon i-Pen-2 text-success font-weight-bold mr-2"></i>
-    //                                 Ubah
-    //                         </button>
-    //                         <button type="button" id="` + data._id + `" onClick="hapus_data(this.id)" class="dropdown-item" >
-    //                             <i class="nav-icon i-Close-Window text-danger font-weight-bold mr-2"></i>
-    //                                 Hapus
-    //                         </button>
-    //                     </div>`;
+        function viewImg(input) {
+            if (input.files && input.files[0]) {
+                var batasImg = 204800;
+                if (input.files[0]['size'] <= batasImg) {
+                    var reader = new FileReader();
+                    var nama = $(input).attr('name');
+                    // console.log(input.files[0]['size']);
 
-        //                 },
-        //             },
-        //             {
-        //                 "data": null,
-        //                 "sortable": false,
-        //                 render: function(data, type, row, meta) {
-        //                     return meta.row + meta.settings._iDisplayStart + 1;
-        //                 }
-        //             },
-        //             {
-        //                 data: 'nik',
-        //             },
-        //             {
-        //                 data: 'nama',
-        //             },
-        //             {
-        //                 data: 'null',
-        //                 render: function(data, type, row) {
-        //                     return "" + row.lahir.tempat + " " + dateformat(row.lahir.tanggal);
-        //                 }
-        //             },
-        //             {
-        //                 data: 'jk',
-        //                 render: function(data, type, row) {
-        //                     if (data == "L") {
-        //                         return "Laki-Laki";
-        //                     } else {
-        //                         return "Perempuan";
-        //                     }
-        //                 }
-        //             },
-        //             {
-        //                 data: 'agama',
-        //                 render: function(data, type, row) {
-        //                     if (data == "1") {
-        //                         return "Islam";
-        //                     } else if (data == "2") {
-        //                         return "Kristen";
-        //                     } else if (data == "3") {
-        //                         return "Khatolik";
-        //                     } else if (data == "4") {
-        //                         return "Hindu";
-        //                     } else if (data == "5") {
-        //                         return "Buddha";
-        //                     } else if (data == "6") {
-        //                         return "Konghucu";
-        //                     }
-        //                 }
-        //             },
-        //             {
-        //                 data: 'status_pernikahan',
-        //                 render: function(data, type, row) {
-        //                     if (data == "1") {
-        //                         return "Belum Menikah";
-        //                     } else if (data == "2") {
-        //                         return "Menikah";
-        //                     } else if (data == "3") {
-        //                         return "Cerai";
-        //                     } else if (data == "4") {
-        //                         return "Duda";
-        //                     } else if (data == "5") {
-        //                         return "Janda";
-        //                     }
-        //                 }
-        //             },
-        //             {
-        //                 data: 'pendidikan_id',
-        //                 render: function(data, type, row) {
-        //                     if (data == "1") {
-        //                         return "Tidak punya ijazah";
-        //                     } else if (data == "2") {
-        //                         return "SD";
-        //                     } else if (data == "3") {
-        //                         return "SMP";
-        //                     } else if (data == "4") {
-        //                         return "SMA";
-        //                     } else if (data == "5") {
-        //                         return "S1";
-        //                     } else if (data == "6") {
-        //                         return "S2";
-        //                     } else if (data == "7") {
-        //                         return "S3";
-        //                     }
-        //                 }
-        //             },
-        //         ],
-        //     });
-        // }
+                    reader.onload = function(e) {
+                        $('#' + nama).attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '',
+                        text: 'Foto terlalu berat! Maximal 200 KB',
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        }
+                    });
+                    $(input).val("");
+                    // console.log($(input).val());
+                }
+            }
+        }
     </script>
 @endsection
