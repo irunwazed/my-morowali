@@ -103,6 +103,10 @@ exports.controller = class PendudukController {
 					alamat: dt.alamat,
 					status_pernikahan: dt.status_pernikahan,
 					pendidikan_id: dt.pendidikan_id,
+					agama:dt.agama,
+					fisik:dt.fisik,
+					pendidikan_id:dt.pendidikan_id,
+					penyakit:dt.penyakit,
 					data: dt.data,
 					hidup: dt.hidup,
 					keluarga_penduduk: await Promise.all(dt.keluarga_penduduk.map(async e => {
