@@ -306,16 +306,19 @@ exports.controller = class LaporanController {
       let kabupaten = req.query.kabupaten?req.query.kabupaten:'';
       let kecamatan = req.query.kecamatan?req.query.kecamatan:'';
       let kelurahan = req.query.kelurahan?req.query.kelurahan:'';
-
-      let query = {};
+      
+      let match = {}
+      if(kabupaten!='') match['alamat.kabupaten_kode'] = kabupaten;
+      if(kecamatan!='') match['alamat.kecamatan_kode'] = kecamatan;
+      if(kelurahan!='') match['alamat.kelurahan_kode'] = kelurahan;
 
       let data = [];
       let tmp = {};
       if(datatable){
-        tmp = await paginate.find(req, 'penduduk_bantuan', query);
+        tmp = await paginate.find(req, 'penduduk_bantuan', match);
         data = tmp.data;
       }else{
-        data = await db.penduduk_bantuan.find(query);;
+        data = await db.penduduk_bantuan.find(match);;
       }
 
       let dataAll = data.map(e => {

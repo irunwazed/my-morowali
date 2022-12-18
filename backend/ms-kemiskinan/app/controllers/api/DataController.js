@@ -238,6 +238,7 @@ exports.controller = class DataController {
 						level: 1,
 						nama: e.penduduk.nama,
 						nik: e.penduduk.nik,
+						kk_image: e.kk_image?e.kk_image:'',
 					};
 				})
 
@@ -260,6 +261,7 @@ exports.controller = class DataController {
 					} }
 				]).limit(10);
 				data = data.map(e => {
+					e.keluarga = e.keluarga?e.keluarga:{};
 					return {
 						_id: e.keluarga._id,
 						keluarga_id: e.keluarga._id,
@@ -268,6 +270,7 @@ exports.controller = class DataController {
 						level: 1,
 						nama: e.nama,
 						nik: e.nik,
+						kk_image: e.keluarga.kk_image?e.keluarga.kk_image:'',
 					};
 				})
 			}
