@@ -68,6 +68,7 @@ exports.controller = class LaporanController {
 
         return {
           _id: e._id,
+          ktp_image: e.ktp_image,
           nama: e.nama,
           nik: e.nik,
           jenis_kelamin: e.jk=='P'?'Perempuan':'Laki - Laki',
@@ -181,6 +182,7 @@ exports.controller = class LaporanController {
             let penduduk = await db.penduduk.findById(ak.penduduk_id)
             return {
               kepala_keluarga: ak.kepala?'Ya':'Tidak',
+              ktp_image: penduduk.ktp_image,
               nama: penduduk.nama,
               nik: penduduk.nik,
               hubungan_keluarga: hubKel[ak.level],
@@ -243,6 +245,8 @@ exports.controller = class LaporanController {
       let tmp = {};
       if(datatable){
         tmp = await paginate.aggregate(req, 'keluarga_kesejahteraan', query);
+        await db.keluarga_kesejahteraan.populate(tmp.data, {path:"keluarga_id"});
+        await db.keluarga_kesejahteraan.populate(tmp.data, {path:"kepala_keluarga"});
         data = tmp.data;
       }else{
         data = await db.keluarga_kesejahteraan.aggregate(query);
@@ -266,6 +270,8 @@ exports.controller = class LaporanController {
           keuangan: e.keuangan,
           indikator: e.indikator,
           kepala_keluarga: {
+            kk_image: e.keluarga_id?e.keluarga_id.kk_image:'',
+            ktp_image: e.kepala_keluarga.ktp_image,
             no_kk: e.keluarga_id?e.keluarga_id.no_kk:'',
             nama: e.kepala_keluarga.nama,
             nik: e.kepala_keluarga?e.kepala_keluarga.nik:'',
