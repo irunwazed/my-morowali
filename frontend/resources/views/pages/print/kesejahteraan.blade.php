@@ -353,6 +353,20 @@
                                         @endif
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2"><b>Foto Kartu Keluarga</b><br>
+                                        @if (@$dat->kepala_keluarga->kk_image)
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->kepala_keluarga->kk_image }}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 150px; height: 120px; object-fit: contain;"
+                                                src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                                alt="">
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
                             </table>
                         </td>
                     </tr>

@@ -62,6 +62,59 @@ class PrintController extends Controller
             // dd(json_decode($responseBodyAsString));
         }
     }
+    public function print_penduduk_stream_v2(Request $request)
+    {
+        // dd($_GET);
+        // dd($request->all());
+        $kab = $request->kabupaten;
+        $kec = $request->kecamatan;
+        $kel = $request->kelurahan;
+        if (!$kab) $kab = "";
+        if (!$kec) $kec = "";
+        if (!$kel) $kel = "";
+        // dd($_GET);
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/penduduk?datatable=false&kabupaten=' . $kab . '&kecamatan=' . $kec . '&kelurahan=' . $kel;
+        $auth = "Bearer " . $request->session()->get('token');
+        // dd($auth);
+        try {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request(
+                'GET',
+                $url,
+                [
+                    'headers' =>
+                    [
+                        'Authorization' => $auth
+                    ]
+                ],
+            );
+            $respon = json_decode($response->getBody()->getContents());
+            $data = $respon->data;
+            // dd($data[0]);
+
+            // $pdf = PDF::loadview(
+            //     'pages.print.penduduk',
+            //     [
+            //         'data' => $respon->data
+            //     ]
+            // );
+            // $pdf->set_paper('legal', 'landscape');
+            // return $pdf->stream('laporan-penduduk');
+
+            return view(
+                'pages.print.penduduk_v2',
+                [
+                    'data' => $data
+                ]
+            );
+            // dd($respon);
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = json_decode($response->getBody()->getContents());
+            return \redirect()->back()->with('error', $responseBodyAsString->message);
+            // dd(json_decode($responseBodyAsString));
+        }
+    }
 
 
     public function print_penduduk_pdf(Request $request)
@@ -142,7 +195,6 @@ class PrintController extends Controller
         }
     }
 
-
     public function print_kesejahteraan_stream_v2(Request $request)
     {
         $status_kesejahteraan = $request->status_kesejahteraan;
@@ -150,7 +202,7 @@ class PrintController extends Controller
         if (!$status_kesejahteraan) $status_kesejahteraan = "";
         if (!$tahun) $tahun = "";
         // dd($request->all());
-        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?datatable=true&status_kesejahteraan=' . $status_kesejahteraan . '&tahun=' . $tahun;
+        $url = 'http://127.0.0.1:3000/kemiskinan/laporan/kesejahteraan?datatable=false&status_kesejahteraan=' . $status_kesejahteraan . '&tahun=' . $tahun;
         $auth = "Bearer " . $request->session()->get('token');
         try {
             $client = new \GuzzleHttp\Client();
@@ -168,7 +220,7 @@ class PrintController extends Controller
             $data = $respon->data;
             // dd($data);
             return view(
-                'pages.print.kesejahteraan',
+                'pages.print.kesejahteraan_v2',
                 [
                     'data' => $data
                 ]

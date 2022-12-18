@@ -238,7 +238,15 @@
                                         $j++;
                                     @endphp
                                 @endforeach
-                            </table>
+                            </table> <br><b>Foto KTP</b><br><br>
+                            @if (@$dat->ktp_image)
+                                <img style="width: 200px; height: 200px; object-fit: contain;"
+                                    src="{{ env('API_URL') }}/kemiskinan-public{{ @$dat->ktp_image }}" alt="">
+                            @else
+                                <img style="width: 150px; height: 120px; object-fit: contain;"
+                                    src="{{ env('API_URL') }}/kemiskinan-public/storages/images/no-images.png"
+                                    alt="">
+                            @endif
                         </td>
                     </tr>
                     @php $i++ @endphp

@@ -193,6 +193,5 @@
         return $y;
     }
 @endphp
-{{ dd(@$data[0]) }}
 
 </html>
