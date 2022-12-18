@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PrintController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,15 +61,15 @@ Route::group(['middleware' => 'cek_login'], function () {
             });
 
             Route::prefix("/print")->group(function () {
-                Route::get("/kesejahteraan/stream", [Controller::class, 'print_kesejahteraan_stream'])->name('print.kesejahteraan.stream');
-                Route::get("/kesejahteraan/streamv2", [Controller::class, 'print_kesejahteraan_stream_v2'])->name('print.kesejahteraan.streamv2');
-                Route::get("/kesejahteraan/pdf", [Controller::class, 'print_kesejahteraan_pdf'])->name('print.kesejahteraan.pdf');
-                Route::get("/penduduk/stream", [Controller::class, 'print_penduduk_stream'])->name('print.penduduk.stream');
-                Route::get("/penduduk/pdf", [Controller::class, 'print_penduduk_pdf'])->name('print.penduduk.pdf');
-                Route::get("/bantuan/stream", [Controller::class, 'print_bantuan_stream'])->name('print.bantuan.stream');
-                Route::get("/bantuan/pdf", [Controller::class, 'print_bantuan_pdf'])->name('print.bantuan.pdf');
-                Route::get("/keluarga/stream", [Controller::class, 'print_keluarga_stream'])->name('print.keluarga.stream');
-                Route::get("/keluarga/pdf", [Controller::class, 'print_keluarga_pdf'])->name('print.keluarga.pdf');
+                Route::get("/kesejahteraan/stream", [PrintController::class, 'print_kesejahteraan_stream'])->name('print.kesejahteraan.stream');
+                Route::get("/kesejahteraan/streamv2", [PrintController::class, 'print_kesejahteraan_stream_v2'])->name('print.kesejahteraan.streamv2');
+                Route::get("/kesejahteraan/pdf", [PrintController::class, 'print_kesejahteraan_pdf'])->name('print.kesejahteraan.pdf');
+                Route::get("/penduduk/stream", [PrintController::class, 'print_penduduk_stream'])->name('print.penduduk.stream');
+                Route::get("/penduduk/pdf", [PrintController::class, 'print_penduduk_pdf'])->name('print.penduduk.pdf');
+                Route::get("/bantuan/stream", [PrintController::class, 'print_bantuan_stream'])->name('print.bantuan.stream');
+                Route::get("/bantuan/pdf", [PrintController::class, 'print_bantuan_pdf'])->name('print.bantuan.pdf');
+                Route::get("/keluarga/stream", [PrintController::class, 'print_keluarga_stream'])->name('print.keluarga.stream');
+                Route::get("/keluarga/pdf", [PrintController::class, 'print_keluarga_pdf'])->name('print.keluarga.pdf');
             });
         });
     });
